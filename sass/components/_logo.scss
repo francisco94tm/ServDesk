@@ -1,0 +1,35 @@
+.logo{
+    display: flex;        
+    align-content: center;
+    align-items: center;
+    margin: 40px 40px;
+    color: $theme--fg;
+
+    h1{
+        font-weight: 400;
+        margin: 0;
+    }
+
+    &.small{
+        flex-direction: row;
+        margin: 40px 40px;
+        .text{
+            margin: 0 15px;
+            font-size: 20px;
+            line-height: 17px;
+        }
+    }
+
+    &.big{ 
+        margin-top: 60px;        
+        flex-direction: column;
+        img{
+            width: 230px;
+        }
+        .text {
+            margin: 50px 0 0 0;
+            font-size: 60px;
+            line-height: 50px;
+        } 
+    }
+} 

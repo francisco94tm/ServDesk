@@ -1,0 +1,29 @@
+.login-container {
+  height: 100%;
+  max-width: 900px;
+  margin: 0 auto !important; }
+  .login-container .login-wrapper {
+    height: 100vh;
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto !important; }
+    .login-container .login-wrapper > .one-half.column {
+      padding: 20px !important; }
+  .login-container .title h1 {
+    text-align: center; }
+  .login-container form {
+    margin-top: 30px; }
+
+@media screen and (max-width: 600px) {
+  img {
+    width: 150px !important;
+    margin-top: 30px; }
+
+  .login-container .one-half.column {
+    height: auto; }
+    .login-container .one-half.column .title h1 {
+      display: inline-block;
+      font-size: 20px;
+      letter-spacing: 2px; } }
+
+/*# sourceMappingURL=login.css.map */

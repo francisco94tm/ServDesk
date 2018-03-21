@@ -1,0 +1,214 @@
+@import 'variables';
+form {
+    padding: 20px 0;
+}
+
+.input-group {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    padding: 7px 10px;
+    position: relative;
+}
+
+svg text{
+    fill: $theme--fg;
+}
+
+label {
+    color: $main-color;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    display: inline-block;
+    min-width: 150px;
+}
+
+input {
+    display: block;
+    background: $input--bg;
+    color: $input--fg;
+    width: $input--default-width;
+    min-width: $input--default-width;
+    font-family: "Walfork";
+    outline: none;
+    padding: 10px 10px;
+    font-size: 13px;
+    border: none;
+    border-bottom: solid 1px rgba($theme--fg, 0.3);
+
+
+    &.big-input {
+        font-size: 16px;
+        color: $input--fg;
+        text-align: center;
+        letter-spacing: 1px;
+        background: $input--bg;
+        border: $input--border;
+        padding: 20px 40px;
+    }
+}
+
+.search-box {
+    position: relative;
+    width: 350px;
+    height: 60px;
+    padding-top: 10px;
+    margin: 30px auto 0px auto;
+    input[type="search"] {
+        text-align: left;
+        padding: 15px 40px;
+        font-size: 11px;
+        letter-spacing: 1px;
+        width: 220px;
+        min-width: auto;
+        margin: 0 10px 20px 10px!important;
+        text-transform: uppercase;
+        border: $input--border;
+    }
+}
+
+button {
+    display: block;
+    width: $input--default-width;
+    min-width: $input--default-width;
+    font-family: "Walfork";
+    font-size: 12px;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-color: $main-color;
+    border: $button--border;
+    margin: 0;
+    padding: 20px 40px;
+    outline: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: 0.3s $animation-ease-out;
+    position: relative;
+    &:hover {
+        background: $button--hover-bg;
+        border: $button--hover-border;
+    }
+}
+
+
+/****************************************************************************
+ *
+ * SELECT 
+ */
+
+
+/*the container must be positioned relative:*/
+
+.x-select {
+    position: relative;
+    width: 300px;
+    margin: 10px 0 0px 10px;
+    border-bottom: solid 1px rgba($theme--fg, 0.3);
+    &.disabled {
+        border-bottom: dashed 1px rgba($theme--fg, 0.3);
+        .select-selected .bold{
+            color: rgba($theme--fg, 0.25)!important;
+        }
+        .select-selected, i {
+            color: rgba($theme--fg, 0.25)!important;
+        }
+    }
+    i.material-icons {
+        position: absolute;
+        padding: 9px 5px;
+        color: $main-color;
+        display: block;
+        font-size: 20px;
+    }
+    & select {
+        display: none;
+        /*hide original SELECT element:*/
+    }
+    .select-selected {
+        letter-spacing: 1px;
+        font-size: 10px;
+        text-transform: uppercase;
+        span {
+            display: inline;
+        }
+        .bold {
+            font-weight: 600;
+            margin-right: 5px;
+            color: $main-color;
+        }
+        &:before {
+            content: "";
+            padding-right: 10px;
+            padding-left: 5px;
+            font-weight: 600;
+           
+        }
+        /*style the arrow inside the select element:*/
+        &:after {
+            position: absolute;
+            content: "";
+            top: 15px;
+            right: 15px;
+            width: 0;
+            height: 0;
+            border: 4px solid transparent;
+            border-color: $main-color transparent transparent transparent;
+        }
+        /*point the arrow upwards when the select box is open (active):*/
+        &.select-arrow-active:after {
+            border-color: transparent transparent $main-color transparent;
+            top: 9px;
+        }
+    }
+    /*style the items (options), including the selected item:*/
+    .select-items div,
+    .select-selected {
+        color: rgba($theme--fg, 0.9);
+        padding: 12px 16px;
+        border: 1px solid transparent; // border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+        user-select: none;
+    }
+    /*style items (options):*/
+    .select-items {
+        position: absolute;        
+
+        @if $theme--bg == $dark-theme--bg{
+            background-color: lighten($theme--bg, 5);
+            border: solid 1px rgba($theme--fg, 0.25);
+        } @else if $theme--bg == $clear-theme--bg{
+            background-color: $theme--bg;
+            border: solid 1px rgba($theme--fg, 0.35);
+        }
+
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+        transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        max-height: 300px;
+        overflow-x: auto;
+         
+        border-radius: 2px;
+        font-size: 13px;
+        & div.selected {
+            font-weight: 600;
+            background-color: rgba($theme--fg, 0.3);
+            &:hover {
+                background-color: rgba($theme--fg, 0.3);
+            }
+        }
+        & div:hover {
+            background-color: rgba($theme--fg, 0.1);
+        }
+    }
+    /*hide the items when the select box is closed:*/
+    .select-hide {
+        display: none;
+    }
+}

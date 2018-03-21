@@ -1,0 +1,131 @@
+<link rel="stylesheet" ng-href="{{session.theme.url}}" > 
+
+<div class="container dashboard-container">    
+    
+    
+    <div class="now-time">
+        <div class="date">16/03/2018</div>
+        <div class="time">15:05</div>
+    </div>
+
+    <!-- Navigation Panel  *********************************************** -->
+
+    <div class="nav column"> 
+        <logo size="small"></logo> 
+        <div class="navpanel">
+            <div ng-click="NavPanel.setCurrentSection($index)" class="item {{$last?'user-section':''}} {{(NavPanel.getCurrentSection()==$index)?'selected':''}}" ng-repeat="n in NavPanel.getSections()">
+                <i class="material-icons">{{n.icon}}</i><span>{{n.name}}</span> 
+            </div>  
+        </div>
+    </div>
+
+    <!-- 01. Alert Section  *********************************************** -->
+
+    <div class="body column" ng-show="NavPanel.getCurrentSection()==0"> 
+        <div class="item-nav column">
+            <search ng-model="session.search"></search>   
+            <xselect 
+                label="Ordenar por:" 
+                options='Alerts.getFilterOptions()' 
+                item-selected="2"
+                ng-model="Alerts.filter.selected"></xselect>   
+            <alert-container 
+                data="Alerts.getData()" 
+                current="currentAlert" 
+                order-by="Alerts.filter.selected.key" 
+                filter-by="session.search"></alert-container>              
+        </div>  
+                
+        <div class="item-body column preview-panel alert-body is-vertical-centered {{(currentAlert != undefined)?'is-opened':'is-closed'}}">
+            <div class="opened" ng-show="currentAlert!=undefined">  
+                <div class="priority priority-{{currentAlert.priority}}" ng-if="currentAlert.priority!=-1">{{Alerts.priorityToText(currentAlert.priority)}}</div>
+
+                <h1>{{currentAlert.razon}}</h1>                
+                <div class="metadata">
+                    <div class="author">{{currentAlert.client.name}}</div>
+                    <div class="datetime">{{currentAlert.fechaRegistro}}</div>
+                </div>
+                <pre>{{currentAlert.description}}</pre> 
+            </div>
+            
+            <div class="closed" ng-show="currentAlert==undefined">
+                <h1>Tienes tareas por resolver</h1>
+                <div class="item-wrapper">
+                    <div class="item very-high-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '3')}}</div>Muy alta prioridad</div>
+                    <div class="item high-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '2')}}</div>Alta prioridad</div>
+                    <div class="item medium-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '1')}}</div>Media prioridad</div>
+                    <div class="item low-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '0')}}</div>Baja prioridad</div>
+                </div class="item-wrapper">
+            </div>
+        </div>
+
+    </div>      
+
+    <!-- 02. Requirements Section ****************************************** -->
+    
+    <div class="item-body column requirement-panel" ng-show="NavPanel.getCurrentSection()==1"> 
+        <h1><div class="bold">Nuevo Requerimiento</div></h1>
+        <form>            
+            <xselect label="Activo:" options='options.activo' ng-model="data.auxsreq.activo"></xselect>
+            <xselect label="Responsable:" options='options.responsable' ng-model="data.auxsreq.responsable"></xselect>
+            <xselect label="Status:" options='options.status' ng-model="data.auxsreq.status"></xselect>
+            <xselect disabled="true" label="Impacto:" options='options.impacto' item-selected='2' ng-model="data.auxsreq.impacto"></xselect>
+            <xselect disabled="true" label="Prioridad:" options='options.prioridad' item-selected='1' ng-model="data.auxsreq.prioridad"></xselect>
+            <xselect disabled="true" label="Urgencia:" options='options.urgencia' item-selected='1' ng-model="data.auxsreq.urgencia"></xselect> 
+            <br>
+            <button ng-click="newRequirement()">Registrar</button>
+        </form>  
+    </div> 
+
+     <!-- 03. Reports Section ****************************************** -->
+
+    <div class="item-body column report-panel" ng-show="NavPanel.getCurrentSection()==2"> 
+        <h1 class="bold">Reporte</h1>
+        <div id="report-graph-wrapper">
+            <div class="chart-container"></div>
+        </div>
+    </div>   
+
+     <!-- 03. Add Client section ****************************************** -->
+
+    <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==3"> 
+        <h1 class="bold">Alta de cliente</h1>
+        <form>
+            <xinput label="Nombre(s):" placeholder="Ingresa el nombre"></xinput> 
+            
+            <div class="input-group"><label>Primer apellido:</label><input type="text" placeholder = "Ingresa el primer apellido"/></div>
+            <div class="input-group"><label>Segundo apellido:</label><input type="text" placeholder = "Ingresa el segundo apellido"/></div>
+            <div class="input-group"><label>Área:</label><input type="text" placeholder = "Ingresa el área"/></div>
+            <div class="input-group"><label>Departamento:</label><input type="text" placeholder = "Ingresa el departamento"/></div>
+            <div class="input-group"><label>Puesto:</label><input type="text" placeholder = "Ingresa el puesto"/></div>
+            
+            <button ng-click="newUser()">Registrar</button>
+        </form>
+    </div>
+
+
+     <!-- 04. Configuration ****************************************** -->
+
+    <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==4"> 
+        <h1 class="bold">Configuración</h1>
+        <form>
+            <xselect label="Tema:" options='options.tema' item-selected="2" ng-model="session.theme"></xselect>
+            {{data.theme.url}}
+        </form>
+    </div>
+
+</div>
+
+<div class="alertx {{alertx.hidden ? 'hidden':''}}">
+    <div class="alertx-body">
+        <div class="alertx-message">
+            <p>Requerimiento registrado.</p>
+            <p class="datetime">16/05/2018 15:40</p>
+            <br/>
+            <h1>105</h1>
+        </div>
+        <div class="alertx-controlls">
+            <button ng-click="closeNewRequirementAlert()">CERRAR</button>
+        </div>
+    </div>
+</div>

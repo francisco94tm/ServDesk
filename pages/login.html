@@ -1,0 +1,18 @@
+<div class="container login-container">
+    <div class="row login-wrapper">
+        <div class="one-half column is-vertical-centered">             
+            <logo size="big"></logo> 
+        </div>
+        <div class="one-half column is-vertical-centered">
+            <div class="title">
+                <h1>INICIA</h1>                
+                <h1><div class="bold">SESIÓN</div></h1>
+            </div>     
+            <form> 
+                <input class="big-input" ng-show="!isLogged" type="text" ng-model="email" placeholder="E-mail"/>
+                <input class="big-input" ng-show="!isLogged" type="password" ng-model="pass" placeholder="Password"/> 
+                <button ng-click="continue()" class="login-btn">Continuar</button>   
+            </form>	
+        </div>
+    </div>
+</div>

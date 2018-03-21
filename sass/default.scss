@@ -1,0 +1,74 @@
+@import 'components/colors';
+@import 'components/headings';
+@import 'components/forms';
+@import 'components/helpers';
+@import 'components/logo';
+@import 'components/login';
+@import 'components/dashboard';
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Walfork";
+    font-synthesis: none;
+    -moz-font-feature-settings: 'kern';
+    -moz-osx-font-smoothing: grayscale;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+    text-rendering: geometricPrecision !important;
+    -webkit-font-smoothing: antialiased !important;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $scrollbar-bg;
+}
+
+body,
+html {
+    min-height: 100vh;
+}
+
+.container {
+    min-height: 100vh;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+    background-color: $theme--bg;
+    transition: $animation-ease-out;
+
+    .row, .columns, .column{
+        min-height: 100%;
+        height: 100%; 
+        overflow-y: auto;
+        position: relative;
+    }
+}
+
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }

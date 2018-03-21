@@ -1,0 +1,43 @@
+@import 'colors';
+
+
+$theme--bg: $clear-theme--bg;
+$theme--fg: $clear-theme--fg;
+
+$preview-panel-open-bg:  $theme--bg;
+$preview-panel-close-bg: rgba($theme--fg, 0.12);
+
+$scrollbar-bg: rgba($theme--fg, 0.2); 
+$animation-ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+
+$priorities: (
+    very-high: $very-high-priority,
+    high:      $high-priority,
+    medium:    $medium-priority,
+    low:       $low-priority,
+    non:       $non-priority
+);
+
+ 
+
+/* 1.1 Input
+--------------------------------------------*/
+
+$input--bg: transparent;
+$input--fg: $theme--fg;
+$input--border: solid 1px $main-color;
+$input--default-width: 300px;
+
+
+/* 1.2 Button
+--------------------------------------------*/
+
+$button--bg: $main-color;
+$button--fg: white;
+$button--border: solid 1px $main-color;
+
+/* On Hover */
+
+$button--hover-bg: darken($main-color, 10);
+$button--hover-fg: white;
+$button--hover-border: solid 1px darken($main-color, 10);
