@@ -85,24 +85,20 @@ angular.module('app').component('alertItem', {
  * Alert Container Component
  */
 
-function alertItemContainerController($scope, $element, $attrs, Alerts, System){ 
-    $element.ready(function(){
-        $scope.$apply(function(){
-             
-            // $interval(function(){
-                $scope.$ctrl.data = [];
-                System.call('getTableData', {'table': 'Requirement'}).then(function(response){ 
-                    $scope.$ctrl.data = response.data.info; 
-                });
-            // },500);            
-        });
-    });
+function alertItemContainerController($scope, $element, $attrs){ 
+    // $element.ready(function(){
+    //     $scope.$apply(function(){             
+    //         $scope.$ctrl.data = Alerts.getData();
+    //         console.log(Alerts);
+    //     });
+    // });
 }
  
 angular.module('app').component('alertItemContainer', {
     templateUrl: 'js/components/alert-item-container.component.html',
     controller: alertItemContainerController,
-    bindings: { 
+    bindings: {
+        'data': '=',
         'current': '=', 
         'orderBy': '=',
         'filterBy': '='

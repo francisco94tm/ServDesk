@@ -12,7 +12,7 @@
 		switch($toDo){
 			case 'getTableData':
 				echo $system->getTableData($_REQUEST['table']);	
-				break; 
+				break;  
 			case 'saveRequirement':
 				echo $system->saveRequirement($_REQUEST);	
 				break; 
@@ -36,6 +36,10 @@
 
 			$values['query'] = "SELECT * from $table";
 			$values['info'] = $db->select($values['query']);
+
+			$q = "SELECT MAX(id) as maxId from $table";
+			$values['maxId'] = $db->select($q)[0]['maxId'];
+
 			$values['error'][] = $db->error();
 			return json_encode($values);
 		} 

@@ -30,15 +30,12 @@
 		// Load alerts 	
 		$scope.Alerts = Alerts;
 		$scope.Alertx = Alertx;
-
-		System.call('getTableData', {'table': 'requerimiento'}).then(function(response){ 
-			if(response.data.info == false){
-				console.log("No hay registros");
-				return;
-			}
-			Alerts.setData(response.data.info);
+		
+		Alerts.load().then(function(response){ 
+			console.log(response.data.maxId)
+			Alerts.setData(response.data.info); 
 		});
-  
+		  
 
 		// Load catalogues
 		$scope.catalogues = [

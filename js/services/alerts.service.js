@@ -2,7 +2,7 @@
  *  Alerts Service
  ********************************************/
 
- var Alerts = function(System, $timeout){
+ var Alerts = function(System){
 
     var priorityStr = {
        "-1"  : "",
@@ -22,7 +22,8 @@
             { id: 2, name: 'Prioridad Ascendente', 	key: '-priority', 	icon: 'error_outline'}
     };
 
-    this.data;
+    this.data = [];
+    this.maxId = undefined;
 
     this.priorityToText = function(number){ 
         return priorityStr[number];
@@ -37,7 +38,23 @@
     } 
 
     this.setData = function(d){
-        data = d;
+        this.data = d;
+    }
+
+    this.getData = function(){ 
+        return this.data;
+    }
+
+    this.setMaxId = function(mi){
+        maxId = mi;
+    }
+
+    this.getMaxId = function(){
+        return this.maxId;
+    }
+
+    this.load = function(){
+        return System.call('getTableData', {'table': 'Requirement'}); 
     }
   
 }
