@@ -55,8 +55,8 @@
 			$status = $obj['status'];
 			$urgency = $obj['urgency'];
 
-			$values['query'] = "INSERT INTO requirement (caseType, description, impact, priority, reason, registerMedium, responsible, status, urgency)
-								VALUES ($caseType, '$description', $impact, $priority, '$reason', $registerMedium, $responsible, $status, $urgency)";
+			$values['query'] = "INSERT INTO requirement (registerDate, caseType, description, impact, priority, reason, registerMedium, responsible, status, urgency)
+								VALUES (now(), $caseType, '$description', $impact, $priority, '$reason', $registerMedium, $responsible, $status, $urgency)";
 			$values['info'] = $db->query($values['query']);			
 			$values['id'][] = $db->getLastID(); 
 			$values['error'][] = $db->error(); 

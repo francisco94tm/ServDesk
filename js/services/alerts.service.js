@@ -2,14 +2,14 @@
  *  Alerts Service
  ********************************************/
 
- var Alerts = function(){
+ var Alerts = function(System, $timeout){
 
     var priorityStr = {
        "-1"  : "",
-        "0"  : "Baja Prioridad",
-        "1"  : "Prioridad media",
-        "2"  : "Alta Prioridad",
-        "3"  : "Muy Alta Prioridad"
+        "1"  : "Baja Prioridad",
+        "2"  : "Prioridad media",
+        "3"  : "Alta Prioridad",
+        "4"  : "Muy Alta Prioridad"
     }
 
     var filter = {
@@ -22,7 +22,7 @@
             { id: 2, name: 'Prioridad Ascendente', 	key: '-priority', 	icon: 'error_outline'}
     };
 
-    var data = null;
+    this.data;
 
     this.priorityToText = function(number){ 
         return priorityStr[number];
@@ -39,8 +39,5 @@
     this.setData = function(d){
         data = d;
     }
-
-    this.getData = function(){
-        return data;
-    }
+  
 }

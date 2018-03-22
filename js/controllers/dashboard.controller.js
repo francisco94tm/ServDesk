@@ -22,7 +22,6 @@
 				url: 'css/default.css'
 			},	
 		};
-
  
 		NavPanel.addSection($scope.session);
 		$scope.NavPanel = NavPanel;
@@ -44,31 +43,20 @@
 		// Load catalogues
 		$scope.catalogues = [
 			"theme", "impact", "priority", "urgency", 
-			"status", "agent", "caseType", "registerMedium", "requirement"
+			"status", "agent", "caseType", "registerMedium"
 		];
 		angular.forEach($scope.catalogues, function(val, id){
+			getTableData(val);
+		});
+
+		function getTableData(val){
 			System.call('getTableData', {'table': val}).then(function(response){
 				$scope.options[val] = response.data.info;
 			});
-		});
-	
-		// Flags
-		$scope.alertx = {
-			hidden: true
-		}; 
+		}	 
 		
 		$scope.Requirement = Requirement;	
-		Requirement.setClient($scope.session.id);
-
-		$scope.saveRequirement = function(){	 
-			// $scope.alertx.hidden = false;
-		};
-
-		$scope.closeNewRequirementAlert = function(){		
-			$scope.data.auxsreq = undefined;
-			$scope.alertx.hidden = true;
-		};
- 
+		Requirement.setClient($scope.session.id); 
 
 		$scope.data.chart = [
 			{

@@ -3,10 +3,10 @@
         <!--  -->
         <div class="priority priority-{{$ctrl.data.priority}}" ng-if="$ctrl.data.priority!=-1">{{Alerts.priorityToText($ctrl.data.priority)}}</div>
 
-        <h1>{{$ctrl.data.razon}}</h1>                
+        <h1>{{$ctrl.data.reason}}</h1>                
         <div class="metadata">
             <div class="author">{{$ctrl.data.client.name}}</div>
-            <div class="datetime">{{$ctrl.data.fechaRegistro}}</div>
+            <div class="datetime">{{$ctrl.data.registerDate}}</div>
         </div>
         <pre>{{$ctrl.data.description}}</pre> 
     </div>

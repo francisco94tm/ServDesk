@@ -49,19 +49,18 @@ function alertItemController($scope, $element, $attrs, $timeout){
     }; 
     
     $element.ready(function(){
-        $scope.$apply(function(){ 
-            console.log($scope.$ctrl.data.priority);
+        $scope.$apply(function(){  
             switch($scope.$ctrl.data.priority){
-                case "0":
+                case "1":
                     $scope.$ctrl.priorityClass = 'low-priority';
                     break;
-                case "1":
+                case "2":
                     $scope.$ctrl.priorityClass = 'medium-priority';
                     break;
-                case "2":
+                case "3":
                     $scope.$ctrl.priorityClass = 'high-priority';
                     break;
-                case "3":
+                case "4":
                     $scope.$ctrl.priorityClass = 'very-high-priority';
                     break;
                 case "-1":
@@ -86,10 +85,16 @@ angular.module('app').component('alertItem', {
  * Alert Container Component
  */
 
-function alertItemContainerController($scope, $element, $attrs, Alerts){ 
+function alertItemContainerController($scope, $element, $attrs, Alerts, System){ 
     $element.ready(function(){
-        $scope.$apply(function(){             
-            $scope.$ctrl.data = Alerts.getData();  
+        $scope.$apply(function(){
+             
+            // $interval(function(){
+                $scope.$ctrl.data = [];
+                System.call('getTableData', {'table': 'Requirement'}).then(function(response){ 
+                    $scope.$ctrl.data = response.data.info; 
+                });
+            // },500);            
         });
     });
 }

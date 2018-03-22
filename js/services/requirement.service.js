@@ -2,7 +2,7 @@
  *  Requirements Service
  ********************************************/
 
-var Requirement = function(System, Alertx){
+var Requirement = function(System, Alertx, Alerts, $timeout){
     
     var data = {
         id: undefined,
@@ -37,7 +37,7 @@ var Requirement = function(System, Alertx){
             System.call('saveRequirement', data).then(function(response){ 
                 Alertx.setTitle("Requerimiento registrado");
                 Alertx.setId(response.data.id);
-                Alertx.show();
+                Alertx.show(); 
             });
         });
     }
