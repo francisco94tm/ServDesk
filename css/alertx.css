@@ -69,9 +69,16 @@
     font-family: "Walfork"; 
     position: absolute;
     bottom: 0;
-    right: -80px;
+    right: 0px;
     padding: 20px 40px;
     outline: none;
     color: #333;
-    width: 200px;
+    width: auto;
+    min-width: auto;
+}
+
+.alertx-controlls button:hover{
+    background: #eee;
+    border: none;
+    padding: 20px 40px;
 }

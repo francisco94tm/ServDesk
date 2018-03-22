@@ -72,7 +72,7 @@ insert into Client values(1,'Juan','Perez','Rojas',1,1,3,'2017-02-01 00:00:00',1
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 
-create table Requeriment (
+create table Requirement (
 	id int primary key auto_increment, 
 	caseType int,
 	hierarchy int,
@@ -80,7 +80,7 @@ create table Requeriment (
 	author int,
 	responsible int,
 	receptor int,
-	state int,
+	status int,
 	reason varchar(500),
 	client int,
 	registerMedium int,

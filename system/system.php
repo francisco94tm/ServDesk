@@ -13,6 +13,9 @@
 			case 'getTableData':
 				echo $system->getTableData($_REQUEST['table']);	
 				break; 
+			case 'saveRequirement':
+				echo $system->saveRequirement($_REQUEST);	
+				break; 
 		}
 	}
 
@@ -34,6 +37,29 @@
 			$values['query'] = "SELECT * from $table";
 			$values['info'] = $db->select($values['query']);
 			$values['error'][] = $db->error();
+			return json_encode($values);
+		} 
+
+		public function saveRequirement($obj){
+			// Create connection
+			include_once('connection.php');
+			$db = new Connection(); 
+			
+			$caseType = $obj['caseType'];
+			$description = $obj['description'];
+			$impact = $obj['impact'];
+			$priority = $obj['priority'];
+			$reason = $obj['reason'];
+			$registerMedium = $obj['registerMedium'];
+			$responsible = $obj['responsible'];
+			$status = $obj['status'];
+			$urgency = $obj['urgency'];
+
+			$values['query'] = "INSERT INTO requirement (caseType, description, impact, priority, reason, registerMedium, responsible, status, urgency)
+								VALUES ($caseType, '$description', $impact, $priority, '$reason', $registerMedium, $responsible, $status, $urgency)";
+			$values['info'] = $db->query($values['query']);			
+			$values['id'][] = $db->getLastID(); 
+			$values['error'][] = $db->error(); 
 			return json_encode($values);
 		} 
 	};

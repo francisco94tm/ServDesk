@@ -7,7 +7,9 @@ $.when(
     $.getScript('js/services/system.service.js'), 
     $.getScript('js/services/navPanel.service.js'),
     $.getScript('js/services/alerts.service.js'),   
-    $.getScript('js/services/utils.service.js')
+    $.getScript('js/services/requirement.service.js'),   
+    $.getScript('js/services/utils.service.js'),
+    $.getScript('js/services/alertx.service.js'),
 )
 .done(function(){
     angular.module('app').service('Obj', Obj); 
@@ -16,5 +18,7 @@ $.when(
     angular.module('app').service('System', System); 
     angular.module('app').service('NavPanel', NavPanel); 
     angular.module('app').service('Alerts', Alerts); 
+    angular.module('app').service('Requirement', Requirement);
     angular.module('app').service('Utils', Utils); 
+    angular.module('app').service('Alertx', Alertx); 
 }); 
