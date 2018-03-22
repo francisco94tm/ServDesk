@@ -42,7 +42,7 @@ create table Cliente(
 );
 
 create table Requerimiento(
-	folio int primary key, --Autogenerado
+	id int primary key auto_increment, --Autogenerado
 	tipoCaso int, --Se obtiene del catalogo tipo caso
 	jerarquia int, --Se obtiene de la infraestructura cr�tica reportada
 	descripcion varchar(200), --Lo ingresa el agente
@@ -53,14 +53,14 @@ create table Requerimiento(
 	razon varchar(200),--Registrado por el agente
 	cliente int,--Registrado por el agente
 	medioRegistro int,--Registrado por el agente
-	fechaRegistro date,--Autogenerado
-	fechaAtencion date,--Autogenerado en la primera accion del responsable
-	fechaSolucion date,--Autogenerado al cerrar el ticket
+	fechaRegistro datetime,--Autogenerado
+	fechaAtencion datetime,--Autogenerado en la primera accion del responsable
+	fechaSolucion datetime,--Autogenerado al cerrar el ticket
 	impacto int, --Se tiene del inventario
 	urgencia int, --Se tiene del inventario
 	prioridad int,--Se tiene del inventario
-	fechaMaxAtencion date,--Estimado (5 d�as h�biles)
-	fechaMaxSolucion date,--Estimado (5 d�as h�biles)
+	fechaMaxAtencion datetime,--Estimado (5 d�as h�biles)
+	fechaMaxSolucion datetime,--Estimado (5 d�as h�biles)
 	solucion varchar(200),--Registrada por el agente al pasar al estado En proceso
 	causa varchar(200) --Registrada por el agente al cerrar el caso
 	-- FOREIGN KEY(tipoCaso) REFERENCES TipoCaso(idTipo),

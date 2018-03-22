@@ -28,37 +28,16 @@
                 label="Ordenar por:" 
                 options='Alerts.getFilterOptions()' 
                 item-selected="2"
-                ng-model="Alerts.filter.selected"></xselect>   
-            <alert-container 
-                data="Alerts.getData()" 
+                ng-model="Alerts.filter.selected"></xselect> 
+             
+
+            <alert-item-container  
                 current="currentAlert" 
                 order-by="Alerts.filter.selected.key" 
                 filter-by="session.search"></alert-container>              
         </div>  
-                
-        <div class="item-body column preview-panel alert-body is-vertical-centered {{(currentAlert != undefined)?'is-opened':'is-closed'}}">
-            <div class="opened" ng-show="currentAlert!=undefined">  
-                <div class="priority priority-{{currentAlert.priority}}" ng-if="currentAlert.priority!=-1">{{Alerts.priorityToText(currentAlert.priority)}}</div>
-
-                <h1>{{currentAlert.razon}}</h1>                
-                <div class="metadata">
-                    <div class="author">{{currentAlert.client.name}}</div>
-                    <div class="datetime">{{currentAlert.fechaRegistro}}</div>
-                </div>
-                <pre>{{currentAlert.description}}</pre> 
-            </div>
-            
-            <div class="closed" ng-show="currentAlert==undefined">
-                <h1>Tienes tareas por resolver</h1>
-                <div class="item-wrapper">
-                    <div class="item very-high-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '3')}}</div>Muy alta prioridad</div>
-                    <div class="item high-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '2')}}</div>Alta prioridad</div>
-                    <div class="item medium-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '1')}}</div>Media prioridad</div>
-                    <div class="item low-priority"><div class="circle">{{countIfMatchProperty(data.alerts, 'priority', '0')}}</div>Baja prioridad</div>
-                </div class="item-wrapper">
-            </div>
-        </div>
-
+        
+        <alert-display data="currentAlert"></alert-display> 
     </div>      
 
     <!-- 02. Requirements Section ****************************************** -->
@@ -91,10 +70,10 @@
     <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==3"> 
         <h1 class="bold">Alta de cliente</h1>
         <form>
-            <xinput label="Nombre(s):" placeholder="Ingresa el nombre"></xinput> 
-            
-            <div class="input-group"><label>Primer apellido:</label><input type="text" placeholder = "Ingresa el primer apellido"/></div>
-            <div class="input-group"><label>Segundo apellido:</label><input type="text" placeholder = "Ingresa el segundo apellido"/></div>
+            <xinput label="Nombre(s):" placeholder="Ingresa el nombre" ng-model="client.name"></xinput>  
+            <xinput label="Primer apellido:" placeholder="Ingresa el primer apellido" ng-model="client.lastname1"></xinput>  
+            <xinput label="Segundo apellido:" placeholder="Ingresa el segundo apellido" ng-model="client.lastname2"></xinput>  
+             
             <div class="input-group"><label>Área:</label><input type="text" placeholder = "Ingresa el área"/></div>
             <div class="input-group"><label>Departamento:</label><input type="text" placeholder = "Ingresa el departamento"/></div>
             <div class="input-group"><label>Puesto:</label><input type="text" placeholder = "Ingresa el puesto"/></div>

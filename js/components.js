@@ -86,14 +86,18 @@ angular.module('app').component('alertItem', {
  * Alert Container Component
  */
 
-function alertContainerController($scope, $element, $attrs){ 
+function alertItemContainerController($scope, $element, $attrs, Alerts){ 
+    $element.ready(function(){
+        $scope.$apply(function(){             
+            $scope.$ctrl.data = Alerts.getData();  
+        });
+    });
 }
  
-angular.module('app').component('alertContainer', {
-    templateUrl: 'js/components/alert-container.component.html',
-    controller: alertContainerController,
-    bindings: {
-        'data': '=',
+angular.module('app').component('alertItemContainer', {
+    templateUrl: 'js/components/alert-item-container.component.html',
+    controller: alertItemContainerController,
+    bindings: { 
         'current': '=', 
         'orderBy': '=',
         'filterBy': '='
@@ -101,9 +105,24 @@ angular.module('app').component('alertContainer', {
 });
 
 
+/*****************************************************************
+ * Alert Display Component
+ */
+
+function alertDisplayController($scope, $element, $attrs){ 
+}
+ 
+angular.module('app').component('alertDisplay', {
+    templateUrl: 'js/components/alert-display.component.html',
+    controller: alertDisplayController,
+    bindings: {
+        'data': '='
+    }, 
+});
+
 
 /*****************************************************************
- * Alert Container Component
+ *  x Select Component
  */
 
 function xselectController($scope, $element, $attrs){  
@@ -149,6 +168,27 @@ angular.module('app').component('xselect', {
         'ngModel': '=',
         'disabled': '=',
         'itemSelected': '@'
+    }, 
+    replace: true
+});
+
+
+/*****************************************************************
+ * x Input Component
+ */
+function xinputController($scope, $element, $attrs){ 
+    $scope.$ctrl.type = $scope.$ctrl.type || 'text';
+}
+
+angular.module('app').component('xinput', {
+    templateUrl: 'js/components/xinput.component.html',
+    controller: xinputController,
+    bindings: {
+        'label': '@', 
+        'ngModel': '=',
+        'disabled': '=',
+        'type': '@', 
+        'placeholder': '@',
     }, 
     replace: true
 });
