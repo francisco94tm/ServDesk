@@ -160,7 +160,7 @@ function xselectController($scope, $element, $attrs){
 }
   
 angular.module('app').component('xselect', {
-    templateUrl: 'js/components/xselect.component.html',
+    templateUrl: 'js/components/x-select.component.html',
     controller: xselectController,
     bindings: {
         'label': '@',
@@ -181,7 +181,7 @@ function xinputController($scope, $element, $attrs){
 }
 
 angular.module('app').component('xinput', {
-    templateUrl: 'js/components/xinput.component.html',
+    templateUrl: 'js/components/x-input.component.html',
     controller: xinputController,
     bindings: {
         'label': '@', 
@@ -192,3 +192,25 @@ angular.module('app').component('xinput', {
     }, 
     replace: true
 });
+
+
+
+/*****************************************************************
+ * x Input Component
+ */
+function xtextareaController($scope, $element, $attrs){ 
+    $scope.$ctrl.type = $scope.$ctrl.type || 'text';
+}
+
+angular.module('app').component('xtextarea', {
+    templateUrl: 'js/components/x-textarea.component.html',
+    controller: xtextareaController,
+    bindings: {
+        'label': '@', 
+        'ngModel': '=',
+        'disabled': '=', 
+        'placeholder': '@',
+    }, 
+    replace: true
+});
+

@@ -42,18 +42,26 @@
 
     <!-- 02. Requirements Section ****************************************** -->
     
-    <div class="item-body column requirement-panel" ng-show="NavPanel.getCurrentSection()==1"> 
-        <h1><div class="bold">Nuevo Requerimiento</div></h1>
-        <form>            
-            <xselect label="Activo:" options='options.activo' ng-model="data.auxsreq.activo"></xselect>
-            <xselect label="Responsable:" options='options.responsable' ng-model="data.auxsreq.responsable"></xselect>
-            <xselect label="Status:" options='options.status' ng-model="data.auxsreq.status"></xselect>
-            <xselect disabled="true" label="Impacto:" options='options.impacto' item-selected='2' ng-model="data.auxsreq.impacto"></xselect>
-            <xselect disabled="true" label="Prioridad:" options='options.prioridad' item-selected='1' ng-model="data.auxsreq.prioridad"></xselect>
-            <xselect disabled="true" label="Urgencia:" options='options.urgencia' item-selected='1' ng-model="data.auxsreq.urgencia"></xselect> 
-            <br>
-            <button ng-click="newRequirement()">Registrar</button>
+    <div class="item-body column requirement-panel" ng-show="NavPanel.getCurrentSection()==1">  
+        <div class="head-data">
+            <xinput label="Título" ng-model="data.auxreq.reason" placeholder="Escribe un título"></xinput>
+            <xtextarea label="Descripción" ng-model="data.auxreq.description" placeholder="Escribe una descripción"></xtextarea>
+        </div>
+        <form>     
+            <div class="col">
+                <xselect label="Activo:" options='options.activo' ng-model="data.auxsreq.activo"></xselect>
+                <xselect label="Responsable:" options='options.agent' ng-model="data.auxsreq.responsible"></xselect>
+                <xselect label="Tipo de Caso:" options='options.caseType' ng-model="data.auxsreq.caseType"></xselect>
+                <xselect label="Status:" options='options.status' ng-model="data.auxsreq.status"></xselect>
+            </div>
+            <div class="col">
+                <xselect disabled="true" label="Impacto:" options='options.impact' item-selected='1' ng-model="data.auxsreq.impact"></xselect>
+                <xselect disabled="true" label="Prioridad:" options='options.priority' item-selected='1' ng-model="data.auxsreq.priority"></xselect>
+                <xselect disabled="true" label="Urgencia:" options='options.urgency' item-selected='1' ng-model="data.auxsreq.urgency"></xselect> 
+                <xselect label="Medio de registro:" options='options.registerMedium' ng-model="data.auxsreq.registerMedium"></xselect> 
+            </div>                  
         </form>  
+        <button ng-click="newRequirement()">Registrar</button>
     </div> 
 
      <!-- 03. Reports Section ****************************************** -->
@@ -88,7 +96,7 @@
     <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==4"> 
         <h1 class="bold">Configuración</h1>
         <form>
-            <xselect label="Tema:" options='options.tema' item-selected="2" ng-model="session.theme"></xselect>
+            <xselect label="Tema:" options='options.theme' item-selected="2" ng-model="session.theme"></xselect>
             {{data.theme.url}}
         </form>
     </div>

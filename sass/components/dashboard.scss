@@ -226,10 +226,52 @@
 
     .requirement-panel{ 
         width: calc(100% - 250px);
-        padding: 50px 100px;
-                 
+        padding: 0!important;
+        max-height: 100vh; 
+
+        .row{
+            min-height: auto!important;
+            height: auto!important;
+        }
+        
+        form{
+            padding: 0 100px;
+            display: flex;
+        }
+
+        .head-data{
+            padding: 50px 100px 0 100px; 
+            .input-group {
+                display: flex;
+                flex-direction: column;
+                padding: 7px 10px;
+                position: relative;   
+                align-items: flex-start;
+                align-content: flex-start;
+            }
+            
+            input{
+                display: block;
+                background: $input--bg;
+                color: $input--fg; 
+                font-family: "Walfork";
+                outline: none;
+                padding: 10px 10px;
+                font-size: 80px;
+                border: none;
+                min-width: 100%;
+                font-weight: 600;
+                min-height: 30px; 
+            }            
+        }
+
+        h1{
+            padding: 50px 100px;
+        }
+         
         button{
-            margin-left: 10px; 
+            margin: 30px 0 0 110px!important;
+            display: block;
         }
     }
 

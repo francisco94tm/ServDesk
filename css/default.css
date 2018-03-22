@@ -76,6 +76,24 @@ form {
   padding: 7px 10px;
   position: relative; }
 
+.textarea-group {
+  display: flex;
+  flex-direction: column;
+  padding: 7px 10px;
+  position: relative; }
+
+textarea {
+  display: block;
+  background: transparent;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: "Walfork";
+  outline: none;
+  padding: 10px 10px;
+  font-size: 20px;
+  border: none;
+  max-width: 600px;
+  height: 60px; }
+
 svg text {
   fill: rgba(0, 0, 0, 0.87); }
 
@@ -547,9 +565,40 @@ button {
           max-width: 180px; }
   .dashboard-container .requirement-panel {
     width: calc(100% - 250px);
-    padding: 50px 100px; }
+    padding: 0 !important;
+    max-height: 100vh; }
+    .dashboard-container .requirement-panel .row {
+      min-height: auto !important;
+      height: auto !important; }
+    .dashboard-container .requirement-panel form {
+      padding: 0 100px;
+      display: flex; }
+    .dashboard-container .requirement-panel .head-data {
+      padding: 50px 100px 0 100px; }
+      .dashboard-container .requirement-panel .head-data .input-group {
+        display: flex;
+        flex-direction: column;
+        padding: 7px 10px;
+        position: relative;
+        align-items: flex-start;
+        align-content: flex-start; }
+      .dashboard-container .requirement-panel .head-data input {
+        display: block;
+        background: transparent;
+        color: rgba(0, 0, 0, 0.87);
+        font-family: "Walfork";
+        outline: none;
+        padding: 10px 10px;
+        font-size: 80px;
+        border: none;
+        min-width: 100%;
+        font-weight: 600;
+        min-height: 30px; }
+    .dashboard-container .requirement-panel h1 {
+      padding: 50px 100px; }
     .dashboard-container .requirement-panel button {
-      margin-left: 10px; }
+      margin: 30px 0 0 110px !important;
+      display: block; }
   .dashboard-container .report-panel {
     width: calc(100% - 250px);
     padding: 50px 100px; }

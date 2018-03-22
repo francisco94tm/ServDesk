@@ -11,6 +11,26 @@ form {
     position: relative;
 }
 
+.textarea-group {
+    display: flex;
+    flex-direction: column;
+    padding: 7px 10px;
+    position: relative;   
+}
+
+textarea{
+    display: block;
+    background: $input--bg;
+    color: $input--fg; 
+    font-family: "Walfork";
+    outline: none;
+    padding: 10px 10px;
+    font-size: 20px;
+    border: none;
+    max-width: $input--default-width*2; 
+    height: 60px; 
+}
+
 svg text{
     fill: $theme--fg;
 }

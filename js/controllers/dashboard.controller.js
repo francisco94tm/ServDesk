@@ -7,10 +7,12 @@
 		/* Configuration variables */
 		System.setRoute('system/system.php'); 
 		 
-		$scope.data = {};
+		$scope.data = {};		
+		$scope.options = {};
+
 		// Session
 		$scope.session = { 			 
-			name : 	"Usuario",
+			name : 	"Francisco Trejo",
 			icon:	'settings',
 			search: "", 	
 			theme: 	{
@@ -19,6 +21,7 @@
 				url: 'css/default.css'
 			},	
 		};
+
  
 		NavPanel.addSection($scope.session);
 		$scope.NavPanel = NavPanel;
@@ -27,10 +30,30 @@
 		// Load alerts 	
 		$scope.Alerts = Alerts;	
 		System.call('getTableData', {'table': 'requerimiento'}).then(function(response){ 
-			console.log(response.data.info);
+			if(response.data.info == false){
+				console.log("No hay registros");
+				return;
+			}
 			Alerts.setData(response.data.info);
 		});
   
+
+		// Load catalogues
+		$scope.catalogues = [
+			"theme", 
+			"impact", 
+			"priority", 
+			"urgency", 
+			"status",
+			"agent",
+			"caseType",
+			"registerMedium",
+		];
+		angular.forEach($scope.catalogues, function(val, id){
+			System.call('getTableData', {'table': val}).then(function(response){
+				$scope.options[val] = response.data.info;
+			});
+		});
 	
 		// Flags
 		$scope.alertx = {
@@ -38,36 +61,36 @@
 		};
 
  
-		$scope.options = {
-			tema: [
-				{ id: 1, name: 'Oscuro', url: "css/dark-theme.css"},
-				{ id: 2, name: 'Claro', url: "css/default.css"},
-			],
-			activo: [ 
-				{ id: 1, name: 'Activo 1'}, 
-				{ id: 2, name: 'Activo 2'},
-			],
-			responsable: [ 
-				{ id: 1, name: 'Responsable 1'}, 
-				{ id: 2, name: 'Responsable 2'},
-			],
-			status: [ 
-				{ id: 1, name: 'Status 1'}, 
-				{ id: 2, name: 'Status 2'},
-			],
-			impacto: [ 
-				{ id: 1, name: 'Impacto 1'}, 
-				{ id: 2, name: 'Impacto 2'},
-			],
-			prioridad: [ 
-				{ id: 1, name: 'Prioridad 1'}, 
-				{ id: 2, name: 'Prioridad 2'},
-			],
-			urgencia: [ 
-				{ id: 1, name: 'Urgencia 1'}, 
-				{ id: 2, name: 'Urgencia 2'},
-			],
-		};
+		// $scope.options = {
+		// 	tema: [
+		// 		{ id: 1, name: 'Oscuro', url: "css/dark-theme.css"},
+		// 		{ id: 2, name: 'Claro', url: "css/default.css"},
+		// 	],
+		// 	activo: [ 
+		// 		{ id: 1, name: 'Activo 1'}, 
+		// 		{ id: 2, name: 'Activo 2'},
+		// 	],
+		// 	responsable: [ 
+		// 		{ id: 1, name: 'Responsable 1'}, 
+		// 		{ id: 2, name: 'Responsable 2'},
+		// 	],
+		// 	status: [ 
+		// 		{ id: 1, name: 'Status 1'}, 
+		// 		{ id: 2, name: 'Status 2'},
+		// 	],
+		// 	impacto: [ 
+		// 		{ id: 1, name: 'Impacto 1'}, 
+		// 		{ id: 2, name: 'Impacto 2'},
+		// 	],
+		// 	prioridad: [ 
+		// 		{ id: 1, name: 'Prioridad 1'}, 
+		// 		{ id: 2, name: 'Prioridad 2'},
+		// 	],
+		// 	urgencia: [ 
+		// 		{ id: 1, name: 'Urgencia 1'}, 
+		// 		{ id: 2, name: 'Urgencia 2'},
+		// 	],
+		// };
 
  
 		$scope.newRequirement = function(){		
