@@ -1,7 +1,7 @@
 <div class="item-body column preview-panel alert-body is-vertical-centered {{($ctrl.data != undefined)?'is-opened':'is-closed'}}">
     <div class="opened" ng-show="$ctrl.data!=undefined">  
         <!--  -->
-        <div class="priority priority-{{$ctrl.data.priority}}" ng-if="$ctrl.data.priority!=-1">{{Alerts.priorityToText($ctrl.data.priority)}}</div>
+        <div class="priority priority-{{$ctrl.data.priority.id}}" ng-if="$ctrl.data.priority.id!=-1">{{$ctrl.data.priority.name}}</div>
 
         <h1>{{$ctrl.data.reason}}</h1>                
         <div class="metadata">

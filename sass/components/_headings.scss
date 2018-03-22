@@ -24,10 +24,10 @@ h1 .bold, h1.bold{
         max-width: 200px;
         border-radius: 50px;
 
-        &.priority-0{ color: darken($low-priority, 15); border: solid 1px $low-priority; }
-        &.priority-1{ color: darken($medium-priority, 15); border: solid 1px $medium-priority; }
-        &.priority-2{ color: $high-priority; border: solid 1px $high-priority; }
-        &.priority-3{ color: $very-high-priority; border: solid 1px $very-high-priority; }
+        &.priority-1{ color: darken($low-priority, 15)!important; border: solid 1px $low-priority!important; }
+        &.priority-2{ color: darken($medium-priority, 15)!important; border: solid 1px $medium-priority!important; }
+        &.priority-3{ color: $high-priority!important; border: solid 1px $high-priority!important; }
+        &.priority-4{ color: $very-high-priority!important; border: solid 1px $very-high-priority!important; }
     }
 
     h1{

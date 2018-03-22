@@ -19,18 +19,18 @@ h1 .bold, h1.bold {
   margin-bottom: 30px;
   max-width: 200px;
   border-radius: 50px; }
-  .alert-body .priority.priority-0 {
-    color: #22c164;
-    border: solid 1px #50e08c; }
   .alert-body .priority.priority-1 {
-    color: #d6ca17;
-    border: solid 1px #ece24e; }
+    color: #22c164 !important;
+    border: solid 1px #50e08c !important; }
   .alert-body .priority.priority-2 {
-    color: #fd9839;
-    border: solid 1px #fd9839; }
+    color: #d6ca17 !important;
+    border: solid 1px #ece24e !important; }
   .alert-body .priority.priority-3 {
-    color: #fc4343;
-    border: solid 1px #fc4343; }
+    color: #fd9839 !important;
+    border: solid 1px #fd9839 !important; }
+  .alert-body .priority.priority-4 {
+    color: #fc4343 !important;
+    border: solid 1px #fc4343 !important; }
 .alert-body h1 {
   font-family: Walfork;
   transition: margin 0.3s cubic-bezier(0, 0, 0.2, 1);

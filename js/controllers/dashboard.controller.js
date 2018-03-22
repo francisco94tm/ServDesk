@@ -32,7 +32,7 @@
 		$scope.Alertx = Alertx;
 		
 		Alerts.load().then(function(response){ 
-			console.log(response.data.maxId)
+			Alerts.setMaxId(response.data.maxId);
 			Alerts.setData(response.data.info); 
 		});
 		  
@@ -96,7 +96,7 @@
 			var colorArray = ['#a00041','#d73c4c','#f66d3a','#ffaf59','#ffe185','#ffffbc','#e6f693','#aadea2','#62c3a5','#2c87bf','#5e4ca4'];
 			return colorArray[i];
 		}
-		RadarChart.defaultConfig.color = colorFunction,
+		RadarChart.defaultConfig.color = colorFunction;
 		// RadarChart.defaultConfig.radius = 3;
 		RadarChart.defaultConfig.w = 400;
 		RadarChart.defaultConfig.h = 400;

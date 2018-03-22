@@ -48,7 +48,7 @@
         <div class="head-data">
             <xinput label="Título" ng-model="Requirement.data.reason" placeholder="Escribe un título"></xinput>
             <xtextarea label="Descripción" ng-model="Requirement.data.description" placeholder="Escribe una descripción"></xtextarea>
-        </div>
+        </div> 
         <form>     
             <div class="col">
                 <xselect label="Activo:" options='options.activo'></xselect>
@@ -56,7 +56,7 @@
                 <xselect label="Tipo de Caso:" options='options.caseType' ng-model="Requirement.data.caseType"></xselect>
                 <xselect label="Status:" options='options.status' ng-model="Requirement.data.status"></xselect>
             </div>
-            <div class="col">
+            <div class="col"> 
                 <xselect disabled="true" label="Impacto:" options='options.impact' item-selected='1' ng-model="Requirement.data.impact"></xselect>
                 <xselect disabled="true" label="Prioridad:" options='options.priority' item-selected='1' ng-model="Requirement.data.priority"></xselect>
                 <xselect disabled="true" label="Urgencia:" options='options.urgency' item-selected='1' ng-model="Requirement.data.urgency"></xselect> 

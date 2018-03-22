@@ -49,8 +49,8 @@ function alertItemController($scope, $element, $attrs, $timeout){
     }; 
     
     $element.ready(function(){
-        $scope.$apply(function(){  
-            switch($scope.$ctrl.data.priority){
+        $scope.$apply(function(){   
+            switch($scope.$ctrl.data.priority.id){
                 case "1":
                     $scope.$ctrl.priorityClass = 'low-priority';
                     break;

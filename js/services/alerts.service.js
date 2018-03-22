@@ -46,7 +46,7 @@
     }
 
     this.setMaxId = function(mi){
-        maxId = mi;
+        this.maxId = mi;
     }
 
     this.getMaxId = function(){
@@ -54,7 +54,12 @@
     }
 
     this.load = function(){
-        return System.call('getTableData', {'table': 'Requirement'}); 
+        return System.call('getRequirementData'); 
+    }
+
+    this.reload = function(){
+        console.log(this.maxId);
+        return System.call('getRequirementData', {'condition': 'id > '+this.maxId}); 
     }
   
 }
