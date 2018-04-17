@@ -1,0 +1,12 @@
+<div class="xPopup {{xPopup.isHidden() ? 'hidden':''}}">
+    <div class="xpopup-body">
+        <div class="xPopup-message">
+            <p>{{xPopup.getTitle()}}</p> 
+            <br/>
+            <h1>{{xPopup.getId()[0]}}</h1>
+        </div>
+        <div class="xpopup-controlls">
+            <button ng-click="xPopup.hide()">CERRAR</button>
+        </div>
+    </div>
+</div>

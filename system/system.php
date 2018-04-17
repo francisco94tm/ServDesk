@@ -1,23 +1,41 @@
 <?php 
 	header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
-	session_start();
-
-	if(isset($_REQUEST['request'])) {	
+	if(!isset($_SESSION)) session_start();
  
-		$system = new System(); 
+
+	if(isset($_REQUEST['request'])) {	 
+		
 		$toDo = $_REQUEST['request'];
 		unset($_REQUEST['request']);
 
 		// Check the action to do according the request that was sent
 		switch($toDo){
 			case 'getTableData':
+				$system = new System(); 
 				echo $system->getTableData($_REQUEST);	
 				break; 
 			case 'getRequirementData':
+				$system = new System(); 
 				echo $system->getRequirementData($_REQUEST);	
 				break;   
 			case 'saveRequirement':
+				$system = new System(); 
 				echo $system->saveRequirement($_REQUEST);	
+				break; 
+			case 'login':
+				include_once('login.class.php');
+				$login = new Login(); 	 
+				echo $login->startSession($_REQUEST);
+				break; 
+			case 'logout':
+				include_once('login.class.php');
+				$login = new Login(); 	 
+				echo $login->closeSession($_REQUEST);
+				break; 
+			case 'getLoginStatus':
+				include_once('login.class.php');
+				$login = new Login(); 	 
+				echo $login->verifySession($_REQUEST);
 				break; 
 		}
 	}
@@ -25,8 +43,7 @@
 	////////////////////////////////////////////////////////////////////////
  
 	class System { 
-		protected $values = [];
-
+		protected $values = []; 
 		/**
 		 * Load data from database
 		 * @return  JSON object to inject into the view.
@@ -37,7 +54,7 @@
 			$table = $obj['table'];
 
 			// Create connection
-			include_once('connection.php');
+			include_once('connection/connection.php');
 			$db = new Connection(); 
 
 			if(!isset($obj['condition'])){
@@ -62,7 +79,7 @@
 		public function getRequirementData($obj){
 
 			// Create connection
-			include_once('connection.php');
+			include_once('connection/connection.php' );
 			$db = new Connection(); 
 			 
 
@@ -100,7 +117,7 @@
 
 		public function saveRequirement($obj){
 			// Create connection
-			include_once('connection.php');
+			include_once('connection/connection.php' );
 			$db = new Connection(); 
 			
 			$caseType = $obj['caseType'];
