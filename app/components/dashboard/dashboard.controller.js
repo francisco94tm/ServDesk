@@ -6,23 +6,30 @@
 		
 		// Check of session exist otherwise redirect to Login  ------------------------------------
 
-		if(!Dashboard.sessionExists())
-			$window.location = "#"; 
-		else
-			loadDashboard(); 
+		
+
+		Dashboard.sessionExists().then(function(response){ 
+			if(response == false)
+				$window.location = "#"; 
+			else loadDashboard(); 
+		}); 
 		
 		// Session exists, load dashboard ----------------------------------------------------------		
 		function loadDashboard(){
 					
 			$scope.data = {};			
 			$scope.options = {};
+			$scope.logout = function(){					
+				Dashboard.logout();			
+				$window.location = "#"; 
+				NavPanel.reset();
+			}
 			
 			// Load session data
 			Dashboard.getSessionData().then(function(response){
 				// Load services
 				$scope.NavPanel = NavPanel;
-				$scope.Requirement = Requirement;
-				$scope.Alert = Alert;
+				$scope.Requirement = Requirement; 
 				$scope.xPopup = xPopup;
 
 				$scope.session = response; 
@@ -30,10 +37,10 @@
 				Requirement.setClient(response.id); 
 			}); 
 			
-			Alert.load().then(function(response){ 
-				Alert.setMaxId(response.data.maxId);
-				Alert.setData(response.data.info); 
-			});
+			// Alert.load().then(function(response){ 
+				// Alert.setMaxId(response.data.maxId);
+			
+			// });
 			 
 			// Load catalogues
 			$scope.catalogues = [
@@ -44,7 +51,7 @@
 			];
 			angular.forEach($scope.catalogues, function(val, id){
 				getTableData(val);
-			});
+			});					
 			console.log($scope.options)
 
 			function getTableData(val){
@@ -52,6 +59,9 @@
 					if(response.data.error[0] !== "")
 						console.log(response.data.error[0]);
 					$scope.options[val] = response.data.info;
+					if(val === "request"){
+						Alert.setData($scope.options.request); 
+					}
 				});				
 			}	   
 		}

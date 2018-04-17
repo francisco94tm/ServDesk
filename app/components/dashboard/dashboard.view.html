@@ -26,11 +26,11 @@
                 ng-model="Alert.filter.selected"></xselect> 
              
 
-            <alert-item-container  
-                data="Alert.data"
+            <alert-container   
                 current="currentAlert" 
                 order-by="Alert.filter.selected.key" 
                 filter-by="session.search"></alert-container>  
+            {{Alert.data}}
                       
         </div>  
         
@@ -95,6 +95,8 @@
         <form>
             <xselect label="Tema:" options='options.theme' item-selected="2" ng-model="session.theme"></xselect>
             {{data.theme.url}}
+            <br><br>
+            <button ng-click="logout()">Cerrar sesión</button>
         </form>
     </div>
 

@@ -89,6 +89,12 @@ var Session = function(System) {
             return _this.session; 
         }); 
     } 
+
+    this.close = function(){
+        System.call('logout').then(function(response){
+
+        });
+    }
 }
 
 angular.module('app').service('Session', Session); 

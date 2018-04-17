@@ -1,7 +1,7 @@
 var Dashboard = function(Session) {   
     this.sessionExists = function(){
-        return Session.isSet().then(function(response){
-            return response.data !== false;
+        return Session.isSet().then(function(response){ 
+            return response.data !== 'FALSE';
         });
     }
     this.getSessionData = function(){         
@@ -18,6 +18,9 @@ var Dashboard = function(Session) {
                 }
             } 
         });        
+    } 
+    this.logout = function(){
+        Session.close();
     }
 }
 

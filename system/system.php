@@ -2,7 +2,6 @@
 	header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
 	if(!isset($_SESSION)) session_start();
  
-
 	if(isset($_REQUEST['request'])) {	 
 		
 		$toDo = $_REQUEST['request'];

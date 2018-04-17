@@ -49,7 +49,7 @@ class Login{
     public function verifySession(){
         if(isset($_SESSION['servDesk']))
             return json_encode($_SESSION['servDesk']);
-        return false;
+        return 'FALSE';
     }
 
     
