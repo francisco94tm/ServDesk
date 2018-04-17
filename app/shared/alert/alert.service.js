@@ -37,7 +37,7 @@ var Alert = function(System){
         return filter.selected;
     } 
 
-    this.setData = function(d){
+    this.setData = function(d){ 
         this.data = d;
     }
 

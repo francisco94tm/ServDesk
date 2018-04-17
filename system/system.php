@@ -12,10 +12,6 @@
 			case 'getTableData':
 				$system = new System(); 
 				echo $system->getTableData($_REQUEST);	
-				break; 
-			case 'getRequirementData':
-				$system = new System(); 
-				echo $system->getRequirementData($_REQUEST);	
 				break;   
 			case 'saveRequirement':
 				$system = new System(); 
@@ -67,49 +63,12 @@
 				$condition = $obj['condition'];
 				$values['query'] = "SELECT * from $table WHERE $condition";
 				$values['info'] = $db->select($values['query']);
-			} 
-			
+			} 			
 
 			$values['error'][] = $db->error();
 			return json_encode($values);
 		} 
-	
-		// Get requirement table data.
-		public function getRequirementData($obj){
-
-			// Create connection
-			include_once('connection/connection.php' );
-			$db = new Connection(); 
-			 
-
-			if(!isset($obj['condition'])){
-				$values['query'] = "SELECT * from requirement";
-				$values['info'] = $db->select($values['query']);
-				$values['error'][] = $db->error(); 
-			}
-
-			else { 
-				$condition = $obj['condition'];
-				$values['query'] = "SELECT * from requirement WHERE $condition";
-				$values['info'] = $db->select($values['query']);
-				$values['error'][] = $db->error(); 
-			}  
-
-			$q = "SELECT MAX(id) as maxId from requirement";
-			$values['maxId'] = $db->select($q)[0]['maxId'];
-
-			$toFix = ['caseType','registerMedium','status', 'urgency','priority', 'client'];
-			foreach($values['info'] as $i => &$row){
-				foreach($toFix as $index => &$col){				
-					$aux_obj = [];				
-					$values['query'] = "SELECT * from $col WHERE id = $row[$col]";
-					$row[$col] = $db->select($values['query'])[0];
-					$values['error'][] = $db->error();  
-				}
-			}
-			 
-			return json_encode($values);
-		}
+	 
 
 	////////////////////////////////////////////////////////////////////////
  
@@ -136,6 +95,5 @@
 			$values['error'][] = $db->error(); 
 			return json_encode($values);
 		}
-
 	};
 ?>
