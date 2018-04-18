@@ -52,8 +52,13 @@
 
 		$scope.saveRequirement = function(){			
 			Requirement.save().then(function(response){
-				console.log(response.data);
-				$scope.$broadcast('openPopup', "somedata");	
+				response.data
+				var objeto = {
+					title: "Requerimiento registrado",
+					id:  response.data.id
+				}
+				console.log(objeto)
+				$scope.$broadcast('openPopup', objeto);	
 			});			 
 		}
 	}; 

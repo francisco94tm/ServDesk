@@ -1,10 +1,10 @@
 <div class="xpopup {{$ctrl.display ? '':'hidden'}}">
-    <div class="xpopup-body"> 
-        {{$ctrl.display}}
+    <div class="xpopup-body">  
         <div class="xpopup-message">
-            <p>{{xPopup.getTitle()}}</p> 
+            <p>{{$ctrl.data.title}}</p> 
             <br/>
-            <h1>{{xPopup.getId()[0]}}</h1>
+            <h1>{{$ctrl.data.id}}</h1>
+            <p>{{$ctrl.data.description}}</p>
         </div>
         <div class="xpopup-controlls">
             <button ng-click="$ctrl.display = false">CERRAR</button>

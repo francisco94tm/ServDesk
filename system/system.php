@@ -128,7 +128,7 @@
 				 $status, $agentThreat,  $registerMedium
 			 )";
 			$values['info'] = $db->query($values['query']);			
-			$values['id'][] = $db->getLastID(); 
+			$values['id']   = $db->getLastID(); 
 			$values['error'][] = $db->error(); 
 			return json_encode($values);
 		}

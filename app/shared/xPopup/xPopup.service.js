@@ -4,7 +4,7 @@
 
 var xPopup = function(){
 
-    this.display = true;
+    this.display = false;
     this.title = undefined;
     this.id = undefined;
 
