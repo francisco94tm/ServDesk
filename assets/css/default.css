@@ -163,6 +163,16 @@ button {
   border-radius: 2px;
   transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
   position: relative; }
+  button:disabled {
+    border: none;
+    cursor: default;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.8); }
+    button:disabled:hover {
+      border: none;
+      cursor: default;
+      background-color: rgba(0, 0, 0, 0.2);
+      color: rgba(255, 255, 255, 0.8); }
   button:hover {
     background: #3f4e83;
     border: solid 1px #3f4e83; }
@@ -202,7 +212,11 @@ button {
     /*style the arrow inside the select element:*/
     /*point the arrow upwards when the select box is open (active):*/ }
     .x-select .select-selected span {
-      display: inline; }
+      display: inline-block !important;
+      white-space: nowrap;
+      overflow: hidden; }
+      .x-select .select-selected span.value {
+        max-width: 160px; }
     .x-select .select-selected .bold {
       font-weight: 600;
       margin-right: 5px;
@@ -254,6 +268,70 @@ button {
       background-color: rgba(0, 0, 0, 0.1); }
   .x-select .select-hide {
     display: none; }
+
+.xpopup {
+  display: flex;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(50, 50, 50, 0.7);
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  transition: 0.3s; }
+  .xpopup.hidden {
+    z-index: -1;
+    background: rgba(50, 50, 50, 0); }
+    .xpopup.hidden .xpopup-body {
+      margin-top: 100vh;
+      transform: scale(0.5); }
+  .xpopup .xpopup-body {
+    transform: scale(1);
+    margin-top: 0;
+    width: 450px;
+    height: 300px;
+    background: white;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    text-align: center;
+    padding: 70px 50px 50px 50px;
+    position: relative;
+    font-family: "Walfork";
+    transition: 0.3s; }
+  .xpopup .xpopup-message p {
+    text-transform: uppercase;
+    font-weight: bold; }
+    .xpopup .xpopup-message p.datetime {
+      font-weight: 100;
+      font-size: 13px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #555;
+      padding: 10px 15px; }
+    .xpopup .xpopup-message p h1 {
+      font-size: 70px;
+      margin: 0;
+      font-weight: 400; }
+  .xpopup .xpopup-controlls button {
+    border: none;
+    font-size: 14px;
+    background: none;
+    font-family: "Walfork";
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    padding: 20px 40px;
+    outline: none;
+    color: #333;
+    width: auto;
+    min-width: auto; }
+    .xpopup .xpopup-controlls button:hover {
+      background: #eee;
+      border: none;
+      padding: 20px 40px; }
 
 .is-vertical-centered {
   display: flex;

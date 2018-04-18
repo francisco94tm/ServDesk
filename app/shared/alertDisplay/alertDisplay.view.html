@@ -1,14 +1,35 @@
 <div class="item-body column preview-panel alert-body is-vertical-centered {{($ctrl.data != undefined)?'is-opened':'is-closed'}}">
     <div class="opened" ng-show="$ctrl.data!=undefined">  
         <!--  -->
-        <div class="priority priority-{{$ctrl.data.priority.id}}" ng-if="$ctrl.data.priority.id!=-1">{{$ctrl.data.priority.name}}</div>
+        <div class="priority priority-{{$ctrl.data.id_caseType.id}}" ng-if="$ctrl.data.id_caseType.id!=-1">{{$ctrl.data.id_caseType.description}}</div>
 
-        <h1>{{$ctrl.data.description}}</h1>                
+        <h1>{{$ctrl.data.subject}}</h1>                
         <div class="metadata">
-            <div class="author">{{$ctrl.data.client.name}}</div>
+            <div class="author">
+                {{$ctrl.data.author.name}} 
+                {{$ctrl.data.author.firstLastname}} 
+                {{$ctrl.data.author.secondLastname}}
+            </div>
             <div class="datetime">{{$ctrl.data.registerDate}}</div>
         </div>
         <pre>{{$ctrl.data.description}}</pre> 
+        <div class="assets">
+
+            <br>
+            <b>Estado:</b> 
+            <div class="name">{{$ctrl.data.id_status.value}}</div>
+
+            <br>
+            <b>Activo:</b> 
+            <div class="name">{{$ctrl.data.infrastructure.name}}</div>
+            <div class="description">{{$ctrl.data.infrastructure.description}}</div>
+
+            <br>
+            <b>Fecha Máxima de atención:</b>
+            <div class="maxdate-attention">{{$ctrl.data.maxAtentionDate}}</div>
+            <b>Fecha Máxima de solución:</b>
+            <div class="maxdate-solution">{{$ctrl.data.maxSolutionDate}}</div>
+        </div>
     </div>
     
     <div class="closed" ng-show="$ctrl.data==undefined"> 

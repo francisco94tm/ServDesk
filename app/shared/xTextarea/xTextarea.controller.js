@@ -1,17 +1,16 @@
 /*****************************************************************
  * x Input Component
  */
-function xTextareaController($scope, $element, $attrs){ 
-    $scope.$ctrl.type = $scope.$ctrl.type || 'text';
+function xTextareaController($scope, $element, $attrs){  
 }
 
-angular.module('app').component('xTextarea', {
+angular.module('app').component('xtextarea', {
     templateUrl: 'app/shared/xTextarea/xTextarea.view.html',
     controller: xTextareaController,
     bindings: {
         'label': '@', 
         'ngModel': '=',
-        'disabled': '=', 
+        'disabled': '=?', 
         'placeholder': '@',
     }, 
     replace: true

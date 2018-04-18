@@ -61,7 +61,7 @@ input {
 
     &.big-input {
         font-size: 16px;
-        color: $input--fg;
+        color: $theme--fg;
         text-align: center;
         letter-spacing: 1px;
         background: $input--bg;
@@ -108,6 +108,20 @@ button {
     border-radius: 2px;
     transition: 0.3s $animation-ease-out;
     position: relative;
+
+    &:disabled{
+        border: none;
+        cursor: default;
+        background-color: rgba($theme--fg, 0.2);
+        color: rgba($theme--bg, 0.8);
+        &:hover{
+            border: none;
+            cursor: default;
+            background-color: rgba($theme--fg, 0.2);
+            color: rgba($theme--bg, 0.8);
+        }
+    }
+
     &:hover {
         background: $button--hover-bg;
         border: $button--hover-border;
@@ -128,6 +142,8 @@ button {
     width: 300px;
     margin: 10px 0 0px 10px;
     border-bottom: solid 1px rgba($theme--fg, 0.3);
+
+
     &.disabled {
         border-bottom: dashed 1px rgba($theme--fg, 0.3);
         .select-selected .bold{
@@ -153,7 +169,12 @@ button {
         font-size: 10px;
         text-transform: uppercase;
         span {
-            display: inline;
+            display: inline-block!important;
+            white-space:nowrap;
+            overflow:hidden;
+            &.value{
+                max-width: 160px;
+            }            
         }
         .bold {
             font-weight: 600;
@@ -232,3 +253,80 @@ button {
         display: none;
     }
 }
+
+
+.xpopup{
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(50,50,50,0.7);
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: 0.3s; 
+    &.hidden{
+        z-index: -1;
+        background: rgba(50,50,50,0); 
+        .xpopup-body{
+            margin-top: 100vh;
+            transform: scale(0.5); 
+        }
+    }
+    .xpopup-body{
+        transform: scale(1); 
+        margin-top: 0;
+        width: 450px;
+        height: 300px;
+        background: white;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        text-align: center;
+        padding: 70px 50px 50px 50px;
+        position: relative;
+        font-family: "Walfork";
+        transition: 0.3s; 
+    }
+
+    .xpopup-message p{
+        text-transform: uppercase;
+        font-weight: bold;
+        &.datetime{
+            font-weight: 100;
+            font-size: 13px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: #555;
+            padding: 10px 15px;
+        }
+        h1{
+            font-size: 70px;
+            margin: 0;
+            font-weight: 400;
+        }
+    }
+    
+    .xpopup-controlls button{
+        border: none;
+        font-size: 14px;
+        background: none;
+        font-family: "Walfork"; 
+        position: absolute;
+        bottom: 0;
+        right: 0px;
+        padding: 20px 40px;
+        outline: none;
+        color: #333;
+        width: auto;
+        min-width: auto;
+        &:hover{
+            background: #eee;
+            border: none;
+            padding: 20px 40px;
+        }
+    }
+}  
+   

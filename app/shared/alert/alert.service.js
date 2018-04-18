@@ -18,7 +18,8 @@ var Alert = function(System){
             { id: 2, name: 'Prioridad Ascendente', 	key: '-priority', 	icon: 'error_outline'},
             { id: 3, name: 'Fecha Descendiente', 	key: 'datetime', 	icon: 'date_range'}, 
             { id: 4, name: 'Prioridad Descendiente',key: 'priority', 	icon: 'error_outline'},
-        ],selected: 
+        ],
+        selected: 
             { id: 2, name: 'Prioridad Ascendente', 	key: '-priority', 	icon: 'error_outline'}
     };
 

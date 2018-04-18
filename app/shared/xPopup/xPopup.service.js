@@ -4,40 +4,43 @@
 
 var xPopup = function(){
 
-    var display = false;
-    var title = undefined;
-    var id = undefined;
+    this.display = true;
+    this.title = undefined;
+    this.id = undefined;
 
     this.show = function(){
-        display = true;
+        
+        this.display = true; 
     }
 
     this.hide = function(){
-        display = false;
+        this.display = false;
     }
 
     this.isHidden = function(){
-        return display == false;
+        console.log("esta oculto?");
+        return this.display == false;
     }
 
     this.isShown = function(){
-        return display == true;
+        console.log("visible?");
+        return this.display == true;
     }
 
     this.setId = function(i){
-        id = i;
+        this.id = i;
     }
 
     this.getId = function(){
-        return id;
+        return this.id;
     }
 
     this.setTitle = function(t){
-        title = t;
+        this.title = t;
     }
 
     this.getTitle = function(){
-        return title;
+        return this.title;
     }
 }
 

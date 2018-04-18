@@ -1,7 +1,10 @@
 <div class="alert-item {{($ctrl.data.id == $ctrl.current.id) ? 'selected' : ''}} {{$ctrl.priorityClass}}" ng-click="alertItemClick($ctrl.data)">
     <div class="left">
-        <div class="alert-title">{{$ctrl.data.description}}</div>
-        <div class="alert-client">{{$ctrl.data.client.name}}</div>
+        <div class="alert-title">{{$ctrl.data.subject}}</div>
+        <div class="alert-client">
+            {{$ctrl.data.author.name}} 
+            {{$ctrl.data.author.firstLastname}}
+        </div>
     </div>
     <div class="right">
         <div class="alert-datetime">{{$ctrl.data.registerDate}}</div>  

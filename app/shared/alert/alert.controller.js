@@ -15,23 +15,23 @@ function alertController($scope, $element, $attrs, $timeout, Alert){
     $element.ready(function(){
         $scope.$apply(function(){   
             
-            // switch($scope.$ctrl.data.priority.id){
-            //     case "1":
-            //         $scope.$ctrl.priorityClass = 'low-priority';
-            //         break;
-            //     case "2":
-            //         $scope.$ctrl.priorityClass = 'medium-priority';
-            //         break;
-            //     case "3":
-            //         $scope.$ctrl.priorityClass = 'high-priority';
-            //         break;
-            //     case "4":
-            //         $scope.$ctrl.priorityClass = 'very-high-priority';
-            //         break;
-            //     case "-1":
-            //         $scope.$ctrl.priorityClass = 'non-priority';
-            //         break;
-            // } 
+            switch($scope.$ctrl.data.id_caseType.id){
+                case "1":
+                    $scope.$ctrl.priorityClass = 'low-priority';
+                    break;
+                case "2":
+                    $scope.$ctrl.priorityClass = 'medium-priority';
+                    break;
+                case "3":
+                    $scope.$ctrl.priorityClass = 'high-priority';
+                    break;
+                case "4":
+                    $scope.$ctrl.priorityClass = 'very-high-priority';
+                    break;
+                case "-1":
+                    $scope.$ctrl.priorityClass = 'non-priority';
+                    break;
+            } 
         });
     });   
 }

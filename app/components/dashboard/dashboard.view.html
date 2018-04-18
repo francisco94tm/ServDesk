@@ -23,9 +23,7 @@
                 label="Ordenar por:" 
                 options='Alert.getFilterOptions()' 
                 item-selected="2"
-                ng-model="Alert.filter.selected"></xselect> 
-             
-
+                ng-model="Alert.filter.selected"></xselect>    
             <alert-container  
                 current="currentAlert" 
                 order-by="Alert.filter.selected.key" 
@@ -40,24 +38,25 @@
     
     <div class="item-body column requirement-panel" ng-show="NavPanel.getCurrentSection()==1">  
         <div class="head-data">
-            <xinput label="Título" ng-model="Requirement.data.reason" placeholder="Escribe un título"></xinput>
-            <xtextarea label="Descripción" ng-model="Requirement.data.description" placeholder="Escribe una descripción"></xtextarea>
+            <xinput label="Título" ng-model="Requirement.data.subject" placeholder="Escribe un título"></xinput>
+            <xtextarea ng-model="Requirement.data.description" placeholder="Escribe una descripción"></xtextarea>
         </div> 
         <form>     
             <div class="col">
-                <xselect label="Activo:" options='options.activo'></xselect>
-                <xselect label="Responsable:" options='options.agent' ng-model="Requirement.data.responsible"></xselect>
+                <xselect label="Activo:" options='options.assetRepository' ng-model="Requirement.data.asset"></xselect>
+                <xselect label="Responsable:" options='options.agent' ng-model="Requirement.data.responsable"></xselect>
                 <xselect label="Tipo de Caso:" options='options.caseType' ng-model="Requirement.data.caseType"></xselect>
                 <xselect label="Status:" options='options.status' ng-model="Requirement.data.status"></xselect>
             </div>
             <div class="col"> 
-                <xselect disabled="true" label="Impacto:" options='options.threatImpact' item-selected='1' ng-model="Requirement.data.impact"></xselect>
+                <!-- <xselect disabled="true" label="Impacto:" options='options.threatImpact' item-selected='1' ng-model="Requirement.data.impact"></xselect>
                 <xselect disabled="true" label="Prioridad:" options='options.priority' item-selected='1' ng-model="Requirement.data.priority"></xselect>
-                <xselect disabled="true" label="Urgencia:" options='options.urgency' item-selected='1' ng-model="Requirement.data.urgency"></xselect> 
+                <xselect disabled="true" label="Urgencia:" options='options.urgency' item-selected='1' ng-model="Requirement.data.urgency"></xselect>  -->
+                <xselect label="Agente de amenaza:" options='options.agentThreat' ng-model="Requirement.data.agentThreat"></xselect> 
                 <xselect label="Medio de registro:" options='options.registerMedium' ng-model="Requirement.data.registerMedium"></xselect> 
             </div>                  
         </form>   
-        <button ng-click="Requirement.save()">Registrar</button>
+        <button ng-disabled="Requirement.areFieldsMissing()" ng-click="saveRequirement()">Registrar</button>
     </div> 
 
      <!-- 03. Reports Section ****************************************** -->
@@ -101,4 +100,4 @@
 
 </div>
 
-<x-popup></x-popup>
+<xpopup></xpopup>

@@ -4,7 +4,7 @@ var Dashboard = function(Session, System, $timeout, $q) {
         "theme", "request", 
         "threatImpact", "threatInterest", "threatType", "threatExists", "threatCapacity",
         "infrastructureVulnerability", "assetRepository", "agentThreat",
-        "status", "agent", "caseType", "registerMedium", "job",
+        "status", "agent", "caseType", "registerMedium", "job", "client"
     ];
 
     this.sessionExists = function(){
@@ -38,27 +38,19 @@ var Dashboard = function(Session, System, $timeout, $q) {
         var promises = [];
         angular.forEach(catalogues, function(val, id){ 
             promises.push(
-                System.call('getTableData', {'table': val}).then(function(response){
+                System.call('getTableData', {'table': val}).then(function(response){  
+                    console.log(response.data);
                     if(response.data.error[0] !== "")
                         console.log(response.data.error[0]);
                     opt[val] = response.data.info; 
                 })
             );
         });        
-        return $q.all(promises).then(function(response){      
-            angular.forEach(Object.keys(opt), function(val, id){
-                fixIndexFields(val, opt);
-            });
+        return $q.all(promises).then(function(response){    
+            console.log(opt);
             return opt;
         });  
-    }
-
-    function fixIndexFields(table, object){
-        switch(table){
-            case 'a':
-                break;
-        }
-    };
+    } 
 }
 
 angular.module('app').service('Dashboard', Dashboard); 

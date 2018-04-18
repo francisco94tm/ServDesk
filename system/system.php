@@ -50,46 +50,83 @@
 
 			// Create connection
 			include_once('connection/connection.php');
-			$db = new Connection(); 
-
-			if(!isset($obj['condition'])){
-				$values['query'] = "SELECT * from $table";
-				$values['info'] = $db->select($values['query']);
-				$q = "SELECT MAX(id) as maxId from $table";
-				$values['maxId'] = $db->select($q)[0]['maxId'];
-			}
-
-			else {
-				$condition = $obj['condition'];
-				$values['query'] = "SELECT * from $table WHERE $condition";
-				$values['info'] = $db->select($values['query']);
-			} 			
-
+			$db = new Connection();
+			
+			// Select from table
+			$values['query'] = "SELECT * from $table";
+			$values['info'] = $db->select($values['query']);
 			$values['error'][] = $db->error();
+
+			// Obtain name for just-id values
+			$this->fixIndexes($table, $values['info']);
 			return json_encode($values);
 		} 
-	 
 
-	////////////////////////////////////////////////////////////////////////
- 
+		private function fixIndexes($table, &$data){ 
+			switch($table){
+			case 'request':
+				foreach($data as &$row){
+					$this->swap($row['id_agentThreat'], 'agentThreat', 'name');
+					$this->swap($row['id_caseType'], 'caseType', '*');
+					$this->swap($row['id_client'], 'client', '*');
+					$this->swap($row['id_realAgentThreat'], 'agentThreat', 'name');
+					$this->swap($row['id_registerMedium'], 'registerMedium', 'name');
+					$this->swap($row['id_status'], 'status', 'name');
+					$this->swap($row['author'], 'agent', '*');
+					$this->swap($row['responsable'], 'agent', '*');
+					$this->swap($row['infrastructure'], 'assetRepository', '*');
+				}
+				break;
+			}
+		} 
 
+		private function swap(&$id, $table, $col){			
+			include_once('connection/connection.php');
+			$db = new Connection();
+			if(!is_numeric($id)){
+				$row = $db->select("SELECT $col FROM $table where id = '$id'");
+			}
+			else{
+				$row = $db->select("SELECT $col FROM $table where id = $id");
+			}
+			$i = $id; 
+			$id = [];
+
+			if($col == "*" && count($row) > 0){
+				$id = $row[0];
+			}
+			else {								
+				$id['id'] = $i;
+				if(count($row) > 0)
+					$id['value'] = $row[0][$col];
+			}
+		}
+		
 		public function saveRequirement($obj){
 			// Create connection
 			include_once('connection/connection.php' );
 			$db = new Connection(); 
 			
+			$agentThreat = $obj['agentThreat'];
+			$asset = $obj['asset'];
+			$author = $obj['author'];
 			$caseType = $obj['caseType'];
 			$description = $obj['description'];
-			$impact = $obj['impact'];
-			$priority = $obj['priority'];
-			$reason = $obj['reason'];
-			$registerMedium = $obj['registerMedium'];
-			$responsible = $obj['responsible'];
+			$registerMedium = $obj['registerMedium'];			 
+			$responsable = $obj['responsable'];
 			$status = $obj['status'];
-			$urgency = $obj['urgency'];
-
-			$values['query'] = "INSERT INTO requirement (registerDate, caseType, description, impact, priority, reason, registerMedium, responsible, status, urgency)
-								VALUES (now(), $caseType, '$description', $impact, $priority, '$reason', $registerMedium, $responsible, $status, $urgency)";
+			$subject = $obj['subject'];
+ 
+			$values['query'] = "INSERT INTO request (
+				id_caseType, infrastructure, description,
+				subject, author, responsable,
+				id_status, id_agentThreat, id_registerMedium
+			)
+			 VALUES (
+				 $caseType, '$asset', '$description', 
+				 '$subject', $author, $responsable,
+				 $status, $agentThreat,  $registerMedium
+			 )";
 			$values['info'] = $db->query($values['query']);			
 			$values['id'][] = $db->getLastID(); 
 			$values['error'][] = $db->error(); 

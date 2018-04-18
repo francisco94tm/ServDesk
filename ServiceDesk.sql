@@ -58,7 +58,7 @@ insert into ThreatType values(3,'Ambiental','Amenazas de tipo Ambiental');
 # # # # # # # # # # # # # # # # # # # # # # # #
 
 create table AgentThreat(
-	id int not null,
+	id int not null auto_increment,
 	id_threatType int not null,
 	name varchar(50) not null,
 	description varchar(100) not null,
@@ -67,8 +67,8 @@ create table AgentThreat(
 );
 
 insert into AgentThreat values(1,1,'Fraude','Fraude de proveedor');
-insert into AgentThreat values(1,2,'Falla eléctrica','Falla eléctrica');
-insert into AgentThreat values(1,3,'Sismo','Sismo');
+insert into AgentThreat values(2,2,'Falla eléctrica','Falla eléctrica');
+insert into AgentThreat values(3,3,'Sismo','Sismo');
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -181,7 +181,7 @@ insert into Client values(1,'Juan','Perez','Rojas',1,1,1,1,'2017/02/01','6666666
 #																		#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-CREATE TABLE AssetRepository (
+CREATE TABLE AssetRepository AssetRepository (
 	id varchar(8) not null,
 	name varchar(60) not null,
 	description varchar(240) not null,
@@ -243,12 +243,13 @@ create table Request(
 	id int not null auto_increment, -- Autogenerado
 	id_caseType int not null, -- Se obtiene del catalogo tipo caso
 	infrastructure varchar(8) not null, -- Se obtiene de la infraestructura crítica reportada
+	subject varchar(50),
 	description varchar(500) not null, -- Lo ingresa el agente
 	author int not null, -- Autogenerado: el agente que registra
 	responsable int not null,-- Asignado por el agente que registra
 	id_status int default 1,-- Asignado por el agente que registra, este cambiará con cada acción por parte del agente
 	id_agentThreat int not null,-- Registrado por el agente del catalogo de amenazas
-	id_client int not null,-- Registrado por el agente
+	id_client int,-- Registrado por el agente
 	id_registerMedium int not null,-- Registrado por el agente del catalogo de medios de registro
 	registerDate datetime,-- Autogenerado al insertar
 	atentionDate datetime,-- Generado por sistema en la primera accion del responsable
@@ -278,7 +279,7 @@ create trigger `Request_INSERT` before insert on  `Request`
 		new.maxSolutionDate =  adddate(now(),interval 5 day);
 
 insert into Request(id_caseType, infrastructure, description, author, responsable, id_agentThreat, id_client, id_registerMedium)
-	values(1,'COTR1','Un Requerimiento',2,1,1,1,1);
+	values(1,'COTR1','Un Requerimiento','Descripción de un Requerimiento',2,1,1,1,1);
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 

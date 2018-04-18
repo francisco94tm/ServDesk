@@ -3,20 +3,22 @@
  *  x Select Component
  */
 
-function xselectController($scope, $element, $attrs){  
+function xselectController($scope, $element, $attrs, $timeout){  
     // Flag to know whether the dialog is opened or closed
     $scope.$ctrl.isOpened = false;
 
     $element.ready(function(){
         $scope.$apply(function(){  
-            if($scope.$ctrl.itemSelected != undefined){                
-                angular.forEach($scope.$ctrl.options, function(val, id){
-                    if(val.id == $scope.$ctrl.itemSelected*1){
-                        $scope.$ctrl.ngModel = val;
-                        return -1;
-                    }
-                }); 
-            }
+            $timeout(function(){
+                if($scope.$ctrl.itemSelected != undefined){             
+                    angular.forEach($scope.$ctrl.options, function(val, id){                                            
+                        if(val.id ==  $scope.$ctrl.itemSelected){ 
+                            $scope.$ctrl.ngModel = val;
+                            return -1;
+                        }
+                    }); 
+                }
+            },200);            
         });
     }); 
 
@@ -28,7 +30,7 @@ function xselectController($scope, $element, $attrs){
  
         $scope.$ctrl.isOpened = !$scope.$ctrl.isOpened;        
         if(obj == undefined)
-            return;
+            return; 
         $scope.$ctrl.ngModel = obj;
     };
     // Close dialog function
@@ -43,7 +45,7 @@ angular.module('app').component('xselect', {
     bindings: {
         'label': '@',
         'options': '=',
-        'ngModel': '=',
+        'ngModel': '=?',
         'disabled': '=',
         'itemSelected': '@'
     }, 
