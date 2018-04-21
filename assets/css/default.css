@@ -553,6 +553,7 @@ button {
     margin-top: 5px;
     height: calc(100vh - 155px);
     overflow-y: auto;
+    overflow-x: hidden;
     padding-bottom: 0; }
     .dashboard-container .alert-item-wrapper .alert-item {
       display: flex;
@@ -687,6 +688,8 @@ button {
   .dashboard-container .new-client-panel {
     width: calc(100% - 250px);
     padding: 50px 100px; }
+    .dashboard-container .new-client-panel form {
+      display: flex; }
 
 * {
   margin: 0;

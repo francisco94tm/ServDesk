@@ -4,7 +4,8 @@ var Dashboard = function(Session, System, $timeout, $q) {
         "theme", "request", 
         "threatImpact", "threatInterest", "threatType", "threatExists", "threatCapacity",
         "infrastructureVulnerability", "assetRepository", "agentThreat",
-        "status", "agent", "caseType", "registerMedium", "job", "client"
+        "status", "agent", "caseType", "registerMedium", "job", "client",
+        "area", "department", "businessUnit"
     ];
 
     this.sessionExists = function(){
@@ -33,13 +34,18 @@ var Dashboard = function(Session, System, $timeout, $q) {
     this.setCatalogues = function(c){
         catalogues = c;
     }
-    this.getCatalogues = function(){
+    this.getCatalogues = function(cat){
         var opt = {};
         var promises = [];
         angular.forEach(catalogues, function(val, id){ 
+            
+            // Look for specific catalog
+            if(cat !== undefined){
+                if(cat !== val)
+                return;
+            }
             promises.push(
-                System.call('getTableData', {'table': val}).then(function(response){  
-                    console.log(response.data);
+                System.call('getTableData', {'table': val}).then(function(response){   
                     if(response.data.error[0] !== "")
                         console.log(response.data.error[0]);
                     opt[val] = response.data.info; 

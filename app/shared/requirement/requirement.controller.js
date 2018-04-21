@@ -1,4 +1,4 @@
-function requirementController($scope, $element, $attrs, requirement){   
+function requirementController($scope, $element, $attrs, Requirement){   
  
 }
   

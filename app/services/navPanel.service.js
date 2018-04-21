@@ -10,7 +10,8 @@ var NavPanel = function() {
         { name: "Alertas", 				icon: 'warning'	},
         { name: "Requerimiento", 		icon: 'list'	},
         { name: "Reportes", 			icon: 'show_chart'	},
-        { name: "Alta",			 		icon: 'person_add'	} 
+        { name: "Alta Cliente",			icon: 'person_add'	},
+        { name: "Alta Agente",			icon: 'person_add'	}
     ];
 
     var currentSection = 0;

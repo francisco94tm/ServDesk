@@ -12,15 +12,15 @@ var Alert = function(System){
         "4"  : "Muy Alta Prioridad"
     }
 
-    var filter = {
+    this.filter = {
         options : [
-            { id: 1, name: 'Fecha Ascendente', 		key: '-datetime', 	icon: 'date_range'},
-            { id: 2, name: 'Prioridad Ascendente', 	key: '-priority', 	icon: 'error_outline'},
-            { id: 3, name: 'Fecha Descendiente', 	key: 'datetime', 	icon: 'date_range'}, 
-            { id: 4, name: 'Prioridad Descendiente',key: 'priority', 	icon: 'error_outline'},
+            { id: 1, name: 'Recientes', 	key: '-registerDate', 	icon: 'date_range'},
+            { id: 2, name: 'Más urgente', 	key: '-id_caseType.id', icon: 'error_outline'},
+            { id: 3, name: 'Antiguos', 	    key: 'registerDate', 	icon: 'date_range'}, 
+            { id: 4, name: 'Menos urgentes',key: 'id_caseType.id', 	icon: 'error_outline'},
         ],
         selected: 
-            { id: 2, name: 'Prioridad Ascendente', 	key: '-priority', 	icon: 'error_outline'}
+            { id: 2, name: 'Prioridad Ascendente', 	key: '-registerDate', 	icon: 'error_outline'}
     };
 
     this.data = [];
@@ -31,11 +31,11 @@ var Alert = function(System){
     }
 
     this.getFilterOptions = function(){
-        return filter.options;
+        return this.filter.options;
     }
 
     this.getFilterSelected = function(){
-        return filter.selected;
+        return this.filter.selected;
     } 
 
     this.setData = function(d){ 

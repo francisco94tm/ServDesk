@@ -17,6 +17,14 @@
 				$system = new System(); 
 				echo $system->saveRequirement($_REQUEST);	
 				break; 
+			case 'saveClient':
+				$system = new System(); 
+				echo $system->saveClient($_REQUEST);	
+				break;
+			case 'saveAgent':
+				$system = new System(); 
+				echo $system->saveAgent($_REQUEST);	
+				break; 
 			case 'login':
 				include_once('login.class.php');
 				$login = new Login(); 	 
@@ -127,6 +135,71 @@
 				 '$subject', $author, $responsable,
 				 $status, $agentThreat,  $registerMedium
 			 )";
+			$values['info'] = $db->query($values['query']);			
+			$values['id']   = $db->getLastID(); 
+			$values['error'][] = $db->error(); 
+			return json_encode($values);
+		}
+
+		public function saveClient($obj){
+			// Create connection
+			include_once('connection/connection.php' );
+			$db = new Connection(); 
+			
+			$name = $obj['name'];
+			$firstLastname = $obj['firstLastname'];
+			$secondLastname = $obj['secondLastname'];
+			$mobilephone = $obj['mobilephone'];
+			$phone = $obj['phone'];
+			$email = $obj['email'];
+			$job = $obj['job'];
+			$area = $obj['area'];
+			$department = $obj['department'];
+			$businessUnit = $obj['businessUnit'];
+ 
+			$values['query'] = "INSERT INTO client (
+				name, firstLastname, secondLastname,
+				id_job, id_area, id_department,
+				id_businessUnit, admissionDate, mobilephone,
+				phone, email, status
+			)
+			 VALUES (
+				'$name', '$firstLastname', '$secondLastname', 
+				$job, $area, $department,
+				$businessUnit, NOW(),  '$mobilephone',
+				'$phone', '$email', 'A'
+			 )";
+			$values['info'] = $db->query($values['query']);			
+			$values['id']   = $db->getLastID(); 
+			$values['error'][] = $db->error(); 
+			return json_encode($values);
+		}
+
+		public function saveAgent($obj){
+			// Create connection
+			include_once('connection/connection.php' );
+			$db = new Connection(); 
+			
+			$name = $obj['name'];
+			$firstLastname = $obj['firstLastname'];
+			$secondLastname = $obj['secondLastname'];
+			$mobilephone = $obj['mobilephone'];
+			$phone = $obj['phone'];
+			$email = $obj['email'];
+			$address = $obj['address'];
+			 
+ 
+			$values['query'] = "INSERT INTO agent (
+				name, firstLastname, secondLastname,
+				mobilephone, address,
+				phone, email
+			)
+			 VALUES (
+				'$name', '$firstLastname', '$secondLastname', 
+				'$mobilephone', '$address',
+				'$phone', '$email'
+			 )";
+			 
 			$values['info'] = $db->query($values['query']);			
 			$values['id']   = $db->getLastID(); 
 			$values['error'][] = $db->error(); 

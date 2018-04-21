@@ -140,6 +140,7 @@
         margin-top: 5px;
         height: calc(100vh - 155px);
         overflow-y: auto;
+        overflow-x: hidden;
         padding-bottom: 0;
 
         .alert-item{
@@ -289,5 +290,8 @@
     .new-client-panel{
         width: calc(100% - 250px);
         padding: 50px 100px;
+        form{
+            display: flex;
+        }
     } 
 }

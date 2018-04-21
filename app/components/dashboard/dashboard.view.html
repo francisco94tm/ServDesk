@@ -18,19 +18,17 @@
 
     <div class="body column" ng-show="NavPanel.getCurrentSection()==0"> 
         <div class="item-nav column">
-            <search ng-model="session.search"></search>   
+            <search ng-model="session.search"></search>  
             <xselect 
                 label="Ordenar por:" 
-                options='Alert.getFilterOptions()' 
+                options='Alert.filter.options' 
                 item-selected="2"
                 ng-model="Alert.filter.selected"></xselect>    
+
             <alert-container  
                 current="currentAlert" 
                 order-by="Alert.filter.selected.key" 
-                filter-by="session.search"></alert-container> 
-                
-            {{Alert.filter.selected.key}}
-                      
+                filter-by="session.search"></alert-container>                       
         </div>  
         
         <alert-display data="currentAlert"></alert-display> 
@@ -74,23 +72,51 @@
 
     <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==3"> 
         <h1 class="bold">Alta de cliente</h1>
-        <form>
-            <xinput label="Nombre(s):" placeholder="Ingresa el nombre" ng-model="client.name"></xinput>  
-            <xinput label="Primer apellido:" placeholder="Ingresa el primer apellido" ng-model="client.lastname1"></xinput>  
-            <xinput label="Segundo apellido:" placeholder="Ingresa el segundo apellido" ng-model="client.lastname2"></xinput>  
-             
-            <div class="input-group"><label>Área:</label><input type="text" placeholder = "Ingresa el área"/></div>
-            <div class="input-group"><label>Departamento:</label><input type="text" placeholder = "Ingresa el departamento"/></div>
-            <div class="input-group"><label>Puesto:</label><input type="text" placeholder = "Ingresa el puesto"/></div>
-            
-            <button ng-click="newUser()">Registrar</button>
+        <br>
+        <form>            
+            <div class="col">
+                <xinput label="Nombre(s):" placeholder="Ingresa el nombre" ng-model="Client.data.name"></xinput>  
+                <xinput label="Primer apellido:" placeholder="Ingresa el primer apellido" ng-model="Client.data.firstLastname"></xinput>  
+                <xinput label="Segundo apellido:" placeholder="Ingresa el segundo apellido" ng-model="Client.data.secondLastname"></xinput>  
+                <xinput label="Teléfono Móvil:" placeholder="Ingresa teléfono móvil" ng-model="Client.data.mobilephone"></xinput>  
+                <xinput label="Teléfono Fijo:" placeholder="Ingresa teléfono fijo" ng-model="Client.data.phone"></xinput>  
+                <xinput label="Email:" placeholder="Ingresa e-mail" ng-model="Client.data.email"></xinput>  
+            </div>  
+            <div class="col">
+                    <xselect label="Puesto:" options='options.job' ng-model="Client.data.job"></xselect>
+                    <xselect label="Área:" options='options.area' ng-model="Client.data.area"></xselect>
+                    <xselect label="Departamento:" options='options.department' ng-model="Client.data.department"></xselect>
+                    <xselect label="Unidad:" options='options.businessUnit' ng-model="Client.data.businessUnit"></xselect>
+                </div>   
         </form>
+        <br><br>  
+        <button ng-disabled="Client.areFieldsMissing()" ng-click="saveClient()">Registrar</button>
     </div>
 
-
-     <!-- 04. Configuration ****************************************** -->
-
     <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==4"> 
+        <h1 class="bold">Alta de agente</h1>
+        <br>
+        <form>            
+            <div class="col">
+                <xinput label="Nombre(s):" placeholder="Ingresa el nombre" ng-model="Agent.data.name"></xinput>  
+                <xinput label="Primer apellido:" placeholder="Ingresa el primer apellido" ng-model="Agent.data.firstLastname"></xinput>  
+                <xinput label="Segundo apellido:" placeholder="Ingresa el segundo apellido" ng-model="Agent.data.secondLastname"></xinput>  
+                <xinput label="Direccion:" placeholder="Ingresa direccion" ng-model="Agent.data.address"></xinput>  
+                <xinput label="Teléfono Móvil:" placeholder="Ingresa teléfono móvil" ng-model="Agent.data.mobilephone"></xinput>  
+                <xinput label="Teléfono Fijo:" placeholder="Ingresa teléfono fijo" ng-model="Agent.data.phone"></xinput>  
+                <xinput label="Email:" placeholder="Ingresa e-mail" ng-model="Agent.data.email"></xinput>  
+            </div>  
+            <div class="col">
+                    <!-- <xselect label="Nivel:" options='options.level' ng-model="Agent.data.level"></xselect>  -->
+                </div>   
+        </form>
+        <br><br>  
+        <button ng-disabled="Agent.areFieldsMissing()" ng-click="saveAgent()">Registrar</button>
+    </div>
+
+     <!-- 05. Configuration ****************************************** -->
+
+    <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==5"> 
         <h1 class="bold">Configuración</h1>
         <form>
             <xselect label="Tema:" options='options.theme' item-selected="2" ng-model="session.theme"></xselect>
