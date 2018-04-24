@@ -16,6 +16,7 @@ angular.module('app').component('xinput', {
         'disabled': '=',
         'type': '@', 
         'placeholder': '@',
+        'class': '@'
     }, 
     replace: true
 });

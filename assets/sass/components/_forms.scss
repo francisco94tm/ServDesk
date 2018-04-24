@@ -142,7 +142,7 @@ button {
     width: 300px;
     margin: 10px 0 0px 10px;
     border-bottom: solid 1px rgba($theme--fg, 0.3);
-
+    
 
     &.disabled {
         border-bottom: dashed 1px rgba($theme--fg, 0.3);
@@ -216,27 +216,40 @@ button {
     }
     /*style items (options):*/
     .select-items {
-        position: absolute;        
-
+        position: absolute;   
         @if $theme--bg == $dark-theme--bg{
             background-color: lighten($theme--bg, 5);
-            border: solid 1px rgba($theme--fg, 0.25);
+            border: solid 1px rgba($theme--fg, 0.24);
         } @else if $theme--bg == $clear-theme--bg{
             background-color: $theme--bg;
-            border: solid 1px rgba($theme--fg, 0.35);
-        }
-
-        top: 100%;
+            border: solid 1px rgba($theme--fg, 0.24);
+        } 
+        top: -100%;
         left: 0;
         right: 0;
         z-index: 99;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-        transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
-        max-height: 300px;
-        overflow-x: auto;
-         
-        border-radius: 2px;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+ 
+        overflow-x: auto; 
+        border-radius: 3px;
         font-size: 13px;
+        max-height: 300px;
+        transition: 
+            max-height 0.3s $animation-ease-out,
+            top 0.3s $animation-ease-out,
+            box-shadow 0.3s $animation-ease-out;
+
+        &.select-hide{
+            top: 0;
+            max-height: 0px;
+            box-shadow: none;
+            border: none;
+            transition: 
+                max-height 0.3s $animation-ease-out,
+                top 0.3s $animation-ease-out,
+                box-shadow 0.3s $animation-ease-out; 
+        }
+
         & div.selected {
             font-weight: 600;
             background-color: rgba($theme--fg, 0.3);
@@ -247,11 +260,7 @@ button {
         & div:hover {
             background-color: rgba($theme--fg, 0.1);
         }
-    }
-    /*hide the items when the select box is closed:*/
-    .select-hide {
-        display: none;
-    }
+    } 
 }
 
 

@@ -8,8 +8,7 @@ var xPopup = function(){
     this.title = undefined;
     this.id = undefined;
 
-    this.show = function(){
-        
+    this.show = function(){        
         this.display = true; 
     }
 
@@ -24,7 +23,7 @@ var xPopup = function(){
 
     this.isShown = function(){
         console.log("visible?");
-        return this.display == true;
+        return this.display == true; 
     }
 
     this.setId = function(i){
