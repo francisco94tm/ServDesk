@@ -13,9 +13,9 @@
 				$system = new System(); 
 				echo $system->getTableData($_REQUEST);	
 				break;   
-			case 'saveRequirement':
+			case 'saveCase':
 				$system = new System(); 
-				echo $system->saveRequirement($_REQUEST);	
+				echo $system->saveCase($_REQUEST);	
 				break; 
 			case 'saveClient':
 				$system = new System(); 
@@ -85,6 +85,10 @@
 					$this->swap($row['infrastructure'], 'assetRepository', '*');
 				}
 				break;
+			case 'agent':
+				foreach($data as &$row){
+					$this->swap($row['id_level'], 'Level', 'name');
+				}
 			}
 		} 
 
@@ -110,7 +114,7 @@
 			}
 		}
 		
-		public function saveRequirement($obj){
+		public function saveCase($obj){
 			// Create connection
 			include_once('connection/connection.php' );
 			$db = new Connection(); 
@@ -121,19 +125,19 @@
 			$caseType = $obj['caseType'];
 			$description = $obj['description'];
 			$registerMedium = $obj['registerMedium'];			 
-			$responsable = $obj['responsable'];
-			$status = $obj['status'];
+			$responsable = $obj['responsable']; 
+			$client = $obj['client'];
 			$subject = $obj['subject'];
  
 			$values['query'] = "INSERT INTO request (
 				id_caseType, infrastructure, description,
 				subject, author, responsable,
-				id_status, id_agentThreat, id_registerMedium
+				id_status, id_client, id_agentThreat, id_registerMedium
 			)
 			 VALUES (
 				 $caseType, '$asset', '$description', 
 				 '$subject', $author, $responsable,
-				 $status, $agentThreat,  $registerMedium
+				 1, $client, $agentThreat,  $registerMedium
 			 )";
 			$values['info'] = $db->query($values['query']);			
 			$values['id']   = $db->getLastID(); 

@@ -1,0 +1,15 @@
+<!-- 05. Configuration ================================================== -->
+<br><br>
+<div class="settings-container container row">
+    <div class="column">
+        <h1 class="bold">Configuración</h1>
+        <form>
+            <xselect label="Tema:" 
+                options='$ctrl.options.theme' 
+                item-selected="2" 
+                ng-model="$ctrl.session.theme"></xselect> 
+            <br><br>
+            <button ng-click="$ctrl.logout()">Cerrar sesión</button>
+        </form>
+    </div>    
+</div>

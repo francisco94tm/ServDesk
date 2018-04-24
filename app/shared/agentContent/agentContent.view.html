@@ -1,0 +1,42 @@
+<div class="agent-content column section-content {{($ctrl.data != undefined)?'is-opened':'is-closed'}}">
+    <div class="opened section-content-wrapper" ng-show="$ctrl.data!=undefined">          
+        <div class="pre-data">
+            <b>Estatus: </b><span>{{$ctrl.data.status}}</span>
+        </div>
+        <h1>{{$ctrl.data.usr}}</h1>                
+        <div class="metadata">            
+            <div class="user-name">
+                {{$ctrl.data.name}} 
+                {{$ctrl.data.firstLastname}} 
+                {{$ctrl.data.secondLastname}}
+            </div>
+            <div class="item-list">
+                <div class="curp item">
+                    <i class="material-icons">face</i>
+                    <span><b>{{$ctrl.data.id_level.value}}</b></span>
+                </div>
+                <div class="email item">
+                    <i class="material-icons">mail_outline</i>
+                    <span>{{$ctrl.data.email}}</span>
+                </div>
+                <div class="phone item">
+                    <i class="material-icons">phone</i>
+                    <span>{{$ctrl.data.phone}}</span>
+                </div>
+                <div class="mobilephone item">
+                    <i class="material-icons">phone_iphone</i>
+                    <span>{{$ctrl.data.mobilephone}}</span>
+                </div>
+                <div class="address item">
+                    <i class="material-icons">home</i>
+                    <span>{{$ctrl.data.address}}</span>
+                </div>
+            </div>
+            
+        </div> 
+    </div>
+    
+    <div class="closed" ng-show="$ctrl.data==undefined"> 
+        <h1>Da clic sobre algún agente</h1> 
+    </div>
+</div>

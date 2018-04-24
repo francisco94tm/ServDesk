@@ -86,10 +86,10 @@
 
   .one-half.column                { width: 50%; }
 
-  .nav.column                     { width: 250px; }  
-  .body.column                    { width: calc(100% - 250px); }
-  .item-nav.column                { width: 350px; }
-  .item-body.column               { width: calc(100% - 350px); }
+  /* .dash-nav.column                { width: 200px; }  
+  .dash-content.column            { width: calc(100% - 200px); }
+  .section-nav.column             { width: 350px; }
+  .section-content.column         { width: calc(100% - 350px); } */
 
   /* Offsets */
   .offset-by-one.column,

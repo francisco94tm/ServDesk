@@ -46,12 +46,12 @@ var Chart = function(){
                  '#2c87bf','#5e4ca4'];
             return colorArray[i];
         }
-        RadarChart.defaultConfig.color = colorFunction; 
-        RadarChart.defaultConfig.w = 400;
-        RadarChart.defaultConfig.h = 400;
-        RadarChart.defaultConfig.backgroundTooltipColor = "#444";
-        RadarChart.defaultConfig.backgroundTooltipOpacity = "1.0";  
-        RadarChart.draw(".chart-container", this.getData());
+        // RadarChart.defaultConfig.color = colorFunction; 
+        // RadarChart.defaultConfig.w = 400;
+        // RadarChart.defaultConfig.h = 400;
+        // RadarChart.defaultConfig.backgroundTooltipColor = "#444";
+        // RadarChart.defaultConfig.backgroundTooltipOpacity = "1.0";  
+        // RadarChart.draw(".chart-container", this.getData());
     }
  
     

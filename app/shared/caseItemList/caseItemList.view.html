@@ -1,0 +1,16 @@
+<div class="case-item-list column">
+    <xsearch ng-model="$ctrl.search"></xsearch> 
+    <xselect 
+        label="Ordenar por:" 
+        options='$ctrl.filter.options' 
+        item-selected="2"
+        ng-model="$ctrl.filter.selected">
+    </xselect>  
+    <div class="case-item-wrapper item-wrapper">
+        <case-item
+            ng-repeat="x in $ctrl.data | orderBy:$ctrl.filter.selected.key | filter:$ctrl.search"
+            data="x"
+            current="$ctrl.current">
+        </case-item>
+    </div>
+</div>

@@ -13,13 +13,15 @@ var Dashboard = function(Session, System, $timeout, $q) {
             return response.data !== 'FALSE';
         });
     }
+
     this.getSessionData = function(){         
         return Session.getData().then(function(response){ 
             return {
                 id : response.id,
                 name :  response.name + " " +  response.firstLastname,  
-                icon:	'settings',
-                search: "", 
+                icon:	'settings', 
+                view: 'settings-container',
+                sectionlevel: response.id_level,
                 theme: 	{
                     id: 1,
                     value: 'Oscuro',
@@ -28,9 +30,7 @@ var Dashboard = function(Session, System, $timeout, $q) {
             } 
         });        
     } 
-    this.logout = function(){
-        Session.close();
-    }
+    
     this.setCatalogues = function(c){
         catalogues = c;
     }
@@ -52,8 +52,7 @@ var Dashboard = function(Session, System, $timeout, $q) {
                 })
             );
         });        
-        return $q.all(promises).then(function(response){    
-            console.log(opt);
+        return $q.all(promises).then(function(response){     
             return opt;
         });  
     } 

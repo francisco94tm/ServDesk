@@ -1,0 +1,28 @@
+<div class="agent-add-container add-container" ng-class="($ctrl.status.isClosed())?'closed':'opened'"> 
+    <div class="back" ng-click="$ctrl.status.shuffle()"></div>
+    <div class="button">
+        <i class="close material-icons" ng-click="$ctrl.status.shuffle()">add</i>
+    </div> 
+    <div class="panel">
+        <div class="panel-wrapper">
+            <div class="head-data">
+                <xinput label="Registrar nuevo agente" ng-model="$ctrl.AgentAdd.data.usr" placeholder="Nombre de usuario"></xinput>
+                <xtextarea ng-model="$ctrl.AgentAdd.data.description" placeholder="Escribe una descripción"></xtextarea>
+            </div> 
+            <form>     
+                <div class="col">
+                    
+                    <!-- <xselect label="Medio de registro:" options='$ctrl.options.registerMedium' ng-model="$ctrl.AgentAdd.data.registerMedium"></xselect> 
+                    <xselect label="Tipo de Caso:" options='$ctrl.options.AgentType' ng-model="$ctrl.AgentAdd.data.AgentType"></xselect>
+                    <xselect label="Activo:" options='$ctrl.options.assetRepository' ng-model="$ctrl.AgentAdd.data.asset"></xselect>  -->
+                </div>
+                <div class="col">  
+                    <!-- <xselect label="Agente de amenaza:" options='$ctrl.options.agentThreat' ng-model="$ctrl.AgentAdd.data.agentThreat"></xselect> 
+                    <xselect label="Responsable:" options='$ctrl.options.agent' ng-model="$ctrl.AgentAdd.data.responsable"></xselect>
+                    <xselect label="Cliente:" options='$ctrl.options.client' ng-model="$ctrl.AgentAdd.data.client"></xselect> -->
+                </div>                  
+            </form>
+            <button ng-disabled="$ctrl.AgentAdd.areFieldsMissing()" ng-click="$ctrl.saveAgent()">Registrar</button>     
+        </div>   
+    </div>
+</div>

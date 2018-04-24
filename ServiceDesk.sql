@@ -81,12 +81,13 @@ create table Agent(
 	mobilephone varchar(30) not null,
 	phone varchar(30) not null,
 	email varchar(30) not null,
-	level int not null,
+	id_level int not null,
 	backup int,
 	usr varchar(20) not null,
 	pass varchar(10) not null,
 	status varchar(3) not null,
-	primary key(id) 
+	primary key(id),
+	foreign key (id_level) references Level(id)
 ); 
 
 insert into Agent values(1,'Orlando','Rocha','Montiel','Calle 1 colonia 1 ciudad de mexico','55555555555','55555555555','correo@dominio',2,2,'Especialista1','123','A');
@@ -117,6 +118,19 @@ create table Department(
 );
 
 insert into Department values(1,1,'Ciencias Sociales','Departamento de ciencias sociales');
+
+# # # # # # # # # # # # # # # # # # # # # # # # 
+
+create table Level(
+	id int not null auto_increment, 
+	name varchar(50) not null,
+	description varchar(100),
+	primary key(id)
+);
+
+insert into Level values(1, 'Agente', '');
+insert into Level values(2, 'Especialista', '');
+insert into Level values(3, 'HotFix', '');
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -154,6 +168,7 @@ insert into Job values(1,1,1,1,'Profesor','Profesor de la materia');
 
 create table Client(
 	id int not null auto_increment,
+	curp varchar(18),
 	name varchar(30) not null,
 	firstLastname varchar(30),
 	secondLastname varchar(30),
