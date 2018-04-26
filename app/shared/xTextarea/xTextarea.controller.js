@@ -12,6 +12,7 @@ angular.module('app').component('xtextarea', {
         'ngModel': '=',
         'disabled': '=?', 
         'placeholder': '@',
+        'class': '@'
     }, 
     replace: true
 });

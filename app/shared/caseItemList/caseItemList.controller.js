@@ -9,8 +9,7 @@ function caseItemListController($scope, $element, $attrs, CaseItemList){
     $scope.$ctrl.data = [];
     
     // Update alerts
-    $scope.$on('getCases', function (event, data) {  
-        console.log(data);
+    $scope.$on('getCases', function (event, data) {   
         $scope.$ctrl.data = data;  
     });  
 }

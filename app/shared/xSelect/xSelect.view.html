@@ -1,12 +1,11 @@
 <div class="x-select {{($ctrl.disabled)?'disabled':''}}" ng-click-out="$ctrl.close()">
     <i class="material-icons">{{($ctrl.ngModel.icon == undefined && $ctrl.ngModel.id != undefined)?'checked':$ctrl.ngModel.icon}}</i> 
- 
     <select>
         <option value="0">{{$ctrl.label}}</option> 
         <option value="o.id" ng-repeat="o in $ctrl.options">{{o.name}}</option>
     </select>
-
-    <div class="select-selected" ng-click="$ctrl.shuffle()">
+    {{$ctrl.getSelected()}}
+    <div class="select-selected" ng-click="$ctrl.shuffle()"> 
         <span class="bold">{{$ctrl.label}}</span>
         <span class="value">{{$ctrl.ngModel.name}}</span>
     </div>
@@ -17,3 +16,4 @@
     </div>
 </div>
  
+

@@ -1,0 +1,51 @@
+.infrastructure-wrapper{
+    display: flex; 
+    flex-direction: column;
+    padding: 10px;
+    .infrastructure{
+        margin-top: 50px;
+    }
+    .table-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+table{
+    border: solid 1px #ccc;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
+    margin: 20px 20px 0 0;
+    font-size: 11px;
+    caption{
+        text-align: left; 
+        color: $main-color;
+        font-size: 16px;
+        padding: 5px 30px;
+        letter-spacing: 1px;
+    }
+    th {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        // color: $main-color;
+    }
+    td, th{
+        padding: 5px 10px;
+    }
+    tr:nth-child(even) td,  tr:nth-child(even) th{
+        background: rgb(240, 240, 240);
+    //    border-bottom: solid 1px #ccc;
+    }
+
+    table{ 
+        border: none;
+        margin: 10px 0 0 0;
+        box-shadow: none;
+        tr {
+            border-bottom: none;
+        }
+        th, caption{
+            text-align: left;
+            color: $theme--fg;
+        }
+    }
+}

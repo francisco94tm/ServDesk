@@ -1,25 +1,24 @@
-<div class="agent-add-container add-container" ng-class="($ctrl.status.isClosed())?'closed':'opened'"> 
-    <div class="back" ng-click="$ctrl.status.shuffle()"></div>
+<div class="agent-add-container add-container" ng-class="($ctrl.AgentAdd.isClosed())?'closed':'opened'"> 
+    <div class="back" ng-click="$ctrl.AgentAdd.shuffle()"></div>
     <div class="button">
-        <i class="close material-icons" ng-click="$ctrl.status.shuffle()">add</i>
+        <i class="close material-icons" ng-click="$ctrl.AgentAdd.shuffle()">add</i>
     </div> 
     <div class="panel">
         <div class="panel-wrapper">
             <div class="head-data">
                 <xinput label="Registrar nuevo agente" ng-model="$ctrl.AgentAdd.data.usr" placeholder="Nombre de usuario"></xinput>
-                <xtextarea ng-model="$ctrl.AgentAdd.data.description" placeholder="Escribe una descripción"></xtextarea>
-            </div> 
+             </div> 
             <form>     
                 <div class="col">
-                    
-                    <!-- <xselect label="Medio de registro:" options='$ctrl.options.registerMedium' ng-model="$ctrl.AgentAdd.data.registerMedium"></xselect> 
-                    <xselect label="Tipo de Caso:" options='$ctrl.options.AgentType' ng-model="$ctrl.AgentAdd.data.AgentType"></xselect>
-                    <xselect label="Activo:" options='$ctrl.options.assetRepository' ng-model="$ctrl.AgentAdd.data.asset"></xselect>  -->
-                </div>
-                <div class="col">  
-                    <!-- <xselect label="Agente de amenaza:" options='$ctrl.options.agentThreat' ng-model="$ctrl.AgentAdd.data.agentThreat"></xselect> 
-                    <xselect label="Responsable:" options='$ctrl.options.agent' ng-model="$ctrl.AgentAdd.data.responsable"></xselect>
-                    <xselect label="Cliente:" options='$ctrl.options.client' ng-model="$ctrl.AgentAdd.data.client"></xselect> -->
+                    <xselect label="Nivel de Acceso:" options='$ctrl.options.level' ng-model="$ctrl.AgentAdd.data.level"></xselect> 
+                    <xinput label="Contraseña:" type="password" ng-model="$ctrl.AgentAdd.data.pass"></xinput> 
+                    <xinput label="Nombre(s):" ng-model="$ctrl.AgentAdd.data.name"></xinput>   
+                    <xinput label="Primer apellido:" ng-model="$ctrl.AgentAdd.data.firstLastname"></xinput>   
+                    <xinput label="Segundo apellido:" ng-model="$ctrl.AgentAdd.data.secondLastname"></xinput>   
+                    <xinput label="Email:" ng-model="$ctrl.AgentAdd.data.email"></xinput>   
+                    <xinput label="Teléfono Fijo:" ng-model="$ctrl.AgentAdd.data.phone"></xinput>   
+                    <xinput label="Teléfono Móvil:" ng-model="$ctrl.AgentAdd.data.mobilephone"></xinput>   
+                    <xinput label="Dirección:" ng-model="$ctrl.AgentAdd.data.address"></xinput>    
                 </div>                  
             </form>
             <button ng-disabled="$ctrl.AgentAdd.areFieldsMissing()" ng-click="$ctrl.saveAgent()">Registrar</button>     

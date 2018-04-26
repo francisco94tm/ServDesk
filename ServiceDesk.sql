@@ -24,8 +24,8 @@ create table RegisterMedium(
 	primary key(id)
 );
 
-insert into RegisterMedium values(1,'Telefónico');
-insert into RegisterMedium values(2,'Email');
+insert into RegisterMedium values(1,'Teléfono');
+insert into RegisterMedium values(2,'Correo Electrónico');
  
 # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -131,6 +131,23 @@ create table Level(
 insert into Level values(1, 'Agente', '');
 insert into Level values(2, 'Especialista', '');
 insert into Level values(3, 'HotFix', '');
+
+# # # # # # # # # # # # # # # # # # # # # # # # 
+
+CREATE TABLE riskmatrix (
+  id_probability float NOT NULL,
+  id_impact int(11) NOT NULL,
+  result float NOT NULL
+);
+ 
+INSERT INTO riskmatrix VALUES 
+(1,1,0.2),(1,2,0.4),(1,3,0.6),(1,4,0.8),
+(1,5,1),(2,1,0.6),(2,2,1.2),(2,3,1.8),
+(2,4,2.4),(2,5,3),(3,1,1),(3,2,2),
+(3,3,3),(3,4,4),(3,5,5),(4,1,1.4),
+(4,2,2.8),(4,3,4.2),(4,4,5.6),(4,5,7),
+(5,1,1.8),(5,2,3.6),(5,3,6.4),(5,4,7.2),
+(5,5,9);
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 
@@ -265,7 +282,8 @@ create table Request(
 	id_status int default 1,-- Asignado por el agente que registra, este cambiará con cada acción por parte del agente
 	id_agentThreat int not null,-- Registrado por el agente del catalogo de amenazas
 	id_client int,-- Registrado por el agente
-	id_registerMedium int not null,-- Registrado por el agente del catalogo de medios de registro
+	id_
+	ium int not null,-- Registrado por el agente del catalogo de medios de registro
 	registerDate datetime,-- Autogenerado al insertar
 	atentionDate datetime,-- Generado por sistema en la primera accion del responsable
 	solutionDate datetime,-- Generado por sistema al cerrar el ticket es decir al actualizar el estatus a 'SOLUCIONADO'
@@ -346,6 +364,7 @@ insert into ThreatInterest values(2,0.11,0.3,'Se genera poco',0.3);
 insert into ThreatInterest values(3,0.31,0.5,'Se genera regular',0.5);
 insert into ThreatInterest values(4,0.51,0.7,'Se genera mucho',0.7);
 insert into ThreatInterest values(5,0.71,0.9,'Es incontrolable',0.9);
+
 
 # # # # # # # # # # # # # # # # # # # # # # # # 
 

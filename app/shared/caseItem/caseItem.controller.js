@@ -11,7 +11,7 @@ function caseItemController($scope, $element, $attrs, CaseItem, $rootScope){
     $scope.caseItemClick = function(data){ 
         var d = ($scope.$ctrl.current == data) ? undefined : data;
         $scope.$ctrl.current = d; 
-        $rootScope.$broadcast('displayCase', d);
+        $rootScope.$broadcast('displayCase', d); 
     }; 
     
     $element.ready(function(){

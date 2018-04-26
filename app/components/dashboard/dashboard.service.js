@@ -5,7 +5,7 @@ var Dashboard = function(Session, System, $timeout, $q) {
         "threatImpact", "threatInterest", "threatType", "threatExists", "threatCapacity",
         "infrastructureVulnerability", "assetRepository", "agentThreat",
         "status", "agent", "caseType", "registerMedium", "job", "client",
-        "area", "department", "businessUnit"
+        "area", "department", "businessUnit", "level"
     ];
 
     this.sessionExists = function(){

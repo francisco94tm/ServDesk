@@ -1,37 +1,135 @@
 <div class="case-content column section-content {{($ctrl.data != undefined)?'is-opened':'is-closed'}}">
-    <div class="opened section-content-wrapper" ng-show="$ctrl.data!=undefined">  
-        <div class="priority priority-{{$ctrl.data.id_caseType.id}}" ng-if="$ctrl.data.id_caseType.id!=-1">{{$ctrl.data.id_caseType.description}}</div>
+   
+    <!-- Show when data is selected -->
+    <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.data != undefined">  
 
-        <h1>{{$ctrl.data.subject}}</h1>                
-        <div class="metadata">
-            <div class="author">
-                {{$ctrl.data.author.name}} 
-                {{$ctrl.data.author.firstLastname}} 
-                {{$ctrl.data.author.secondLastname}}
+        <!-- Edit button --> 
+        <div class="edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
+            <div class="off">
+                <i class="material-icons">edit</i>
+                <span>Editar</span>
             </div>
-            <div class="datetime">{{$ctrl.data.registerDate}}</div>
+            <div class="on">
+                <i class="material-icons">close</i>
+                <span>Cerrar</span>
+            </div>            
+        </div>   
+
+        <!-- Pre-data -->
+        <div class="pre-data priority priority-{{$ctrl.data.id_caseType.id}}" 
+            ng-if="$ctrl.data.id_caseType.id!=-1">{{$ctrl.data.id_caseType.description}}
         </div>
-        <pre>{{$ctrl.data.description}}</pre> 
-        <div class="assets">
 
-            <br>
-            <b>Estado:</b> 
-            <div class="name">{{$ctrl.data.id_status.value}}</div>
+        <!-- Subject --> 
+        <xinput type="text" 
+            class="extra-big"
+            disabled="!$ctrl.CaseContent.isEditModeOn()"
+            label="Título" 
+            ng-model="$ctrl.data.subject">
+        </xinput>
+            
+        <!-- Author  -->
+        <div class="author"> 
+            {{$ctrl.data.author.name}} 
+            {{$ctrl.data.author.firstLastname}} 
+            {{$ctrl.data.author.secondLastname}}
+        </div> 
 
-            <br>
-            <b>Activo:</b> 
-            <div class="name">{{$ctrl.data.infrastructure.name}}</div>
-            <div class="description">{{$ctrl.data.infrastructure.description}}</div>
+        <!-- Description  -->
+        <xtextarea 
+            class="pre"
+            disabled="!$ctrl.CaseContent.isEditModeOn()"
+            label="Descripción" 
+            ng-model="$ctrl.data.description">
+        </xtextarea>
 
-            <br>
-            <b>Fecha Máxima de atención:</b>
-            <div class="maxdate-attention">{{$ctrl.data.maxAtentionDate}}</div>
-            <b>Fecha Máxima de solución:</b>
-            <div class="maxdate-solution">{{$ctrl.data.maxSolutionDate}}</div>
-        </div>
-    </div>
-    
-    <div class="closed" ng-show="$ctrl.data==undefined"> 
+        <div class="metadata"> 
+            <!-- Bullets -->
+            <div class="item-list"> 
+                
+                <!-- Register Medium -->
+                <div class="item register-medium">                    
+                    <i class="material-icons priority-{{$ctrl.data.id_caseType.id}}">content_paste</i>
+                    <xselect
+                        options="$ctrl.options.registerMedium" 
+                        disabled="!$ctrl.CaseContent.isEditModeOn()"
+                        label="Medio de registro:" 
+                        item-selected="{{$ctrl.data.id_registerMedium.id}}"
+                        ng-model="$ctrl.data.id_registerMedium"> 
+                    </xselect>
+                </div>
+
+                <!-- Asset --> 
+                <div class="item register-medium">                    
+                    <i class="material-icons priority-{{$ctrl.data.id_caseType.id}}">extension</i>
+                    <xselect
+                        options="$ctrl.options.assetRepository" 
+                        disabled="!$ctrl.CaseContent.isEditModeOn()"
+                        label="Infraestructura:" 
+                        item-selected="{{$ctrl.data.infrastructure.id}}"
+                        ng-model="$ctrl.data.infrastructure"> 
+                    </xselect>
+                </div>
+
+                <!-- Agent Threat --> 
+                <div class="item register-medium">                    
+                    <i class="material-icons priority-{{$ctrl.data.id_caseType.id}}">warning</i>
+                    <xselect
+                        options="$ctrl.options.agentThreat" 
+                        disabled="!$ctrl.CaseContent.isEditModeOn()"
+                        label="Agente de Amenaza:" 
+                        item-selected="{{$ctrl.data.id_agentThreat.id}}"
+                        ng-model="$ctrl.data.id_agentThreat"> 
+                    </xselect>
+                </div>
+
+                <!-- Responsable --> 
+                <div class="item register-medium">                    
+                    <i class="material-icons priority-{{$ctrl.data.id_caseType.id}}">perm_identity</i>
+                    <xselect
+                        options="$ctrl.options.agent" 
+                        disabled="!$ctrl.CaseContent.isEditModeOn()"
+                        label="Responsable:" 
+                        item-selected="{{$ctrl.data.responsable.id}}"
+                        ng-model="$ctrl.data.responsable"> 
+                    </xselect>
+                </div>
+
+                <!-- Client --> 
+                <div class="item register-medium">                    
+                    <i class="material-icons priority-{{$ctrl.data.id_caseType.id}}">face</i>
+                    <xselect
+                        options="$ctrl.options.client" 
+                        disabled="!$ctrl.CaseContent.isEditModeOn()"
+                        label="Cliente:" 
+                        item-selected="{{$ctrl.data.id_client.id}}"
+                        ng-model="$ctrl.data.id_client"> 
+                    </xselect>
+                </div>
+
+                <!-- Max attention date -->
+                <!-- <div class="item max-attention-date">
+                    <i class="material-icons priority-{{$ctrl.data.id_caseType.id}}">date_range</i>
+                    <span class="data-wrapper">
+                        <div class="field"><b>Fecha máxima de atención:</b></div>
+                        <div class="data">{{$ctrl.data.maxAtentionDate}}</div>
+                    </span>                   
+                </div>  -->
+                    
+                <!-- Max solution date -->
+                <!-- <div class="item max-solution-date">
+                    <i class="material-icons priority-{{$ctrl.data.id_caseType.id}}">today</i>
+                    <span class="data-wrapper">
+                        <div class="field "><b>Fecha máxima de solución:</b></div>
+                        <div class="data">{{$ctrl.data.maxSolutionDate}}</div>
+                    </span>                   
+                </div>   -->
+            </div>
+        </div> 
+    </div>  
+
+     <!-- Show when data is non-selected -->
+    <div class="closed" ng-show="$ctrl.data == undefined"> 
         <h1>Tienes casos por resolver</h1> 
     </div>
 </div>

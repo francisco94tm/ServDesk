@@ -1,36 +1,99 @@
 <div class="agent-content column section-content {{($ctrl.data != undefined)?'is-opened':'is-closed'}}">
-    <div class="opened section-content-wrapper" ng-show="$ctrl.data!=undefined">          
+    
+    <!-- Show when data is selected -->
+    <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.data!=undefined">          
+        
+        <!-- Edit button --> 
+        <div class="edit-button {{$ctrl.AgentContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
+            <div class="off">
+                <i class="material-icons">edit</i>
+                <span>Editar</span>
+            </div>
+            <div class="on">
+                <i class="material-icons">close</i>
+                <span>Cerrar</span>
+            </div>            
+        </div>   
+     
+        <!-- Pre-data -->
         <div class="pre-data">
             <b>Estatus: </b><span>{{$ctrl.data.status}}</span>
         </div>
-        <h1>{{$ctrl.data.usr}}</h1>                
-        <div class="metadata">            
-            <div class="user-name">
-                {{$ctrl.data.name}} 
-                {{$ctrl.data.firstLastname}} 
-                {{$ctrl.data.secondLastname}}
-            </div>
-            <div class="item-list">
-                <div class="curp item">
+
+        <!-- Title --> 
+        <xinput type="text" 
+            class="extra-big"
+            disabled="!$ctrl.AgentContent.isEditModeOn()"
+            label="Usuario" 
+            ng-model="$ctrl.data.usr">
+        </xinput> 
+           
+        <!-- Username -->
+        <div class="user-name">
+            {{$ctrl.data.name}} 
+            {{$ctrl.data.firstLastname}} 
+            {{$ctrl.data.secondLastname}}
+        </div>
+
+        <div class="metadata">   
+            <!-- Bullets -->
+            <div class="item-list"> 
+
+                <!-- Access Level --> 
+                <div class="item level">                    
                     <i class="material-icons">face</i>
-                    <span><b>{{$ctrl.data.id_level.value}}</b></span>
+                    <xselect
+                        options="$ctrl.options.level" 
+                        disabled="!$ctrl.AgentContent.isEditModeOn()"
+                        label="Nivel de acceso:" 
+                        item-selected="{{$ctrl.data.id_level.id}}"
+                        ng-model="$ctrl.data.id_level"> 
+                    </xselect>
                 </div>
-                <div class="email item">
-                    <i class="material-icons">mail_outline</i>
-                    <span>{{$ctrl.data.email}}</span>
+
+                <!-- Email -->
+                <div class="item email">                    
+                    <i class="material-icons">email</i>
+                    <xinput 
+                        class="like-select"
+                        disabled="!$ctrl.AgentContent.isEditModeOn()"
+                        label="Email:"  
+                        ng-model="$ctrl.data.email"> 
+                    </xinput>
                 </div>
-                <div class="phone item">
+
+                <!-- Phone -->
+                <div class="item email">                    
                     <i class="material-icons">phone</i>
-                    <span>{{$ctrl.data.phone}}</span>
+                    <xinput 
+                        class="like-select"
+                        disabled="!$ctrl.AgentContent.isEditModeOn()"
+                        label="Teléfono:"  
+                        ng-model="$ctrl.data.phone"> 
+                    </xinput>
                 </div>
-                <div class="mobilephone item">
-                    <i class="material-icons">phone_iphone</i>
-                    <span>{{$ctrl.data.mobilephone}}</span>
-                </div>
-                <div class="address item">
+
+                <!-- Mobile Phone -->
+                <div class="item email">                    
+                        <i class="material-icons">phone_iphone</i>
+                        <xinput 
+                            class="like-select"
+                            disabled="!$ctrl.AgentContent.isEditModeOn()"
+                            label="Teléfono móvil:"  
+                            ng-model="$ctrl.data.mobilephone"> 
+                        </xinput>
+                    </div>
+
+                <!-- Address -->
+                <div class="item email">                    
                     <i class="material-icons">home</i>
-                    <span>{{$ctrl.data.address}}</span>
-                </div>
+                    <xinput 
+                        class="like-select"
+                        disabled="!$ctrl.AgentContent.isEditModeOn()"
+                        label="Dirección:"  
+                        ng-model="$ctrl.data.address"> 
+                    </xinput>
+                </div> 
             </div>
             
         </div> 

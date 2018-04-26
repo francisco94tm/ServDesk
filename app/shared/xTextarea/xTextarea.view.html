@@ -1,4 +1,8 @@
 <div class="textarea-group">
-    <label>{{$ctrl.label}}</label>
-    <textarea placeholder = "{{$ctrl.placeholder}}" ng-model="$ctrl.ngModel"/> 
+    <label class="{{$ctrl.disabled? 'disabled' : ''}}">{{$ctrl.label}}</label>
+    <textarea 
+        ng-disabled="$ctrl.disabled" 
+        placeholder = "{{$ctrl.placeholder}}" 
+        ng-model="$ctrl.ngModel"
+        msd-elastic/> 
 </div>

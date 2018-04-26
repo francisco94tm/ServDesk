@@ -20,29 +20,46 @@
     }  
 }
 case-content{
-    width: 100%;
-    .priority{ 
-        border: solid 1px #333;
-        text-align: center;
-        padding: 5px 30px; 
-        display: inline-blocK;
-        max-width: 230px;
-        margin-bottom: 40px;  
-        border-radius: 50px;
+    width: 100%; 
+    max-width: 100%;     
+    overflow-x: hidden;
+    .priority{  
+        // color: white!important; 
         &.priority-1{ 
+            // background-color: lighten($low-priority, 27)!important; 
+            // border: solid 1px darken($low-priority, 15)!important; 
             color: darken($low-priority, 15)!important; 
-            border: solid 1px $low-priority!important; }
+        }
         &.priority-2{ 
-            color: darken($medium-priority, 15)!important; 
-            border: solid 1px $medium-priority!important; }
+            // background-color: lighten($medium-priority, 27)!important; 
+            // border: solid 1px darken($medium-priority, 23)!important; 
+            color: darken($medium-priority, 23)!important; 
+        }
         &.priority-3{ 
-            color: $high-priority!important; 
-            border: solid 1px $high-priority!important; }
+            // background-color: lighten($high-priority,30)!important;             
+            // border: solid 1px darken($high-priority, 15)!important; 
+            color: darken($high-priority, 15)!important; 
+        }
         &.priority-4{ 
-            color: $very-high-priority!important; 
-            border: solid 1px $very-high-priority!important; }
+            // background-color: $very-high-priority!important; 
+            color: darken($very-high-priority, 15)!important;  
+        }
+    }
+
+    .item-list{
+        .item{
+            .priority-1{ 
+                color: darken($low-priority, 15)!important;}
+            .priority-2{ 
+                color: darken($medium-priority, 16)!important; }
+            .priority-3{ 
+                color: $high-priority!important;}
+            .priority-4{ 
+                color: $very-high-priority!important;}
+        }
     }
 }
+
 
 
 .case-add-container{    

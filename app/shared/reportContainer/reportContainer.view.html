@@ -2,7 +2,54 @@
 <br><br>
 <div class="item-body column report-panel"> 
     <h1 class="bold">Reporte</h1>
+
+    <div class="infrastructure-wrapper">
+        <div class="infrastructure" ng-repeat = "(key, data) in $ctrl.data">
+            <caption><b>Infraestructura:</b> {{key}}</caption>
+            <div class="table-wrapper">
+                <table class="theats" ng-repeat = "(kx, dx) in  data.threatTypes">   
+                    <tr> 
+                        <th>Amenaza:</th>
+                        <td>{{kx}}</td>
+                    </tr>
+                    <tr> 
+                        <th>Ocurrencia:</th>
+                        <td>{{dx.ocurrences}}</td>
+                    </tr>
+                    <tr> 
+                        <th>Probabilidad:</th>
+                        <td>{{dx.probability}}</td>
+                    </tr>
+                    <tr> 
+                        <th>Impacto:</th>
+                        <td>{{dx.impact}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <table > 
+                                <tbody>
+                                    <tr>
+                                        <th>Agente:</th>
+                                        <th>Recom.</th>
+                                        <th>Ocurr.</th> 
+                                        <th>Prob.</th>  
+                                    </tr>
+                                    <tr ng-repeat="(k, d) in dx.agentThreats"> 
+                                        <td>{{k}}</td>
+                                        <td>{{d.recomendation}}</td>
+                                        <td>{{d.ocurrences}}</td>
+                                        <td>{{d.probability}}</td>
+                                    </tr> 
+                                </tbody> 
+                            </table>
+                        </td>
+                    </tr>                   
+                </table> 
+            </div>
+        </div>
+    </div>
+     
     <div id="report-graph-wrapper">
         <chart></chart>
     </div>
-</div>   
+</div>  
