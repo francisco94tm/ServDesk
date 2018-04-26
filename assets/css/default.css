@@ -750,7 +750,7 @@ agent-content {
   flex-direction: column;
   padding: 10px; }
   .infrastructure-wrapper .infrastructure {
-    margin-top: 50px; }
+    margin-bottom: 50px; }
   .infrastructure-wrapper .table-wrapper {
     display: flex;
     flex-wrap: wrap; }

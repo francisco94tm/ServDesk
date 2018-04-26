@@ -3,6 +3,12 @@
 <div class="item-body column report-panel"> 
     <h1 class="bold">Reporte</h1>
 
+    <br><br>
+    <div id="report-graph-wrapper"> 
+        <chart></chart> 
+    </div>
+
+
     <div class="infrastructure-wrapper">
         <div class="infrastructure" ng-repeat = "(key, data) in $ctrl.data">
             <caption><b>Infraestructura:</b> {{key}}</caption>
@@ -47,9 +53,5 @@
                 </table> 
             </div>
         </div>
-    </div>
-     
-    <div id="report-graph-wrapper">
-        <chart></chart>
     </div>
 </div>  
