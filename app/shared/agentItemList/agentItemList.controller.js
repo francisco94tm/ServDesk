@@ -8,6 +8,7 @@ function agentItemListController($scope, $element, $attrs, AgentItemList){
     
     // Update alerts
     $scope.$on('getAgents', function (event, data) {  
+        console.log(data);
         $scope.$ctrl.data = data;  
     });  
 }

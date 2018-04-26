@@ -2,8 +2,10 @@
 	'use strict';
 
 	// Dash Ctrl
-	var dashCtrl = function($scope, $window, $sce, Dashboard, System, xPopup){
+	var dashCtrl = function($scope, $window, $sce, Dashboard, System, xPopup, Session){
 		
+		$scope.Session = Session;
+
 		// Check of session exist otherwise redirect to Login  ------------------------------------
 		Dashboard.sessionExists().then(function(response){ 
 			if(response == false)

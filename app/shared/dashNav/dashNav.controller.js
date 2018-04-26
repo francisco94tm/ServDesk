@@ -17,8 +17,7 @@ function dashNavController($scope, $element, $attrs, $timeout, DashNav, $rootSco
     }
     
     // Detect if a new section has to be added to the dash-nav
-    $scope.$on('addSectionToNav', (event, data) => {
-        console.log(data);
+    $scope.$on('addSectionToNav', (event, data) => { 
         DashNav.addSection(data);
         DashNav.setLevel(data.sectionlevel);        
     })
