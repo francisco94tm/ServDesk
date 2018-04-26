@@ -1,0 +1,10 @@
+<div class="agent-item-list column">
+    <xsearch ng-model="$ctrl.search"></xsearch>  
+    <div class="agent-item-wrapper item-wrapper">  
+        <agent-item
+            ng-repeat="x in $ctrl.data | filter:$ctrl.search"
+            data="x"
+            current="$ctrl.current">
+        </agent-item>
+    </div>
+</div>

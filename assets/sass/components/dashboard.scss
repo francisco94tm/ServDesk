@@ -1,297 +1,207 @@
+@import 'variables';
+@import 'helpers';
 @import 'navbar';
+@import 'addContainer';
+@import 'editContainer';
+@import 'caseContainer';
+@import 'agentContainer';
+@import 'reportContainer';
 
-.dashboard-container{  
 
-    .now-time{
-        position: absolute; 
-        top: 0;
-        right: 0;
-        padding: 10px 30px;
-        z-index: 30;
-        text-align: right;
+// Panels Widhts ===================================================================
+
+.section-container{
+    overflow-x: hidden!important;
+}
+.container{    
+    .row{
         display: flex;
-        color: #444;
-        font-size: 12px;
-
-        .date{
-            margin-right: 10px;
+    }    
+    .column{        
+        min-height: 100vh;
+        &.dash-nav, &dash-nav{
+            width: 250px;
+            overflow-x: hidden;
         }
-        .time{
-            font-weight: bold;
-        }
-    }
-    
-    // Right Alert Detail panel
-    .preview-panel{  
-        padding: 70px; 
-        background-color: $preview-panel-close-bg; 
-        transition: $animation-ease-out 0.3s; 
-        justify-content: flex-start;
-        // align-items: center;
-        // align-content: center;
-        text-align: left;
-        position: relative;
-
-        &.is-opened{
-            background-color: $preview-panel-open-bg;
+        &.dash-content, &dash-content{
+            overflow-x: none;
+            width: calc(100% - 250px)!important;
         } 
-
-        .opened{
-            min-width: 100%;    
+        &.section-nav { 
+            width: 350px; 
+            overflow-x: hidden;
         }
-  
-        .closed{
-            h1{
-                font-family: Walfork;
-                font-weight: 600;
-                color: #ccc; 
-                font-size: 60px; 
-                text-align: left;
-                padding: 0 0 0 40px;
-            }
-
-            .item-wrapper{
-                display: flex;
-                flex-direction: column;    
-                align-content: flex-start;            
-                align-items: flex-start;            
-                margin-top: 50px;
-
-                .item{   
-                    font-size: 24px;
-                    text-align: center;
-                    display: flex;                 
-                    padding: 10px 30px;
-                    margin: 5px 10px;
-                    min-width: 300px;
-                    border-radius: 3px;
-                    width: auto;
-                    align-items: center;
-                    align-content: center;
-                    justify-content: flex-start; 
-                    position: relative;
-
-                    // Asign priority alerts item format
-                    @each $key, $val in $priorities {                
-                        &.#{$key}-priority {  
-                            // background-color: lighten($val, 32);  
-                            // border: solid 1px darken($val, 0);
-                            
-                            &:before{
-                                content: "";
-                                position: absolute;
-                                width: 15px;
-                                height: 15px;
-                                border-radius: 50%;
-                                background-color: lighten($val,20);
-                                border: solid 1px $val;
-                                left: 0;
-                            }
-                            
-                        }
-                    } 
-
-                    .circle{ 
-                        font-weight: 600;
-                        margin-left: 25px;
-                        margin-right: 20px;              
-                    }
-                }
-            }
-        }
-    } 
-
-    // User Button
-    .user-button{
-        display: flex; 
-        align-items: center; 
-        padding: 20px 40px 20px 30px;
-        position: absolute;
-        bottom: 20px;
-        left: 0px; 
-        width: 250px;
-        cursor: pointer;
-        border-left: solid 3px transparent;
-        transition: $animation-ease-out 0.3s; 
-        &:hover{
-           border-left: solid 3px #333;
-           font-weight: 600;
-        }
-        .user-name{
-            margin-left: 20px; 
-            font-size: 13px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        .user-avatar{
-            background-color: $main-color;
-            color: white;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 50%;
-            text-align: center;
+        &.section-content {     
+            overflow-x: hidden!important;            
+            padding: 50px 100px 60px 100px;
+            position: relative;
         }
     }
+}
 
 
+// Item list wrapper =========================================================
 
-    .alert-item-wrapper{
-        margin-top: 5px;
-        height: calc(100vh - 155px);
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding-bottom: 0;
+.item-wrapper{    
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 40px;
+    margin-top: 5px; 
 
-        .alert-item{
-            display: flex; 
-            padding: 15px 30px;
-            font-size: 13px;
-            justify-content: space-between; 
-            margin: 5px 30px 5px 10px;
-            cursor: pointer;
-            transition: 0.15s;
-            position: relative;
-            border-left: 4px solid; 
+    .item{
+        display: flex; 
+        padding: 15px 30px;
+        font-size: 13px;
+        justify-content: space-between; 
+        margin: 5px 30px 5px 10px;        
+        transition: 0.15s $animation-ease-out;
+        position: relative;
+        border-left: 4px solid #ccc; 
+        cursor: pointer;
 
-            .alert-title{
+        .left{
+            z-index: 1;
+            display: flex;
+            color: $theme--fg;
+            .title{
                 white-space: nowrap; 
                 overflow: hidden;
                 text-overflow: ellipsis;
-                max-width: 170px; 
-                
+                max-width: 170px;  
                 font-size: 13px; 
                 padding: 0;
                 margin: 0;
                 font-weight: bold;
-            }
-
-            .alert-client{
-                // text-transform: uppercase;
+                padding-right: 10px;
+            }    
+            .data{ 
                 opacity: 0.6;
-                font-size: 10px;
-                &:before{
-                    content: "De: "; 
-                }
+                font-size: 13px; 
             }
+        }         
+        .datetime{
+            z-index: 1;
+            color: $theme--fg;
+            max-width: 58px;
+            text-align: right; 
+            right: 0;
+            top: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 11.5px;  
+            opacity: 0.7;
+        } 
 
-            .alert-datetime{
-                max-width: 58px;
-                text-align: right; 
-                right: 0;
-                top: 0;
-                overflow: hidden;
-                white-space: nowrap;
-                font-size: 11.5px;  
-                opacity: 0.7;
-            }
-
-            &>div{  
-                z-index: 1; 
-                color: $theme--fg;
-            }
-            
-            // Asign priority alerts item format
-            @each $key, $val in $priorities {                
-                &.#{$key}-priority { 
-                    @include alert-style($val); 
-                }
-            } 
-
-            &:before{
-                content: "";
-                display: block;
-                position: absolute;
-                width: 0%;
-                height: 100%;
-                transition: $animation-ease-out 0.3s; 
-                top: 0;
-                left: 0;
-                z-index: 0;
-            }
-
-            &.selected{       
-                margin-left: -4px; 
-                &:before{
-                    width: 100%;
-                }  
-                .alert-title{ 
-                    max-width: 180px;
-                }
-            } 
-        }
-    }
-
-    
-    /***************************************************************/
-
-    .requirement-panel{ 
-        width: calc(100% - 250px);
-        padding: 0!important;
-        max-height: 100vh; 
-
-        .row{
-            min-height: auto!important;
-            height: auto!important;
-        }
-        
-        form{
-            padding: 0 100px;
-            display: flex;
-        }
-
-        .head-data{
-            padding: 50px 100px 0 100px; 
-            .input-group {
-                display: flex;
-                flex-direction: column;
-                padding: 7px 10px;
-                position: relative;   
-                align-items: flex-start;
-                align-content: flex-start;
-            }
-            
-            input{
-                display: block;
-                background: $input--bg;
-                color: $input--fg; 
-                font-family: "Walfork";
-                outline: none;
-                padding: 10px 10px;
-                font-size: 80px;
-                border: none;
-                min-width: 100%;
-                font-weight: 600;
-                min-height: 30px; 
-            }            
-        }
-
-        h1{
-            padding: 50px 100px;
-        }
-         
-        button{
-            margin: 30px 0 0 110px!important;
+        // Animation when selected
+        &:before{
+            content: "";
             display: block;
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            transition: $animation-ease-out 0.3s; 
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
-    }
 
-    .report-panel{
-        width: calc(100% - 250px);
-        padding: 50px 100px;
-        h1{
-            margin-bottom: 30px;
-        }
-        .graph-wrapper{
-            width: 100%; 
-        }
+        &.selected{       
+            margin-left: -4px; 
+            background: rgba($theme--fg, 0.1);
+            &:before{
+                width: 100%;
+            }  
+            .title{ 
+                max-width: 180px;
+            }
+        } 
     }
-
-    .new-client-panel{
-        width: calc(100% - 250px);
-        padding: 50px 100px;
-        form{
-            display: flex;
-        }
-    } 
 }
+
+// Panels preview content ===============================================================
+
+.container .section-content{
+    position: relative;
+    transition: $animation-ease-out 0.3s; 
+    width: 100%; 
+    border-left: solid 1px rgba($theme--fg, 0.06);;
+    &.is-closed{
+        background: rgba($theme--fg, 0.06);
+        h1{
+            font-weight: bold;
+            text-align: center;
+            color: rgba($theme--fg, 0.15);
+            margin-top: 200px;
+        }
+    }
+    // Opened panel
+    .section-content-wrapper{
+        color: $theme--fg;
+        min-width: 100%!important;
+        display: flex; 
+        flex-direction: column; 
+        .pre-data{
+            color: #666; 
+            padding: 10px 50px 10px 0;
+            display: block;  
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 12px; 
+            font-weight: bold;
+            // margin-bottom: 0px;
+        }
+        h1{      
+            font-weight: bold;  
+            margin-bottom: 40px; 
+        }
+        pre{
+            font-family: "Walfork"; 
+            white-space: pre-wrap;  
+            overflow: hidden; 
+            font-style: italic;
+        }
+        .user-name, .author{
+            font-size: 25px;
+            color: rgb(134, 134, 134);
+            // font-weight: bold;
+            letter-spacing: 1px;
+            // margin-bottom: 30px;
+        }  
+        .item-list{
+            // margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            // flex-wrap: wrap;
+            .item{ 
+                display: flex;
+                // flex-direction: column; 
+                align-content: center;
+                align-items: center;
+                padding: 5px 40px 0px 0;
+                .data-wrapper{
+                    color: $theme--fg; 
+                    .field{
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        font-size: 12px;
+                        line-height: 14px;
+                        font-weight: bold;
+                        color: $theme--fg; 
+                        margin-bottom: 5px; 
+                    }
+                    .data{
+                        color: rgba($theme--fg, 0.4);
+                        font-size: 13px;
+                        line-height: 15px;
+                        font-weight: bold;
+                        display: inline-block;
+                    }
+                }
+                i{
+                    margin-right: 30px;
+                    color: $main-color;
+                }
+            }
+        }
+    }  
+}  

@@ -1,6 +1,5 @@
 <?php if(!isset($_SESSION)) session_start();
-class Login{
-    protected $connectionFilePath = "connection/connection.php";
+class Login{ 
     protected $values = [];
 
     /************************************************************************
@@ -50,8 +49,6 @@ class Login{
         if(isset($_SESSION['servDesk']))
             return json_encode($_SESSION['servDesk']);
         return 'FALSE';
-    }
-
-    
+    } 
 }
 ?>

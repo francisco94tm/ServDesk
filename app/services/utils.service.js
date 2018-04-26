@@ -15,3 +15,11 @@ function Utils (){
 } 
 
 angular.module('app').service('Utils', Utils); 
+
+
+angular.module('app').filter('numKeys', function() {
+    return function(json) {
+        var keys = Object.keys(json)
+        return keys.length;
+    }
+})

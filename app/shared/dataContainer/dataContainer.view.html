@@ -1,0 +1,25 @@
+ <!-- 02. Data Section ============================================= -->
+
+ <div class="item-body column new-client-panel" ng-show="NavPanel.getCurrentSection()==3"> 
+    <h1 class="bold">Alta de cliente</h1>
+    <br>
+    <form>            
+        <div class="col">
+            <xinput label="Nombre(s):" placeholder="Ingresa el nombre" ng-model="Client.data.name"></xinput>  
+            <xinput label="Primer apellido:" placeholder="Ingresa el primer apellido" ng-model="Client.data.firstLastname"></xinput>  
+            <xinput label="Segundo apellido:" placeholder="Ingresa el segundo apellido" ng-model="Client.data.secondLastname"></xinput>  
+            <xinput label="Teléfono Móvil:" placeholder="Ingresa teléfono móvil" ng-model="Client.data.mobilephone"></xinput>  
+            <xinput label="Teléfono Fijo:" placeholder="Ingresa teléfono fijo" ng-model="Client.data.phone"></xinput>  
+            <xinput label="Email:" placeholder="Ingresa e-mail" ng-model="Client.data.email"></xinput>  
+        </div>  
+        <div class="col">
+                <xselect label="Puesto:" options='options.job' ng-model="Client.data.job"></xselect>
+                <xselect label="Área:" options='options.area' ng-model="Client.data.area"></xselect>
+                <xselect label="Departamento:" options='options.department' ng-model="Client.data.department"></xselect>
+                <xselect label="Unidad:" options='options.businessUnit' ng-model="Client.data.businessUnit"></xselect>
+            </div>   
+    </form>
+    <br><br>  
+    <button ng-disabled="Client.areFieldsMissing()" ng-click="saveClient()">Registrar</button>
+</div>
+ 

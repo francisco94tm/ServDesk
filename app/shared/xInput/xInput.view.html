@@ -1,4 +1,4 @@
 <div class="input-group">
-    <label>{{$ctrl.label}}</label>
-    <input type="$ctrl.type" placeholder = "{{$ctrl.placeholder}}" ng-model="$ctrl.ngModel"/> 
+    <label class="{{$ctrl.disabled? 'disabled' : ''}}" ng-class="$ctrl.class">{{$ctrl.label}}</label> 
+    <input ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" placeholder = "{{$ctrl.placeholder}}" ng-model="$ctrl.ngModel" ng-class="$ctrl.class"/> 
 </div>

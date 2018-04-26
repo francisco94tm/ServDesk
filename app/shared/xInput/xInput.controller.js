@@ -5,6 +5,7 @@
  */
 function xinputController($scope, $element, $attrs){ 
     $scope.$ctrl.type = $scope.$ctrl.type || 'text';
+    $scope.$ctrl.disabled = $scope.$ctrl.disabled || false;
 }
 
 angular.module('app').component('xinput', {
@@ -16,6 +17,7 @@ angular.module('app').component('xinput', {
         'disabled': '=',
         'type': '@', 
         'placeholder': '@',
+        'class': '@'
     }, 
     replace: true
 });

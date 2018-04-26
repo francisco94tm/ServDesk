@@ -91,9 +91,7 @@ var Session = function(System) {
     } 
 
     this.close = function(){
-        System.call('logout').then(function(response){
-
-        });
+        return System.call('logout');
     }
 }
 

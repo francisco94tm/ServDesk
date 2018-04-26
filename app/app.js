@@ -1,4 +1,4 @@
-var app = angular.module("app", ['ngRoute', 'ng-click-out']); 
+var app = angular.module("app", ['ngRoute', 'ng-click-out', 'monospaced.elastic']); 
 
 angular.module('app')
     .config(function ($routeProvider, $locationProvider) {

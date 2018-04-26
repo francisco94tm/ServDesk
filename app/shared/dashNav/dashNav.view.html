@@ -1,0 +1,10 @@
+<div class="dash-nav column"> 
+    <logo size="small"></logo> 
+    <div class="navpanel">  
+        <div ng-click="$ctrl.setCurrentSection($index)"  ng-show="n.sectionlevel >= $ctrl.DashNav.getLevel()"
+            class="item {{$last?'user-section':''}} {{($ctrl.DashNav.getCurrentSection()==$index)?'selected':''}}" 
+            ng-repeat="n in $ctrl.DashNav.getSections()">
+            <i class="material-icons">{{n.icon}}</i><span>{{n.name}}</span> 
+        </div>  
+    </div>
+</div>
