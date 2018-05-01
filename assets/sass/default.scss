@@ -13,6 +13,8 @@
     font-family: "Walfork";
     font-synthesis: none;
     -moz-font-feature-settings: 'kern';
+    -webkit-font-feature-settings: 'kern';
+    font-feature-settings: 'kern';
     -moz-osx-font-smoothing: grayscale;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
     text-rendering: geometricPrecision !important;
@@ -23,6 +25,7 @@
 ::-webkit-scrollbar {
     width: 5px;
 }
+
 
 ::-webkit-scrollbar-thumb {
     background: $scrollbar-bg;
@@ -72,3 +75,35 @@ html {
     /* Support for IE. */
     font-feature-settings: 'liga';
   }
+
+.tooltiped{
+    &[data-position="top"]:after{
+        top: -110%;
+    }
+    &[data-position="bottom"]:after{ 
+        top: 100%;
+    }
+    &:hover:after{
+        display: block;
+        opacity: 1;
+        transition: 0.3s $animation-ease-out 0.8s;
+        z-index: 1000;
+    }
+    &:after{
+        display:none;
+        opacity: 0;
+        transition: 0.15s $animation-ease-out;
+        display: block;
+        width: auto;
+        padding: 10px 20px;
+        border-radius: 3px;
+        content: attr(data-tooltip);
+        position: absolute;
+        font-size: 12px;
+        background-color: rgba(#333,0.8);
+        text-align: center;
+        color: $theme--bg;
+        z-index: -1;
+        // left: -25%; 
+    }
+}

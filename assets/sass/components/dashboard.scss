@@ -6,6 +6,7 @@
 @import 'caseContainer';
 @import 'agentContainer';
 @import 'reportContainer';
+@import 'newdataContainer';
 
 
 // Panels Widhts ===================================================================
@@ -43,14 +44,59 @@
 // Item list wrapper =========================================================
 
 .item-wrapper{    
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     padding-bottom: 40px;
-    margin-top: 5px; 
+    margin-top: 5px;  
+    transition: all 0.3s; 
+
+    .refresh-btn{
+        cursor: pointer;
+        width: 320px;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        position: relative;  
+        i{
+            color: rgba($theme--fg,0.3); 
+            text-align: center; 
+            transition: 0.3s $animation-ease-out; 
+        }
+        @keyframes rotating{
+            from {transform: rotate(0deg)}
+            to {transform: rotate(360deg);}
+        }
+        .loading{
+            animation: rotating 1s infinite; 
+        }
+        &.big i{ 
+            font-size: 100px;
+            width: 200px;
+            height: 200px; 
+            line-height: 200px;
+        }
+        &.small i{ 
+            font-size: 25px;
+            width: 40px;
+            height: 40px; 
+            line-height:40px; 
+        }
+        &:hover i{
+            color: $main-color;
+        }
+    }
+    
+    &::-webkit-scrollbar-thumb{
+        background: transparent;
+        transition: all 0.3s;
+    }
+    &:hover::-webkit-scrollbar-thumb{ 
+        background: #ccc; 
+    }
 
     .item{
         display: flex; 
-        padding: 15px 30px;
+        padding: 20px 30px;
         font-size: 13px;
         justify-content: space-between; 
         margin: 5px 30px 5px 10px;        

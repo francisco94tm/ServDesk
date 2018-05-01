@@ -1,13 +1,13 @@
 /****************************************************************************
- *  AgentContent Service
+ *  NewdataContent Service
  ********************************************/
 
-var AgentContent = function(System){ 
+var NewdataContent = function(System){ 
 
     var editMode = false;
     this.backup = {};
-    this.data = undefined;
-    
+    this.data = {};
+      
     this.isEditModeOn = function(){
         return editMode == true;
     } 
@@ -30,4 +30,4 @@ var AgentContent = function(System){
 }
 
 
-angular.module('app').service('AgentContent', AgentContent); 
+angular.module('app').service('NewdataContent', NewdataContent); 

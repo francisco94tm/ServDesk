@@ -1,16 +1,26 @@
 <div class="case-item-list column">
     <xsearch ng-model="$ctrl.search"></xsearch> 
+    
     <xselect 
         label="Ordenar por:" 
         options='$ctrl.filter.options' 
         item-selected="2"
         ng-model="$ctrl.filter.selected">
     </xselect>  
-    <div class="case-item-wrapper item-wrapper">
+    <div class="case-item-wrapper item-wrapper"> 
+        <div class="refresh-btn tooltiped 
+            {{($ctrl.data.length == 0)?'big':'small'}}"
+            ng-click="$ctrl.loadData()"
+            data-tooltip="Recargar"
+            data-position="bottom">
+            <i class="material-icons {{($ctrl.isLoading)?'loading':''}}">
+                refresh</i>
+        </div> 
         <case-item
             ng-repeat="x in $ctrl.data | orderBy:$ctrl.filter.selected.key | filter:$ctrl.search"
             data="x"
             current="$ctrl.current">
         </case-item>
+        
     </div>
 </div>

@@ -4,7 +4,8 @@
 .case-item-wrapper{
     max-height: calc(100% - 153px);
     .item{
-        border-left: 4px solid; 
+        border-left: 4px solid;
+        padding: 15px 30px!important; 
         .left{
             flex-direction: column; 
             .data{  

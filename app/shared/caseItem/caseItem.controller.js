@@ -3,12 +3,19 @@
  * request Component
  */
 
-function caseItemController($scope, $element, $attrs, CaseItem, $rootScope){ 
+function caseItemController($scope, $element, $attrs, CaseItem, CaseContent, $rootScope){ 
     
     $scope.$ctrl.CaseItem = CaseItem;
     
     // Select curren case
     $scope.caseItemClick = function(data){ 
+        if(CaseContent.isEditModeOn()){
+            for (var key in CaseContent.data) {
+                if (CaseContent.data.hasOwnProperty(key)) { 
+                    CaseContent.data[key] = CaseContent.backup[key];
+                }
+            }
+        }
         var d = ($scope.$ctrl.current == data) ? undefined : data;
         $scope.$ctrl.current = d; 
         $rootScope.$broadcast('displayCase', d); 

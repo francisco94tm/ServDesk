@@ -3,9 +3,10 @@
  * request Component
  */
 
-function agentContentController($scope, $element, $attrs, AgentContent, Dashboard){
+function agentContentController($scope, $element, $attrs, AgentItemList, AgentContent, Dashboard){
 
-    $scope.$ctrl.AgentContent = AgentContent; 
+    $scope.$ctrl.AgentContent = AgentContent;
+    $scope.$ctrl.AgentItemList = AgentItemList;  
     $scope.$ctrl.options = {}; 
 
     Dashboard.getCatalogues().then((data) => { 
@@ -13,12 +14,19 @@ function agentContentController($scope, $element, $attrs, AgentContent, Dashboar
     });
     
     $scope.$on('displayAgent', (event, data) => {  
-        $scope.$ctrl.data = data;
+        AgentContent.data = data;
         AgentContent.setEditModeOff(); 
     }); 
 
     $scope.$ctrl.edit = function(){  
+       AgentContent.backup = angular.copy($scope.$ctrl.AgentContent.data);         
         AgentContent.shuffleEditMode(); 
+    }; 
+    $scope.$ctrl.revertEdit = function(){  
+        for (var key in AgentContent.data)
+            if (AgentContent.data.hasOwnProperty(key))
+                AgentContent.data[key] = AgentContent.backup[key];       
+        AgentContent.setEditModeOff(); 
     };
 }
  

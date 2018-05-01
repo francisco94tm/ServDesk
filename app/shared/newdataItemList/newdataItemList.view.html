@@ -1,0 +1,23 @@
+<div class="newdata-item-list section-nav column">
+    <!-- <xsearch ng-model="$ctrl.search"></xsearch>   -->
+     
+    <div class="subsection-switcher">        
+        <xsearch ng-model="$ctrl.search"></xsearch>  
+        <h5>{{$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].name}}</h5>       
+        <div class="tabs" tab-selected="{{$ctrl.NewdataItemList.getCurrentTab()}}">
+            <div ng-click="$ctrl.setCurrentTab($index)"
+                class="tab {{($ctrl.NewdataItemList.getCurrentTab()==$index)?'selected':''}}" 
+                ng-repeat="n in $ctrl.NewdataItemList.getTabs()">
+                <i class="material-icons">{{n.icon}}</i><span>{{n.name}}</span> 
+            </div>   
+        </div>
+    </div>  
+   
+    <div class="newdata-item-wrapper item-wrapper">  
+        <newdata-item
+            ng-repeat="x in $ctrl.data[$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].table] | filter:$ctrl.search"
+            data="x"
+            current="$ctrl.current">
+        </newdata-item>
+    </div>
+</div>

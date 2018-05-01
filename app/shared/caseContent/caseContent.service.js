@@ -5,6 +5,9 @@
 var CaseContent = function(System){
 
     var editMode = false;
+    this.backup = {};
+    this.data = undefined;
+      
       
     this.isEditModeOn = function(){
         return editMode == true;

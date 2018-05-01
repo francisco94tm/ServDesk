@@ -1,12 +1,8 @@
 <div class="agent-add-container add-container" ng-class="($ctrl.AgentAdd.isClosed())?'closed':'opened'"> 
     <div class="back" ng-click="$ctrl.AgentAdd.shuffle()"></div>
-    <div class="button tooltiped" 
-        data-tooltip="{{$ctrl.AgentAdd.isClosed()?'Registrar agente':'Cerrar'}}"
-        data-position="{{$ctrl.AgentAdd.isClosed()?'top':'bottom'}}">
+    <div class="button">
         <i class="close material-icons" ng-click="$ctrl.AgentAdd.shuffle()">add</i>
     </div> 
-
-    
     <div class="panel">
         <div class="panel-wrapper">
             <div class="head-data">

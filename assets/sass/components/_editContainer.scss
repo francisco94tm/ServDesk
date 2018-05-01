@@ -1,70 +1,84 @@
 
 @import 'variables';
- 
-.edit-button{    
-    top: 40px;
-    right: 50px;
-    position: fixed;  
+$buttonw: 150px;
+.revert-edit-button, .edit-button{ 
+    position: fixed;
     cursor: pointer;
     text-align: center;  
     font-weight: bold;
-    text-transform: uppercase; 
-    height: 39px;
+    text-transform: uppercase;     
+    width: $buttonw;
+    height: 40px;
     overflow: hidden;
-    font-size: 12px;
-    border-radius: 5px; 
-    transition: 0.3s; 
-    z-index: 50;
-    .off, .on{
-        transition: margin 0.3s;
-    }
-    &.mode-on{ 
-        max-width: 180px;       
-        border: solid 1px $main-color;
-        background-color: $main-color;
-        color: white;
-        .off{
-            margin-top: -39px;
-        }
-        &:hover{            
-            border: solid 1px $main-color;
-            background-color: darker($main-color, 5);
-            color: white;
-        }
-    }
+    font-size: 14px; 
+    bottom: 20px; 
+    z-index: 100;   
+    // background-color: #888;
+    transition: right 0.3s $animation-ease-out;
+    i{
+        font-size: 15px; }
+    span{ 
+        margin-left: 16px; }
+    .off, .on{  
+        display: flex;
+        justify-content: center; 
+        padding: 0 20px;
+        line-height: 40px; 
+        display: inline-block;
+        transition: margin 0.3s $animation-ease-out, opacity 0.3s $animation-ease-out;
+    }  
+}
+
+.revert-edit-button{ 
+    right: 30px;  
+    padding-left: 30px;   
+    color: $theme--fg;   
+    transition: opacity 0.3s $animation-ease-out;
+    display: flex;
+    &:hover{
+        border-left: none; }
     &.mode-off{
-        max-width: 180px;
-        border: solid 1px $theme--fg;
-        background: $theme--bg;
+        opacity: 0;
+        z-index: 0;
+    }
+    &.mode-on{
+        opacity: 1;
+        z-index: 50;
+    }
+    span, i{
+        line-height: 36px;  }
+}
+.edit-button{      
+    right: 20px;  
+    &.mode-on{       
+        border-right: none;
+        color: $main-color;
+        right: $buttonw + 0px;        
+        .off{
+            opacity: 0;
+            margin-left: -150px;} 
+        .on{
+            opacity: 1;} 
+    }
+    &.mode-off{ 
         color: $theme--fg;           
-        &:hover{
-            border: solid 1px $main-color;
-            background: $theme--bg;
+        &:hover{ 
             color: $main-color;
         }
-    } 
-
-    .on, .off{
-        display: flex;
-        height: 39px;
-        padding: 10px 30px;
-        align-content: center;
-        align-items: center;
-    }
-    i{
-        font-size: 14px;
-    }
-    span{
-        margin-left: 15px;
-    }
-   
+        .off{
+            opacity: 1;} 
+        .on{
+            opacity: 0;}
+    }  
 } 
+
+ 
 
 .edit-panel{ 
     .item{
         position: relative;
         &>i{
-            margin-top: 5px;
+            margin-top: 3px;
             z-index: 2;
             position:absolute;
         }
@@ -155,7 +169,7 @@
     textarea{ 
         font-family: "Walfork";  
         font-style: italic;
-        font-size: 15px; 
+        font-size: 18px; 
         background-color: rgba($theme--fg, 0.1);
         // border: solid 1px rgba($theme--fg, 0.3);
         padding: 20px 40px;
@@ -189,11 +203,13 @@
             color: $theme--fg;
             font-weight: bold;
             border-radius: 5px;   
-            margin-bottom: 30px;
+            // margin-bottom: 30px;
         } 
         &.like-select{
-            padding: 30px 40px 12px 100px!important;
+            padding: 35px 40px 12px 100px!important;
             margin-left: -40px;
+            margin-top: 10px;
+            // margin-bottom: 10px;
             color: rgba($theme--fg, 0.4);
             font-weight: bold; 
             max-width: none;
@@ -202,7 +218,7 @@
     }
 
     label.like-select{
-        top: 8px;
+        top: 24px;
         left: 63px;
         margin-top:0!important;
         opacity: 1!important;

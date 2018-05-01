@@ -1,0 +1,13 @@
+<div class="newdata-item item {{($ctrl.data.id == $ctrl.NewdataItem.current.id) ? 'selected' : ''}}" 
+     ng-click="newdataItemClick($ctrl.data)">
+    <div class="left">
+        <div class="title">{{$ctrl.data.id | minDigits: 3}}</div>
+        <div class="data">
+            {{$ctrl.data.name}} 
+            {{$ctrl.data.firstLastname}}
+        </div>
+    </div>
+    <!-- <div class="right">
+        <div class="alert-datetime">{{$ctrl.data.registerDate}}</div>  
+    </div>     -->
+</div>

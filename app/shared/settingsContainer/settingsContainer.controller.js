@@ -6,7 +6,7 @@ function settingsContainerController($scope, $element, $attrs, $window, DashNav,
 
     $scope.$ctrl.Session = Session;
     
-    Dashboard.getCatalogues('theme').then(data => {
+    Dashboard.getCatalogues(['theme']).then(data => {
         $scope.$ctrl.options = data;
     });
 

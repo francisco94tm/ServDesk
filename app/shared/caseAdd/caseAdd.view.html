@@ -1,6 +1,8 @@
 <div class="case-add-container add-container" ng-class="($ctrl.CaseAdd.isClosed())?'closed':'opened'"> 
     <div class="back" ng-click="$ctrl.CaseAdd.shuffle()"></div>
-    <div class="button">
+    <div class="button tooltiped" 
+        data-tooltip="{{$ctrl.CaseAdd.isClosed()?'Registrar caso':'Cerrar'}}"
+        data-position="{{$ctrl.CaseAdd.isClosed()?'top':'bottom'}}">
         <i class="close material-icons" ng-click="$ctrl.CaseAdd.shuffle()">add</i>
     </div> 
     <div class="panel">

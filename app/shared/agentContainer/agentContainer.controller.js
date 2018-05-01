@@ -4,7 +4,7 @@
  */
 
 function agentContainerController($scope, $element, $attrs, Dashboard){
-    Dashboard.getCatalogues('agent').then(data => { 
+    Dashboard.getCatalogues(['agent']).then(data => { 
         $scope.$ctrl.data = data;
     });
 

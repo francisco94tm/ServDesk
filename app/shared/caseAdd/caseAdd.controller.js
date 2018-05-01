@@ -17,7 +17,7 @@ function caseAddController($scope, $element, $attrs, CaseAdd, $rootScope, Dashbo
         CaseAdd.save().then(response => { 
             $scope.$ctrl.CaseAdd.close();
             $timeout(() => {
-                Dashboard.getCatalogues('request').then(r => {	  
+                Dashboard.getCatalogues(['request']).then(r => {	  
                     $rootScope.$broadcast('getCases', r.request);	 
                 });  				
                 var objeto = {

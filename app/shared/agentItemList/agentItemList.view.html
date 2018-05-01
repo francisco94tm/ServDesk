@@ -1,10 +1,19 @@
 <div class="agent-item-list column">
     <xsearch ng-model="$ctrl.search"></xsearch>  
-    <div class="agent-item-wrapper item-wrapper">  
+    <div class="agent-item-wrapper item-wrapper"> 
+        <div class="refresh-btn tooltiped 
+            {{($ctrl.data.length == 0)?'big':'small'}}"
+            ng-click="$ctrl.loadData()"
+            data-tooltip="Recargar"
+            data-position="bottom">
+            <i class="material-icons {{($ctrl.isLoading)?'loading':''}}">
+                refresh</i>
+        </div> 
         <agent-item
             ng-repeat="x in $ctrl.data | filter:$ctrl.search"
             data="x"
             current="$ctrl.current">
         </agent-item>
+        
     </div>
 </div>

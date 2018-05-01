@@ -1,0 +1,148 @@
+<div class="newdata-content column section-content {{($ctrl.NewdataContent.data != undefined)?'is-opened':'is-closed'}}">
+    
+    <!-- Show when data is selected -->
+    <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.NewdataContent.data!=undefined">          
+        
+        <!-- Edit button --> 
+        <div class="edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
+            <div class="off">
+                <i class="material-icons">edit</i>
+                <span>Editar</span>
+            </div>
+            <div class="on">
+                <i class="material-icons">save</i>
+                <span>Guardar</span>
+            </div>            
+        </div>
+        <div class="revert-edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  ng-click="$ctrl.revertEdit()">
+            <i class="material-icons">close</i>
+            <span>Cancelar</span>
+        </div>     
+     
+        <!-- Pre-data -->
+        <div class="pre-data">
+            <span>{{$ctrl.NewdataContent.data.id | minDigits:3}}</span>
+        </div>
+
+        <!-- Title --> 
+        <xinput type="text" 
+            class="extra-big"
+            disabled="!$ctrl.NewdataContent.isEditModeOn()"
+            label="Nombre" 
+            ng-model="$ctrl.NewdataContent.data.name">
+        </xinput>  
+
+        <!-- Description  -->
+        <xtextarea ng-if="$ctrl.NewdataContent.data.description != undefined"
+            class="pre"
+            disabled="!$ctrl.NewdataContent.isEditModeOn()"
+            label="Descripción" 
+            ng-model="$ctrl.NewdataContent.data.description">
+        </xtextarea>
+
+        <div class="metadata">   
+
+            <!-- Bullets -->
+            <div class="item-list"> 
+                
+                <!-- Threat Type --> 
+                <div class="item area" ng-if="$ctrl.NewdataContent.data.id_threatType != undefined">                    
+                    <i class="material-icons">warning</i>
+                        <xselect
+                        options="$ctrl.options.threatType" 
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Tipo de amenaza:" 
+                        item-selected="{{$ctrl.NewdataContent.data.id_threatType.id}}"
+                        ng-model="$ctrl.NewdataContent.data.id_threatType"> 
+                    </xselect>
+                </div>     
+                
+                    
+                <!-- Area --> 
+                <div class="item area" ng-if="$ctrl.NewdataContent.data.id_area != undefined">                    
+                    <i class="material-icons">place</i>
+                        <xselect
+                        options="$ctrl.options.area" 
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Área:" 
+                        item-selected="{{$ctrl.NewdataContent.data.id_area.id}}"
+                        ng-model="$ctrl.NewdataContent.data.id_area"> 
+                    </xselect>
+                </div>     
+                
+                 <!-- Departamento --> 
+                 <div class="item department" ng-if="$ctrl.NewdataContent.data.id_department != undefined">                    
+                    <i class="material-icons">domain</i>
+                        <xselect
+                        options="$ctrl.options.department" 
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Departamento:" 
+                        item-selected="{{$ctrl.NewdataContent.data.id_department.id}}"
+                        ng-model="$ctrl.NewdataContent.data.id_department"> 
+                    </xselect>
+                </div>   
+
+                 <!-- Unidad de negocios --> 
+                 <div class="item business-unit" ng-if="$ctrl.NewdataContent.data.id_businessUnit != undefined">                    
+                    <i class="material-icons">card_travel</i>
+                    <xselect
+                        options="$ctrl.options.businessUnit" 
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Unidad de negocios:" 
+                        item-selected="{{$ctrl.NewdataContent.data.id_businessUnit.id}}"
+                        ng-model="$ctrl.NewdataContent.data.id_businessUnit"> 
+                    </xselect>
+                </div>   
+
+                <!-- CURP -->
+                <div class="item curp" ng-if="$ctrl.NewdataContent.data.curp != undefined">                    
+                    <i class="material-icons">account_box</i>
+                    <xinput 
+                        class="like-select"
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="CURP:"  
+                        ng-model="$ctrl.NewdataContent.data.curp"> 
+                    </xinput>
+                </div>
+
+                <!-- Email -->
+                <div class="item email" ng-if="$ctrl.NewdataContent.data.email != undefined">                    
+                    <i class="material-icons">email</i>
+                    <xinput 
+                        class="like-select"
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Email:"  
+                        ng-model="$ctrl.NewdataContent.data.email"> 
+                    </xinput>
+                </div>
+
+                <!-- Phone -->
+                <div class="item phone" ng-if="$ctrl.NewdataContent.data.phone != undefined">                    
+                    <i class="material-icons">phone</i>
+                    <xinput 
+                        class="like-select"
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Teléfono:"  
+                        ng-model="$ctrl.NewdataContent.data.phone"> 
+                    </xinput>
+                </div>
+
+                <!-- Mobile Phone -->
+                <div class="item mobilephone" ng-if="$ctrl.NewdataContent.data.mobilephone != undefined">                    
+                    <i class="material-icons">phone_iphone</i>
+                    <xinput 
+                        class="like-select"
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Teléfono móvil:"  
+                        ng-model="$ctrl.NewdataContent.data.mobilephone"> 
+                    </xinput>
+                </div> 
+            </div>
+            
+        </div> 
+    </div>
+    
+    <div class="closed" ng-show="$ctrl.NewdataContent.data==undefined"> 
+        <h1>{{$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].name}}</h1> 
+    </div>
+</div>

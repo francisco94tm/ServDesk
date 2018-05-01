@@ -42,8 +42,22 @@ class System {
         case 'agent':
             foreach($data as &$row){
                 $this->swap($row['id_level'], 'Level', 'name');
+            }   
+            break;     
+        case 'client':
+            foreach($data as &$row){
+                $this->swap($row['id_area'], 'Area', 'name');
+                $this->swap($row['id_department'], 'Department', 'name');
+                $this->swap($row['id_businessUnit'], 'BusinessUnit', 'name');
             }
+            break;
+        case 'agentThreat':
+            foreach($data as &$row){
+                $this->swap($row['id_threatType'], 'threatType', 'name'); 
+            } 
+            break; 
         }
+
     } 
 
     private function swap(&$id, $table, $col){			

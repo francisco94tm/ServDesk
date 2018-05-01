@@ -16,7 +16,7 @@ function agentAddController($scope, $element, $attrs, AgentAdd, $rootScope, Dash
     $scope.$ctrl.saveAgent = () => {			
         AgentAdd.save().then(response => {  
             $scope.$ctrl.AgentAdd.close();
-            Dashboard.getCatalogues('agent').then(r => {	 
+            Dashboard.getCatalogues(['agent']).then(r => {	 
                 $rootScope.$broadcast('getAgents', r.agent);	 
             });  				
             var objeto = {

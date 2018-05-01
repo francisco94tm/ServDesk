@@ -1,7 +1,7 @@
-<div class="agent-content column section-content {{($ctrl.data != undefined)?'is-opened':'is-closed'}}">
+<div class="agent-content column section-content {{($ctrl.AgentContent.data != undefined)?'is-opened':'is-closed'}}">
     
     <!-- Show when data is selected -->
-    <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.data!=undefined">          
+    <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.AgentContent.data!=undefined">          
         
         <!-- Edit button --> 
         <div class="edit-button {{$ctrl.AgentContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
@@ -10,14 +10,19 @@
                 <span>Editar</span>
             </div>
             <div class="on">
-                <i class="material-icons">close</i>
-                <span>Cerrar</span>
+                <i class="material-icons">save</i>
+                <span>Guardar</span>
             </div>            
         </div>   
+        <div class="revert-edit-button {{$ctrl.AgentContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  
+            ng-click="$ctrl.revertEdit()">
+            <i class="material-icons">close</i>
+            <span>Cancelar</span>
+        </div>  
      
         <!-- Pre-data -->
         <div class="pre-data">
-            <b>Estatus: </b><span>{{$ctrl.data.status}}</span>
+            <b>Estatus: </b><span>{{$ctrl.AgentContent.data.status}}</span>
         </div>
 
         <!-- Title --> 
@@ -25,14 +30,14 @@
             class="extra-big"
             disabled="!$ctrl.AgentContent.isEditModeOn()"
             label="Usuario" 
-            ng-model="$ctrl.data.usr">
+            ng-model="$ctrl.AgentContent.data.usr">
         </xinput> 
            
         <!-- Username -->
         <div class="user-name">
-            {{$ctrl.data.name}} 
-            {{$ctrl.data.firstLastname}} 
-            {{$ctrl.data.secondLastname}}
+            {{$ctrl.AgentContent.data.name}} 
+            {{$ctrl.AgentContent.data.firstLastname}} 
+            {{$ctrl.AgentContent.data.secondLastname}}
         </div>
 
         <div class="metadata">   
@@ -46,8 +51,8 @@
                         options="$ctrl.options.level" 
                         disabled="!$ctrl.AgentContent.isEditModeOn()"
                         label="Nivel de acceso:" 
-                        item-selected="{{$ctrl.data.id_level.id}}"
-                        ng-model="$ctrl.data.id_level"> 
+                        item-selected="{{$ctrl.AgentContent.data.id_level.id}}"
+                        ng-model="$ctrl.AgentContent.data.id_level"> 
                     </xselect>
                 </div>
 
@@ -58,7 +63,7 @@
                         class="like-select"
                         disabled="!$ctrl.AgentContent.isEditModeOn()"
                         label="Email:"  
-                        ng-model="$ctrl.data.email"> 
+                        ng-model="$ctrl.AgentContent.data.email"> 
                     </xinput>
                 </div>
 
@@ -69,7 +74,7 @@
                         class="like-select"
                         disabled="!$ctrl.AgentContent.isEditModeOn()"
                         label="Teléfono:"  
-                        ng-model="$ctrl.data.phone"> 
+                        ng-model="$ctrl.AgentContent.data.phone"> 
                     </xinput>
                 </div>
 
@@ -80,7 +85,7 @@
                             class="like-select"
                             disabled="!$ctrl.AgentContent.isEditModeOn()"
                             label="Teléfono móvil:"  
-                            ng-model="$ctrl.data.mobilephone"> 
+                            ng-model="$ctrl.AgentContent.data.mobilephone"> 
                         </xinput>
                     </div>
 
@@ -91,7 +96,7 @@
                         class="like-select"
                         disabled="!$ctrl.AgentContent.isEditModeOn()"
                         label="Dirección:"  
-                        ng-model="$ctrl.data.address"> 
+                        ng-model="$ctrl.AgentContent.data.address"> 
                     </xinput>
                 </div> 
             </div>
@@ -99,7 +104,7 @@
         </div> 
     </div>
     
-    <div class="closed" ng-show="$ctrl.data==undefined"> 
+    <div class="closed" ng-show="$ctrl.AgentContent.data==undefined"> 
         <h1>Da clic sobre algún agente</h1> 
     </div>
 </div>
