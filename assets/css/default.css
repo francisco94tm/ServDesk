@@ -459,12 +459,19 @@ button {
   position: relative;
   height: calc(100% - 70px);
   overflow-y: auto; }
+  .add-container .panel .panel-wrapper .input-group input {
+    padding: 10px 45px 17px 45px; }
+  .add-container .panel .panel-wrapper .x-select {
+    margin: 10px 19px 0px 10px !important; }
+  .add-container .panel .panel-wrapper > .head-data input {
+    padding: 10px 0 10px 10px !important; }
+  .add-container .panel .panel-wrapper > .head-data label {
+    padding-left: 0 !important; }
 .add-container .panel .head-data {
   padding: 10px 30px 0 30px; }
   .add-container .panel .head-data .input-group {
     display: flex;
     flex-direction: column;
-    padding: 7px 10px 7px 10px;
     position: relative;
     align-items: flex-start;
     align-content: flex-start; }
@@ -474,7 +481,7 @@ button {
     color: rgba(0, 0, 0, 0.87);
     font-family: "Walfork";
     outline: none;
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 10px 10px !important;
     font-size: 60px;
     border: none;
     min-width: 100%;
@@ -1108,6 +1115,11 @@ h5 {
 
 ::-webkit-scrollbar {
   width: 3px; }
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.2); }
 
 .panel-wrapper::-webkit-scrollbar-thumb, .item-wrapper::-webkit-scrollbar-thumb, .section-content::-webkit-scrollbar-thumb {
   background: transparent;

@@ -22,10 +22,10 @@ form {
 
 .input-group {
   display: flex;
-  align-content: center;
-  align-items: center;
   padding: 7px 10px;
-  position: relative; }
+  position: relative;
+  flex-direction: column;
+  margin: 10px 10px 0 0; }
 
 .textarea-group {
   display: flex;
@@ -51,11 +51,11 @@ svg text {
 label {
   color: #5C76B7;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 9px;
   letter-spacing: 1px;
   font-weight: bold;
-  display: inline-block;
-  min-width: 150px; }
+  min-width: 150px;
+  padding-left: 45px; }
 
 input {
   display: block;
@@ -65,10 +65,10 @@ input {
   min-width: 300px;
   font-family: "Walfork";
   outline: none;
-  padding: 10px 10px;
+  padding: 10px 45px;
   font-size: 13px;
   border: none;
-  border-bottom: solid 1px rgba(250, 250, 250, 0.3); }
+  border-bottom: solid 1px rgba(250, 250, 250, 0.15); }
   input.big-input {
     font-size: 16px;
     color: #fafafa;
@@ -136,14 +136,17 @@ button {
 .x-select {
   position: relative;
   width: 300px;
+  height: 66px;
   margin: 10px 0 0px 10px;
-  border-bottom: solid 1px rgba(250, 250, 250, 0.3);
+  border-bottom: solid 1px rgba(250, 250, 250, 0.15);
   /*style the items (options), including the selected item:*/
   /*style items (options):*/ }
   .x-select.disabled {
     border-bottom: dashed 1px rgba(250, 250, 250, 0.3); }
     .x-select.disabled .select-selected .bold {
       color: rgba(250, 250, 250, 0.25) !important; }
+    .x-select.disabled .select-selected .value.empty {
+      color: rgba(250, 250, 250, 0.1); }
     .x-select.disabled .select-selected, .x-select.disabled i {
       color: rgba(250, 250, 250, 0.25) !important; }
   .x-select i.material-icons {
@@ -151,31 +154,29 @@ button {
     padding: 9px 5px;
     color: #5C76B7;
     display: block;
-    font-size: 20px; }
+    font-size: 20px;
+    top: 10px; }
   .x-select select {
     display: none;
     /*hide original SELECT element:*/ }
   .x-select .select-selected {
-    letter-spacing: 1px;
-    font-size: 10px;
-    text-transform: uppercase;
+    height: 100%;
     /*style the arrow inside the select element:*/
     /*point the arrow upwards when the select box is open (active):*/ }
     .x-select .select-selected span {
-      display: inline-block !important;
+      display: block;
       white-space: nowrap;
       overflow: hidden; }
-      .x-select .select-selected span.value {
-        max-width: 160px; }
+      .x-select .select-selected span.bold {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 9px; }
+      .x-select .select-selected span.value.empty {
+        color: rgba(250, 250, 250, 0.3); }
     .x-select .select-selected .bold {
       font-weight: 600;
       margin-right: 5px;
       color: #5C76B7; }
-    .x-select .select-selected:before {
-      content: "";
-      padding-right: 10px;
-      padding-left: 5px;
-      font-weight: 600; }
     .x-select .select-selected:after {
       position: absolute;
       content: "";
@@ -191,7 +192,7 @@ button {
   .x-select .select-items div,
   .x-select .select-selected {
     color: rgba(250, 250, 250, 0.9);
-    padding: 12px 16px;
+    padding: 12px 45px 12px 45px;
     border: 1px solid transparent;
     cursor: pointer;
     user-select: none; }
@@ -199,11 +200,11 @@ button {
     position: absolute;
     background-color: #2e2e2e;
     border: solid 1px rgba(250, 250, 250, 0.24);
-    top: -100%;
+    top: 0%;
     left: 0;
     right: 0;
     z-index: 99;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     overflow-x: auto;
     border-radius: 3px;
     font-size: 13px;
@@ -217,11 +218,11 @@ button {
       transition: max-height 0.3s cubic-bezier(0, 0, 0.2, 1), top 0.3s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0, 0, 0.2, 1); }
     .x-select .select-items div.selected {
       font-weight: 600;
-      background-color: rgba(250, 250, 250, 0.3); }
+      background-color: rgba(250, 250, 250, 0.15); }
       .x-select .select-items div.selected:hover {
-        background-color: rgba(250, 250, 250, 0.3); }
+        background-color: rgba(250, 250, 250, 0.15); }
     .x-select .select-items div:hover {
-      background-color: rgba(250, 250, 250, 0.1); }
+      background-color: rgba(250, 250, 250, 0.07); }
 
 .xpopup {
   display: flex;
@@ -390,6 +391,10 @@ button {
 .add-container {
   z-index: 1000;
   position: fixed; }
+  .add-container .row {
+    flex-wrap: wrap;
+    height: 100%;
+    overflow-y: visible !important; }
   .add-container .back {
     z-index: 1001;
     position: fixed;
@@ -422,7 +427,7 @@ button {
     border-radius: 3px;
     z-index: 1002;
     background: #212121;
-    padding: 30px 30px;
+    padding: 20px 15px;
     width: 700px;
     height: calc(100% - 40px);
     position: fixed;
@@ -452,7 +457,8 @@ button {
 
 .add-container .panel .panel-wrapper {
   position: relative;
-  height: 100%; }
+  height: calc(100% - 70px);
+  overflow-y: auto; }
 .add-container .panel .head-data {
   padding: 10px 30px 0 30px; }
   .add-container .panel .head-data .input-group {
@@ -476,10 +482,18 @@ button {
     min-height: 30px; }
 .add-container .panel form {
   display: flex;
+  flex-wrap: wrap;
   position: relative; }
+  .add-container .panel form .head-data {
+    flex-grow: 2;
+    width: 100%; }
+    .add-container .panel form .head-data input {
+      font-size: 50px !important; }
+    .add-container .panel form .head-data label {
+      padding-left: 20px !important; }
 .add-container .panel button {
   position: absolute;
-  bottom: 0px;
+  bottom: 20px;
   right: 20px; }
 
 /* 1.1 Input
@@ -497,7 +511,7 @@ button {
   height: 40px;
   overflow: hidden;
   font-size: 14px;
-  bottom: 20px;
+  top: 20px;
   z-index: 100;
   transition: right 0.3s cubic-bezier(0, 0, 0.2, 1); }
   .revert-edit-button i, .edit-button i {
@@ -518,8 +532,6 @@ button {
   color: #fafafa;
   transition: opacity 0.3s cubic-bezier(0, 0, 0.2, 1);
   display: flex; }
-  .revert-edit-button:hover {
-    border-left: none; }
   .revert-edit-button.mode-off {
     opacity: 0;
     z-index: 0; }
@@ -530,11 +542,12 @@ button {
     line-height: 36px; }
 
 .edit-button {
-  right: 20px; }
+  right: 20px;
+  border-radius: 40px; }
   .edit-button.mode-on {
-    border-right: none;
     color: #5C76B7;
-    right: 150px; }
+    right: 150px;
+    border: none; }
     .edit-button.mode-on .off {
       opacity: 0;
       margin-left: -150px; }
@@ -563,6 +576,8 @@ button {
   margin: 0;
   position: relative; }
 .edit-panel label {
+  left: 15px !important;
+  font-size: 12px !important;
   color: rgba(250, 250, 250, 0.5);
   transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
   margin-top: 30px; }
@@ -589,7 +604,7 @@ button {
     transition: background-color 0.3s cubic-bezier(0, 0, 0.2, 1);
     padding: 10px 100px !important;
     border-radius: 3px;
-    background-color: rgba(250, 250, 250, 0.1) !important;
+    background-color: rgba(250, 250, 250, 0.08) !important;
     display: flex;
     flex-direction: column; }
     .edit-panel .x-select .select-selected:before {
@@ -622,7 +637,7 @@ button {
   font-family: "Walfork";
   font-style: italic;
   font-size: 18px;
-  background-color: rgba(250, 250, 250, 0.1);
+  background-color: rgba(250, 250, 250, 0.08);
   padding: 20px 40px;
   margin-left: -50px;
   max-width: 650px;
@@ -633,7 +648,7 @@ button {
 .edit-panel input {
   border-bottom: none;
   border-radius: 2px;
-  background-color: rgba(250, 250, 250, 0.1);
+  background-color: rgba(250, 250, 250, 0.08);
   transition: 0.3s cubic-bezier(0, 0, 0.2, 1); }
   .edit-panel input:disabled {
     background-color: transparent;
@@ -678,7 +693,7 @@ button {
   height: 100%; }
 
 .case-item-wrapper {
-  max-height: calc(100% - 153px); }
+  max-height: calc(100% - 140px); }
   .case-item-wrapper .item {
     border-left: 4px solid;
     padding: 15px 30px !important; }
@@ -721,6 +736,17 @@ button {
       background: rgba(167, 166, 166, 0.3); }
     .case-item-wrapper .item.non-priority:before {
       background: rgba(167, 166, 166, 0.7); }
+
+.case-item-list .x-select {
+  margin-top: 5px;
+  height: 47px; }
+  .case-item-list .x-select i {
+    top: 0; }
+  .case-item-list .x-select .select-selected span {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 10px; }
 
 case-content {
   width: 100%;
@@ -788,6 +814,15 @@ table {
     table table th, table table caption {
       text-align: left;
       color: #fafafa; }
+
+.newdata-add-container .panel-wrapper {
+  height: calc(100% - 150px) !important; }
+.newdata-add-container .edit-panel .x-select {
+  margin-left: 0px;
+  width: 350px; }
+  .newdata-add-container .edit-panel .x-select .select-selected {
+    background: transparent !important;
+    padding: 10px 50px !important; }
 
 .newdata-container
 newdata-content, .newdata-content {
@@ -1074,10 +1109,10 @@ h5 {
 ::-webkit-scrollbar {
   width: 3px; }
 
-.item-wrapper::-webkit-scrollbar-thumb {
+.panel-wrapper::-webkit-scrollbar-thumb, .item-wrapper::-webkit-scrollbar-thumb, .section-content::-webkit-scrollbar-thumb {
   background: transparent;
   transition: all 0.3s; }
-.item-wrapper:hover::-webkit-scrollbar-thumb {
+.panel-wrapper:hover::-webkit-scrollbar-thumb, .item-wrapper:hover::-webkit-scrollbar-thumb, .section-content:hover::-webkit-scrollbar-thumb {
   background: #444; }
 
 body,
@@ -1092,6 +1127,8 @@ html {
   margin: 0;
   background-color: #212121;
   transition: cubic-bezier(0, 0, 0.2, 1); }
+  .container .row {
+    width: 100%; }
   .container .row, .container .columns, .container .column {
     min-height: 100%;
     height: 100%;
@@ -1121,6 +1158,22 @@ html {
   font-feature-settings: 'liga'; }
   .material-icons:before {
     display: none; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: rgba(250, 250, 250, 0.4); }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: rgba(250, 250, 250, 0.4); }
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: rgba(250, 250, 250, 0.4); }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: rgba(250, 250, 250, 0.4); }
 
 .tooltiped[data-position="top"]:after {
   bottom: calc(100% + 10px); }

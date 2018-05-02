@@ -26,6 +26,11 @@
     width: 3px;
 }
 
+hr{
+    margin-top: 0;
+    margin-bottom: 0;
+    border-top: 1px solid rgba($theme--fg, 0.2);
+}
 .panel-wrapper, .item-wrapper, .section-content{      
     &::-webkit-scrollbar-thumb{
         background: transparent;
