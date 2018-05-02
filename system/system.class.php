@@ -1,11 +1,11 @@
 <?php
 class System { 
     protected $values = []; 
-    /**
-        * Load data from database
-        * @return  JSON object to inject into the view.
-        */
 
+    /*****************************************************************************
+     * Load data from database
+     * @return  JSON object to inject into the view.
+     */ 
     public function getTableData($obj){
 
         $table = $obj['table'];
@@ -24,6 +24,10 @@ class System {
         return json_encode($values);
     } 
 
+    /*****************************************************************************
+     * Change number keys to their text value
+     * @return  JSON object to inject into the view.
+     */ 
     private function fixIndexes($table, &$data){ 
         switch($table){
         case 'request':
@@ -59,29 +63,29 @@ class System {
         }
 
     } 
-
     private function swap(&$id, $table, $col){			
         include_once('connection/connection.php');
         $db = new Connection();
-        if(!is_numeric($id)){
-            $row = $db->select("SELECT $col FROM $table where id = '$id'");
-        }
-        else{
-            $row = $db->select("SELECT $col FROM $table where id = $id");
-        }
+        if(!is_numeric($id))
+            $row = $db->select("SELECT $col FROM $table where id = '$id'");        
+        else
+            $row = $db->select("SELECT $col FROM $table where id = $id");        
         $i = $id; 
-        $id = [];
-
-        if($col == "*" && count($row) > 0){
-            $id = $row[0];
-        }
+        $id = []; 
+        if($col == "*" && count($row) > 0)
+            $id = $row[0];        
         else {								
             $id['id'] = $i;
             if(count($row) > 0)
                 $id['value'] = $row[0][$col];
         }
     }
-    
+
+    /*****************************************************************************
+     * Insert a case into the Database
+     * @return  JSON object to inject into the view.
+     */ 
+     
     public function saveCase($obj){
         // Create connection
         include_once('connection/connection.php' );
@@ -113,11 +117,17 @@ class System {
         return json_encode($values);
     }
 
+    /*****************************************************************************
+     * Insert a client into the Database
+     * @return  JSON object to inject into the view.
+     */ 
+
     public function saveClient($obj){
         // Create connection
         include_once('connection/connection.php' );
         $db = new Connection(); 
         
+        $curp = $obj['curp'];
         $name = $obj['name'];
         $firstLastname = $obj['firstLastname'];
         $secondLastname = $obj['secondLastname'];
@@ -130,13 +140,13 @@ class System {
         $businessUnit = $obj['businessUnit'];
 
         $values['query'] = "INSERT INTO client (
-            name, firstLastname, secondLastname,
+            curp, name, firstLastname, secondLastname,
             id_job, id_area, id_department,
             id_businessUnit, admissionDate, mobilephone,
             phone, email, status
         )
             VALUES (
-            '$name', '$firstLastname', '$secondLastname', 
+            '$curp', '$name', '$firstLastname', '$secondLastname', 
             $job, $area, $department,
             $businessUnit, NOW(),  '$mobilephone',
             '$phone', '$email', 'A'
@@ -146,6 +156,50 @@ class System {
         $values['error'][] = $db->error(); 
         return json_encode($values);
     }
+
+    /*****************************************************************************
+     * Insert a register Medium into the Database
+     * @return  JSON object to inject into the view.
+     */ 
+
+    public function saveRegisterMedium($obj){
+        // Create connection
+        include_once('connection/connection.php' );
+        $db = new Connection();         
+        $name = $obj['name']; 
+        $values['query'] = "INSERT INTO registerMedium (name) VALUES ('$name')";
+        $values['info'] = $db->query($values['query']);			
+        $values['id']   = $db->getLastID(); 
+        $values['error'][] = $db->error(); 
+        return json_encode($values);
+    }
+
+     /*****************************************************************************
+     * Insert a Agent Threat into the Database
+     * @return  JSON object to inject into the view.
+     */ 
+
+    public function saveAgentThreat($obj){
+        // Create connection
+        include_once('connection/connection.php' );
+        $db = new Connection();         
+        $name = $obj['name']; 
+        $description = $obj['description']; 
+        $threatType = $obj['threatType']; 
+        $values['query'] = "INSERT INTO  agentThreat
+            (name, description, id_threatType) 
+        VALUES 
+            ('$name', '$description', $threatType)";
+        $values['info'] = $db->query($values['query']);			
+        $values['id']   = $db->getLastID(); 
+        $values['error'][] = $db->error(); 
+        return json_encode($values);
+    }
+
+    /*****************************************************************************
+     * Insert a agent into the Database
+     * @return  JSON object to inject into the view.
+     */ 
 
     public function saveAgent($obj){
         // Create connection

@@ -1,5 +1,5 @@
 <div class="case-item item {{($ctrl.data.id == $ctrl.current.id) ? 'selected' : ''}} {{$ctrl.priorityClass}}" 
-     ng-click="caseItemClick($ctrl.data)">
+     ng-click="$ctrl.caseItemClick($ctrl.data)">
     <div class="left">
         <div class="title">{{$ctrl.data.subject}}</div>
         <div class="data">

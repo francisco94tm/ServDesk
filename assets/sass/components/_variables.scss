@@ -2,12 +2,7 @@
 
 
 $theme--bg: $clear-theme--bg;
-$theme--fg: $clear-theme--fg;
-
-$preview-panel-open-bg:  $theme--bg;
-$preview-panel-close-bg: rgba($theme--fg, 0.12);
-
-$scrollbar-bg: rgba($theme--fg, 0.2); 
+$theme--fg: $clear-theme--fg; 
 $animation-ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
 
 $priorities: (
@@ -17,7 +12,6 @@ $priorities: (
     low:       $low-priority,
     non:       $non-priority
 );
-
  
 
 /* 1.1 Input

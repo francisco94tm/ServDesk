@@ -4,11 +4,11 @@ form {
 }
 
 .input-group {
-    display: flex;
-    align-content: center;
-    align-items: center;
+    display: flex; 
     padding: 7px 10px;
     position: relative;
+    flex-direction: column;
+    margin: 10px 10px 0 0;
 }
 
 .textarea-group {
@@ -39,12 +39,13 @@ svg text{
 label {
     color: $main-color;
     text-transform: uppercase;
-    font-size: 12px;
+    font-size: 9px;
     letter-spacing: 1px;
-    font-weight: bold;
-    display: inline-block;
+    font-weight: bold; 
     min-width: 150px;
+    padding-left: 45px;
 }
+ 
 
 input {
     display: block;
@@ -54,10 +55,10 @@ input {
     min-width: $input--default-width;
     font-family: "Walfork";
     outline: none;
-    padding: 10px 10px;
+    padding: 10px 45px;
     font-size: 13px;
     border: none;
-    border-bottom: solid 1px rgba($theme--fg, 0.3);
+    border-bottom: solid 1px rgba($theme--fg, 0.15);
 
 
     &.big-input {
@@ -141,14 +142,18 @@ button {
 .x-select {
     position: relative;
     width: 300px;
+    height: 66px;
     margin: 10px 0 0px 10px;
-    border-bottom: solid 1px rgba($theme--fg, 0.3);
+    border-bottom: solid 1px rgba($theme--fg, 0.15);
     
 
     &.disabled {
         border-bottom: dashed 1px rgba($theme--fg, 0.3);
         .select-selected .bold{
             color: rgba($theme--fg, 0.25)!important;
+        }
+        .select-selected .value.empty{
+            color: rgba($theme--fg, 0.1);
         }
         .select-selected, i {
             color: rgba($theme--fg, 0.25)!important;
@@ -160,35 +165,33 @@ button {
         color: $main-color;
         display: block;
         font-size: 20px;
+        top: 10px; 
     }
     & select {
         display: none;
         /*hide original SELECT element:*/
     }
-    .select-selected {
-        letter-spacing: 1px;
-        font-size: 10px;
-        text-transform: uppercase;
+    .select-selected { 
+        height: 100%;
         span {
-            display: inline-block!important;
+            display: block;; 
             white-space:nowrap;
             overflow:hidden;
-            &.value{
-                max-width: 160px;
+            &.bold{
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-size: 9px;
+            }
+            &.value.empty{
+                color: rgba($theme--fg, 0.3);
+                // max-width: 160px;
             }            
         }
         .bold {
             font-weight: 600;
             margin-right: 5px;
             color: $main-color;
-        }
-        &:before {
-            content: "";
-            padding-right: 10px;
-            padding-left: 5px;
-            font-weight: 600;
-           
-        }
+        } 
         /*style the arrow inside the select element:*/
         &:after {
             position: absolute;
@@ -210,7 +213,7 @@ button {
     .select-items div,
     .select-selected {
         color: rgba($theme--fg, 0.9);
-        padding: 12px 16px;
+        padding: 12px 45px 12px 45px;
         border: 1px solid transparent; // border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
         cursor: pointer;
         user-select: none;
@@ -225,12 +228,11 @@ button {
             background-color: $theme--bg;
             border: solid 1px rgba($theme--fg, 0.24);
         } 
-        top: -100%;
+        top: 0%;
         left: 0;
         right: 0;
         z-index: 99;
-        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
- 
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         overflow-x: auto; 
         border-radius: 3px;
         font-size: 13px;
@@ -253,13 +255,13 @@ button {
 
         & div.selected {
             font-weight: 600;
-            background-color: rgba($theme--fg, 0.3);
+            background-color: rgba($theme--fg, 0.15);
             &:hover {
-                background-color: rgba($theme--fg, 0.3);
+                background-color: rgba($theme--fg, 0.15);
             }
         }
         & div:hover {
-            background-color: rgba($theme--fg, 0.1);
+            background-color: rgba($theme--fg, 0.07);
         }
     } 
 }

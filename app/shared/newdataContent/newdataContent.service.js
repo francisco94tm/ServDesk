@@ -6,7 +6,7 @@ var NewdataContent = function(System){
 
     var editMode = false;
     this.backup = {};
-    this.data = {};
+    this.data = undefined;
       
     this.isEditModeOn = function(){
         return editMode == true;

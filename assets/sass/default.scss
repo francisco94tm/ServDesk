@@ -23,12 +23,21 @@
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 3px;
 }
 
-
-::-webkit-scrollbar-thumb {
-    background: $scrollbar-bg;
+.panel-wrapper, .item-wrapper, .section-content{      
+    &::-webkit-scrollbar-thumb{
+        background: transparent;
+        transition: all 0.3s;
+    }
+    &:hover::-webkit-scrollbar-thumb{ 
+        @if $theme--bg == $dark-theme--bg{
+            background: #444;
+        }@else{
+            background: #ccc;
+        }
+    }
 }
 
 body,
@@ -45,6 +54,9 @@ html {
     background-color: $theme--bg;
     transition: $animation-ease-out;
 
+    .row{
+        width: 100%;
+    }
     .row, .columns, .column{
         min-height: 100%;
         height: 100%; 
@@ -74,14 +86,32 @@ html {
     -moz-osx-font-smoothing: grayscale;  
     /* Support for IE. */
     font-feature-settings: 'liga';
+    &:before{
+        display:none;
+    }
   }
+ 
+  $placeholder--fg: rgba($theme--fg,0.4);
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color:   $placeholder--fg
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color:   $placeholder--fg
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color:   $placeholder--fg
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color:   $placeholder--fg
+  }
+
 
 .tooltiped{
     &[data-position="top"]:after{
-        top: -110%;
+        bottom: calc(100% + 10px);
     }
     &[data-position="bottom"]:after{ 
-        top: 100%;
+        top: calc(100% + 10px);
     }
     &:hover:after{
         display: block;
@@ -95,12 +125,13 @@ html {
         transition: 0.15s $animation-ease-out;
         display: block;
         width: auto;
-        padding: 10px 20px;
+        width: 90px;
+        padding: 10px 15px;
         border-radius: 3px;
         content: attr(data-tooltip);
         position: absolute;
         font-size: 12px;
-        background-color: rgba(#333,0.8);
+        background-color: rgba($theme--fg,0.8);
         text-align: center;
         color: $theme--bg;
         z-index: -1;

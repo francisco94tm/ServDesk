@@ -7,7 +7,7 @@
 var DashNav = function() {   
 
     // Default init section
-    var currentSection =  4;
+    var currentSection =  0;
     var level = undefined;
 
     // Section in dashboard Panel 

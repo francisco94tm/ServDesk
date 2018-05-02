@@ -10,14 +10,12 @@ function newdataContentController($scope, $element, $attrs, NewdataContent, Newd
     $scope.$ctrl.options = {}; 
 
     // Load catalogues
-    Dashboard.getCatalogues(['area','department','businessUnit','threatType']).then((data) => { 
-        console.log(data);
+    Dashboard.getCatalogues(['area','department','businessUnit','threatType']).then((data) => {  
         $scope.$ctrl.options = data;
     });
     
     // Display data
-    $scope.$on('displayNewdata', (event, data) => {    
-        console.log(data);
+    $scope.$on('displayNewdata', (event, data) => {   
         NewdataContent.data = data;
         NewdataContent.setEditModeOff(); 
     }); 

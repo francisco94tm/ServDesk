@@ -7,35 +7,41 @@
 var NewdataAdd = function(System, Session, Obj){
 
     var status = 'closed';
+    this.what = undefined; 
     this.data = {
-        id: undefined,
+        id: undefined, 
+        curp: undefined,
         name: undefined,
         firstLastname: undefined,
         secondLastname: undefined, 
-        mobilephone: undefined,
-        address: undefined,
+        mobilephone: undefined, 
         phone: undefined,
         email: undefined,
-        level: undefined,
-        usr: undefined,
-        pass: undefined,
-    }
+        job: undefined,
+        department: undefined,
+        area: undefined,
+        businessUnit: undefined,
+        threatType: undefined
+    } 
 
     this.reset = () => {
         this.data = {
-            id: undefined,
+            id: undefined, 
+            curp: undefined,
             name: undefined,
             firstLastname: undefined,
             secondLastname: undefined, 
-            mobilephone: undefined,
-            address: undefined,
+            mobilephone: undefined, 
             phone: undefined,
             email: undefined,
-            level: undefined,
-            usr: undefined,
-            pass: undefined,
-        }; 
+            job: undefined,
+            department: undefined,
+            area: undefined,
+            businessUnit: undefined,
+            threatType: undefined
+        } 
     };
+
     this.close = () => {
         status = 'closed';
     };
@@ -55,17 +61,34 @@ var NewdataAdd = function(System, Session, Obj){
         return status;
     }
     this.areFieldsMissing = function(){
-        return !Obj.isFilled(this.data, ['id']);
+        if(this.what == undefined)
+            return true;
+        if(this.what.id == 1)
+            return !Obj.isFilled(this.data, ['id', 'description', 'threatType']);
+        if(this.what.id == 2)
+            return !Obj.isFilled(this.data, ['id', 'description', 'threatType', 'curp', 'firstLastname', 'secondLastname', 'email', 'phone', 'mobilephone', 'job', 'department', 'area', 'businessUnit']);
+        if(this.what.id == 3)
+            return !Obj.isFilled(this.data, ['id', 'curp', 'firstLastname', 'secondLastname', 'email', 'phone', 'mobilephone', 'job', 'department', 'area', 'businessUnit']);
     } 
     this.save = function(){  
-        var d = this.data; 
+        var d = angular.copy(this.data); 
         // Change object field to id
         Object.keys(d).map(function(key){ 
             if(d[key] !== null && typeof d[key] === 'object'){
                 d[key] = d[key].id;
             }
         }); 
-        return System.call('saveNewdata', d);         
+        var url;
+        switch(this.what.id){
+            case 1:
+                return System.call('saveClient', d);  
+            case 2:
+                return System.call('saveRegisterMedium', d);  
+            case 3:
+                return System.call('saveAgentThreat', d);  
+        }
+
+               
     }
 }
 

@@ -3,10 +3,11 @@
  * request Component
  */
 
-function newdataAddController($scope, $element, $attrs, NewdataAdd, $rootScope, Dashboard){  
+function newdataAddController($scope, $element, $attrs, NewdataAdd, NewdataItemList, $rootScope, Dashboard, Validate, System){  
     
     // Check if the dialog is closed 
     $scope.$ctrl.NewdataAdd = NewdataAdd; 
+    $scope.$ctrl.NewdataItemList = NewdataItemList; 
 
     // Get catalogues
     Dashboard.getCatalogues().then(data => {
@@ -14,19 +15,37 @@ function newdataAddController($scope, $element, $attrs, NewdataAdd, $rootScope, 
     });  
 
     $scope.$ctrl.saveNewdata = () => {			
-        NewdataAdd.save().then(response => {  
+        NewdataAdd.save().then(response => { 
+            console.log(response); 
             $scope.$ctrl.NewdataAdd.close();
-            Dashboard.getCatalogues(['newdata']).then(r => {	 
-                $rootScope.$broadcast('getNewdatas', r.newdata);	 
-            });  				
+            Dashboard.getCatalogues(['client','registerMedium','agentThreat']).then(r => {	 
+                $rootScope.$broadcast('getNewdata', r);	 
+            });  		
+            console.log(NewdataAdd.what);
+            console.log(NewdataItemList.getTabs());
             var objeto = {
-                title: "Newdatae registrado, el folio es:",
+                title:  NewdataItemList.getTabs()[NewdataAdd.what.id - 1].name+" registrado, el folio es:",
                 id:  response.data.id
             } 
             $rootScope.$broadcast('openPopup', objeto);	
             NewdataAdd.reset();
         });			 
     } 
+
+    
+    $scope.$watch('$ctrl.NewdataAdd.data.curp', (obj) => {
+        if(obj != undefined && obj.length >= 18){
+            if(Validate.curp(obj)){  
+
+                System.call('getCURPMetadata', {'curp':obj}).then(response => {
+                    console.log(response.data);
+                });
+            }
+            else{
+                console.log("CURP Invalido");
+            }
+        }
+    });
 }
  
 angular.module('app').component('newdataAdd', {

@@ -2,7 +2,7 @@
 @import 'helpers';
 
 .case-item-wrapper{
-    max-height: calc(100% - 153px);
+    max-height: calc(100% - 140px);
     .item{
         border-left: 4px solid;
         padding: 15px 30px!important; 
@@ -19,6 +19,23 @@
             @include alert-style($val); 
         }
     }  
+}
+
+.case-item-list{
+    .x-select{
+        margin-top: 5px;
+        height: 47px;
+        i{
+            top: 0; }
+        .select-selected{ 
+            span{
+                display: inline-block;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-size: 10px;
+            }
+        }
+    }
 }
 case-content{
     width: 100%; 
@@ -62,10 +79,4 @@ case-content{
 }
 
 
-
-.case-add-container{    
-    .button{        
-        left: 570px;  
-        bottom: 40px;           
-    }
-}
+ 

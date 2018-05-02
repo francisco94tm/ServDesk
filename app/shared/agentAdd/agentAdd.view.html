@@ -8,6 +8,7 @@
 
     
     <div class="panel">
+        <button ng-disabled="$ctrl.AgentAdd.areFieldsMissing()" ng-click="$ctrl.saveAgent()">Registrar</button>     
         <div class="panel-wrapper">
             <div class="head-data">
                 <xinput label="Registrar nuevo agente" ng-model="$ctrl.AgentAdd.data.usr" placeholder="Nombre de usuario"></xinput>
@@ -24,8 +25,7 @@
                     <xinput label="Teléfono Móvil:" ng-model="$ctrl.AgentAdd.data.mobilephone"></xinput>   
                     <xinput label="Dirección:" ng-model="$ctrl.AgentAdd.data.address"></xinput>    
                 </div>                  
-            </form>
-            <button ng-disabled="$ctrl.AgentAdd.areFieldsMissing()" ng-click="$ctrl.saveAgent()">Registrar</button>     
+            </form> 
         </div>   
     </div>
 </div>

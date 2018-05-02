@@ -15,7 +15,7 @@
 				echo $system->getTableData($_REQUEST);	
 				break;   
 			case 'saveCase':
-			include_once('system.class.php');
+				include_once('system.class.php');
 				$system = new System(); 
 				echo $system->saveCase($_REQUEST);	
 				break; 
@@ -23,6 +23,16 @@
 				include_once('system.class.php');
 				$system = new System(); 
 				echo $system->saveClient($_REQUEST);	
+				break;
+			case 'saveRegisterMedium':
+				include_once('system.class.php');
+				$system = new System(); 
+				echo $system->saveRegisterMedium($_REQUEST);	
+				break;
+			case 'saveAgentThreat':
+				include_once('system.class.php');
+				$system = new System(); 
+				echo $system->saveAgentThreat($_REQUEST);	
 				break;
 			case 'saveAgent':
 				include_once('system.class.php');
@@ -49,6 +59,11 @@
 				$risk = new Risk(); 
 				echo $risk->calculate("2018-04-17", "2018-04-26");	
 				break;  
+			case 'getCURPMetadata':
+				include_once('curp.class.php');
+				$curp = new Curp(); 
+				echo $curp->getMetadata($_REQUEST['curp']);	
+				break; 
 		}
 	} 
 ?>

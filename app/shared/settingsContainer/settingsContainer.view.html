@@ -6,9 +6,8 @@
         <form>
             <xselect label="Tema:" 
                 options='$ctrl.options.theme' 
-                item-selected="2" 
-                ng-model="$ctrl.Session.theme"></xselect> 
-            <br><br>
+                ng-model="$ctrl.Session.session.theme"></xselect> 
+            <br><br> 
             <button ng-click="$ctrl.logout()">Cerrar sesión</button>
         </form>
     </div>    

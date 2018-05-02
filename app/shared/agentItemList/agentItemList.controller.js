@@ -12,8 +12,8 @@ function agentItemListController($scope, $element, $attrs, AgentItemList, Dashbo
         $scope.$ctrl.data = data;  
     }); 
     
-    $scope.$ctrl.loadData = function(){
-
+    $scope.$ctrl.loadData = function(){ 
+        
         $scope.$ctrl.data = [];
         $scope.$ctrl.isLoading = true;
         var promise = Dashboard.getCatalogues(['agent']);        
@@ -25,6 +25,8 @@ function agentItemListController($scope, $element, $attrs, AgentItemList, Dashbo
             });
         }, 1000);
     };
+
+    $scope.$ctrl.loadData();
 }
  
 angular.module('app').component('agentItemList', {

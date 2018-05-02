@@ -13,9 +13,9 @@ var NewdataItemList = function(){
 
     this.reset = function(){ 
         tabs = [
-            { name: "Clientes",             table: 'client',   tablevel: 2,  icon: 'face'	},
-            { name: "Medios de registro",   table: 'registerMedium',   tablevel: 2,  icon: 'content_paste'	},
-            { name: "Agentes de amenaza",   table: 'agentThreat',  tablevel: 1,  icon: 'warning' } 
+            { id:1, name: "cliente",             table: 'client',           tablevel: 2,  icon: 'face'	},
+            { id:2, name: "medio de registro",   table: 'registerMedium',   tablevel: 2,  icon: 'content_paste'	},
+            { id:3, name: "agente de amenaza",   table: 'agentThreat',      tablevel: 1,  icon: 'warning' } 
         ];
     };
     

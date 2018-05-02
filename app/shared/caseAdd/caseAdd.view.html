@@ -6,6 +6,7 @@
         <i class="close material-icons" ng-click="$ctrl.CaseAdd.shuffle()">add</i>
     </div> 
     <div class="panel">
+        <button ng-disabled="$ctrl.CaseAdd.areFieldsMissing()" ng-click="$ctrl.saveCase()">Registrar</button>     
         <div class="panel-wrapper">
             <div class="head-data">
                 <xinput label="Registrar nuevo caso" ng-model="$ctrl.CaseAdd.data.subject" placeholder="Título del caso"></xinput>
@@ -22,8 +23,7 @@
                     <xselect label="Agente de amenaza:" options='$ctrl.options.agentThreat' ng-model="$ctrl.CaseAdd.data.agentThreat"></xselect> 
                     <xselect label="Responsable:" options='$ctrl.options.agent' ng-model="$ctrl.CaseAdd.data.responsable"></xselect>  
                 </div>                  
-            </form>
-            <button ng-disabled="$ctrl.CaseAdd.areFieldsMissing()" ng-click="$ctrl.saveCase()">Registrar</button>     
+            </form> 
         </div>   
     </div>
 </div>

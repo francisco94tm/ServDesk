@@ -8,7 +8,8 @@ var Session = function(System) {
         id: undefined,
         status: undefined,
         user: undefined,
-        level:undefined
+        level:undefined,
+        theme: ''
     } 
     
     this.isSet = function(){

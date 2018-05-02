@@ -13,7 +13,7 @@ var CaseItemList = function(){
             { id: 4, name: 'Menos urgentes',key: 'id_caseType.id', 	icon: 'error_outline'},
         ],
         selected: 
-            { id: 2, name: 'Prioridad Ascendente', 	key: '-registerDate', 	icon: 'error_outline'}
+            { id: 2, name: 'Más urgente', 	key: ['-id_caseType.id', '-registerDate'], 	icon: 'error_outline'}
     };
     
     this.setData = function(d){

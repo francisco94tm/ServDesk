@@ -1,6 +1,9 @@
 
 @import 'variables';
 $buttonw: 150px;
+$edit--bg: rgba($theme--fg, 0.08);
+
+
 .revert-edit-button, .edit-button{ 
     position: fixed;
     cursor: pointer;
@@ -11,7 +14,7 @@ $buttonw: 150px;
     height: 40px;
     overflow: hidden;
     font-size: 14px; 
-    bottom: 20px; 
+    top: 20px; 
     z-index: 100;   
     // background-color: #888;
     transition: right 0.3s $animation-ease-out;
@@ -34,9 +37,7 @@ $buttonw: 150px;
     padding-left: 30px;   
     color: $theme--fg;   
     transition: opacity 0.3s $animation-ease-out;
-    display: flex;
-    &:hover{
-        border-left: none; }
+    display: flex; 
     &.mode-off{
         opacity: 0;
         z-index: 0;
@@ -49,21 +50,22 @@ $buttonw: 150px;
         line-height: 36px;  }
 }
 .edit-button{      
-    right: 20px;  
-    &.mode-on{       
-        border-right: none;
+    right: 20px; 
+    border-radius: 40px;
+    &.mode-on{        
         color: $main-color;
-        right: $buttonw + 0px;        
+        right: $buttonw + 0px;          
+        border: none;      
         .off{
             opacity: 0;
             margin-left: -150px;} 
-        .on{
+        .on{ 
             opacity: 1;} 
     }
     &.mode-off{ 
-        color: $theme--fg;           
+        color: $theme--fg;        
         &:hover{ 
-            color: $main-color;
+            color: $main-color; 
         }
         .off{
             opacity: 1;} 
@@ -92,6 +94,8 @@ $buttonw: 150px;
         position: relative;
     }
     label{
+        left: 15px!important;
+        font-size: 12px!important;
         color: rgba($theme--fg, 0.5);
         transition: 0.3s $animation-ease-out;
         margin-top: 30px;
@@ -125,7 +129,7 @@ $buttonw: 150px;
             transition: background-color 0.3s $animation-ease-out;
             padding: 10px 100px!important;
             border-radius: 3px;
-            background-color: rgba($theme--fg, 0.1)!important;    
+            background-color: $edit--bg!important;    
             display: flex;
             flex-direction: column;        
             &:before{
@@ -170,7 +174,7 @@ $buttonw: 150px;
         font-family: "Walfork";  
         font-style: italic;
         font-size: 18px; 
-        background-color: rgba($theme--fg, 0.1);
+        background-color: $edit--bg;
         // border: solid 1px rgba($theme--fg, 0.3);
         padding: 20px 40px;
         margin-left: -50px; 
@@ -185,7 +189,7 @@ $buttonw: 150px;
     input{
         border-bottom: none; 
         border-radius: 2px;  
-        background-color: rgba($theme--fg, 0.1);
+        background-color: $edit--bg;
         // border: solid 1px rgba($theme--fg, 0.3);
         transition: 0.3s $animation-ease-out;
         &:disabled{
@@ -226,5 +230,4 @@ $buttonw: 150px;
         color: $theme--fg;
     }
 }
-
-i.material-icons:before{display:none;}
+ 

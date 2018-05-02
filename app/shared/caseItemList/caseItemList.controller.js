@@ -2,7 +2,7 @@
  * Alert Container Component
  */
 
-function caseItemListController($scope, $element, $attrs, CaseItemList, $interval, Dashboard){  
+function caseItemListController($scope, $element, $attrs, CaseItemList, CaseContent, $interval, Dashboard){  
 
     // Obtain cases filter data
     $scope.$ctrl.filter = CaseItemList.getFilterData();
@@ -14,7 +14,8 @@ function caseItemListController($scope, $element, $attrs, CaseItemList, $interva
         $scope.$ctrl.data = data;  
     });  
 
-    $scope.$ctrl.loadData = function(){ 
+    $scope.$ctrl.loadData = function(){
+        // CaseContent.data = undefined; 
         $scope.$ctrl.data = []; 
         $scope.$ctrl.isLoading = true;        
         var promise = Dashboard.getCatalogues(['request']);   
@@ -26,6 +27,7 @@ function caseItemListController($scope, $element, $attrs, CaseItemList, $interva
             });
         }, 1000);
     };
+    $scope.$ctrl.loadData();
 }
  
 angular.module('app').component('caseItemList', {

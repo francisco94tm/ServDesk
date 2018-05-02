@@ -1,27 +1,54 @@
-<div class="agent-add-container add-container" ng-class="($ctrl.AgentAdd.isClosed())?'closed':'opened'"> 
-    <div class="back" ng-click="$ctrl.AgentAdd.shuffle()"></div>
-    <div class="button">
-        <i class="close material-icons" ng-click="$ctrl.AgentAdd.shuffle()">add</i>
+<div class="newdata-add-container add-container" ng-class="($ctrl.NewdataAdd.isClosed())?'closed':'opened'"> 
+    <div class="back" ng-click="$ctrl.NewdataAdd.shuffle()"></div>
+    <div class="button tooltiped" 
+        data-tooltip="{{$ctrl.NewdataAdd.isClosed()?'Registrar datos':'Cerrar'}}"
+        data-position="{{$ctrl.NewdataAdd.isClosed()?'top':'bottom'}}">
+        <i class="close material-icons" ng-click="$ctrl.NewdataAdd.shuffle()">add</i>
     </div> 
     <div class="panel">
-        <div class="panel-wrapper">
-            <div class="head-data">
-                <xinput label="Registrar nuevo agente" ng-model="$ctrl.AgentAdd.data.usr" placeholder="Nombre de usuario"></xinput>
-             </div> 
+        <button ng-disabled="$ctrl.NewdataAdd.areFieldsMissing()" ng-click="$ctrl.saveNewdata()">Registrar</button>     
+        
+        <div class="edit-panel">
+            <xselect label="Registrar nuevo:" options='$ctrl.NewdataItemList.getTabs()' ng-model="$ctrl.NewdataAdd.what"></xselect> 
+        </div> 
+        <div class="panel-wrapper"> 
             <form>     
-                <div class="col">
-                    <xselect label="Nivel de Acceso:" options='$ctrl.options.level' ng-model="$ctrl.AgentAdd.data.level"></xselect> 
-                    <xinput label="Contraseña:" type="password" ng-model="$ctrl.AgentAdd.data.pass"></xinput> 
-                    <xinput label="Nombre(s):" ng-model="$ctrl.AgentAdd.data.name"></xinput>   
-                    <xinput label="Primer apellido:" ng-model="$ctrl.AgentAdd.data.firstLastname"></xinput>   
-                    <xinput label="Segundo apellido:" ng-model="$ctrl.AgentAdd.data.secondLastname"></xinput>   
-                    <xinput label="Email:" ng-model="$ctrl.AgentAdd.data.email"></xinput>   
-                    <xinput label="Teléfono Fijo:" ng-model="$ctrl.AgentAdd.data.phone"></xinput>   
-                    <xinput label="Teléfono Móvil:" ng-model="$ctrl.AgentAdd.data.mobilephone"></xinput>   
-                    <xinput label="Dirección:" ng-model="$ctrl.AgentAdd.data.address"></xinput>    
-                </div>                  
-            </form>
-            <button ng-disabled="$ctrl.AgentAdd.areFieldsMissing()" ng-click="$ctrl.saveAgent()">Registrar</button>     
+                <div class="row" ng-if="$ctrl.NewdataAdd.what.id == 1">
+                    <div class="head-data">
+                        <xinput placeholder="CURP del cliente" label="CURP:" ng-model="$ctrl.NewdataAdd.data.curp"></xinput> 
+                    </div>
+                    <div class="col">
+                        <xselect label="Puesto:" options='$ctrl.options.job' ng-model="$ctrl.NewdataAdd.data.job"></xselect> 
+                        <xselect label="Departamento:" options='$ctrl.options.department' ng-model="$ctrl.NewdataAdd.data.department"></xselect> 
+                        <xinput placeholder="Ingresa un nombre" label="Nombre(s):" ng-model="$ctrl.NewdataAdd.data.name"></xinput>   
+                        <xinput placeholder="Ingresa un apellido" label="Segundo apellido:" ng-model="$ctrl.NewdataAdd.data.secondLastname"></xinput>   
+                        <xinput placeholder="Ingresa un telefono" label="Teléfono Fijo:" ng-model="$ctrl.NewdataAdd.data.phone"></xinput>    
+                    </div>
+                    <div class="col">
+                        <xselect label="Área:" options='$ctrl.options.area' ng-model="$ctrl.NewdataAdd.data.area"></xselect> 
+                        <xselect label="Unidad de negocio:" options='$ctrl.options.businessUnit' ng-model="$ctrl.NewdataAdd.data.businessUnit"></xselect> 
+                        <xinput placeholder="Ingresa un apellido" label="Primer apellido:" ng-model="$ctrl.NewdataAdd.data.firstLastname"></xinput>   
+                        <xinput placeholder="Ingresa un email" label="Email:" ng-model="$ctrl.NewdataAdd.data.email"></xinput>   
+                        <xinput placeholder="Ingresa un telefono" label="Teléfono Móvil:" ng-model="$ctrl.NewdataAdd.data.mobilephone"></xinput>   
+                    </div> 
+                </div> 
+                <div class="row" ng-if="$ctrl.NewdataAdd.what.id == 2"> 
+                    <div class="head-data">
+                        <xinput placeholder="Medio de registro" label="Nombre del medio:" ng-model="$ctrl.NewdataAdd.data.name"></xinput>  
+                    </div> 
+                </div>  
+                <div class="row" ng-if="$ctrl.NewdataAdd.what.id == 3"> 
+                    <div class="head-data">
+                        <xinput placeholder="Agente de amenaza" label="Nombre del agente:" ng-model="$ctrl.NewdataAdd.data.name"></xinput>  
+                    </div>
+                    <div class="head-data">
+                        <xtextarea placeholder="Ingresa una descripción" label="Descripción:" ng-model="$ctrl.NewdataAdd.data.description"></xtextarea>  
+                    </div>
+                    <div class="col">
+                        <xselect label="Tipo de amenaza:" options='$ctrl.options.threatType' ng-model="$ctrl.NewdataAdd.data.threatType"></xselect> 
+                    </div>                    
+                </div>                   
+            </form> 
         </div>   
     </div>
 </div>

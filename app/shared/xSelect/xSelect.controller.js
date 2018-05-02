@@ -3,9 +3,10 @@
  *  x Select Component
  */
 
-function xselectController($scope, $element, $attrs, $timeout){  
+function xselectController($scope, $element, $attrs){  
     // Flag to know whether the dialog is opened or closed
     $scope.$ctrl.isOpened = false;
+    $scope.$ctrl.defaultSelected = false;
 
     // $element.ready(function(){
     //     $scope.$apply(function(){  
@@ -22,23 +23,26 @@ function xselectController($scope, $element, $attrs, $timeout){
     //         },200);            
     //     });
     // }); 
+ 
+    $scope.$ctrl.getSelected =  function(){   
+        if($scope.$ctrl.itemSelected == undefined)
+            return;
 
-
-    $scope.$ctrl.getSelected =  function(){  
+        // if($scope.$ctrl.defaultSelected)
+        //     return; 
+        // $scope.$ctrl.defaultSelected = true;
         angular.forEach($scope.$ctrl.options, function(val, id){                                            
             if(val.id ==  $scope.$ctrl.itemSelected){  
                 $scope.$ctrl.ngModel = val;
                 return -1;
             }
-        });       
+        });  
     };
 
     // Shuffle open / close dialog function
     $scope.$ctrl.shuffle = function(obj){    
-
         if($scope.$ctrl.disabled)
-            return;
- 
+            return; 
         $scope.$ctrl.isOpened = !$scope.$ctrl.isOpened;        
         if(obj == undefined)
             return; 
