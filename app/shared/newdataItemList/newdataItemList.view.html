@@ -4,8 +4,8 @@
     <div class="subsection-switcher">        
         
         <h5>{{$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].name}}</h5>       
-        <div class="tabs" tab-selected="{{$ctrl.NewdataItemList.getCurrentTab()}}">
-            <div ng-click="$ctrl.setCurrentTab($index)"
+        <div class="tabs" tab-selected="{{$ctrl.NewdataItemList.getCurrentTab()}}"  ng-hide="$ctrl.DashNav.getLevel() != 1">
+            <div ng-click="$ctrl.setCurrentTab($index)" ng-show="n.tablevel >= $ctrl.DashNav.getLevel()"
                 class="tab {{($ctrl.NewdataItemList.getCurrentTab()==$index)?'selected':''}}" 
                 ng-repeat="n in $ctrl.NewdataItemList.getTabs()">
                 <i class="material-icons">{{n.icon}}</i><span>{{n.name}}</span> 

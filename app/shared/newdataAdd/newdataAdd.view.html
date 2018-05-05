@@ -9,7 +9,7 @@
         <button ng-disabled="$ctrl.NewdataAdd.areFieldsMissing()" ng-click="$ctrl.saveNewdata()">Registrar</button>     
         
         <div class="edit-panel">
-            <xselect label="Registrar nuevo:" options='$ctrl.NewdataItemList.getTabs()' ng-model="$ctrl.NewdataAdd.what"></xselect>             
+            <xselect disabled="($ctrl.DashNav.getLevel() == 1)?false:true" item-selected="{{($ctrl.DashNav.getLevel() == 1)?undefined:1}}" label="Registrar nuevo:" options='$ctrl.NewdataItemList.getTabs()' ng-model="$ctrl.NewdataAdd.what"></xselect>             
             <hr>
         </div> 
         <div class="panel-wrapper"> 

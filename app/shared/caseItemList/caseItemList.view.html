@@ -1,25 +1,33 @@
 <div class="case-item-list column">
+     
     <xsearch ng-model="$ctrl.search"></xsearch> 
-    
     <xselect 
         label="Ordenar por:" 
-        options='$ctrl.filter.options'  
-        ng-model="$ctrl.filter.selected">
-    </xselect>  
+        options='$ctrl.CaseItemList.filter.options'  
+        ng-model="$ctrl.CaseItemList.filter.selected">
+    </xselect>    
     <div class="case-item-wrapper item-wrapper"> 
         <div class="refresh-btn tooltiped 
-            {{($ctrl.data.length == 0)?'big':'small'}}"
+            {{($ctrl.CaseItemList.data.length == 0)?'big':'small'}}"
             ng-click="$ctrl.loadData()"
             data-tooltip="Recargar"
             data-position="bottom">
             <i class="material-icons {{($ctrl.isLoading)?'loading':''}}">
                 refresh</i>
-        </div> 
-        <case-item
-            ng-repeat="x in $ctrl.data | orderBy:$ctrl.filter.selected.key | filter:$ctrl.search"
-            data="x"
-            current="$ctrl.current">
-        </case-item>
-        
+        </div>  
+        <div class="status-group" ng-repeat="(k, group) in $ctrl.CaseItemList.data">
+            <div class="status-group-name" ng-if="group.items.length>0" ng-click="$ctrl.groupdisabled[k]=!$ctrl.groupdisabled[k]" ng-init="$ctrl.groupdisabled[k] = false">
+                <i class="material-icons {{$ctrl.groupdisabled[k]?'hidden':'visible'}}">expand_more</i>
+                <span>{{group.name}}</span>
+            </div>
+            <case-item class="{{($ctrl.groupdisabled[k])?'hidden':'visible'}}"
+                ng-repeat="x in group.items | 
+                    orderBy: $ctrl.CaseItemList.filter.selected.key |  
+                    filter: $ctrl.search"
+                data="x"
+                current="$ctrl.current"> 
+            </case-item> 
+             <!-- filter: (!$ctrl.CaseItemList.showSolvedCases || '') && $ctrl.CaseItemList.filteredCases |  -->
+        </div>
     </div>
 </div>

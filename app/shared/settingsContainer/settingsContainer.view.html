@@ -4,10 +4,19 @@
     <div class="column">
         <h1 class="bold">Configuración</h1>
         <form>
+            <h4>Apariencia</h3>
             <xselect label="Tema:" 
                 options='$ctrl.options.theme' 
-                ng-model="$ctrl.Session.session.theme"></xselect> 
-            <br><br> 
+                ng-model="$ctrl.Session.session.theme"></xselect>   
+            <br><br>
+            <!-- <h4>Mis casos</h3>
+            <div class="checkbox-group">
+                <input id="no-solved" type="checkbox" ng-model="$ctrl.CaseItemList.showSolvedCases"/> 
+                <label for="no-solved">
+                    Mostrar casos solucionados
+                </label>
+            </div> -->
+            <!-- <br><br> -->
             <button ng-click="$ctrl.logout()">Cerrar sesión</button>
         </form>
     </div>    

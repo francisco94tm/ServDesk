@@ -86,7 +86,7 @@ $transition-time: 0.45s;
             transition: $transition-time $animation-ease-out;
         } 
         i.close{                      
-            transform: rotate(-135deg);
+            transform: rotate(135deg);
         }
     }
 }

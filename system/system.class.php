@@ -31,6 +31,12 @@ class System {
     private function fixIndexes($table, &$data){ 
         switch($table){
         case 'request':
+            $new_data = [
+                "0" => [ "name" => "Casos abiertos", "items" => [] ],
+                "1" => [ "name" => "Casos en progreso", "items" => [] ],
+                "2" => [ "name" => "Casos solucionados", "items" => [] ],
+                "3" => [ "name" => "Casos cancelados", "items" => [] ]
+            ];
             foreach($data as &$row){
                 $this->swap($row['id_agentThreat'], 'agentThreat', 'name');
                 $this->swap($row['id_caseType'], 'caseType', '*');
@@ -41,7 +47,24 @@ class System {
                 $this->swap($row['author'], 'agent', '*');
                 $this->swap($row['responsable'], 'agent', '*');
                 $this->swap($row['infrastructure'], 'assetRepository', '*');
+                
+                // Check status of request and categorize
+                switch($row['id_status']['id']){
+                    case 1:
+                        $new_data[0]['items'][] = $row;
+                        break;
+                    case 2:
+                        $new_data[1]['items'][] = $row;
+                        break;
+                    case 3:
+                        $new_data[2]['items'][] = $row;
+                        break;
+                    case 4:
+                        $new_data[3]['items'][] = $row;
+                        break;
+                }
             }
+            $data = $new_data;
             break;
         case 'agent':
             foreach($data as &$row){

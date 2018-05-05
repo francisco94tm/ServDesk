@@ -10,7 +10,7 @@ function caseContentController($scope, $element, $attrs, CaseContent, CaseItemLi
     $scope.$ctrl.options = {};
 
     Dashboard.getCatalogues().then((data) => { 
-        $scope.$ctrl.options = data;
+        $scope.$ctrl.options = data; 
     });
     
     $scope.$on('displayCase', (event, data) => {  

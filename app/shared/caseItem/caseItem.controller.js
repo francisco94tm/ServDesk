@@ -3,7 +3,7 @@
  * request Component
  */
 
-function caseItemController($scope, $element, $attrs, CaseItem, CaseContent, $rootScope){ 
+function caseItemController($scope, $element, $attrs, $rootScope, moment, CaseItem, CaseContent){ 
     
     $scope.$ctrl.CaseItem = CaseItem;
     
@@ -17,7 +17,8 @@ function caseItemController($scope, $element, $attrs, CaseItem, CaseContent, $ro
         $scope.$ctrl.current = d; 
         $rootScope.$broadcast('displayCase', d); 
     };    
-     
+      
+
     $element.ready(function(){
         $scope.$apply(function(){  
             var ct_id = $scope.$ctrl.data.id_caseType.id;

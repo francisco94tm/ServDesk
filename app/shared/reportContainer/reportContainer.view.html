@@ -3,28 +3,34 @@
 <div class="item-body column report-panel"> 
     <h1 class="bold">Reporte</h1>
 
-    <br><br>
-    <div id="report-graph-wrapper"> 
-        <chart></chart> 
-    </div>
+    <!-- <input type="date" ng-model="date.from">
+    <input type="date" ng-model="date.to">
 
+    {{date.from}}
+    {{date.to}}  -->
+    <button ng-click="toggle()"></button>
 
+    <canvas id="radar" class="chart chart-radar"
+        chart-data="data" chart-options="options" chart-series="series" chart-labels="labels">
+    </canvas>
+
+    
     <div class="infrastructure-wrapper">
-        <div class="infrastructure" ng-repeat = "(key, data) in $ctrl.data">
-            <caption><b>Infraestructura:</b> {{key}}</caption>
+        <div class="infrastructure" ng-repeat = "(key, data) in $ctrl.d">
+            <caption><b>Infraestructura:</b> {{data.name}}</caption>
             <div class="table-wrapper">
-                <table class="theats" ng-repeat = "(kx, dx) in  data.threatTypes">   
+                <table class="theats" ng-repeat = "dx in  data.threatType">   
                     <tr> 
                         <th>Amenaza:</th>
-                        <td>{{kx}}</td>
+                        <td>{{dx.name}}</td>
                     </tr>
                     <tr> 
                         <th>Ocurrencia:</th>
                         <td>{{dx.ocurrences}}</td>
-                    </tr>
+                    <!-- </tr> -->
                     <tr> 
                         <th>Probabilidad:</th>
-                        <td>{{dx.probability}}</td>
+                        <td>{{dx.probability*10}}%</td>
                     </tr>
                     <tr> 
                         <th>Impacto:</th>
@@ -40,11 +46,11 @@
                                         <th>Ocurr.</th> 
                                         <th>Prob.</th>  
                                     </tr>
-                                    <tr ng-repeat="(k, d) in dx.agentThreats"> 
-                                        <td>{{k}}</td>
+                                    <tr ng-repeat="d in dx.agentThreat"> 
+                                        <td>{{d.name}}</td>
                                         <td>{{d.recomendation}}</td>
                                         <td>{{d.ocurrences}}</td>
-                                        <td>{{d.probability}}</td>
+                                        <td>{{d.probability*100}}%</td>
                                     </tr> 
                                 </tbody> 
                             </table>

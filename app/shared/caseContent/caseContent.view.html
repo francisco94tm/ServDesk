@@ -34,10 +34,12 @@
         </xinput>
             
         <!-- Author  -->
-        <div class="author"> 
-            {{$ctrl.CaseContent.data.author.name}} 
-            {{$ctrl.CaseContent.data.author.firstLastname}} 
-            {{$ctrl.CaseContent.data.author.secondLastname}}
+        <div class="author">  
+            <span>
+                {{$ctrl.CaseContent.data.author.name}} 
+                {{$ctrl.CaseContent.data.author.firstLastname}} 
+                {{$ctrl.CaseContent.data.author.secondLastname}}
+            </span>
         </div> 
 
         <!-- Description  -->
@@ -134,7 +136,8 @@
     </div>  
 
      <!-- Show when data is non-selected -->
-    <div class="closed" ng-show="$ctrl.CaseContent.data == undefined"> 
-        <h1>Tienes casos por resolver</h1> 
+    <div class="closed" ng-show="$ctrl.CaseContent.data == undefined">  
+        <h1 ng-if="$ctrl.CaseItemList.data[0].items.length>0">Tienes casos por resolver</h1>
+        <h1 ng-if="$ctrl.CaseItemList.data[0].items.length==0 || $ctrl.CaseItemList.data[0].items.length == undefined">Parece que no hay casos por resolver :-)</h1> 
     </div>
 </div>

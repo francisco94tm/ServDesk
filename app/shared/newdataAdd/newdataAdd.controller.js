@@ -3,9 +3,10 @@
  * request Component
  */
 
-function newdataAddController($scope, $element, $attrs, NewdataAdd, NewdataItemList, $rootScope, Dashboard, Validate, System){  
+function newdataAddController($scope, $element, $attrs, DashNav, NewdataAdd, NewdataItemList, $rootScope, Dashboard, Validate, System){  
     
     // Check if the dialog is closed 
+    $scope.$ctrl.DashNav = DashNav; 
     $scope.$ctrl.NewdataAdd = NewdataAdd; 
     $scope.$ctrl.NewdataItemList = NewdataItemList; 
 

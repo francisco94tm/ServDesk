@@ -2,11 +2,12 @@
  * Alert Container Component
  */
 
-function newdataItemListController($scope, $rootScope, $element, $attrs, $interval, NewdataItemList, NewdataItem, NewdataContent, Dashboard){  
+function newdataItemListController($scope, $rootScope, $element, $attrs, $interval, DashNav, NewdataItemList, NewdataItem, NewdataContent, Dashboard){  
  
     $scope.$ctrl.data = [];
 
     $scope.$ctrl.NewdataItemList = NewdataItemList;   
+    $scope.$ctrl.DashNav = DashNav;   
     NewdataItemList.reset();  
     $scope.$ctrl.isLoading = false;
       

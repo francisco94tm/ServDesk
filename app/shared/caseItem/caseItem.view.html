@@ -3,11 +3,12 @@
     <div class="left">
         <div class="title">{{$ctrl.data.subject}}</div>
         <div class="data">
-            De: {{$ctrl.data.author.name}} 
-            {{$ctrl.data.author.firstLastname}}
+            {{$ctrl.data.author.name}} 
+            {{$ctrl.data.author.firstLastname}} 
         </div>
     </div>
     <div class="right">
-        <div class="datetime">{{$ctrl.data.registerDate}}</div>  
+        <div class="datetime" am-time-ago="$ctrl.data.registerDate | amParse:'YYYY-MM-DD HH:mm:ss'"></div>  
+        <!-- <div class="status status-{{$ctrl.data.id_status.id}}">{{$ctrl.data.id_status.value}}</div>   -->
     </div>    
 </div>

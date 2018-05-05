@@ -342,3 +342,18 @@ button {
     }
 }  
    
+
+.checkbox-group{
+    display: flex;
+    flex-direction: row;
+    padding-top: 20px;
+    input{
+        width: auto;
+        min-width: auto;
+        margin-left: 17px;
+    }
+    label{
+        padding-left: 25px;
+        color: $theme--fg;
+    }
+}

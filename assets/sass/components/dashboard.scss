@@ -58,7 +58,7 @@
 
     .refresh-btn{
         cursor: pointer;
-        width: 320px;
+        width: 320px; 
         display: flex;
         justify-content: center;
         align-content: center;
@@ -90,16 +90,8 @@
         &:hover i{
             color: $main-color;
         }
-    }
+    } 
     
-    // &::-webkit-scrollbar-thumb{
-    //     background: transparent;
-    //     transition: all 0.3s;
-    // }
-    // &:hover::-webkit-scrollbar-thumb{ 
-    //     background: #ccc; 
-    // }
-
     .item{
         display: flex; 
         padding: 20px 30px;
@@ -131,19 +123,33 @@
                 opacity: 0.6;
                 font-size: 13px; 
             }
-        }         
-        .datetime{
-            z-index: 1;
-            color: $theme--fg;
-            max-width: 58px;
+        }
+        .right{             
             text-align: right; 
-            right: 0;
-            top: 0;
-            overflow: hidden;
-            white-space: nowrap;
-            font-size: 11.5px;  
-            opacity: 0.7;
-        } 
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            .status{ 
+                margin-right: -5px;
+                border-radius: 2px;
+                color: rgba($theme--fg, 0.7);
+                font-size: 9px;
+                letter-spacing: 1px;
+                padding: 1px 5px;
+                z-index: 1;
+                border: solid 1px  rgba($theme--fg, 0.3);
+                // &.status-1{
+                    
+                // }
+
+            }        
+            .datetime{
+                z-index: 1;
+                color: $theme--fg;  
+                font-size: 11.5px;  
+                opacity: 0.7;
+            } 
+        }
 
         // Animation when selected
         &:before{
@@ -159,11 +165,11 @@
         }
 
         &.selected{       
-            margin-left: -4px; 
-            background: rgba($theme--fg, 0.1);
+            margin-left: -4px;  
+            background: rgba($theme--fg, 0.16);
             &:before{
                 width: 100%;
-            }  
+            }   
             .title{ 
                 max-width: 180px;
             }
@@ -216,6 +222,17 @@
             white-space: pre-wrap;  
             overflow: hidden; 
             font-style: italic;
+        }
+        .circle{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            color: rgb(134, 134, 134);
+            background-color: rgba(134, 134, 134, 0.3);
+            display: inline-block;
+            margin-right: 10px;
         }
         .user-name, .author{
             font-size: 25px;

@@ -3,11 +3,34 @@
 
 .case-item-wrapper{
     max-height: calc(100% - 140px);
+    min-height: calc(100% - 140px);
+    case-item{
+        .item{
+            transition: 0.3s $animation-ease-out;
+            overflow: hidden;
+        }
+        &.hidden .item{
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            max-height: 0;
+            opacity: 0;
+        }
+        &.visible .item{
+            max-height: 500px;
+            opacity: 1;
+        }
+    }
     .item{
         border-left: 4px solid;
         padding: 15px 30px!important; 
+        &.selected{
+            background-color: $theme--bg!important;
+        }
         .left{
             flex-direction: column; 
+            .title{
+                color: rgba($theme--fg, 0.7);
+            }
             .data{  
                 font-size: 11px!important;
             }
@@ -19,6 +42,33 @@
             @include alert-style($val); 
         }
     }  
+}
+
+.status-group-name{
+    background-color: $theme--bg;
+    top: 0px;
+    z-index: 10; 
+    position: -webkit-sticky;
+    position: sticky;
+    font-weight: bold;
+    padding: 10px 0px 10px 20px;  
+    color: rgba($theme--fg, 0.8);
+    font-size: 15px;  
+    letter-spacing: 0.3px;
+    // text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    cursor: pointer;  
+    &:hover{
+        color: $main-color; 
+    }
+    i{
+        margin-right: 15px;
+        transition: 0.3s $animation-ease-out;
+        &.hidden{
+            transform: rotate(-90deg);
+        }
+    } 
 }
 
 .case-item-list{
@@ -65,7 +115,7 @@ case-content{
     }
 
     .item-list{
-        .item{
+        .item{ 
             .priority-1{ 
                 color: darken($low-priority, 15)!important;}
             .priority-2{ 

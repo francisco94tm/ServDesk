@@ -57,7 +57,7 @@
 			case 'getRiskCalculation':
 				include_once('risk.class.php');
 				$risk = new Risk(); 
-				echo $risk->calculate("2018-04-17", "2018-04-26");	
+				echo $risk->calculate("2018-04-17", date('Y-m-d', time()));	
 				break;  
 			case 'getCURPMetadata':
 				include_once('curp.class.php');

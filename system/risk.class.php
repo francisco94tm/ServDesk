@@ -14,41 +14,49 @@
             include_once("connection/connection.php");
             $db = new Connection(); 
             
-            $query = "SELECT r.infrastructure,tt.name as threatType,at.name as agentThreat, COUNT(at.id) as count
-                FROM Request r
-                INNER JOIN AgentThreat at ON r.id_agentThreat=at.id
-                INNER JOIN ThreatType tt ON at.id_threatType=tt.id and at.id=r.id_agentThreat
-                WHERE r.id_status=3 
+            $query = "SELECT r.infrastructure,
+                ar.name as assetName,
+                tt.name as threatType,
+                at.name as agentThreat, 
+                COUNT(at.id) as count
+                FROM Request r, AgentThreat at, ThreatType tt, AssetRepository ar
+                WHERE r.id_status = 3 
+                AND r.id_agentThreat = at.id
+                AND at.id_threatType = tt.id
+                AND r.infrastructure = ar.id 
                 AND r.registerDate BETWEEN $fechaIni AND NOW()
-                GROUP BY r.infrastructure,tt.name,at.name;";
+                GROUP BY r.infrastructure, tt.name, at.name;";
             $rows = $db->select($query);
 
+            // Loop through rows
             foreach ($rows as $r) {
-                if(!isset($assets[$r["infrastructure"]])){
-                    $assets[$r["infrastructure"]]["threatTypes"]=[];
-                    $assets[$r["infrastructure"]]["ocurrences"] = 0;
+                $inf = $r["infrastructure"];
+                if(!isset($assets[$inf])){
+                    $assets[$inf]["threatTypes"]=[];
+                    $assets[$inf]["ocurrences"] = 0;
                 }  
-                if(!isset($assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]])){
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"] = [];
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["ocurrences"] = 0;
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["probability"] = 0.0;
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["impact"] = 0;
+                if(!isset($assets[$inf]["threatTypes"][$r["threatType"]])){
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"] = [];
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["ocurrences"] = 0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["probability"] = 0.0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["impact"] = 0;
                 } 
-                if(!isset($assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]])){
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["ocurrences"] = 0;
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["probability"] = 0.0;
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["e"] = 0;
-                    if($assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]] == "Organizacional"){
-                        $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["i"] = 0;
+                if(!isset($assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]])){
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["ocurrences"] = 0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["probability"] = 0.0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["e"] = 0;
+                    if($assets[$inf]["threatTypes"][$r["threatType"]] == "Organizacional"){
+                        $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["i"] = 0;
                     }
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["c"] = 0;
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["v"] = 0;
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["R"] = 0;
-                    $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["action"] = 0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["c"] = 0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["v"] = 0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["R"] = 0;
+                    $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["action"] = 0;
                 } 
-                $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["ocurrences"] += $r["count"];
-                $assets[$r["infrastructure"]]["threatTypes"][$r["threatType"]]["ocurrences"] += $r["count"];
-                $assets[$r["infrastructure"]]["ocurrences"] += $r["count"];
+                $assets[$inf]["threatTypes"][$r["threatType"]]["agentThreats"][$r["agentThreat"]]["ocurrences"] += $r["count"];
+                $assets[$inf]["threatTypes"][$r["threatType"]]["ocurrences"] += $r["count"];
+                $assets[$inf]["ocurrences"] += $r["count"];
+                $assets[$inf]["name"] = $r["assetName"];
             }
 
             $lowestRisk = 10; 
@@ -64,7 +72,7 @@
         
                     foreach ($threatTypeData["agentThreats"] as $agentThreat => $agentThreatData) { 
         
-                        $probability = $agentThreatData["ocurrences"]/$threatTypeData["ocurrences"];
+                        $probability = $agentThreatData["ocurrences"] / $threatTypeData["ocurrences"];
                         $assets[$asset]["threatTypes"][$threatType]["agentThreats"][$agentThreat]["probability"] = $probability;         
                         $query = "SELECT weighing FROM ThreatExists WHERE $probability BETWEEN lowerValue AND upperValue;";
                         $e = $db->select($query)[0]["weighing"]; /* ADDED */         
