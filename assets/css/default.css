@@ -937,9 +937,15 @@ agent-content {
   width: calc(100% + 200px); }
   .chart-item-wrapper .line-chart-item {
     width: calc(100% - 250px); }
+    @media screen and (max-width: 600px) {
+      .chart-item-wrapper .line-chart-item {
+        width: 100%; } }
   .chart-item-wrapper .radar-chart-item {
     width: calc(100% - 100px);
     margin: 0 0 0 -100px; }
+    @media screen and (max-width: 600px) {
+      .chart-item-wrapper .radar-chart-item {
+        width: 100%; } }
 
 table {
   border: solid 1px #ccc;

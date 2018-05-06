@@ -26,10 +26,16 @@
     width: calc(100% + 200px);
     .line-chart-item{
         width: calc(100% - 250px);
+        @media screen and (max-width: 600px) { 
+            width: 100%;
+        }
     }
     .radar-chart-item{ 
         width: calc(100% - 100px);  
         margin: 0 0 0 -100px;
+        @media screen and (max-width: 600px) { 
+            width: 100%;
+        }
     }
 }
 
