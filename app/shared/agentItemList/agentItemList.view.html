@@ -9,11 +9,13 @@
             <i class="material-icons {{($ctrl.isLoading)?'loading':''}}">
                 refresh</i>
         </div> 
-        <agent-item
-            ng-repeat="x in $ctrl.data | filter:$ctrl.search"
-            data="x"
-            current="$ctrl.current">
-        </agent-item>
+        <div class="status-group">
+            <agent-item
+                ng-repeat="x in $ctrl.data | filter:$ctrl.search"
+                data="x"
+                current="$ctrl.current">
+            </agent-item>
+        </div>
         
     </div>
 </div>

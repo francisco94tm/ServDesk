@@ -1,18 +1,35 @@
 <!-- 03. Reports Section ****************************************** -->
-<br><br>
 <div class="item-body column report-panel"> 
     <h1 class="bold">Reporte</h1>
+ 
 
-    <!-- <input type="date" ng-model="date.from">
-    <input type="date" ng-model="date.to">
-
-    {{date.from}}
-    {{date.to}}  -->
-    <button ng-click="toggle()"></button>
-
-    <canvas id="radar" class="chart chart-radar"
-        chart-data="data" chart-options="options" chart-series="series" chart-labels="labels">
-    </canvas>
+    
+    <div class="chart-wrapper">
+        <h3>Por periodo de tiempo</h3> 
+        <div class="chart-item-wrapper">
+            <div class="chart-item line-chart-item">
+                <canvas id="line" class="chart chart-line" chart-data="line.data"
+                    chart-labels="line.labels" chart-series="line.series" chart-options="line.options"
+                    chart-dataset-override="datasetOverride" chart-click="onClick">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="chart-wrapper">
+        <h3>Por infraestructura</h3>
+        <br>
+        <xselect label="Infraestructura:" ng-model="asset" options="$ctrl.d"></xselect> 
+        <div class="chart-item-wrapper">
+            <div class="chart-item radar-chart-item">
+                <canvas id="radar" class="chart chart-radar"
+                    chart-data="radar.data" chart-options="radar.options" 
+                    chart-series="radar.series" chart-labels="radar.labels">
+                </canvas>
+            </div> 
+        </div> 
+    </div>
+        
+        
 
     
     <div class="infrastructure-wrapper">

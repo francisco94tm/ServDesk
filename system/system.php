@@ -56,8 +56,12 @@
 				break; 
 			case 'getRiskCalculation':
 				include_once('risk.class.php');
-				$risk = new Risk(); 
-				echo $risk->calculate("2018-04-17", date('Y-m-d', time()));	
+				$risk = new Risk();   
+				$_REQUEST['from'] = ($_REQUEST['from'] == "today") ? date('Y-m-01 H:i:s', time()) : date('Y-m-01 H:i:s', strtotime($_REQUEST['from']));
+				$_REQUEST['to']   = ($_REQUEST['to']   == "today") ? date('Y-m-01 H:i:s', time()) : date('Y-m-01 H:i:s', strtotime($_REQUEST['to']));
+
+				// echo json_encode($_REQUEST);
+				echo $risk->calculate($_REQUEST['from'], $_REQUEST['to']);	
 				break;  
 			case 'getCURPMetadata':
 				include_once('curp.class.php');

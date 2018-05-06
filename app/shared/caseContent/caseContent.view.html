@@ -1,10 +1,15 @@
 <div class="case-content column section-content {{($ctrl.CaseContent.data != undefined)?'is-opened':'is-closed'}}">
-   
+    
+    
+
     <!-- Show when data is selected --> 
     <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.CaseContent.data != undefined">  
 
         <!-- Edit button --> 
-        <div class="edit-wrapper">
+        <div class="edit-wrapper {{($ctrl.CaseContent.data != undefined)?'is-opened':'is-closed'">
+            <div class="back-btn" ng-click="$ctrl.CaseContent.data = undefined">        
+                <i class="material-icons">arrow_back</i> 
+            </div>
             <div class="edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
                 <div class="off">
                     <i class="material-icons">edit</i>
@@ -15,9 +20,7 @@
                     <span>Guardar</span>
                 </div>            
             </div>
-        </div>
-        
-        
+        </div> 
         <div class="revert-edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  
             ng-click="$ctrl.revertEdit()">
             <i class="material-icons">close</i>

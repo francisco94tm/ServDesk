@@ -3,21 +3,29 @@
     <!-- Show when data is selected -->
     <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.NewdataContent.data!=undefined">          
         
-        <!-- Edit button --> 
-        <div class="edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
-            <div class="off">
-                <i class="material-icons">edit</i>
-                <span>Editar</span>
+        <!-- Edit button -->  
+        <div class="edit-wrapper {{($ctrl.NewdataContent.data != undefined)?'is-opened':'is-closed'">
+            <div class="back-btn" ng-click="$ctrl.NewdataContent.data = undefined">        
+                <i class="material-icons">arrow_back</i> 
             </div>
-            <div class="on">
-                <i class="material-icons">save</i>
-                <span>Guardar</span>
-            </div>            
+            <div class="edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
+                <div class="off">
+                    <i class="material-icons">edit</i>
+                    <span>Editar</span>
+                </div>
+                <div class="on">
+                    <i class="material-icons">save</i>
+                    <span>Guardar</span>
+                </div>            
+            </div>
         </div>
+
         <div class="revert-edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  ng-click="$ctrl.revertEdit()">
             <i class="material-icons">close</i>
             <span>Cancelar</span>
         </div>     
+
+        
      
         <!-- Pre-data -->
         <div class="pre-data">

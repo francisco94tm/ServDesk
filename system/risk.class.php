@@ -1,13 +1,12 @@
 <?php 
-    class Risk{
-        protected $assets = []; 
+    class Risk{ 
 
         /************************************************************************
          * Calculate Risk from a period of time
          * @return  JSON with recomendations and analisys data
          */
         public function calculate($fechaIni, $fechaFin){
-
+            $assets = []; 
             $fechaIni = $fechaIni ?: "2018-04-17";
             $fechaFin = $fechaFin ?: "2018-04-26";
 
@@ -24,7 +23,7 @@
                 AND r.id_agentThreat = at.id
                 AND at.id_threatType = tt.id
                 AND r.infrastructure = ar.id 
-                AND r.registerDate BETWEEN $fechaIni AND NOW()
+                AND r.registerDate BETWEEN '$fechaIni' AND '$fechaFin'
                 GROUP BY r.infrastructure, tt.name, at.name;";
             $rows = $db->select($query);
 

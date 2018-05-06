@@ -3,17 +3,53 @@
 $buttonw: 150px;
 $edit--bg: rgba($theme--fg, 0.08);
 
+
+.back-btn{
+    color: $theme--fg;
+    padding: 42px 10px 0 0;
+    position: absolute;
+    top: 0;
+    left: 80px;
+    z-index: 1011; 
+    transition: 0.3s $animation-ease-out;
+    display: none;
+    @media screen and (max-width: 600px) { 
+        display: flex;
+    }
+    align-items: center;
+    i{
+        font-size: 20px;
+    }
+    span{
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 15px;
+        margin-left: 14px;
+    }
+}
+ 
 .edit-wrapper{
     position: fixed;
-    top: 0;
+    top: 0; 
     right: 0;
     // background-color: $theme--bg;
-    
-    background: linear-gradient(to bottom, $theme--bg, rgba($theme--bg, 0.8), transparent);
+    &.is-closed{
+        left: 100%;
+    }
+    &.is-opened{
+        left: 0;
+    }
+    background: $theme--bg;
     width: calc(100% - 600px);
-    height: 160px;
-    z-index: 1500;
-    
+    height: 55px;
+    @media screen and (max-width: 600px) { 
+        height: 80px; 
+    }
+    z-index: 1000;
+    transition: 0.3s $animation-ease-out;
+    @media screen and (max-width: 1050px) { 
+        width: calc(100% - 350px);
+    }
     @media screen and (max-width: 600px) { 
         width: 100%;
     }
@@ -27,12 +63,20 @@ $edit--bg: rgba($theme--fg, 0.08);
     text-transform: uppercase;      
     font-size: 14px; 
     float: right; 
-    padding: 30px 20px;
-    // background-color: #888;
+    padding: 18px 20px 20px 20px; 
     transition: right 0.3s $animation-ease-out;
+    @media screen and (max-width: 600px) { 
+        padding: 38px 20px 20px 20px; 
+    }
     i{
+        @media screen and (max-width:600px) { 
+            font-size: 20px;
+        }
         font-size: 15px; }
     span{ 
+        @media screen and (max-width:600px) {
+            display: none;
+        }
         margin-left: 16px; }
     .off, .on{  
         display: flex;
@@ -49,9 +93,12 @@ $edit--bg: rgba($theme--fg, 0.08);
     color: $theme--fg;   
     transition: opacity 0.3s $animation-ease-out;
     display: flex; 
-    top: 0;
-    right: 0;
-    z-index: 1500;
+    top: 0px;
+    @media screen and (max-width:600px) { 
+        top: -3px;
+    }
+    right: 20px;
+    z-index: 1000;
     position: fixed;
     &.mode-off{
         opacity: 0;
@@ -73,9 +120,12 @@ $edit--bg: rgba($theme--fg, 0.08);
         height: 100%;
     }
     &.mode-on{        
-        color: $main-color;
-        right: 100px;          
+        color:  $theme--fg; 
+        right: 125px;          
         border: none;      
+        @media screen and (max-width:600px) { 
+            right: 70px;
+        }
         .off{ 
             display: none;} 
         .on{ 
@@ -84,7 +134,7 @@ $edit--bg: rgba($theme--fg, 0.08);
     &.mode-off{ 
         color: $theme--fg;        
         &:hover{ 
-            color: $main-color; 
+            color:  $theme--fg; 
         }
         .off{
             display: block; } 

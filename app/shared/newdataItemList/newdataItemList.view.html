@@ -2,7 +2,7 @@
     <!-- <xsearch ng-model="$ctrl.search"></xsearch>   -->
      
     <div class="subsection-switcher">        
-        
+        <xsearch ng-model="$ctrl.search"></xsearch>  
         <h5>{{$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].name}}</h5>       
         <div class="tabs" tab-selected="{{$ctrl.NewdataItemList.getCurrentTab()}}"  ng-hide="$ctrl.DashNav.getLevel() != 1">
             <div ng-click="$ctrl.setCurrentTab($index)" ng-show="n.tablevel >= $ctrl.DashNav.getLevel()"
@@ -11,7 +11,7 @@
                 <i class="material-icons">{{n.icon}}</i><span>{{n.name}}</span> 
             </div>   
         </div>
-        <xsearch ng-model="$ctrl.search"></xsearch>  
+       
     </div>  
    
     <div class="newdata-item-wrapper item-wrapper">  
@@ -23,10 +23,12 @@
             <i class="material-icons {{($ctrl.isLoading)?'loading':''}}">
                 refresh</i>
         </div> 
-        <newdata-item
-            ng-repeat="x in $ctrl.data[$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].table] | filter:$ctrl.search"
-            data="x"
-            current="$ctrl.current">
-        </newdata-item>
+        <div class="status-group">
+            <newdata-item
+                ng-repeat="x in $ctrl.data[$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].table] | filter:$ctrl.search"
+                data="x"
+                current="$ctrl.current">
+            </newdata-item>
+        </div> 
     </div>
 </div>

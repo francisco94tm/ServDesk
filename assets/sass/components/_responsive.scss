@@ -13,7 +13,7 @@
         position: fixed;
         top: 20px;
         left: 5px;
-        z-index: 9999; 
+        z-index: 9998; 
         color: rgba($theme--fg, 0.7); 
         display: block; 
         padding: 20px;
@@ -57,11 +57,23 @@
     }
 
     .add-container .panel{
-        max-width:calc(100% - 20px);
-        right: 10px;
+        max-width: 100%;
+        right: 0px; 
         padding: 20px 0!important;
         form{
             overflow-x: hidden;
+        }
+        .head-data{
+            padding: 10px 0px 0 10px;
+        }
+        .x-select{
+            margin: 10px 19px 0px 20px !important;
+        }
+        .x-select i{
+            display: none;
+        }
+        .select-selected{
+            padding: 12px 45px 12px 15px
         }
     }
 
@@ -79,6 +91,35 @@
         }
         &.is-opened{
             left: 0!important; 
+        }
+
+        .input-group, .textarea-group{
+            margin: 0!important;
+            max-width: 100%;
+            padding: 0;
+        }
+        .x-select{
+            margin: 0 0 0 -20px !important;
+            width: calc(100vw - 10px);
+            .select-selected{
+                padding: 10px 80px !important;
+            }
+        }
+        textarea{
+            margin-left: -20px;
+            padding: 20px 0 20px 20px;
+            margin-bottom: 20px;
+            max-width: calc(100vw - 10px);
+        }
+        label.extra-big, .textarea-group label{
+            padding-left: 0; 
+        }
+        input.extra-big{
+            margin-left: -20px; 
+            width: calc(100vw - 10px)!important;
+            max-width: none;
+            padding: 20px 0 20px 20px;
+            // font-size: 50px;
         }
     }
 }

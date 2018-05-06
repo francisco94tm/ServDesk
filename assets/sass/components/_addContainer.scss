@@ -73,6 +73,7 @@ $transition-time: 0.45s;
             @media screen and (max-width: 600px) { 
                 left: auto!important;
                 right: 3.33%;
+                bottom: calc(100% - 160px);
             }
             // left: 520px; 
         }
@@ -88,6 +89,10 @@ $transition-time: 0.45s;
         .panel{ 
             top: 20px;
             transition: $transition-time $animation-ease-out;
+            @media screen and (max-width: 600px) { 
+                height: calc(100% - 80px);
+                top: 80px;
+            }
         } 
         i.close{                      
             transform: rotate(135deg);
@@ -107,7 +112,7 @@ $transition-time: 0.45s;
             }
         }
         .x-select{
-            margin: 10px 19px 0px 10px!important
+            margin: 10px 19px 0px 10px;
         } 
         &>.head-data{
             input{
