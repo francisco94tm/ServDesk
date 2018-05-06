@@ -70,6 +70,10 @@ $transition-time: 0.45s;
             box-shadow: none;
             bottom: calc(100vh - 90px); 
             left: calc(50vw + 270px);
+            @media screen and (max-width: 600px) { 
+                left: auto!important;
+                right: 3.33%;
+            }
             // left: 520px; 
         }
         .back{            

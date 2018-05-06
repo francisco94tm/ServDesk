@@ -20,7 +20,7 @@ var Dashboard = function(Session, System, $timeout, $q) {
         return Session.getData().then(function(response){ 
             return {
                 id : response.id,
-                name :  response.name + " " +  response.firstLastname,  
+                name :  response.name,
                 icon:	'settings', 
                 view: 'settings-container',
                 sectionlevel: response.id_level,

@@ -13,6 +13,9 @@
     &.small{
         flex-direction: row;
         margin: 40px 40px;
+        img{
+            width: 40px;
+        }
         .text{
             margin: 0 15px;
             font-size: 20px;

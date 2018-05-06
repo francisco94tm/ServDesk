@@ -3,6 +3,7 @@
   max-width: 900px;
   margin: 0 auto !important; }
   .login-container .login-wrapper {
+    display: flex;
     height: 100vh;
     min-height: 100vh;
     max-width: 1200px;
@@ -13,17 +14,28 @@
     text-align: center; }
   .login-container form {
     margin-top: 30px; }
-
-@media screen and (max-width: 600px) {
-  img {
-    width: 150px !important;
-    margin-top: 30px; }
-
-  .login-container .one-half.column {
-    height: auto; }
-    .login-container .one-half.column .title h1 {
-      display: inline-block;
-      font-size: 20px;
-      letter-spacing: 2px; } }
+  @media screen and (max-width: 600px) {
+    .login-container img {
+      width: 100px !important; }
+    .login-container .logo {
+      margin: 0;
+      margin-top: 30px !important; }
+      .login-container .logo .text {
+        margin: 30px 0 0 0 !important;
+        font-size: 30px !important;
+        line-height: 25px !important; }
+    .login-container .row {
+      flex-wrap: wrap; }
+    .login-container .one-half, .login-container .column, .login-container .is-vertical-centered {
+      height: auto !important;
+      min-height: auto !important; }
+    .login-container .login-container .one-half.column {
+      height: auto; }
+      .login-container .login-container .one-half.column .title h1 {
+        display: inline-block;
+        font-size: 20px;
+        letter-spacing: 2px; }
+    .login-container form {
+      margin-top: 0 !important; } }
 
 /*# sourceMappingURL=login.css.map */

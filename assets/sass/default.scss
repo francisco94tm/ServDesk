@@ -5,6 +5,7 @@
 @import 'components/logo';
 @import 'components/login';
 @import 'components/dashboard';
+@import 'components/responsive';
 
 
 * {
@@ -123,6 +124,9 @@ html {
         opacity: 1;
         transition: 0.3s $animation-ease-out 0.8s;
         z-index: 1000;
+        @media screen and (max-width: 600px) { 
+            display:none;
+        }
     }
     &:after{
         display:none;

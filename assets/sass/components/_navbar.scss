@@ -14,8 +14,9 @@
         transition: 0.3s;
 
         &.user-section{
-            position: absolute;
+            position: fixed;
             bottom: 30px;
+            z-index: 9999;
         }
         
         i.material-icons{

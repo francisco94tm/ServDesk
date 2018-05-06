@@ -14,6 +14,7 @@
 .section-container{
     overflow-x: hidden!important;
 }
+ 
 .container{    
     .row{
         display: flex;
@@ -22,20 +23,42 @@
         min-height: 100vh;
         &.dash-nav, &dash-nav{
             width: 250px;
-            overflow-x: hidden;
+            overflow-x: hidden; 
+            background: $theme--bg;
+            transition: 0.3s $animation-ease-out;
+            @media screen and (max-width: 1050px) { 
+                .logo{
+                    margin: 40px 40px 40px 70px!important;
+                }
+                position: fixed;
+                z-index: 9000;
+                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+            }
         }
         &.dash-content, &dash-content{
             overflow-x: none;
             width: calc(100% - 250px)!important;
+            @media screen and (max-width: 1050px) {
+                width: 100vw!important;
+            }
         } 
         &.section-nav { 
             width: 350px; 
             overflow-x: hidden;
+            @media screen and (max-width: 600px) {
+                width: 100vw!important;
+            }
         }
         &.section-content {     
             overflow-x: hidden!important;            
-            padding: 50px 100px 60px 100px;
+            padding: 100px 100px 60px 100px;
             position: relative;
+            @media screen and (max-width: 1050px) {
+                padding: 100px 80px 60px 80px;
+            }
+            @media screen and (max-width: 600px) {
+                width: 100vw!important;
+            }
         }
     }
 }
@@ -44,7 +67,53 @@
     .button{        
         left: 535px;  
         bottom: 50px;           
+        @media screen and (max-width: 600px) {
+            left: auto;
+            right: 3.33%; 
+            bottom: 3.33%; 
+        }
     }
+}
+
+
+.status-group{ 
+    width: 320px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    
+    @media screen and (max-width: 600px) { 
+        width: calc(100% - 10px);
+    }
+}
+.status-group-name{
+    background-color: $theme--bg;
+    top: 0px;
+    z-index: 10; 
+    position: -webkit-sticky;
+    position: sticky;
+    font-weight: bold;
+    padding: 10px 20px 10px 20px;  
+    color: rgba($theme--fg, 0.8);
+    font-size: 15px;  
+    letter-spacing: 0.3px;
+    // text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;  
+    &:hover{
+        color: $main-color;  
+    }
+    i{
+        float: right;
+        margin-right: 15px;
+        transition: 0.3s $animation-ease-out;
+        
+        &.hidden{
+            transform: rotate(180deg); 
+        }
+    } 
 }
 
 // Item list wrapper =========================================================
@@ -59,6 +128,9 @@
     .refresh-btn{
         cursor: pointer;
         width: 320px; 
+        @media screen and (max-width: 600px) { 
+            width: 100%;
+        }
         display: flex;
         justify-content: center;
         align-content: center;
@@ -97,7 +169,7 @@
         padding: 20px 30px;
         font-size: 13px;
         justify-content: space-between; 
-        margin: 5px 30px 5px 10px;        
+        margin: 5px 0px 5px 10px;        
         transition: 0.15s $animation-ease-out;
         position: relative;
         border-left: 4px solid rgba($theme--fg, 0.25); 
@@ -188,7 +260,7 @@
         display: flex;
         justify-content: center;
         align-content: center;
-        align-items: center;
+        align-items: center; 
         h1{
             font-weight: bold;
             text-align: center;

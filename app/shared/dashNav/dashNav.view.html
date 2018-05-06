@@ -1,4 +1,11 @@
-<div class="dash-nav column"> 
+
+<div class="back-nav {{$ctrl.mobile.isNavClosed?'nav-hidden':''}}" 
+     ng-init="$ctrl.mobile.isNavClosed == false"
+     ng-click="$ctrl.mobile.isNavClosed = !$ctrl.mobile.isNavClosed"></div>
+<div class="menu-btn" ng-click="$ctrl.mobile.isNavClosed = !$ctrl.mobile.isNavClosed">        
+    <i class="material-icons">menu</i>
+</div>
+<div class="dash-nav column {{$ctrl.mobile.isNavClosed?'nav-hidden':''}}">  
     <logo size="small"></logo> 
     <div class="navpanel">  
         <div ng-click="$ctrl.setCurrentSection($index)"  ng-show="n.sectionlevel >= $ctrl.DashNav.getLevel()"
