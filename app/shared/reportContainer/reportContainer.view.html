@@ -1,9 +1,28 @@
 <!-- 03. Reports Section ****************************************** -->
 <div class="item-body column report-panel"> 
-    <h1 class="bold">Reporte</h1>
- 
-
-    
+    <h1 class="bold">Reporte</h1> 
+    <br>
+    <div class="cases-resume"> 
+        <table>
+            <tr>
+                <th># Casos Abiertos</th>
+                <td>{{$ctrl.cases.opened}}</td>
+            </tr>
+            <tr>
+                <th># Casos en progreso</th>
+                <td>{{$ctrl.cases.in_progress}}</td>
+            </tr>
+            <tr>
+                <th># Casos solucionados</th>
+                <td>{{$ctrl.cases.solved}}</td>
+            </tr>
+            <tr>
+                <th># Casos cancelados:</th>
+                <td>{{$ctrl.cases.cancelled}}</td>
+            </tr>
+        </table>
+    </div> 
+    <br><br>
     <div class="chart-wrapper">
         <h3>Por periodo de tiempo</h3> 
         <div class="chart-item-wrapper">
@@ -27,16 +46,13 @@
                 </canvas>
             </div> 
         </div> 
-    </div>
-        
-        
+    </div>  
 
-    
     <div class="infrastructure-wrapper">
-        <div class="infrastructure" ng-repeat = "(key, data) in $ctrl.d">
-            <caption><b>Infraestructura:</b> {{data.name}}</caption>
+        <div class="infrastructure">
+            <caption><b>Infraestructura:</b> {{asset.name}}</caption>
             <div class="table-wrapper">
-                <table class="theats" ng-repeat = "dx in  data.threatType">   
+                <table class="theats" ng-repeat = "dx in  asset.threatType">   
                     <tr> 
                         <th>Amenaza:</th>
                         <td>{{dx.name}}</td>

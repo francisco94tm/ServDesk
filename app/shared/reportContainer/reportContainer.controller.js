@@ -3,8 +3,19 @@
  * request Component
  */
 
-function reportContainerController($scope, $element, $attrs, $rootScope, ReportContainer, Chart, System, moment){ 
+function reportContainerController($scope, $element, $attrs, $rootScope, ReportContainer, Chart, System, moment, Dashboard){ 
     
+    Dashboard.getCatalogues(['request']).then(data => {
+        $scope.$ctrl.cases = {
+            opened: data.request[0].items.length,
+            in_progress: data.request[1].items.length,
+            solved: data.request[2].items.length,
+            cancelled: data.request[3].items.length
+        };
+        console.log(data);
+    });   
+
+
     $scope.radar = {};
     $scope.radar.labels = ["Impacto", "Ocurrencia", "Probabilidad"]; 
     $scope.radar.options = {
