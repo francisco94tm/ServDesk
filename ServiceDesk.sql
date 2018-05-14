@@ -1,8 +1,8 @@
 drop database if exists ServiceDesk;
-create database ServiceDesk;
+create database ServiceDesk CHARACTER SET utf8 COLLATE utf8_general_ci;
 use ServiceDesk;
   
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table CaseType(
 	id int not null auto_increment,
@@ -16,7 +16,7 @@ insert into CaseType values(2, 'Incidencia','Tiene un alto impacto');
 insert into CaseType values(3, 'Problema','Es crítico');
 
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table RegisterMedium(
 	id int not null auto_increment,
@@ -26,8 +26,8 @@ create table RegisterMedium(
 
 insert into RegisterMedium values(1,'Teléfono');
 insert into RegisterMedium values(2,'Correo Electrónico');
- 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+
+/******************************************************/
 
 create table Status(
 	id int not null auto_increment,
@@ -42,7 +42,7 @@ insert into Status values(2,'En proceso','Caso en proceso de solución','A');
 insert into Status values(3,'Solucionado','Caso solucionado','A');
 insert into Status values(4,'Cancelado','Caso cancelado','A'); 
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table ThreatType(
 	id int not null auto_increment,
@@ -55,7 +55,7 @@ insert into ThreatType values(1,'Organizacional','Amenazas de tipo Organizaciona
 insert into ThreatType values(2,'Tecnológica','Amenazas de tipo Tecnológica');
 insert into ThreatType values(3,'Ambiental','Amenazas de tipo Ambiental');
 
-# # # # # # # # # # # # # # # # # # # # # # # #
+/******************************************************/
 
 create table AgentThreat(
 	id int not null auto_increment,
@@ -70,7 +70,20 @@ insert into AgentThreat values(1,1,'Fraude','Fraude de proveedor');
 insert into AgentThreat values(2,2,'Falla eléctrica','Falla eléctrica');
 insert into AgentThreat values(3,3,'Sismo','Sismo');
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
+
+create table Level(
+	id int not null auto_increment, 
+	name varchar(50) not null,
+	description varchar(100),
+	primary key(id)
+);
+
+insert into Level values(1, 'Agente', '');
+insert into Level values(2, 'Especialista', '');
+insert into Level values(3, 'HotFix', '');
+
+/******************************************************/
 
 create table Agent(
 	id int not null auto_increment,
@@ -94,7 +107,7 @@ insert into Agent values(1,'Orlando','Rocha','Montiel','Calle 1 colonia 1 ciudad
 insert into Agent values(2,'Francisco','Trejo','Martínez','Calle 1 colonia 1 ciudad de mexico','55555555555','55555555555','correo@dominio',1,1,'Agente1','123','A');
 insert into Agent values(3,'Valeria','Mata','Cortés','Calle 1 colonia 1 ciudad de mexico','55555555555','55555555555','correo@dominio',3,1,'HotFix1','123','A');
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table BusinessUnit(
 	id int not null auto_increment,
@@ -106,10 +119,10 @@ create table BusinessUnit(
 insert into BusinessUnit values(1,'ESCOM','Escuela Superior de Cómputo');
 insert into BusinessUnit values(2,'ENCB','Escuela Nacional de Ciencias Biologicas');
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table Department(
-	id int not null,
+	id int not null auto_increment,
 	id_businessUnit int not null,
 	name varchar(50) not null,
 	description varchar(100) not null,
@@ -119,20 +132,8 @@ create table Department(
 
 insert into Department values(1,1,'Ciencias Sociales','Departamento de ciencias sociales');
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
-create table Level(
-	id int not null auto_increment, 
-	name varchar(50) not null,
-	description varchar(100),
-	primary key(id)
-);
-
-insert into Level values(1, 'Agente', '');
-insert into Level values(2, 'Especialista', '');
-insert into Level values(3, 'HotFix', '');
-
-# # # # # # # # # # # # # # # # # # # # # # # # 
 
 CREATE TABLE riskmatrix (
   id_probability float NOT NULL,
@@ -149,10 +150,10 @@ INSERT INTO riskmatrix VALUES
 (5,1,1.8),(5,2,3.6),(5,3,6.4),(5,4,7.2),
 (5,5,9);
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table Area(
-	id int not null,
+	id int not null auto_increment,
 	id_department int not null,
 	id_businessUnit int not null,
 	name varchar(50) not null,
@@ -164,10 +165,10 @@ create table Area(
 
 insert into `Area` values(1,1,1,'Área 1','Área 1 del departamento');
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table Job(
-	id int not null,
+	id int not null auto_increment,
 	id_area int not null,
 	id_department int not null,
 	id_businessUnit int not null,
@@ -176,12 +177,12 @@ create table Job(
 	primary key(id, id_area,id_department,id_businessUnit),
 	foreign key(id_area) references Area(id),
 	foreign key(id_department) references Department(id),
-	foreign key(id_businessUnit) references BusinessUnit(idf)
+	foreign key(id_businessUnit) references BusinessUnit(id)
 );
 
 insert into Job values(1,1,1,1,'Profesor','Profesor de la materia');
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table Client(
 	id int not null auto_increment,
@@ -205,15 +206,17 @@ create table Client(
 	foreign key(id_businessUnit) references BusinessUnit(id)
 );
 
-insert into Client values(1,'Juan','Perez','Rojas',1,1,1,1,'2017/02/01','6666666666','6666666666','cliente@dominio','A');
+insert into Client values(1, 'XXXXXXXXXXXXXXXXXX', 'Juan','Perez','Rojas',1,1,1,1,'2017/02/01','6666666666','6666666666','cliente@dominio','A');
 
+/*
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																		#
 #       	I N F R A S T R U C T U R E    D A T A						#
 #																		#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+*/
 
-CREATE TABLE AssetRepository AssetRepository (
+CREATE TABLE AssetRepository (
 	id varchar(8) not null,
 	name varchar(60) not null,
 	description varchar(240) not null,
@@ -269,7 +272,8 @@ INSERT INTO AssetRepository VALUES
 ('SI8', 'Acer - Laptop ES1-533-P6H1 ', 'Laptop de Trabajo', 'Laptop', 'Activo', 'Fábrica', 'HW', 'Confidencial', '/home/pepemejia/Desktop/infra.txt', 'Plaza de la Tecnología', '2017-10-17', 800, 1, 'ADAD2', '2018-02-27 00:00:00', 'Ninguno', 1),
 ('SI9', 'HP - Laptop 15-BW014LA de 15,6', 'Laptop de Trabajo', 'Laptop', 'Activo', 'Fábrica', 'HW', 'Confidencial', '/home/pepemejia/Desktop/infra.txt', 'Plaza de la Tecnología', '2018-08-01', 900, 1, 'ADAD2', '2018-02-27 00:00:00', 'Ninguno', 1);
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+
+/******************************************************/
 
 create table Request(
 	id int not null auto_increment, -- Autogenerado
@@ -282,8 +286,7 @@ create table Request(
 	id_status int default 1,-- Asignado por el agente que registra, este cambiará con cada acción por parte del agente
 	id_agentThreat int not null,-- Registrado por el agente del catalogo de amenazas
 	id_client int,-- Registrado por el agente
-	id_
-	ium int not null,-- Registrado por el agente del catalogo de medios de registro
+	id_registerMedium int not null,-- Registrado por el agente del catalogo de medios de registro
 	registerDate datetime,-- Autogenerado al insertar
 	atentionDate datetime,-- Generado por sistema en la primera accion del responsable
 	solutionDate datetime,-- Generado por sistema al cerrar el ticket es decir al actualizar el estatus a 'SOLUCIONADO'
@@ -311,10 +314,10 @@ create trigger `Request_INSERT` before insert on  `Request`
 		new.maxAtentionDate = adddate(now(),interval 5 day),
 		new.maxSolutionDate =  adddate(now(),interval 5 day);
 
-insert into Request(id_caseType, infrastructure, description, author, responsable, id_agentThreat, id_client, id_registerMedium)
+insert into Request(id_caseType, infrastructure, subject, description, author, responsable, id_agentThreat, id_client, id_registerMedium)
 	values(1,'COTR1','Un Requerimiento','Descripción de un Requerimiento',2,1,1,1,1);
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table ThreatImpact(
 	id int not null,
@@ -331,7 +334,7 @@ insert into ThreatImpact values(3,4.1,6.0,'Regular',6);
 insert into ThreatImpact values(4,6.1,8.0,'Alto',8);
 insert into ThreatImpact values(5,8.1,10.0,'Desastroso',10);
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table ThreatExists(
 	id int not null,
@@ -346,9 +349,9 @@ insert into ThreatExists values(1,0,0.1,'Casi imposible',0.1);
 insert into ThreatExists values(2,0.11,0.3,'Poco probable',0.3);
 insert into ThreatExists values(3,0.31,0.5,'Probable',0.5);
 insert into ThreatExists values(4,0.51,0.7,'Muy posible',0.7);
-insert into ThreatExists values(5,0.71,0.9,'Casi seguro',0.9);
+insert into ThreatExists values(5,0.71,1.0,'Casi seguro',0.9);
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table ThreatInterest(
 	id int not null,
@@ -363,10 +366,10 @@ insert into ThreatInterest values(1,0,0.1,'Casi no genera',0.1);
 insert into ThreatInterest values(2,0.11,0.3,'Se genera poco',0.3);
 insert into ThreatInterest values(3,0.31,0.5,'Se genera regular',0.5);
 insert into ThreatInterest values(4,0.51,0.7,'Se genera mucho',0.7);
-insert into ThreatInterest values(5,0.71,0.9,'Es incontrolable',0.9);
+insert into ThreatInterest values(5,0.71,1.0,'Es incontrolable',0.9);
 
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table ThreatCapacity(
 	id int not null,
@@ -381,9 +384,9 @@ insert into ThreatCapacity values(1,0,0.1,'Los recursos son casi nulos',0.1);
 insert into ThreatCapacity values(2,0.11,0.3,'Cuenta con muy pocos recursos',0.3);
 insert into ThreatCapacity values(3,0.31,0.5,'Los recursos son regulares',0.5);
 insert into ThreatCapacity values(4,0.51,0.7,'Cuenta con muchos recursos',0.7);
-insert into ThreatCapacity values(5,0.71,0.9,'Los recursos son superiores',0.9);
+insert into ThreatCapacity values(5,0.71,1.0,'Los recursos son superiores',0.9);
 
-# # # # # # # # # # # # # # # # # # # # # # # # 
+/******************************************************/
 
 create table InfrastructureVulnerability(
 	id int not null,
@@ -398,14 +401,15 @@ insert into InfrastructureVulnerability values(1,0,0.1,'Protección reforzada',0
 insert into InfrastructureVulnerability values(2,0.11,0.3,'Protección normal',0.3);
 insert into InfrastructureVulnerability values(3,0.31,0.5,'Medianamente protegido',0.5);
 insert into InfrastructureVulnerability values(4,0.51,0.7,'Muy poca protección',0.7);
-insert into InfrastructureVulnerability values(5,0.71,0.9,'Sin protección',0.9);
+insert into InfrastructureVulnerability values(5,0.71,1.0,'Sin protección',0.9);
  
-
+/*
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #																		#
 #       	C U S T O M I Z A T I O N  									#
 #																		#
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+*/
 
 create table Theme(
 	id int primary key auto_increment,
