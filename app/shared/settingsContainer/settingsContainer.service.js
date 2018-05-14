@@ -4,6 +4,7 @@
 
 var SettingsContainer = function(System, Session){
     this.logout = function(){
+        
         Session.close();
     }
 }

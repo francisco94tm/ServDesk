@@ -17,6 +17,260 @@ h1 .bold, h1.bold {
 /* 1.2 Button
 --------------------------------------------*/
 /* On Hover */
+.xpopup {
+  display: flex;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
+  opacity: 1; }
+  .xpopup.hidden {
+    z-index: -1;
+    opacity: 0; }
+    .xpopup.hidden .xpopup-body {
+      transform: scale(0.7); }
+  .xpopup .xpopup-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(50, 50, 50, 0.45); }
+  .xpopup .xpopup-body {
+    width: 400px;
+    max-width: 400px;
+    min-height: 200px;
+    background: #fff;
+    color: rgba(0, 0, 0, 0.87);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    text-align: center;
+    padding: 50px;
+    position: relative;
+    font-family: "Walfork";
+    transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 3px; }
+  .xpopup .xpopup-message .title {
+    font-weight: bold;
+    font-size: 13px;
+    text-transform: uppercase; }
+  .xpopup .xpopup-message .id {
+    font-size: 70px;
+    font-weight: 400;
+    padding: 0;
+    line-height: 80px; }
+  .xpopup .close-btn {
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer; }
+  .xpopup .xpopup-controlls button {
+    border: none;
+    font-size: 14px;
+    background: none;
+    font-family: "Walfork";
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    padding: 20px 30px;
+    outline: none;
+    width: auto;
+    min-width: auto;
+    opacity: 0.8;
+    color: rgba(0, 0, 0, 0.87); }
+    .xpopup .xpopup-controlls button:hover {
+      opacity: 1; }
+
+/****************************************************************************
+ *
+ * SELECT 
+ */
+/*the container must be positioned relative:*/
+.x-select {
+  position: relative;
+  width: 300px;
+  height: 66px;
+  margin: 10px 0 0px 10px;
+  border-bottom: solid 1px rgba(0, 0, 0, 0.15);
+  /*style the items (options), including the selected item:*/
+  /*style items (options):*/ }
+  .x-select.disabled {
+    border-bottom: dashed 1px rgba(0, 0, 0, 0.3); }
+    .x-select.disabled .select-selected .bold {
+      color: rgba(0, 0, 0, 0.25) !important; }
+    .x-select.disabled .select-selected .value.empty {
+      color: rgba(0, 0, 0, 0.1); }
+    .x-select.disabled .select-selected, .x-select.disabled i {
+      color: rgba(0, 0, 0, 0.25) !important; }
+  .x-select i.material-icons {
+    position: absolute;
+    padding: 9px 5px;
+    color: #3949ab;
+    display: block;
+    font-size: 20px;
+    top: 10px; }
+  .x-select select {
+    display: none;
+    /*hide original SELECT element:*/ }
+  .x-select .select-selected {
+    height: 100%;
+    /*style the arrow inside the select element:*/
+    /*point the arrow upwards when the select box is open (active):*/ }
+    .x-select .select-selected span {
+      display: block;
+      white-space: nowrap;
+      overflow: hidden; }
+      .x-select .select-selected span.bold {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 9px; }
+      .x-select .select-selected span.value.empty {
+        color: rgba(0, 0, 0, 0.3); }
+    .x-select .select-selected .bold {
+      font-weight: 600;
+      margin-right: 5px;
+      color: #3949ab; }
+    .x-select .select-selected:after {
+      position: absolute;
+      content: "";
+      top: 15px;
+      right: 15px;
+      width: 0;
+      height: 0;
+      border: 4px solid transparent;
+      border-color: rgba(0, 0, 0, 0.87) transparent transparent transparent; }
+    .x-select .select-selected.select-arrow-active:after {
+      border-color: transparent transparent rgba(0, 0, 0, 0.87) transparent;
+      top: 9px; }
+  .x-select .select-items div,
+  .x-select .select-selected {
+    color: rgba(0, 0, 0, 0.9);
+    padding: 12px 45px 12px 45px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    user-select: none; }
+  .x-select .select-items {
+    position: absolute;
+    background-color: #fff;
+    border: solid 1px rgba(0, 0, 0, 0.24);
+    top: 0%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    overflow-x: auto;
+    border-radius: 3px;
+    font-size: 13px;
+    max-height: 300px;
+    transition: max-height 0.3s cubic-bezier(0, 0, 0.2, 1), top 0.3s cubic-bezier(0, 0, 0.2, 1), padding 0.3s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0, 0, 0.2, 1); }
+    @media screen and (max-width: 600px) {
+      .x-select .select-items {
+        z-index: 9999 !important;
+        position: fixed;
+        width: 100vw !important;
+        max-height: 100vh;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        padding-top: 100px; } }
+    .x-select .select-items.select-hide {
+      top: 0;
+      padding-top: 0;
+      max-height: 0px;
+      box-shadow: none;
+      border: none;
+      transition: max-height 0.3s cubic-bezier(0, 0, 0.2, 1), top 0.3s cubic-bezier(0, 0, 0.2, 1), padding 0.3s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0, 0, 0.2, 1); }
+    .x-select .select-items div.selected {
+      font-weight: 600;
+      background-color: rgba(0, 0, 0, 0.15); }
+      .x-select .select-items div.selected:hover {
+        background-color: rgba(0, 0, 0, 0.15); }
+    .x-select .select-items div:hover {
+      background-color: rgba(0, 0, 0, 0.07); }
+
+.xtoast {
+  display: flex;
+  position: fixed;
+  max-width: 100vw;
+  width: 350px;
+  max-width: 94%;
+  height: 60px;
+  z-index: 9999;
+  bottom: 3.33%;
+  right: 3%;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
+  opacity: 1; }
+  .xtoast.hidden {
+    z-index: -1;
+    bottom: -70px;
+    opacity: 0; }
+  .xtoast .xtoast-body {
+    width: 100%;
+    height: 100%;
+    background: #111;
+    color: white;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    text-align: center;
+    position: relative;
+    font-family: "Walfork";
+    transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
+    border-radius: 3px;
+    line-height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 0 30px;
+    margin-top: 0; }
+  .xtoast .xtoast-message {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center; }
+    .xtoast .xtoast-message .title {
+      font-weight: bold;
+      font-size: 13px; }
+    .xtoast .xtoast-message .id {
+      font-size: 70px;
+      font-weight: 400;
+      padding: 0;
+      line-height: 80px; }
+  .xtoast .close-btn {
+    padding: 10px 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer; }
+  .xtoast .xtoast-controlls {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center; }
+    .xtoast .xtoast-controlls button {
+      border: none;
+      font-size: 14px;
+      background: none;
+      font-family: "Walfork";
+      padding: 10px 20px;
+      border-radius: 3px;
+      line-height: 20px;
+      outline: none;
+      width: auto;
+      min-width: auto;
+      opacity: 0.8;
+      color: yellow; }
+      .xtoast .xtoast-controlls button:hover {
+        background: rgba(255, 255, 255, 0.05);
+        opacity: 1; }
+
 form {
   padding: 20px 0; }
 
@@ -127,177 +381,6 @@ button {
   button:hover {
     background: #2c3985;
     border: solid 1px #2c3985; }
-
-/****************************************************************************
- *
- * SELECT 
- */
-/*the container must be positioned relative:*/
-.x-select {
-  position: relative;
-  width: 300px;
-  height: 66px;
-  margin: 10px 0 0px 10px;
-  border-bottom: solid 1px rgba(0, 0, 0, 0.15);
-  /*style the items (options), including the selected item:*/
-  /*style items (options):*/ }
-  .x-select.disabled {
-    border-bottom: dashed 1px rgba(0, 0, 0, 0.3); }
-    .x-select.disabled .select-selected .bold {
-      color: rgba(0, 0, 0, 0.25) !important; }
-    .x-select.disabled .select-selected .value.empty {
-      color: rgba(0, 0, 0, 0.1); }
-    .x-select.disabled .select-selected, .x-select.disabled i {
-      color: rgba(0, 0, 0, 0.25) !important; }
-  .x-select i.material-icons {
-    position: absolute;
-    padding: 9px 5px;
-    color: #3949ab;
-    display: block;
-    font-size: 20px;
-    top: 10px; }
-  .x-select select {
-    display: none;
-    /*hide original SELECT element:*/ }
-  .x-select .select-selected {
-    height: 100%;
-    /*style the arrow inside the select element:*/
-    /*point the arrow upwards when the select box is open (active):*/ }
-    .x-select .select-selected span {
-      display: block;
-      white-space: nowrap;
-      overflow: hidden; }
-      .x-select .select-selected span.bold {
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 9px; }
-      .x-select .select-selected span.value.empty {
-        color: rgba(0, 0, 0, 0.3); }
-    .x-select .select-selected .bold {
-      font-weight: 600;
-      margin-right: 5px;
-      color: #3949ab; }
-    .x-select .select-selected:after {
-      position: absolute;
-      content: "";
-      top: 15px;
-      right: 15px;
-      width: 0;
-      height: 0;
-      border: 4px solid transparent;
-      border-color: rgba(0, 0, 0, 0.87) transparent transparent transparent; }
-    .x-select .select-selected.select-arrow-active:after {
-      border-color: transparent transparent rgba(0, 0, 0, 0.87) transparent;
-      top: 9px; }
-  .x-select .select-items div,
-  .x-select .select-selected {
-    color: rgba(0, 0, 0, 0.9);
-    padding: 12px 45px 12px 45px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    user-select: none; }
-  .x-select .select-items {
-    position: absolute;
-    background-color: #fff;
-    border: solid 1px rgba(0, 0, 0, 0.24);
-    top: 0%;
-    left: 0;
-    right: 0;
-    z-index: 99;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    overflow-x: auto;
-    border-radius: 3px;
-    font-size: 13px;
-    max-height: 300px;
-    transition: max-height 0.3s cubic-bezier(0, 0, 0.2, 1), top 0.3s cubic-bezier(0, 0, 0.2, 1), padding 0.3s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0, 0, 0.2, 1); }
-    @media screen and (max-width: 600px) {
-      .x-select .select-items {
-        z-index: 9999 !important;
-        position: fixed;
-        width: 100vw !important;
-        max-height: 100vh;
-        height: 100vh;
-        top: 0;
-        left: 0;
-        padding-top: 100px; } }
-    .x-select .select-items.select-hide {
-      top: 0;
-      padding-top: 0;
-      max-height: 0px;
-      box-shadow: none;
-      border: none;
-      transition: max-height 0.3s cubic-bezier(0, 0, 0.2, 1), top 0.3s cubic-bezier(0, 0, 0.2, 1), padding 0.3s cubic-bezier(0, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0, 0, 0.2, 1); }
-    .x-select .select-items div.selected {
-      font-weight: 600;
-      background-color: rgba(0, 0, 0, 0.15); }
-      .x-select .select-items div.selected:hover {
-        background-color: rgba(0, 0, 0, 0.15); }
-    .x-select .select-items div:hover {
-      background-color: rgba(0, 0, 0, 0.07); }
-
-.xpopup {
-  display: flex;
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(50, 50, 50, 0.7);
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  transition: 0.3s; }
-  .xpopup.hidden {
-    z-index: -1;
-    background: rgba(50, 50, 50, 0); }
-    .xpopup.hidden .xpopup-body {
-      margin-top: 100vh;
-      transform: scale(0.5); }
-  .xpopup .xpopup-body {
-    transform: scale(1);
-    margin-top: 0;
-    width: 450px;
-    height: 300px;
-    background: white;
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    text-align: center;
-    padding: 70px 50px 50px 50px;
-    position: relative;
-    font-family: "Walfork";
-    transition: 0.3s; }
-  .xpopup .xpopup-message p {
-    text-transform: uppercase;
-    font-weight: bold; }
-    .xpopup .xpopup-message p.datetime {
-      font-weight: 100;
-      font-size: 13px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      color: #555;
-      padding: 10px 15px; }
-    .xpopup .xpopup-message p h1 {
-      font-size: 70px;
-      margin: 0;
-      font-weight: 400; }
-  .xpopup .xpopup-controlls button {
-    border: none;
-    font-size: 14px;
-    background: none;
-    font-family: "Walfork";
-    position: absolute;
-    bottom: 0;
-    right: 0px;
-    padding: 20px 40px;
-    outline: none;
-    color: #333;
-    width: auto;
-    min-width: auto; }
-    .xpopup .xpopup-controlls button:hover {
-      background: #eee;
-      border: none;
-      padding: 20px 40px; }
 
 .checkbox-group {
   display: flex;
@@ -586,7 +669,7 @@ button {
   position: fixed;
   top: 0;
   right: 0;
-  background: #fff;
+  background: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.95), transparent);
   width: calc(100% - 600px);
   height: 55px;
   z-index: 1000;
@@ -597,7 +680,7 @@ button {
     left: 0; }
   @media screen and (max-width: 600px) {
     .edit-wrapper {
-      height: 80px; } }
+      height: 150px; } }
   @media screen and (max-width: 1050px) {
     .edit-wrapper {
       width: calc(100% - 350px); } }
@@ -927,6 +1010,9 @@ agent-content {
 
 .report-panel {
   padding: 50px 80px; }
+  @media screen and (max-width: 600px) {
+    .report-panel {
+      padding: 70px 10px; } }
   .report-panel .x-select {
     margin-left: -20px; }
 
@@ -937,15 +1023,9 @@ agent-content {
   width: calc(100% + 200px); }
   .chart-item-wrapper .line-chart-item {
     width: calc(100% - 250px); }
-    @media screen and (max-width: 600px) {
-      .chart-item-wrapper .line-chart-item {
-        width: 100%; } }
   .chart-item-wrapper .radar-chart-item {
     width: calc(100% - 100px);
     margin: 0 0 0 -100px; }
-    @media screen and (max-width: 600px) {
-      .chart-item-wrapper .radar-chart-item {
-        width: 100%; } }
 
 table {
   border: solid 1px #ccc;
@@ -1296,20 +1376,14 @@ h5 {
       white-space: pre-wrap;
       overflow: hidden;
       font-style: italic; }
-    .container .section-content .section-content-wrapper .circle {
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      border-radius: 50%;
-      color: #868686;
-      background-color: rgba(134, 134, 134, 0.3);
-      display: inline-block;
-      margin-right: 10px; }
-    .container .section-content .section-content-wrapper .user-name, .container .section-content .section-content-wrapper .author {
+    .container .section-content .section-content-wrapper .user-name span, .container .section-content .section-content-wrapper .author span {
       font-size: 25px;
-      color: #868686;
-      letter-spacing: 1px; }
+      color: rgba(0, 0, 0, 0.5);
+      letter-spacing: 1px;
+      font-weight: bold; }
+    .container .section-content .section-content-wrapper .user-name b, .container .section-content .section-content-wrapper .author b {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.25); }
     .container .section-content .section-content-wrapper .item-list {
       display: flex;
       flex-direction: column; }

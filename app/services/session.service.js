@@ -1,99 +1,153 @@
 var Session = function(System) { 
     
-    this.session = {
-        name: undefined,
-        firstLastname: undefined,
+    // Session object
+    this.session = {        
+        id:             undefined,
+        backup:         undefined,
+        name:           undefined,
+        firstLastname:  undefined,
         secondLastname: undefined,
-        email: undefined,
-        id: undefined,
-        status: undefined,
-        user: undefined,
-        level:undefined,
-        theme: ''
+        email:          undefined,
+        status:         undefined,
+        user:           undefined,
+        level:          undefined,
+        icon:           'settings',
+        view:           'settings-container', 
+        theme: {
+            id:             0,
+            value:          'Por defecto',
+            url:            'assets/css/default.css'
+        }
     } 
-    
-    this.isSet = function(){
-        var flag;
-        var _this = this;
-        return System.call('getLoginStatus');
-    }
 
-    // Setters
-    this.setName = function(name){
-        this.session.name = name;
+    /** ************************************************************************
+     * 
+     *  F U N C T I O N S
+     *  
+     */ 
+     
+    // Close and delete cuerrent session
+    this.close = function(){
+        return System.call('logout');
     }
-    this.setFirstLastname = function(firstLastname){
-        this.session.firstLastname = firstLastname;
-    }
-    this.setSecondLastname = function(secondLastname){
-        this.secondLastname = secondLastname;
-    }
-    this.setEmail = function(email){
-        this.session.email = email;
-    }
-    this.setId = function(id){
+    
+    // Verify in server if session object is set
+    this.isSet = () =>  { return System.call('getLoginStatus'); }
+     
+    // Load Session data values from server
+    this.loadData = function(){
+        var _this = this;
+        return System.call('getLoginStatus').then(function(response){  
+            // User has logged correctly
+            if(response.data !== false){ 
+                _this.setData(response.data);
+            } 
+            return _this.getData();          
+        }); 
+    }  
+
+    /** ************************************************************************
+     * 
+     *  G E T T E R S
+     *  
+     */ 
+
+    this.getId = () => { 
+        return this.session.id; 
+    };
+    this.getBackup = () => { 
+        return this.session.backup; 
+    };
+    this.getName = () => { 
+        return this.session.name; 
+    };
+    this.getFirstLastname = () => { 
+        return this.session.firstLastname; 
+    };
+    this.getSecondLastname = () =>  { 
+        return this.session.secondLastname; 
+    };
+    this.getEmail = () => { 
+        return this.session.email; 
+    };
+    this.getStatus = () => { 
+        return this.session.status; 
+    };
+    this.getUser = () => { 
+        return this.session.user; 
+    };
+    this.getLevel= () => { 
+        return this.session.level;
+    }; 
+    this.getIcon = () => { 
+        return this.session.icon;
+    }; 
+    this.getView = () => { 
+        return this.session.view;
+    }; 
+    this.getTheme = () => { 
+        return this.session.theme;
+    };
+    this.getData = () => { 
+        return this.session; 
+    };
+    
+    /** ************************************************************************
+     * 
+     *  S E T T E R S
+     *  
+     */ 
+
+    this.setId = (id) => { 
         this.session.id = id;
     }
-    this.setStatus = function(status){
-        this.status = status;
-    } 
-    this.setUser = function(user){
+    this.setBackup = (backup) => { 
+        this.session.backup = backup;
+    }
+    this.setName = (name) => { 
+        this.session.name = name;
+    }
+    this.setFirstLastname = (firstLastname) =>  { 
+        this.session.firstLastname = firstLastname;
+    }
+    this.setSecondLastname= (secondLastname) => { 
+        this.session.secondLastname = secondLastname;
+    }
+    this.setEmail = (email) => { 
+        this.session.email = email;
+    }
+    this.setStatus = (status) => { 
+        this.session.status = status;
+    }
+    this.setUser = (user) => { 
         this.session.user = user;
     }
-    this.setLevel = function(level){
+    this.setLevel = (level) => { 
         this.session.level = level;
     }
-    this.setData = function(data){        
+    this.setIcon = (icon) => { 
+        this.session.icon = icon;
+    }
+    this.setView = (view) => { 
+        this.session.view = view;
+    }
+    this.setTheme = (theme) => { 
+        this.session.theme = theme; 
+    }
+
+    this.setData = (data) => {
+        this.session.id = data.id;      
+        this.session.backup = data.backup;      
         this.session.name = data.name;
         this.session.firstLastname = data.firstLastname;
         this.session.secondLastname = data.secondLastname;
         this.session.email = data.email;
-        this.session.id = data.id;
         this.session.status = data.status;
         this.session.user = data.usr;
-        this.session.level = data.level; 
+        this.session.level = data.id_level;
     }
-    
-    // Getters
-     // Getters
-     this.getName = function(){
-        return this.session.name;
-    }
-    this.getFirstLastname = function(){
-        return this.session.firstLastname;
-    }
-    this.getSecondLastname = function(){
-        return this.session.secondLastname;
-    }
-    this.getEmail = function(){
-        return this.session.email;
-    } 
-    this.getId = function(){
-        return this.session.id;
-    }
-    this.getStatus = function(){
-        return this.session.status;
-    }
-    this.getUser = function(){
-        return this.session.user;
-    }
-    this.getLevel = function(){
-        return this.session.level;
-    }
-    this.getData = function(){
-        var _this = this;
-        return System.call('getLoginStatus').then(function(response){  
-            if(response.data !== false){
-                _this.setData(response.data);
-                return response.data;
-            } 
-            return _this.session; 
-        }); 
-    } 
+ 
 
-    this.close = function(){
-        return System.call('logout');
-    }
 }
 
 angular.module('app').service('Session', Session); 

@@ -7,6 +7,7 @@ var NewdataItemList = function(){
     // Default init tab
     var currentTab =  0;
     var level = undefined;
+    var data = [];
 
     // Tabs in newdata Panel 
     var tabs; 

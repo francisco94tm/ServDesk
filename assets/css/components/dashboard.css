@@ -193,7 +193,7 @@
   position: fixed;
   top: 0;
   right: 0;
-  background: #fff;
+  background: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.95), transparent);
   width: calc(100% - 600px);
   height: 55px;
   z-index: 1000;
@@ -204,7 +204,7 @@
     left: 0; }
   @media screen and (max-width: 600px) {
     .edit-wrapper {
-      height: 80px; } }
+      height: 150px; } }
   @media screen and (max-width: 1050px) {
     .edit-wrapper {
       width: calc(100% - 350px); } }
@@ -534,6 +534,9 @@ agent-content {
 
 .report-panel {
   padding: 50px 80px; }
+  @media screen and (max-width: 600px) {
+    .report-panel {
+      padding: 70px 10px; } }
   .report-panel .x-select {
     margin-left: -20px; }
 
@@ -544,15 +547,9 @@ agent-content {
   width: calc(100% + 200px); }
   .chart-item-wrapper .line-chart-item {
     width: calc(100% - 250px); }
-    @media screen and (max-width: 600px) {
-      .chart-item-wrapper .line-chart-item {
-        width: 100%; } }
   .chart-item-wrapper .radar-chart-item {
     width: calc(100% - 100px);
     margin: 0 0 0 -100px; }
-    @media screen and (max-width: 600px) {
-      .chart-item-wrapper .radar-chart-item {
-        width: 100%; } }
 
 table {
   border: solid 1px #ccc;
@@ -903,20 +900,14 @@ h5 {
       white-space: pre-wrap;
       overflow: hidden;
       font-style: italic; }
-    .container .section-content .section-content-wrapper .circle {
-      width: 50px;
-      height: 50px;
-      line-height: 50px;
-      text-align: center;
-      border-radius: 50%;
-      color: #868686;
-      background-color: rgba(134, 134, 134, 0.3);
-      display: inline-block;
-      margin-right: 10px; }
-    .container .section-content .section-content-wrapper .user-name, .container .section-content .section-content-wrapper .author {
+    .container .section-content .section-content-wrapper .user-name span, .container .section-content .section-content-wrapper .author span {
       font-size: 25px;
-      color: #868686;
-      letter-spacing: 1px; }
+      color: rgba(0, 0, 0, 0.5);
+      letter-spacing: 1px;
+      font-weight: bold; }
+    .container .section-content .section-content-wrapper .user-name b, .container .section-content .section-content-wrapper .author b {
+      font-size: 15px;
+      color: rgba(0, 0, 0, 0.25); }
     .container .section-content .section-content-wrapper .item-list {
       display: flex;
       flex-direction: column; }

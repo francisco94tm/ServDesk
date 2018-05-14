@@ -3,7 +3,7 @@
  */
 
 function dashContentController($scope, $element, $attrs, DashNav, DashContent){  
-    
+
     // Detect when dashboard section changes
     getNavData();
     $scope.$on('getCurrentSection', (event, data) => {

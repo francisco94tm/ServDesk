@@ -3,9 +3,10 @@
  * request Component
  */
 
-function caseContainerController($scope, $element, $attrs){  
-    // Search variable
+function caseContainerController($scope, $element, $attrs, Session){  
+     // Search variable
     $scope.$ctrl.search = "";
+    $scope.$ctrl.Session = Session;
 }
  
 angular.module('app').component('caseContainer', {

@@ -1,4 +1,4 @@
-<?php 
+<?php if(!isset($_SESSION)) session_start();
     class Risk{ 
 
         /************************************************************************
@@ -9,9 +9,15 @@
             $assets = []; 
             $fechaIni = $fechaIni ?: "2018-04-17";
             $fechaFin = $fechaFin ?: "2018-04-26";
-
+            $id = $_SESSION['servDesk']['id'];
+            
             include_once("connection/connection.php");
             $db = new Connection(); 
+
+            if($_SESSION['servDesk']['id_level'] == 4)
+                $condition = "r.id_client = $id";
+            else 
+                $condition = "r.responsable = $id";
             
             $query = "SELECT r.infrastructure,
                 ar.name as assetName,
@@ -23,6 +29,7 @@
                 AND r.id_agentThreat = at.id
                 AND at.id_threatType = tt.id
                 AND r.infrastructure = ar.id 
+                AND $condition
                 AND r.registerDate BETWEEN '$fechaIni' AND '$fechaFin'
                 GROUP BY r.infrastructure, tt.name, at.name;";
             $rows = $db->select($query);

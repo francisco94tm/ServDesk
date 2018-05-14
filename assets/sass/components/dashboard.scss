@@ -294,24 +294,21 @@
             white-space: pre-wrap;  
             overflow: hidden; 
             font-style: italic;
-        }
-        .circle{
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            text-align: center;
-            border-radius: 50%;
-            color: rgb(134, 134, 134);
-            background-color: rgba(134, 134, 134, 0.3);
-            display: inline-block;
-            margin-right: 10px;
-        }
+        } 
         .user-name, .author{
-            font-size: 25px;
-            color: rgb(134, 134, 134);
-            // font-weight: bold;
-            letter-spacing: 1px;
-            // margin-bottom: 30px;
+            
+            
+            span{
+                font-size: 25px;
+                color: rgba($theme--fg, 0.5);
+                letter-spacing: 1px; 
+                font-weight: bold;
+            }
+
+            b{
+                font-size: 15px;
+                color: rgba($theme--fg, 0.25);
+            }
         }  
         .item-list{
             // margin-top: 10px;

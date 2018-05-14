@@ -1,13 +1,16 @@
-<div class="xpopup {{$ctrl.display ? '':'hidden'}}">
+<div class="xpopup {{$ctrl.xPopup.isHidden() ? 'hidden':''}}">
+    <div class="xpopup-back" ng-click="$ctrl.xPopup.hide()"></div>
     <div class="xpopup-body">  
+        <div class="close-btn" ng-click="$ctrl.xPopup.hide()">
+            <i class="material-icons">close</i>
+        </div>
         <div class="xpopup-message">
-            <p>{{$ctrl.data.title}}</p> 
-            <br/>
-            <h1>{{$ctrl.data.id}}</h1>
-            <p>{{$ctrl.data.description}}</p>
+            <div class="title">{{$ctrl.xPopup.getTitle()}}</div>
+            <div class="id">{{$ctrl.xPopup.getId()}}</div>
+            <div class="description">{{$ctrl.xPopup.getDescription()}}</div>
         </div>
-        <div class="xpopup-controlls">
-            <button ng-click="$ctrl.display = false">CERRAR</button>
-        </div>
+        <!-- <div class="xpopup-controlls">
+            <button ng-click="$ctrl.xPopup.hide()">ACEPTAR</button>
+        </div> -->
     </div>
 </div>

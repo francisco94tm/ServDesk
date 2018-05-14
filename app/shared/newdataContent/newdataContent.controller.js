@@ -26,6 +26,7 @@ function newdataContentController($scope, $element, $attrs, NewdataContent, Newd
         NewdataContent.shuffleEditMode(); 
     };
 
+
     // Revert edits
     $scope.$ctrl.revertEdit = function(){  
         for (var key in NewdataContent.data)

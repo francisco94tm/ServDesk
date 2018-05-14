@@ -8,22 +8,22 @@ var DashNav = function() {
 
     // Default init section
     var currentSection =  0;
-    var level = undefined;
-
-    // Section in dashboard Panel 
+    var level = undefined;  
     var sections; 
 
     this.reset = function(){ 
+        currentSection =  0;
+        level = undefined;
         sections = [
-            { name: "Mis Casos",   view: 'case-container',   sectionlevel: 2,  icon: 'notifications_none'	},
-            { name: "Datos",       view: 'data-container',   sectionlevel: 2,  icon: 'lightbulb_outline'	},
-            { name: "Agentes",     view: 'agent-container',  sectionlevel: 1,  icon: 'perm_identity' },
-            { name: "Reportes",    view: 'report-container', sectionlevel: 3,  icon: 'show_chart'	}
+            { name: "Mis Casos",   view: 'case-container',   level: 4,  icon: 'notifications_none'	},
+            { name: "Datos",       view: 'data-container',   level: 3,  icon: 'lightbulb_outline'	},
+            { name: "Agentes",     view: 'agent-container',  level: 1,  icon: 'perm_identity' },
+            { name: "Reportes",    view: 'report-container', level: 4,  icon: 'show_chart'	}
         ];
     };
     
     // Add a section to Dash Nav
-    this.addSection = function(obj){  
+    this.addSection = function(obj){   
         sections.push(obj);
     }
 

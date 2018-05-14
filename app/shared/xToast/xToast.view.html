@@ -1,0 +1,16 @@
+<div class="xtoast {{$ctrl.xToast.isHidden() ? 'hidden':''}}">
+    <div class="xtoast-back" ng-click="$ctrl.xToast.hide()"></div>
+    <div class="xtoast-body">  
+        <!-- <div class="close-btn" ng-click="$ctrl.xToast.hide()">
+            <i class="material-icons">close</i>
+        </div> -->
+        <div class="xtoast-message">
+            <div class="title">{{$ctrl.xToast.getTitle()}}</div>
+            <div class="id">{{$ctrl.xToast.getId()}}</div>
+            <div class="description">{{$ctrl.xToast.getDescription()}}</div>
+        </div>
+        <div class="xtoast-controlls">
+            <button ng-click="$ctrl.xToast.hide()">Deshacer</button> 
+        </div>
+    </div>
+</div>

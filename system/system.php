@@ -19,6 +19,11 @@
 				$system = new System(); 
 				echo $system->saveCase($_REQUEST);	
 				break; 
+			case 'editCase':
+				include_once('system.class.php');
+				$system = new System(); 
+				echo $system->editCase($_REQUEST);	
+				break; 
 			case 'saveClient':
 				include_once('system.class.php');
 				$system = new System(); 

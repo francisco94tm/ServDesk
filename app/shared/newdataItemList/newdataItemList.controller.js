@@ -6,7 +6,7 @@ function newdataItemListController($scope, $rootScope, $element, $attrs, $interv
  
     $scope.$ctrl.data = [];
 
-    $scope.$ctrl.NewdataItemList = NewdataItemList;   
+    $scope.$ctrl.NewdataItemList = NewdataItemList;
     $scope.$ctrl.DashNav = DashNav;   
     NewdataItemList.reset();  
     $scope.$ctrl.isLoading = false;
@@ -24,17 +24,17 @@ function newdataItemListController($scope, $rootScope, $element, $attrs, $interv
     
     // Update alerts
     $scope.$on('getNewdata', function (event, data) {   
-        $scope.$ctrl.data = data;  
+        NewdataItemList.data = data;  
     });  
 
     $scope.$ctrl.loadData = function(){ 
-        $scope.$ctrl.data = []; 
+        NewdataItemList.data = []; 
         $scope.$ctrl.isLoading = true;        
         var promise =  Dashboard.getCatalogues(['client','registerMedium','agentThreat']);   
         var interval = $interval(() => {
             promise.then((data) => {  
                 $scope.$ctrl.isLoading  = false;
-                $scope.$ctrl.data = data;  
+                NewdataItemList.data = data;  
                 $interval.cancel(interval);
             });
         }, 1000);

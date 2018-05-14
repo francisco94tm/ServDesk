@@ -4,19 +4,19 @@
  */
 
 function xPopupController($scope, $element, $attrs, xPopup){   
-    $scope.$ctrl.display = xPopup.display; 
+    $scope.$ctrl.xPopup = xPopup;
+    // $scope.$ctrl.display = xPopup.display; 
 
     $scope.$on('openPopup', function(scope, data){
-        console.log(data);
-        $scope.$ctrl.display = true;
-        xPopup.display = false;
-        $scope.$ctrl.data = data;
+        console.log(data); 
+        xPopup.show();
+        xPopup.data = data;
     });
     
-    $scope.$on('closePopup', function(data){
-        $scope.$ctrl.display = true;
-        xPopup.display = true;
+    $scope.$on('closePopup', function(){
+        xPopup.hide();
     });
+ 
 }
   
 angular.module('app').component('xpopup', {

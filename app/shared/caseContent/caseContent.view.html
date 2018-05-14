@@ -10,7 +10,7 @@
             <div class="back-btn" ng-click="$ctrl.CaseContent.data = undefined">        
                 <i class="material-icons">arrow_back</i> 
             </div>
-            <div class="edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
+            <div ng-if="2 >= $ctrl.Session.getId()" class="edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
                 <div class="off">
                     <i class="material-icons">edit</i>
                     <span>Editar</span>
@@ -21,6 +21,7 @@
                 </div>            
             </div>
         </div> 
+
         <div class="revert-edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  
             ng-click="$ctrl.revertEdit()">
             <i class="material-icons">close</i>
@@ -42,6 +43,7 @@
             
         <!-- Author  -->
         <div class="author">  
+            <b>Atendido por:</b><br>
             <span>
                 {{$ctrl.CaseContent.data.author.name}} 
                 {{$ctrl.CaseContent.data.author.firstLastname}} 
@@ -61,6 +63,30 @@
             <!-- Bullets -->
             <div class="item-list"> 
                 
+                <!-- Client --> 
+                <div class="item register-medium">                    
+                    <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">face</i>
+                    <xselect
+                        options="$ctrl.options.client" 
+                        disabled="!$ctrl.CaseContent.isEditModeOn()"
+                        label="Cliente:" 
+                        item-selected="{{$ctrl.CaseContent.data.id_client.id}}"
+                        ng-model="$ctrl.CaseContent.data.id_client"> 
+                    </xselect>
+                </div>
+
+                <!-- Agent Threat --> 
+                <div class="item register-medium">                    
+                    <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">warning</i>
+                    <xselect
+                        options="$ctrl.options.agentThreat" 
+                        disabled="!$ctrl.CaseContent.isEditModeOn()"
+                        label="Agente de Amenaza:" 
+                        item-selected="{{$ctrl.CaseContent.data.id_agentThreat.id}}"
+                        ng-model="$ctrl.CaseContent.data.id_agentThreat"> 
+                    </xselect>
+                </div> 
+    
                 <!-- Register Medium -->
                 <div class="item register-medium">                    
                     <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">content_paste</i>
@@ -83,43 +109,7 @@
                         item-selected="{{$ctrl.CaseContent.data.infrastructure.id}}"
                         ng-model="$ctrl.CaseContent.data.infrastructure"> 
                     </xselect>
-                </div>
-
-                <!-- Agent Threat --> 
-                <div class="item register-medium">                    
-                    <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">warning</i>
-                    <xselect
-                        options="$ctrl.options.agentThreat" 
-                        disabled="!$ctrl.CaseContent.isEditModeOn()"
-                        label="Agente de Amenaza:" 
-                        item-selected="{{$ctrl.CaseContent.data.id_agentThreat.id}}"
-                        ng-model="$ctrl.CaseContent.data.id_agentThreat"> 
-                    </xselect>
-                </div>
-
-                <!-- Responsable --> 
-                <div class="item register-medium">                    
-                    <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">perm_identity</i>
-                    <xselect
-                        options="$ctrl.options.agent" 
-                        disabled="!$ctrl.CaseContent.isEditModeOn()"
-                        label="Responsable:" 
-                        item-selected="{{$ctrl.CaseContent.data.responsable.id}}"
-                        ng-model="$ctrl.CaseContent.data.responsable"> 
-                    </xselect>
-                </div>
-
-                <!-- Client --> 
-                <div class="item register-medium">                    
-                    <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">face</i>
-                    <xselect
-                        options="$ctrl.options.client" 
-                        disabled="!$ctrl.CaseContent.isEditModeOn()"
-                        label="Cliente:" 
-                        item-selected="{{$ctrl.CaseContent.data.id_client.id}}"
-                        ng-model="$ctrl.CaseContent.data.id_client"> 
-                    </xselect>
-                </div>
+                </div> 
 
                 <!-- Max attention date -->
                 <!-- <div class="item max-attention-date">
@@ -142,9 +132,11 @@
         </div> 
     </div>  
 
-     <!-- Show when data is non-selected -->
-    <div class="closed" ng-show="$ctrl.CaseContent.data == undefined">  
-        <h1 ng-if="$ctrl.CaseItemList.data[0].items.length>0">Tienes casos por resolver</h1>
-        <h1 ng-if="$ctrl.CaseItemList.data[0].items.length==0 || $ctrl.CaseItemList.data[0].items.length == undefined">Parece que no hay casos por resolver :-)</h1> 
+     <!-- Show when data is non-selected --> 
+    <div class="closed" ng-show="$ctrl.CaseContent.data == undefined">   
+        <h1 ng-if="$ctrl.CaseItemList.data[0].items.length>0 && 4 != $ctrl.Session.getLevel()">Tienes casos por resolver</h1>
+        <h1 ng-if="$ctrl.CaseItemList.data[0].items.length>0 && 4 == $ctrl.Session.getLevel()">Bienvenido</h1>
+        <h1 ng-if="($ctrl.CaseItemList.data[0].items.length==0 || $ctrl.CaseItemList.data[0].items.length == undefined) && 4 != $ctrl.Session.getLevel()">Parece que no hay casos por resolver :-)</h1>  
+        <h1 ng-if="($ctrl.CaseItemList.data[0].items.length==0 || $ctrl.CaseItemList.data[0].items.length == undefined) && 4 == $ctrl.Session.getLevel()">Bienvenido</h1>  
     </div>
 </div>

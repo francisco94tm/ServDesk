@@ -1,0 +1,93 @@
+.xtoast{
+    display: flex;
+    position: fixed;
+    max-width: 100vw;
+    width: 350px;
+    max-width: 94%;
+    height: 60px;
+    z-index: 9999;
+    bottom: 3.33%;
+    right: 3%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition: 0.3s $animation-ease-out; 
+    opacity: 1;
+     
+    &.hidden{
+        z-index: -1; 
+        bottom: -70px;
+        opacity: 0;
+    } 
+    .xtoast-body{  
+        width: 100%; 
+        height: 100%;
+        background: #111;
+        color: white;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        text-align: center; 
+        position: relative;
+        font-family: "Walfork";
+        transition: 0.3s $animation-ease-out; 
+        border-radius: 3px;
+        line-height: 60px;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px 0 30px;
+        margin-top: 0;
+    }
+
+    .xtoast-message { 
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        .title{                     
+            font-weight: bold; 
+            font-size: 13px; 
+        }
+        .id{
+            font-size: 70px; 
+            font-weight: 400;   
+            padding: 0;
+            line-height: 80px;
+        }
+        // .message{
+
+        // }
+    }
+    .close-btn{
+        padding: 10px 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
+    .xtoast-controlls {
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        align-items: center;
+        button{
+            border: none;
+            font-size: 14px;
+            background: none;
+            font-family: "Walfork";   
+            padding: 10px 20px;
+            border-radius: 3px;
+            line-height: 20px;
+            outline: none; 
+            width: auto;
+            min-width: auto;  
+            opacity: 0.8;
+            color: yellow;
+            &:hover{
+                background: rgba(white,0.05);
+                opacity: 1;
+            }
+        }
+    }
+}  

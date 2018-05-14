@@ -2,9 +2,15 @@
      ng-click="$ctrl.caseItemClick($ctrl.data)">
     <div class="left">
         <div class="title">{{$ctrl.data.subject}}</div>
-        <div class="data">
+        <div class="data" ng-if="$ctrl.Session.getLevel() == 4">
             {{$ctrl.data.author.name}} 
             {{$ctrl.data.author.firstLastname}} 
+            {{$ctrl.data.author.secondLastname}} 
+        </div>
+        <div class="data" ng-if="$ctrl.Session.getLevel() != 4">
+            {{$ctrl.data.id_client.name}} 
+            {{$ctrl.data.id_client.firstLastname}} 
+            {{$ctrl.data.id_client.secondLastname}} 
         </div>
     </div>
     <div class="right">

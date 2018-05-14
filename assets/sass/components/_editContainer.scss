@@ -39,11 +39,11 @@ $edit--bg: rgba($theme--fg, 0.08);
     &.is-opened{
         left: 0;
     }
-    background: $theme--bg;
+    background: linear-gradient(to bottom, $theme--bg, rgba($theme--bg, 0.95), transparent);
     width: calc(100% - 600px);
     height: 55px;
     @media screen and (max-width: 600px) { 
-        height: 80px; 
+        height: 150px; 
     }
     z-index: 1000;
     transition: 0.3s $animation-ease-out;

@@ -58,7 +58,7 @@ var AgentAdd = function(System, Session, Obj){
         return !Obj.isFilled(this.data, ['id']);
     } 
     this.save = function(){  
-        var d = this.data; 
+        var d = angular.copy(this.data); 
         // Change object field to id
         Object.keys(d).map(function(key){ 
             if(d[key] !== null && typeof d[key] === 'object'){

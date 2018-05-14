@@ -2,7 +2,7 @@
  * request Component
  */
 
-function settingsContainerController($scope, $element, $attrs, $window, DashNav, CaseItemList, Session, Dashboard){  
+function settingsContainerController($scope, $element, $attrs, $window, DashNav, CaseItemList, Session, Dashboard, $rootScope){  
 
     $scope.$ctrl.Session = Session;
     $scope.$ctrl.CaseItemList = CaseItemList;
@@ -15,6 +15,8 @@ function settingsContainerController($scope, $element, $attrs, $window, DashNav,
         Session.close().then(data => {
             // console.log(data);
             $window.location = "#"; 
+            CaseItemList.data = [];
+            $rootScope.$broadcast('displayCase', undefined);
             DashNav.reset();
         }); 
     };

@@ -16,7 +16,7 @@
    
     <div class="newdata-item-wrapper item-wrapper">  
         <div class="refresh-btn tooltiped 
-            {{($ctrl.data.length == 0)?'big':'small'}}"
+            {{($ctrl.NewdataItemList.data.length == 0)?'big':'small'}}"
             ng-click="$ctrl.loadData()"
             data-tooltip="Recargar"
             data-position="bottom">
@@ -25,7 +25,7 @@
         </div> 
         <div class="status-group">
             <newdata-item
-                ng-repeat="x in $ctrl.data[$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].table] | filter:$ctrl.search"
+                ng-repeat="x in $ctrl.NewdataItemList.data[$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].table] | filter:$ctrl.search"
                 data="x"
                 current="$ctrl.current">
             </newdata-item>

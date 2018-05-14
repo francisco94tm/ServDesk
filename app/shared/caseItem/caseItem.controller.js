@@ -3,9 +3,11 @@
  * request Component
  */
 
-function caseItemController($scope, $element, $attrs, $rootScope, moment, CaseItem, CaseContent){ 
+function caseItemController($scope, $element, $attrs, $rootScope, moment, CaseItem, CaseContent, Session){ 
     
     $scope.$ctrl.CaseItem = CaseItem;
+    $scope.$ctrl.Session = Session;
+    
     
     // Select curren case
     $scope.$ctrl.caseItemClick = function(data){ 
@@ -18,6 +20,11 @@ function caseItemController($scope, $element, $attrs, $rootScope, moment, CaseIt
         $rootScope.$broadcast('displayCase', d); 
     };    
       
+    $scope.$on('getCases', (event, data) => {
+        console.log(data);
+        if(data == undefined)
+            $scope.$ctrl.current = undefined;
+    });
 
     $element.ready(function(){
         $scope.$apply(function(){  

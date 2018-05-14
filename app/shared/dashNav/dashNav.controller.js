@@ -4,10 +4,9 @@
 
 function dashNavController($scope, $element, $attrs, $timeout, DashNav, $rootScope){ 
     
-    $scope.$ctrl.DashNav = DashNav;  
-    DashNav.reset();
-    
     // Stablish default init section
+    $scope.$ctrl.DashNav = DashNav;   
+    DashNav.reset();
     $rootScope.$broadcast('getCurrentSection');
     
     // ALert to DashContent that current section has changed
@@ -17,9 +16,10 @@ function dashNavController($scope, $element, $attrs, $timeout, DashNav, $rootSco
     }
     
     // Detect if a new section has to be added to the dash-nav
-    $scope.$on('addSectionToNav', (event, data) => { 
-        DashNav.addSection(data);
-        DashNav.setLevel(data.sectionlevel);        
+    $scope.$on('addSectionToNav', (event, data) => {           
+        DashNav.reset();  
+        DashNav.setLevel(data.level); 
+        DashNav.addSection(data);      
     })
 }
  

@@ -1,8 +1,8 @@
 /****************************************************************************
- *  xPopup Service
+ *  xToast Service
  ********************************************/
 
-var xPopup = function(){
+var xToast = function(){
 
     this.display = false;
     this.data = {
@@ -53,4 +53,4 @@ var xPopup = function(){
     }
 }
 
-angular.module('app').service('xPopup', xPopup); 
+angular.module('app').service('xToast', xToast); 

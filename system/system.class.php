@@ -1,4 +1,5 @@
-<?php
+<?php if(!isset($_SESSION)) session_start();
+
 class System { 
     protected $values = []; 
 
@@ -13,9 +14,20 @@ class System {
         // Create connection
         include_once('connection/connection.php');
         $db = new Connection();
-        
+        if(!isset($_SESSION['servDesk'])){
+            $values['error'][] = "No existe el objecto de Session";
+            return json_encode($values);
+        }            
+        $id = $_SESSION['servDesk']['id'];
         // Select from table
-        $values['query'] = "SELECT * from $table";
+        if($table === "request"){
+            if($_SESSION['servDesk']['id_level'] != 4)
+                $values['query'] = "SELECT * from $table WHERE responsable = $id";
+            else
+                $values['query'] = "SELECT * from $table WHERE id_client = $id";
+        }
+        else 
+            $values['query'] = "SELECT * from $table";
         $values['info'] = $db->select($values['query']);
         $values['error'][] = $db->error();
 
@@ -136,6 +148,39 @@ class System {
             )";
         $values['info'] = $db->query($values['query']);			
         $values['id']   = $db->getLastID(); 
+        $values['error'][] = $db->error(); 
+        return json_encode($values);
+    }
+
+    /*****************************************************************************
+     * Edit a case into the Database
+     * @return  JSON object to inject into the view.
+     */ 
+     
+    public function editCase($obj){
+        // Create connection
+        include_once('connection/connection.php' );
+        $db = new Connection();  
+        $agentThreat = $obj['id_agentThreat'];
+        $asset = $obj['infrastructure']; 
+        $description = $obj['description'];
+        $registerMedium = $obj['id_registerMedium']; 
+        $client = $obj['id_client'];
+        $subject = $obj['subject'];
+        $id = $obj['id'];
+        $status = $obj['id_status'];
+
+        $values['query'] = "UPDATE request SET
+            infrastructure = '$asset',
+            description = '$description',
+            subject = '$subject',  
+            id_status = $status, 
+            id_client = $client, 
+            id_agentThreat = $agentThreat,
+            id_registerMedium = $registerMedium
+            WHERE id = $id
+        ";
+        $values['info'] = $db->query($values['query']);	 
         $values['error'][] = $db->error(); 
         return json_encode($values);
     }
