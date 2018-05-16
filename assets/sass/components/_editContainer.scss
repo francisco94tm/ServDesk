@@ -39,9 +39,9 @@ $edit--bg: rgba($theme--fg, 0.08);
     &.is-opened{
         left: 0;
     }
-    background: linear-gradient(to bottom, $theme--bg, rgba($theme--bg, 0.95), transparent);
+    background: linear-gradient(to bottom, $theme--bg, rgba($theme--bg, 0.75), transparent);
     width: calc(100% - 600px);
-    height: 55px;
+    height: 80px;
     @media screen and (max-width: 600px) { 
         height: 150px; 
     }

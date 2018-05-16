@@ -21,11 +21,11 @@
         }
     }
     .item{
-        border-left: 4px solid;
-        padding: 15px 30px!important; 
-        &.selected{
-            background-color: $theme--bg!important;
-        }
+        // border-left: 4px solid;
+        padding: 15px 30px 15px 60px!important; 
+        // &.selected{
+        //     // background-color: $theme--bg!important; 
+        // }
         .left{
             flex-direction: column; 
             .title{

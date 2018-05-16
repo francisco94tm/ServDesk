@@ -1,5 +1,6 @@
-<div class="container login-container">
-    <div class="row login-wrapper">
+<div class="container login-container" ng-class="(wrong === false)?'nothingwrong':''">
+    <div class="lds-ring" ng-class="(wrong === false)?'nothingwrong':''"><div></div><div></div></div>
+    <div class="row login-wrapper" ng-class="(wrong === true)?'somethingwrong':(wrong === false)?'nothingwrong':''">
         <div class="one-half column is-vertical-centered">             
             <logo size="big"></logo> 
         </div>

@@ -30,21 +30,22 @@
 }
 
 @mixin alert-style($color) {
-    border-left-color: $color;
+    // border-left-color: $color;
     
     @if $theme--bg == $dark-theme--bg{
-        background:     rgba($color, 0.12);
+        background:     rgba($theme--fg, 0.12);
+        &:hover{
+            background: rgba($theme--fg,0.3)
+        }
+        &:before{
+            background: rgba($color,0.7);
+        }
+    } @else if $theme--bg == $clear-theme--bg{
+        background:     rgba($color, 0.25);
         &:hover{
             background: rgba($color,0.3)}
         &:before{
-            background: rgba($color,0.7)}
-
-    } @else if $theme--bg == $clear-theme--bg{
-        background:     rgba($color, 0.15);
-        &:hover{
-            background: rgba($color,0.2)}
-        &:before{
-            background: rgba($color,0.5)}
+            background: rgba($color,1)}
     }
 
     

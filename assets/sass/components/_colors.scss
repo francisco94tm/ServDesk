@@ -1,26 +1,38 @@
 
 // $main-color: #5063A5;
-$main-color: #3949ab;
+// $main-color: #3949ab;
+// $main-color:    #6553bf;
+// $main-color: #6553bf;
+// $main-color: #24a655;
+$main-color: #0066fd;
+// $accent3-color: #ff5831;
 // $main-color: #231FC2;
 // $main-color: #1762C2;
 
-$dark-theme--bg:   #212121;
-$dark-theme--fg:   #fafafa; 
+/********************************************************
+ * Dark theme
+ */
+$dark-theme--bg:   #23292f;
+// $dark-theme--bg:   #212121;
+$dark-theme--fg:   #fff; 
 
-// $clear-theme--bg: #fff;
-// $clear-theme--bg: #DFDBDA;
+/********************************************************
+ * Clear theme
+ */
 $clear-theme--bg: #fff;
-$clear-theme--fg: rgba(#000, 0.87);
- 
-$very-high-priority:rgb(252, 67, 67);
-// $very-high-priority: #DA4D43;
-$high-priority:     #e53935;
-$medium-priority:   rgb(236, 226, 78);
-// $medium-priority:   #FCCE54;
+$clear-theme--fg: rgba(#111, 0.87);
+
+/********************************************************
+ * Purple theme
+ */
+$purple-theme--bg: darken(#403294, 0);
+$purple-theme--fg: rgba(#fff, 0.87);
+
+/********************************************************
+ * Priority colors
+ */
+$very-high-priority: #f1716f; 
+$high-priority:     #f78583;
+$medium-priority:   rgb(236, 226, 78); 
 $low-priority:      rgb(80, 224, 140);
-$non-priority:      rgb(167, 166, 166);
-
-
-// $high-priority:     lighten(#3949ab, 10);
-// $medium-priority:   lighten(#3949ab, 30);
-// $low-priority:      lighten(#3949ab, 50);
+$non-priority:      rgb(167, 166, 166); 

@@ -5,14 +5,16 @@
 
 function reportContainerController($scope, $element, $attrs, $rootScope, ReportContainer, Chart, System, moment, Dashboard){ 
     
-    Dashboard.getCatalogues(['request']).then(data => {
-        $scope.$ctrl.cases = {
-            opened: data.request[0].items.length,
-            in_progress: data.request[1].items.length,
-            solved: data.request[2].items.length,
-            cancelled: data.request[3].items.length
-        };
-        console.log(data);
+    // Radar cases chart
+    Dashboard.getCatalogues(['request']).then(data => { 
+        $scope.pie = {};
+        $scope.pie.data = [
+            data.request[0].items.length,
+            data.request[1].items.length,
+            data.request[2].items.length,
+            data.request[3].items.length
+        ]; 
+        $scope.pie.labels = ["Abiertos", "En progreso", "Solucionados", "Cancelados"];   
     });   
 
 

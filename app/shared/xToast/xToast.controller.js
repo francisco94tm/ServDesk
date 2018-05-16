@@ -3,9 +3,12 @@
  *  x Select Component
  */
 
-function xToastController($scope, $element, $attrs, xToast, $timeout){   
+function xToastController($scope, $element, $attrs, xToast, $timeout, $rootScope){   
     $scope.$ctrl.xToast = xToast;
+    $scope.$ctrl.xToast.display = false;
+
     $scope.$ctrl.timeout = 5000; 
+    var undo = false;
 
     $scope.$on('openToast', function(scope, data){
         $timeout(()=>{
@@ -13,6 +16,8 @@ function xToastController($scope, $element, $attrs, xToast, $timeout){
             xToast.data = data;
             $timeout(()=>{
                 xToast.hide();
+                if(!undo)
+                    $rootScope.$broadcast("undo", false);
             }, $scope.$ctrl.timeout);
         }, 500);        
     });
@@ -20,6 +25,11 @@ function xToastController($scope, $element, $attrs, xToast, $timeout){
     $scope.$on('closeToast', function(){
         xToast.hide();
     });
+
+    $scope.$ctrl.undo = function(){
+        undo = true;
+        $rootScope.$broadcast("undo", true);
+    }   
  
 }
   

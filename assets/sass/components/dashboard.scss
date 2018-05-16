@@ -14,7 +14,24 @@
 .section-container{
     overflow-x: hidden!important;
 }
- 
+
+.back-dash{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background: white;
+    opacity: 1; 
+    z-index: 10001;
+    transition: all 1s $animation-ease-out;
+    &.closed{
+        // background: red;
+        opacity: 0!important;
+        height: 0;
+    }
+}
+
 .container{    
     .row{
         display: flex;
@@ -51,7 +68,7 @@
         }
         &.section-content {     
             overflow-x: hidden!important;            
-            padding: 100px 100px 60px 100px;
+            padding: 60px 100px 60px 100px;
             position: relative;
             @media screen and (max-width: 1050px) {
                 padding: 100px 80px 60px 80px;
@@ -86,25 +103,26 @@
         width: calc(100% - 10px);
     }
 }
+
 .status-group-name{
     background-color: $theme--bg;
     top: 0px;
-    z-index: 10; 
+    z-index: 11; 
     position: -webkit-sticky;
     position: sticky;
     font-weight: bold;
-    padding: 10px 20px 10px 20px;  
+    padding: 10px 20px 10px 10px;  
     color: rgba($theme--fg, 0.8);
     font-size: 15px;  
     letter-spacing: 0.3px;
     // text-transform: uppercase;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     cursor: pointer;  
-    &:hover{
-        color: $main-color;  
-    }
+    // &:hover{
+    //     color: $main-color;  
+    // }
     i{
         float: right;
         margin-right: 15px;
@@ -170,12 +188,16 @@
         font-size: 13px;
         justify-content: space-between; 
         margin: 5px 0px 5px 10px;        
-        transition: 0.15s $animation-ease-out;
-        position: relative;
-        border-left: 4px solid rgba($theme--fg, 0.25); 
-        background: rgba($theme--fg, 0.08); 
+        transition: 0.4s $animation-ease-out;
+        position: relative;  
+        // border-left: 4px solid rgba($theme--fg, 0.25); 
+        background: rgba($theme--fg, 0.02); 
         cursor: pointer;
+        border-radius: 2px;
 
+        &:hover{
+            background: rgba($theme--fg, 0.09); 
+        }
         .left{
             z-index: 1;
             display: flex;
@@ -209,38 +231,49 @@
                 letter-spacing: 1px;
                 padding: 1px 5px;
                 z-index: 1;
-                border: solid 1px  rgba($theme--fg, 0.3);
-                // &.status-1{
-                    
-                // }
-
+                border: solid 1px  rgba($theme--fg, 0.3); 
             }        
             .datetime{
                 z-index: 1;
                 color: $theme--fg;  
                 font-size: 11.5px;  
-                opacity: 0.7;
+                opacity: 0.6;
             } 
         }
 
         // Animation when selected
+        $beforew: 3px;
         &:before{
             content: "";
             display: block;
             position: absolute;
-            width: 0%;
-            height: 100%;
-            transition: $animation-ease-out 0.3s; 
-            top: 0;
-            left: 0;
+            width: 3px;
+            height: calc(100% - 20px);
+            border-radius: $beforew;
+            transition: 
+                transform 0.15s, 
+                height 0.15s 0.15s,  
+                top 0.15s 0.15s,  
+                border-radius 0.15s 0.15s; 
+            top: 10px;
+            left: 10px;
             z-index: 0;
         }
 
-        &.selected{       
-            margin-left: -4px;  
+        &.selected{        
             background: rgba($theme--fg, 0.16);
-            &:before{
-                width: 100%;
+            &:before{ 
+                // $sc: calc(100% / #{$beforew});
+                // @error #{$sc};
+                transform: scale(200); 
+                top: calc((100% - #{$beforew}) / 2);
+                height: $beforew; 
+                border-radius: 50%; 
+                transition: 
+                    transform 0.15s 0.15s, 
+                    height 0.15s, 
+                    top 0.15s, 
+                    border-radius 0.15s; 
             }   
             .title{ 
                 max-width: 180px;
@@ -348,3 +381,46 @@
         }
     }  
 }  
+
+
+
+.lds-ring {
+    display: inline-block;
+    position: fixed;
+    z-index: 10002;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    width: 64px;
+    height: 64px;
+    transform: scale(1.3); 
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 2px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: $main-color transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

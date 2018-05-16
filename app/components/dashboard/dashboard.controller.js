@@ -3,7 +3,7 @@
 
 	// Dash Ctrl
 	var dashCtrl = function($scope, $window, Session, $timeout){
-		
+		$scope.allLoaded = false;
 		$scope.Session = Session; 
 
 		// Check if session exist otherwise redirect to Login  ------------------------------------ 
@@ -20,6 +20,7 @@
 				$timeout(function(){
 					$scope.$broadcast('addSectionToNav', data);  
 					$scope.$broadcast('getCases');   
+					$scope.allLoaded = true; 
 				});
 			}); 
 		}   

@@ -3,24 +3,29 @@
     <h1 class="bold">Reporte</h1> 
     <br>
     <div class="cases-resume"> 
+        <h3>Resumen de casos</h3> 
         <table>
             <tr>
                 <th># Casos Abiertos</th>
-                <td>{{$ctrl.cases.opened}}</td>
+                <td>{{pie.data[0]}}</td>
             </tr>
             <tr>
                 <th># Casos en progreso</th>
-                <td>{{$ctrl.cases.in_progress}}</td>
+                <td>{{pie.data[1]}}</td>
             </tr>
             <tr>
                 <th># Casos solucionados</th>
-                <td>{{$ctrl.cases.solved}}</td>
+                <td>{{pie.data[2]}}</td>
             </tr>
             <tr>
                 <th># Casos cancelados:</th>
-                <td>{{$ctrl.cases.cancelled}}</td>
+                <td>{{pie.data[3]}}</td>
             </tr>
         </table>
+        <canvas id="pie" class="chart chart-pie"
+            chart-data="pie.data" 
+            chart-labels="pie.labels">
+        </canvas>
     </div> 
     <br><br>
     <div class="chart-wrapper">
@@ -48,7 +53,7 @@
         </div> 
     </div>  
 
-    <div class="infrastructure-wrapper">
+    <div class="infrastructure-wrapper" ng-if="asset != undefined">
         <div class="infrastructure">
             <caption><b>Infraestructura:</b> {{asset.name}}</caption>
             <div class="table-wrapper">

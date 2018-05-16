@@ -1,62 +1,221 @@
-.login-container {
-    height: 100%;
-    max-width: 900px;
+@import 'variables'; 
+
+@keyframes appear{
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes somethingwrong{
+   0% { transform: translateX(-30px)} 
+   10% { transform: translateX(30px)} 
+   30% { transform: translateX(-10px)} 
+   50% { transform: translateX(10px)} 
+   70% { transform: translateX(-5px)} 
+   90% { transform: translateX(5px)} 
+   100% { transform: translateX(0px)} 
+}
+
+@keyframes nothingwrong{
+    0% { opacity: 1; transform: scale(1) translateY(0); }  
+    100% { opacity: 0; transform: scale(0.3) translateY(900px); }  
+ }
+
+.login-container { 
+    width: 100%;        
     margin: 0 auto!important;
+    color: white!important;
+    background-color: $main-color!important;
+    transition: all 0.6s $animation-ease-out;
     
-    .login-wrapper {
-        display: flex;
-        height: 100vh;
-        min-height: 100vh;
-        max-width: 1200px;
-        margin: 0 auto!important;
-        &>.one-half.column {
-            padding: 20px!important;
-        } 
+    &.nothingwrong{
+        background-color: white!important;
     }
     
+    .login-wrapper { 
+        opacity: 1;
+        animation: appear 0.5s $animation-ease-out forwards;
+        background-color: $clear-theme--bg;
+        display: flex;
+        height: 510px!important;
+        max-height: 510px!important;
+        min-height: 510px!important;
+        max-width: 900px;
+        margin: calc((100vh - 510px) / 2) auto!important;
+        -webkit-box-shadow: 0px 67px 100px -17px rgba(0,0,0,0.66);
+        -moz-box-shadow: 0px 67px 100px -17px rgba(0,0,0,0.66);
+        box-shadow: 0px 67px 100px -17px rgba(0,0,0,0.66);
+        flex-direction: row;
+        transition: 0.3s $animation-ease-out;
+
+        &.somethingwrong{ 
+            animation: somethingwrong 0.5s;
+        } 
+
+        &.nothingwrong{
+            animation: nothingwrong 0.5s forwards;
+        }
+
+        &>.one-half.column {
+            padding: 20px!important; 
+        } 
+
+        .column{
+            height: 510px!important;
+            max-height: 510px!important;
+            min-height: 510px!important;
+            transition: 0.3s $animation-ease-out;
+        }
+
+        @media screen and (max-width: 950px) {  
+            height: 100%!important;
+            max-height: 100%!important;
+            min-height: 100%!important;
+            max-width: 100%;
+            width: 100%;
+            margin: 0!important;
+            .column{ 
+                height: auto!important;
+                max-height: none!important;
+                min-height: auto!important;
+            } 
+        }
+        @media screen and (max-width: 650px) {  
+            flex-direction: column;
+            .column{
+                width: 100%;
+                min-width: 100%;
+            }
+        }
+    }
+    
+    .title{
+        margin-top: 20px;
+        transition: 0.3s $animation-ease-out;
+        @media screen and (max-width: 650px) { 
+            margin-top: 0;
+        }
+    }
     .title h1 {
-        text-align: center;
+        transition: 0.3s $animation-ease-out;
+        font-size: 40px;
+        text-align: center; 
     }
     form {
         margin-top: 30px;
     } 
 
+    .logo, .title h1, input{        
+        color: #333!important;
+    }
+
+    input{
+        border: solid 1px transparent; 
+        background: rgba(#333, 0.12);
+        &::-webkit-input-placeholder {
+            color: rgba(#333,0.5);
+        } 
+        &:-ms-input-placeholder{
+            color: rgba(#333,0.5);
+        } 
+        & ::-moz-placeholder {
+            color: rgba(#333,0.5);
+        } 
+
+        &:nth-child(1){
+            border-radius: 3px 3px 0 0;
+            border-bottom: solid 1px rgba(#333, 0.15);
+        }
+
+        &:nth-child(2){
+            border-radius: 0 0 3px 3px; 
+        }
+    }
+
+    button{
+        margin-top: 25px;
+        background: darken($main-color, 10);
+        &:hover{
+            background: darken($main-color, 15);
+        }
+    }
+
     // Responsive design
-    @media screen and (max-width: 600px) { 
+    @media screen and (max-width: 650px) { 
         img {
-            width: 100px!important; 
+            width: 90px!important; 
         }
         h1{
-            font-size: 20px;
+            font-size: 30px;
             display: inline-block;
             letter-spacing: 1px;
         }
-        .logo{
-            margin: 0;
-            margin-top: 30px!important;
+        .logo{ 
+            margin-top: 70px!important;
             .text{
                 margin: 30px 0 0 0!important;
                 font-size: 30px!important;
-                line-height: 25px!important;
+                line-height: 25px!important;  
             }
-        }
-        .row{
-            flex-wrap: wrap;
-        }
-        .one-half, .column, .is-vertical-centered{
-            height: auto!important;
-            min-height: auto!important;
-        }
-        .login-container .one-half.column {
-            height: auto;
-            .title h1 {
-                display: inline-block;
-                font-size: 20px;
-                letter-spacing: 2px;
-            }
-        }
+        } 
+        .title h1 {
+            display: inline-block;
+            font-size: 14px;
+            letter-spacing: 2px; 
+        } 
         form{
             margin-top: 0!important;
         }
     }
 }
+
+
+.login-container .lds-ring {
+    display: inline-block;
+    position: absolute;
+    top: calc(50% - 32px);
+    left: calc(50% - 32px);
+    width: 64px;
+    height: 64px;
+    transform: scale(1.3);
+    z-index: 0;
+    &.nothingwrong div{
+        border-color: $main-color transparent transparent transparent;
+    }
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 2px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+    
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

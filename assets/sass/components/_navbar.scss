@@ -33,7 +33,7 @@
             font-weight: bold;
             color: $main-color;
             border-left-color: $main-color;
-            background: linear-gradient(to right, darken($theme--bg, 5), transparent);
+            // background: linear-gradient(to right, darken($theme--bg, 5), transparent);
         }
     }
 }

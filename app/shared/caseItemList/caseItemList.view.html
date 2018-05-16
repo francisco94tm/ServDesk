@@ -17,9 +17,8 @@
         </div>  
         <div class="status-group" ng-repeat="(k, group) in $ctrl.CaseItemList.data">
             <div class="status-group-name" ng-if="group.items.length>0" ng-click="$ctrl.groupdisabled[k]=!$ctrl.groupdisabled[k]" ng-init="$ctrl.groupdisabled[k] = false">
-                <span>{{group.name}}</span>
                 <i class="material-icons {{$ctrl.groupdisabled[k]?'hidden':'visible'}}">expand_less</i>
-                
+                <span>{{group.name}}</span>               
             </div>
             <case-item class="{{($ctrl.groupdisabled[k])?'hidden':'visible'}}"
                 ng-repeat="x in group.items | 

@@ -17,20 +17,25 @@ angular.module('app')
         tooltips: {
             backgroundColor: "rgba(50,50,50,0.9)",
             titleFontFamily: "Walfork",
-            titleMarginBottom: 20,
-            callbacks: {
-                label: (tooltipItem, data) => {  
-                    return "  "+tooltipItem.yLabel;
-                }
-            },
-            // titleFontSize: 12,
+            titleMarginBottom: 20, 
+            titleFontSize: 20,
             bodyFontFamily: "Walfork",
-            bodySpacing: 10,
+            bodyFontSize: 12,
+            bodySpacing: 15,
             cornerRadius: 2,
-            xPadding: 15,
-            yPadding: 10
+            xPadding: 30,
+            yPadding: 20,
+            intersect: false,  
         },
         elements: { 
+        },
+        layout: {
+            padding: {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            }
         }
     });
 

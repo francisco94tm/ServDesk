@@ -5,6 +5,7 @@
 
 function xPopupController($scope, $element, $attrs, xPopup){   
     $scope.$ctrl.xPopup = xPopup;
+    $scope.$ctrl.xPopup.display = false;
     // $scope.$ctrl.display = xPopup.display; 
 
     $scope.$on('openPopup', function(scope, data){

@@ -1,4 +1,7 @@
 <link rel="stylesheet" ng-href="{{Session.session.theme.url}}" >  
+<div class="back-dash {{(allLoaded)?'closed':''}}">
+    <div class="lds-ring"><div></div><div></div></div>
+</div>
 <div class="container dash-container row"> 
     <dash-nav></dash-nav>
     <dash-content></dash-content> 
