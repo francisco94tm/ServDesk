@@ -206,12 +206,14 @@ class System {
         include_once('connection/connection.php');
         $db = new Connection();
 
+        $id = $_SESSION['servDesk']['id'];
+            
         // Calculate 
-        $q  = "SELECT (MONTH(solutionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, atentionDate, solutionDate)) DIV 1 'mediatime' FROM request WHERE id_status = 3 GROUP BY month";
+        $q  = "SELECT (MONTH(solutionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, atentionDate, solutionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && id_status = 3 GROUP BY month";
         $values['solutionTime'] = $db->select($q);
         $values['error'][] = $db->error(); 
 
-        $q  = "SELECT (MONTH(atentionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, registerDate, atentionDate)) DIV 1 'mediatime' FROM request WHERE (id_status = 3 || id_status = 2) GROUP BY month";
+        $q  = "SELECT (MONTH(atentionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, registerDate, atentionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && (id_status = 3 || id_status = 2) GROUP BY month";
         $values['attentionTime'] = $db->select($q); 
         $values['error'][] = $db->error();  
 
