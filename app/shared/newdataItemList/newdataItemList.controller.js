@@ -2,44 +2,92 @@
  * Alert Container Component
  */
 
-function newdataItemListController($scope, $rootScope, $element, $attrs, $interval, DashNav, NewdataItemList, NewdataItem, NewdataContent, Dashboard){  
- 
-    $scope.$ctrl.data = [];
+function newdataItemListController(
+    $scope, $element, $attrs,
+    $rootScope, $timeout, $interval, 
+    Dashboard, DashNav, NewdataItem,
+    NewdataItemList, NewdataContent, 
+    ){
 
+
+    // Init Services  
     $scope.$ctrl.NewdataItemList = NewdataItemList;
     $scope.$ctrl.DashNav = DashNav;   
-    NewdataItemList.reset();  
+    NewdataItemList.reset();
+
+    
+    $scope.$ctrl.groupDisabled = [
+        [ false, false, false, false ]
+    ];
+
+
+    var list = angular.element($element).find(".item-wrapper");    
     $scope.$ctrl.isLoading = false;
-      
+
+
+    /* ******************************************************
+     * Change current tab section
+     * *****************************************************/
     $scope.$ctrl.setCurrentTab = (n) => { 
-        if(NewdataContent.isEditModeOn())
-            for (var key in NewdataContent.data)
-                if (NewdataContent.data.hasOwnProperty(key))
-                    NewdataContent.data[key] = NewdataContent.backup[key]; 
-        NewdataItemList.setCurrentTab(n);
+        // $timeout(() => list.scrollTop(50));
+        /* 
+         * Check if editing mode is active,
+         * if it is, change current data to backup data 
+         * to avoid loosing info.
+         */        
+        // if(NewdataContent.isEditModeOn()){ // TO DO
+        //     for (var key in NewdataContent.data){
+        //         if (NewdataContent.data.hasOwnProperty(key)){
+        //             NewdataContent.data[key] = NewdataContent.backup[key]; 
+        //         }
+        //     }
+        // } 
+        // Set current Tab
+        NewdataItemList.setCurrentTab(n); 
+        // Get new data list 
         NewdataItem.current = undefined; 
         $rootScope.$broadcast('displayNewdata', undefined);
-    }
- 
+    } 
+
     
-    // Update alerts
-    $scope.$on('getNewdata', function (event, data) {   
-        NewdataItemList.data = data;  
+    /* ******************************************************
+     * Update data when a broadcast call is received
+     * *****************************************************/
+    $scope.$on('getNewdata', function (event, data) {
+        NewdataItemList.setData(data);
     });  
 
-    $scope.$ctrl.loadData = function(){ 
-        NewdataItemList.data = []; 
-        $scope.$ctrl.isLoading = true;        
+
+    /* ******************************************************
+     * Load data from database
+     * *****************************************************/
+    $scope.$ctrl.loadData = function(){
+        // Show loading animation 
+        $scope.$ctrl.isLoading = true;  
+        // Reset data to empty array
+        NewdataItemList.setEmptyData();
+        // Call server for calagues 
         var promise =  Dashboard.getCatalogues(['client','registerMedium','agentThreat']);   
         var interval = $interval(() => {
-            promise.then((data) => {  
-                $scope.$ctrl.isLoading  = false;
-                NewdataItemList.data = data;  
-                $interval.cancel(interval);
+            promise.then(data => {  
+                // Data is loaded
+                $scope.$ctrl.isLoading  = false;  
+                NewdataItemList.setData(data);
+                $timeout(() => $scope.$ctrl.scroll());                
+                $interval.cancel(interval);   
             });
         }, 1000);
     };
+
+     // Scroll up to hide refresh button
+     $scope.$ctrl.scroll = () => { 
+        list.animate({
+            scrollTop: 50
+        }); 
+    };
+
     $scope.$ctrl.loadData();
+    $scope.$ctrl.setCurrentTab(1);
 }
  
 angular.module('app').component('newdataItemList', {

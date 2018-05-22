@@ -1,5 +1,5 @@
-<div class="case-item item {{($ctrl.data.id == $ctrl.current.id) ? 'selected' : ''}} {{$ctrl.priorityClass}}" 
-     ng-click="$ctrl.caseItemClick($ctrl.data)">
+<div class="case-item item {{($ctrl.data.id == $ctrl.current.id) ? 'selected' : ''}} {{($ctrl.data.id_status.id==1 || $ctrl.data.id_status.id==2)?$ctrl.priorityClass:''}}" 
+     ng-click="$ctrl.caseItemClick($ctrl.data)"> 
     <div class="left">
         <div class="title">{{$ctrl.data.subject}}</div>
         <div class="data" ng-if="$ctrl.Session.getLevel() == 4">

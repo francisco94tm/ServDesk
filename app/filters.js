@@ -22,3 +22,16 @@ angular.module('app').filter('minDigits', function () {
         return num;
     };
 });
+
+angular.module('app').filter('groupBy', function($parse) {
+   return _.memoize(function(items, field) {
+        var getter = $parse(field);
+        var y = _.groupBy(items, function(item) {
+            return getter(item);
+        }); 
+        return _.groupBy(items, function(item) {
+            return getter(item);
+        });
+    });   
+});
+ 

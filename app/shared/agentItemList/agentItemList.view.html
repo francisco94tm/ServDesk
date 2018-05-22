@@ -1,4 +1,4 @@
-<div class="agent-item-list column">
+<div class="agent-item-list section-nav column">
     <xsearch ng-model="$ctrl.search"></xsearch>  
     <div class="agent-item-wrapper item-wrapper"> 
         <div class="refresh-btn tooltiped 
@@ -13,9 +13,9 @@
             <agent-item
                 ng-repeat="x in $ctrl.data | filter:$ctrl.search"
                 data="x"
+                orderBy="x.usr"
                 current="$ctrl.current">
             </agent-item>
-        </div>
-        
+        </div> 
     </div>
 </div>

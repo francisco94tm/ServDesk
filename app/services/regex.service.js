@@ -15,19 +15,19 @@ var Regex = function() {
             },
             'postalCode': {
                 'pattern': '^\\d{5}?$',
-                'message': 'Ingrese un código Postal válido (5 dígitos)'
+                'message': 'Ingresa un código Postal válido (5 dígitos)'
             },
             'phoneNumber': {
-                'pattern': '^\\d+$',
-                'message': 'Sólo números'
+                'pattern': '^\\d{10}$',
+                'message': 'Ingresa número de 10 dígitos'
             },
             'videoUrl': {
                 'pattern': '^(https?:\\/\\/)?(www\\.)?(.*)\\.(.*)$',
-                'message': 'Ingrese una URL valida'
+                'message': 'Ingresa una URL valida'
             },
             'lada': {
                 'pattern': '^\\d\\d(\\d)?$',
-                'message': 'Ingrese una clave LADA válida (2 o 3 dígitos)'
+                'message': 'Ingresa una clave LADA válida (2 o 3 dígitos)'
             },
             'rfc': {
                 'pattern': '^[A-Z]{4}\\d{6}(..)?$',
@@ -35,19 +35,19 @@ var Regex = function() {
             },
             'digits': {
                 'pattern': '^\\d+$',
-                'message': 'Ingrese números exclusivamente'
+                'message': 'Ingresa números exclusivamente'
             },
             'curp':{
                 'pattern' : '^[A-Z]{1}[AEIOU]{1}[A-Z]{2}[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[HM]{1}(AS|BC|BS|CC|CS|CH|CL|CM|DF|DG|GT|GR|HG|JC|MC|MN|MS|NT|NL|OC|PL|QT|QR|SP|SL|SR|TC|TS|TL|VZ|YN|ZS|NE)[B-DF-HJ-NP-TV-Z]{3}[0-9A-Z]{1}[0-9]{1}$',
-                'message' : 'Ingrese un CURP válido'
+                'message' : 'Ingresa un CURP válido'
             },
             'score':{
                 'pattern' : '^(10(\\.00)|[0-9](\\.\\d{2}))$',
-                'message' : 'Ingrese una calificación (con dos decimales)'
+                'message' : 'Ingresa una calificación (con dos decimales)'
             },
             'validDate':{
                 'pattern' : '^(0?[1-9]|[12][0-9]|3[01])[\\/](0?[1-9]|1[012])[\\/]([8][789]|[019][\\d])',
-                'message' : 'Ingrese fecha válida posterior a 01/01/87'
+                'message' : 'Ingresa fecha válida posterior a 01/01/87'
             }
         };
     }

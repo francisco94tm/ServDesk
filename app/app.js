@@ -1,4 +1,8 @@
-var app = angular.module("app", ['ngRoute', 'ng-click-out', 'monospaced.elastic', 'chart.js', 'angularMoment']); 
+var app = angular.module("app", 
+    [
+        'ngRoute', 'ng-click-out', 'monospaced.elastic', 
+        'chart.js', 'angularMoment'
+    ]); 
  
 angular.module('app')
 .config(function ($routeProvider, $locationProvider, ChartJsProvider) 
@@ -56,6 +60,6 @@ angular.module('app')
     $locationProvider.hashPrefix('');   
 
 
-}).run(function(amMoment) {
-    amMoment.changeLocale('de');
+}).run(function(amMoment, $rootScope) {
+    amMoment.changeLocale('de');   
 });

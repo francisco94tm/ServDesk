@@ -1,5 +1,5 @@
 <div class="x-select {{($ctrl.disabled)?'disabled':''}}" ng-click-out="$ctrl.close()">
-    <i class="material-icons">{{($ctrl.ngModel.icon == undefined && $ctrl.ngModel.id != undefined)?'checked':$ctrl.ngModel.icon}}</i> 
+    <i class="material-icons">{{($ctrl.ngModel.icon == undefined && $ctrl.ngModel.id != undefined)?'':$ctrl.ngModel.icon}}</i> 
     <select>
         <option value="0">{{$ctrl.label}}</option> 
         <option value="o.id" ng-repeat="o in $ctrl.options">{{o.name}}</option>
@@ -7,12 +7,17 @@
     {{$ctrl.getSelected()}}
     <div class="select-selected" ng-click="$ctrl.shuffle()"> 
         <span class="bold">{{$ctrl.label}}</span>
-        <span class="value {{($ctrl.ngModel.name == undefined)?'empty':''}}">{{($ctrl.ngModel.name == undefined)?'Selecciona una opción':$ctrl.ngModel.name }}</span>
+        <span class="value {{($ctrl.ngModel.name == undefined)?'empty':''}}">
+            {{($ctrl.ngModel.name == undefined)?'Selecciona una opción':($ctrl.type=='people')?$ctrl.ngModel.name+' '+$ctrl.ngModel.firstLastname+' '+$ctrl.ngModel.secondLastname:$ctrl.ngModel.name}}
+        </span>
     </div>
     <div class="select-items {{$ctrl.isOpened?'':'select-hide'}}">
-        <div ng-repeat="o in $ctrl.options" 
+        <div ng-repeat="o in $ctrl.options | orderBy: 'name'" 
             ng-click="$ctrl.shuffle(o)" 
-            class="{{($ctrl.ngModel.id == o.id)?'selected':''}}">{{o.name}}</div>
+            class="{{($ctrl.ngModel.id == o.id)?'selected':''}}">
+                <i class="material-icons">{{(o.icon != undefined)?o.icon:''}}</i> 
+                {{o.name}}{{($ctrl.type=='people')?(' '+o.firstLastname+' '+o.secondLastname):''}}
+            </div>
     </div>
 </div>
  

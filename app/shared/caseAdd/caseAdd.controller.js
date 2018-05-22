@@ -7,6 +7,7 @@ function caseAddController($scope, $element, $attrs, CaseAdd, $rootScope, Dashbo
     
     // Check if the dialog is closed 
     $scope.$ctrl.CaseAdd = CaseAdd; 
+    $scope.$ctrl.validate = {};
  
     // Get catalogues
     Dashboard.getCatalogues().then(data => {

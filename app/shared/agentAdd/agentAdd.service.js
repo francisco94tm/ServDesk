@@ -57,6 +57,11 @@ var AgentAdd = function(System, Session, Obj){
     this.areFieldsMissing = function(){
         return !Obj.isFilled(this.data, ['id']);
     } 
+
+    this.allFieldsAreTrue = function(obj){
+        return Obj.allPropertiesAreTrue(obj);
+    };
+
     this.save = function(){  
         var d = angular.copy(this.data); 
         // Change object field to id

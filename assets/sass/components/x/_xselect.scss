@@ -10,8 +10,8 @@
 .x-select {
     position: relative;
     width: 300px;
-    height: 66px;
-    margin: 10px 0 0px 10px;
+    height: 63px;
+    margin: 10px 20px 0px 10px;
     border-bottom: solid 1px rgba($theme--fg, 0.15);
     
 
@@ -27,7 +27,7 @@
             color: rgba($theme--fg, 0.25)!important;
         }
     }
-    i.material-icons {
+    &>i.material-icons {
         position: absolute;
         padding: 9px 5px;
         color: $main-color;
@@ -78,8 +78,8 @@
         }
     }
     /*style the items (options), including the selected item:*/
-    .select-items div,
-    .select-selected {
+    // .select-items div,
+    .select-selected { 
         color: rgba($theme--fg, 0.9);
         padding: 12px 45px 12px 45px;
         border: 1px solid transparent; // border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -89,6 +89,18 @@
     /*style items (options):*/
     .select-items {
         position: absolute;   
+        &>div{
+            display: flex;
+            padding: 12px 45px 12px 15px;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            i{
+                padding-right: 20px;
+                font-size: 20px;
+                color: rgba($theme--fg, 0.3);
+            }
+        } 
         @if $theme--bg == $dark-theme--bg{
             background-color: lighten($theme--bg, 5);
             border: solid 1px rgba($theme--fg, 0.24);

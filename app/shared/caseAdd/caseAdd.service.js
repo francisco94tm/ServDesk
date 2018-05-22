@@ -7,6 +7,8 @@
 var CaseAdd = function(System, Session, Obj){
 
     var status = 'closed';
+    
+
     this.data = {
         id: undefined,
         author: undefined,

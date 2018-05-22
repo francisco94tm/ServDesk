@@ -6,18 +6,19 @@
         <i class="close material-icons" ng-click="$ctrl.NewdataAdd.shuffle()">add</i>
     </div> 
     <div class="panel">
-        <button ng-disabled="$ctrl.NewdataAdd.areFieldsMissing()" ng-click="$ctrl.saveNewdata()">Registrar</button>     
-        
+        <button ng-disabled="$ctrl.NewdataAdd.areFieldsMissing() || ($ctrl.NewdataAdd.what.id == 1 && !$ctrl.NewdataAdd.allFieldsAreTrue($ctrl.valid))">Registrar</button>     
+        {{$scope.$ctrl.valid[$ctrl.NewdataAdd.what.id-1]}}
         <div class="edit-panel">
             <xselect disabled="($ctrl.DashNav.getLevel() == 1)?false:true" item-selected="{{($ctrl.DashNav.getLevel() == 1)?undefined:1}}" label="Registrar nuevo:" options='$ctrl.NewdataItemList.getTabs()' ng-model="$ctrl.NewdataAdd.what"></xselect>             
             <hr>
         </div> 
         <div class="panel-wrapper"> 
-            <form>     
-                <div class="row" ng-if="$ctrl.NewdataAdd.what.id == 1">
+            
+            <form>   
+                <div class="row" ng-if="$ctrl.NewdataAdd.what.id == 1"> 
                     <div class="head-data">
-                        <xinput placeholder="CURP del cliente" label="CURP:" ng-model="$ctrl.NewdataAdd.data.curp"></xinput> 
-                    </div>
+                        <xinput valid-model="$ctrl.valid.curp" type="curp" placeholder="CURP del cliente" label="CURP:" ng-model="$ctrl.NewdataAdd.data.curp"></xinput> 
+                    </div>  
                     <div class="row">
                         <xselect label="Puesto:" options='$ctrl.options.job' ng-model="$ctrl.NewdataAdd.data.job"></xselect> 
                         <xselect label="Área:" options='$ctrl.options.area' ng-model="$ctrl.NewdataAdd.data.area"></xselect> 
@@ -29,10 +30,10 @@
                         <xinput placeholder="Ingresa un apellido" label="Primer apellido:" ng-model="$ctrl.NewdataAdd.data.firstLastname"></xinput>   
                         
                         <xinput placeholder="Ingresa un apellido" label="Segundo apellido:" ng-model="$ctrl.NewdataAdd.data.secondLastname"></xinput>   
-                        <xinput placeholder="Ingresa un email" label="Email:" ng-model="$ctrl.NewdataAdd.data.email"></xinput>   
+                        <xinput valid-model="$ctrl.valid.email" type="email" placeholder="Ingresa un email" label="Email:" ng-model="$ctrl.NewdataAdd.data.email"></xinput>   
                         
-                        <xinput placeholder="Ingresa un telefono" label="Teléfono Fijo:" ng-model="$ctrl.NewdataAdd.data.phone"></xinput>    
-                        <xinput placeholder="Ingresa un telefono" label="Teléfono Móvil:" ng-model="$ctrl.NewdataAdd.data.mobilephone"></xinput>   
+                        <xinput valid-model="$ctrl.valid.phone" type="phoneNumber" placeholder="Ingresa un telefono" label="Teléfono Fijo:" ng-model="$ctrl.NewdataAdd.data.phone"></xinput>    
+                        <xinput valid-model="$ctrl.valid.mobilePhone" type="phoneNumber" placeholder="Ingresa un telefono" label="Teléfono Móvil:" ng-model="$ctrl.NewdataAdd.data.mobilephone"></xinput>   
                     
                     </div> 
                 </div> 

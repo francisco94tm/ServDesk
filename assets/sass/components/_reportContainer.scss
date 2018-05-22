@@ -39,8 +39,8 @@
 
 
 table{
-    border: solid 1px #ccc;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
+    // border: solid 1px #ccc;
+    // box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
     margin: 20px 20px 0 0;
     font-size: 11px;
     caption{
@@ -56,12 +56,13 @@ table{
         // color: $main-color;
     }
     td, th{
-        padding: 5px 10px;
+        padding: 10px 20px;
+        border-bottom:solid 1px rgba($theme--fg, 0.2);
     }
-    tr:nth-child(even) td,  tr:nth-child(even) th{
-        background: rgb(240, 240, 240);
-    //    border-bottom: solid 1px #ccc;
-    }
+    // tr:nth-child(even) td,  tr:nth-child(even) th{
+    //     background: rgba($theme--fg, 0.1);
+    // //    border-bottom: solid 1px #ccc;
+    // }
 
     table{ 
         border: none;
@@ -69,6 +70,11 @@ table{
         box-shadow: none;
         tr {
             border-bottom: none;
+            &:nth-last-child(1){
+                td, th{ 
+                    border-bottom:solid 1px transparent;
+                }
+            }
         }
         th, caption{
             text-align: left;

@@ -11,7 +11,7 @@ var Session = function(System) {
         status:         undefined,
         user:           undefined,
         level:          undefined,
-        icon:           'settings',
+        icon:           'portrait',
         view:           'settings-container', 
         theme: {
             id:             0,
@@ -145,8 +145,7 @@ var Session = function(System) {
         this.session.status = data.status;
         this.session.user = data.usr;
         this.session.level = data.id_level;
-    }
- 
+    } 
 
 }
 

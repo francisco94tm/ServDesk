@@ -1,14 +1,19 @@
 @import 'variables';
 
+*{    
+    font-family: "Walfork";
+}
 
 h1{   
     font-size: 60px; 
     display: block;
     color: $theme--fg;
-}
+    &.bold, & .bold{        
+        font-weight: 600;
+    }
+} 
 
-h1 .bold, h1.bold{
+input, button, textarea , pre, h1{
     font-family: "Walfork";
-    font-weight: 600;
 }
  

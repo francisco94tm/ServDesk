@@ -8,7 +8,8 @@ var xToast = function(){
     this.data = {
         title: "Cargando...",
         id: "",
-        description: ""
+        description: "",
+        show_button: true
     };
 
 
@@ -50,6 +51,10 @@ var xToast = function(){
 
     this.getDescription = function(){
         return this.data.description;
+    }
+
+    this.isButtonVisible = function(){
+        return this.data.show_button;
     }
 }
 

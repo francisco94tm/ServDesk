@@ -17,8 +17,8 @@ var DashNav = function() {
         sections = [
             { name: "Mis Casos",   view: 'case-container',   level: 4,  icon: 'notifications_none'	},
             { name: "Datos",       view: 'data-container',   level: 3,  icon: 'lightbulb_outline'	},
-            { name: "Agentes",     view: 'agent-container',  level: 1,  icon: 'perm_identity' },
-            { name: "Reportes",    view: 'report-container', level: 4,  icon: 'show_chart'	}
+            { name: "Agentes",     view: 'agent-container',  level: 1,  icon: 'people_outline' },
+            { name: "Reportes",    view: 'report-container', level: 4,  icon: 'bar_chart'	}
         ];
     };
     

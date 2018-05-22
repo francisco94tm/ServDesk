@@ -1,0 +1,178 @@
+// Item list wrapper =========================================================
+
+@keyframes rotating{
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg);}
+}
+
+.item-wrapper{    
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    margin-top: 5px;  
+    transition: all 0.3s; 
+
+    // Refresh button -----------------------------------------------------
+    .refresh-btn{
+        cursor: pointer;
+        width: 320px;  
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        position: relative;  
+        @media screen and (max-width: 600px) { 
+            width: 100%;
+        } 
+        .loading{
+            animation: rotating 1s infinite; 
+        }
+        i{
+            color: rgba($theme--fg,0.3); 
+            text-align: center; 
+            transition: 0.3s $animation-ease-out; 
+        }
+        &.big i{ 
+            font-size: 100px;
+            width: 200px;
+            height: 200px; 
+            line-height: 200px;
+        }
+        &.small i{ 
+            font-size: 25px;
+            width: 40px;
+            height: 40px; 
+            line-height:40px; 
+        }
+        &:hover i{
+            color: $main-color;
+        }
+    } 
+    
+    // Item -----------------------------------------------------
+    case-item, newdata-item{ 
+        .item{
+            transition: 0.3s $animation-ease-out;
+            overflow: hidden;
+        }
+        &.hidden .item{
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            max-height: 0; 
+            margin: 0px 0px 0px 10px!important; 
+            height: 0; 
+            opacity: 0;
+        }
+        &.visible .item{
+            max-height: 500px;
+            opacity: 1;
+        }
+    }
+
+    .item{
+        display: flex;  
+        font-size: 13px;
+        justify-content: space-between; 
+        margin: 5px 0px 5px 10px;   
+        padding: 15px 30px 15px 50px;   
+        transition: background 0.25s, padding 0.5s 0.3s;
+        position: relative;  
+        overflow: hidden; 
+        background: rgba($theme--fg, 0.08); 
+        cursor: pointer;
+        border-radius: 2px;
+        
+        &:hover{
+            background: rgba($theme--fg, 0.1); 
+        }
+        .left, .right{ 
+            flex-direction: column; 
+        }
+        // Left panel subdata
+        .left{
+            z-index: 1;
+            display: flex;
+            color: $theme--fg; 
+            font-size: 13px; 
+            .title{
+                white-space: nowrap; 
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 170px;  
+                padding: 0;
+                margin: 0;
+                font-weight: bold;
+                padding-right: 10px;
+            }    
+            .data{ 
+                opacity: 0.6;
+            }
+        }
+
+        // Right panel subdata
+        .right{             
+            text-align: right; 
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            .status{ 
+                margin-right: -5px;
+                border-radius: 2px;
+                color: rgba($theme--fg, 0.7);
+                font-size: 9px;
+                letter-spacing: 1px;
+                padding: 1px 5px;
+                z-index: 1;
+                border: solid 1px  rgba($theme--fg, 0.3); 
+            }        
+            .datetime, .id{
+                z-index: 1;
+                color: $theme--fg;  
+                font-size: 11.5px;  
+                opacity: 0.6;
+            } 
+        }
+
+        // Animation when selected
+        $beforew: 3px;
+        $time: 0.25s;
+        &:before{
+            content: "";
+            display: block;
+            position: absolute;
+            $beforew: 3px;
+            height: calc(100% - 20px);
+            width: $beforew;
+            border-radius: $beforew; 
+            transition: 
+                height $time $time,
+                top $time $time,
+                border-radius 0s $time,
+                transform $time;
+
+            background: rgba($theme--fg,0.15);
+            top: 10px;
+            left: 10px;
+            z-index: 0;
+        } 
+
+        &.selected{   
+            &:before{ 
+                border-radius: 50%;
+                transform: scale(200);
+                height: $beforew;
+                top: 50%; 
+                transition: 
+                    height $time,
+                    top $time,
+                    border-radius 0s $time,
+                    transform $time $time;
+            }   
+            &:hover{
+                // background: transparent;  
+            }
+            .title{ 
+                max-width: 180px;
+            }
+        } 
+    }
+} 

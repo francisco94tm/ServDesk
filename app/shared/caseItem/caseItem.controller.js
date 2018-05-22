@@ -8,7 +8,6 @@ function caseItemController($scope, $element, $attrs, $rootScope, moment, CaseIt
     $scope.$ctrl.CaseItem = CaseItem;
     $scope.$ctrl.Session = Session;
     
-    
     // Select curren case
     $scope.$ctrl.caseItemClick = function(data){ 
         if(CaseContent.isEditModeOn())

@@ -2,29 +2,48 @@
 <div class="item-body column report-panel"> 
     <h1 class="bold">Reporte</h1> 
     <br>
+
+    <div class="time-reponse">
+        <h3>Tiempos promedio de respuesta</h3>
+        <table>
+            <tr>
+                <th></th>
+                <th>Atención</th>
+                <th>Solución</th>
+            </tr>
+            <tr ng-repeat="a in $ctrl.attentionTime">
+                <th>{{$ctrl.today | amAdd : a.month*1 : 'months' | amDateFormat: 'MMMM'}}</th>
+                <td>{{a.mediatime*1 | amDurationFormat : 'seconds' }}</td>
+                <td>{{$ctrl.solutionTime[$index].mediatime*1 | amDurationFormat : 'seconds' }}</td>
+            </tr> 
+        </table>   
+    </div>
+
+    <br><br>
+
     <div class="cases-resume"> 
         <h3>Resumen de casos</h3> 
         <table>
             <tr>
-                <th># Casos Abiertos</th>
-                <td>{{pie.data[0]}}</td>
+                <th>Abiertos</th>
+                <td>{{$ctrl.pie.data[0]}}</td>
             </tr>
             <tr>
-                <th># Casos en progreso</th>
-                <td>{{pie.data[1]}}</td>
+                <th>En progreso</th>
+                <td>{{$ctrl.pie.data[1]}}</td>
             </tr>
             <tr>
-                <th># Casos solucionados</th>
-                <td>{{pie.data[2]}}</td>
+                <th>Solucionados</th>
+                <td>{{$ctrl.pie.data[2]}}</td>
             </tr>
             <tr>
-                <th># Casos cancelados:</th>
-                <td>{{pie.data[3]}}</td>
+                <th>Cancelados:</th>
+                <td>{{$ctrl.pie.data[3]}}</td>
             </tr>
         </table>
         <canvas id="pie" class="chart chart-pie"
-            chart-data="pie.data" 
-            chart-labels="pie.labels">
+            chart-data="$ctrl.pie.data" 
+            chart-labels="$ctrl.pie.labels">
         </canvas>
     </div> 
     <br><br>
@@ -32,9 +51,8 @@
         <h3>Por periodo de tiempo</h3> 
         <div class="chart-item-wrapper">
             <div class="chart-item line-chart-item">
-                <canvas id="line" class="chart chart-line" chart-data="line.data"
-                    chart-labels="line.labels" chart-series="line.series" chart-options="line.options"
-                    chart-dataset-override="datasetOverride" chart-click="onClick">
+                <canvas id="line" class="chart chart-line" chart-data="$ctrl.line.data"
+                    chart-labels="$ctrl.line.labels" chart-series="$ctrl.line.series" chart-options="$ctrl.line.options">
                 </canvas>
             </div>
         </div>
@@ -46,18 +64,18 @@
         <div class="chart-item-wrapper">
             <div class="chart-item radar-chart-item">
                 <canvas id="radar" class="chart chart-radar"
-                    chart-data="radar.data" chart-options="radar.options" 
-                    chart-series="radar.series" chart-labels="radar.labels">
+                    chart-data="$ctrl.radar.data" chart-options="$ctrl.radar.options" 
+                    chart-series="$ctrl.radar.series" chart-labels="$ctrl.radar.labels">
                 </canvas>
             </div> 
         </div> 
     </div>  
 
-    <div class="infrastructure-wrapper" ng-if="asset != undefined">
+    <div class="infrastructure-wrapper" ng-if="$ctrl.asset != undefined">
         <div class="infrastructure">
-            <caption><b>Infraestructura:</b> {{asset.name}}</caption>
+            <caption><b>Infraestructura:</b> {{$ctrl.asset.name}}</caption>
             <div class="table-wrapper">
-                <table class="theats" ng-repeat = "dx in  asset.threatType">   
+                <table class="theats" ng-repeat = "dx in asset.threatType">   
                     <tr> 
                         <th>Amenaza:</th>
                         <td>{{dx.name}}</td>

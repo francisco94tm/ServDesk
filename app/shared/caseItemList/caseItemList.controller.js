@@ -8,34 +8,37 @@ function caseItemListController($scope, $element, $attrs, $interval, $timeout, C
     var list = angular.element($element).find(".item-wrapper");
     $scope.$ctrl.CaseItemList = CaseItemList;  
     $scope.$ctrl.isLoading = false; 
-    $scope.$ctrl.groupDisabled = [];
+    $scope.$ctrl.groupDisabled = [ false, false, false, false ];
+    $scope.$ctrl.category = undefined;
 
+ 
     // Update alerts when receiving a broadcast call
-    $scope.$on('getCases', () => { 
+    $scope.$on('getCases', () => {
         $scope.$ctrl.loadData();
-    });   
-  
+    });  
+
     // load data when click reload button
     $scope.$ctrl.loadData = () => {  
         $rootScope.$broadcast('displayCase', undefined);
         $scope.$ctrl.current = undefined;
-        $scope.$ctrl.CaseItemList.data = []; 
+        CaseItemList.data = []; 
+        CaseItemList.quantity = [0, 0, 0, 0];
         $scope.$ctrl.isLoading = true;        
-        var promise = Dashboard.getCatalogues(['request']);   
+        var promise = Dashboard.getCatalogues(['request']);
         var interval = $interval(() => {
-            promise.then((data) => {   
+            promise.then((data) => { 
                 $scope.$ctrl.isLoading  = false; 
-                $scope.$ctrl.CaseItemList.data = data.request;  
-                $timeout(() => $scope.$ctrl.scroll());
+                CaseItemList.data =  data.request;
+                $timeout(() => $scope.$ctrl.scroll());                
                 $interval.cancel(interval); 
             });
         }, 1000);
     };  
-
+ 
     // Scroll up to hide refresh button
     $scope.$ctrl.scroll = () => { 
         list.animate({
-            scrollTop: 40
+            scrollTop: 50
         }); 
     };     
 }

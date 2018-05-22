@@ -3,10 +3,9 @@
  ********************************************/
 
 var SettingsContainer = function(System, Session){
-    this.logout = function(){
-        
-        Session.close();
-    }
+    // this.logout = function(){ 
+    //     Session.close();
+    // }
 }
 
 

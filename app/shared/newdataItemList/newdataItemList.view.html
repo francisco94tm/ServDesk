@@ -1,34 +1,90 @@
-<div class="newdata-item-list section-nav column">
-    <!-- <xsearch ng-model="$ctrl.search"></xsearch>   -->
-     
+<div class="newdata-item-list section-nav column"> 
+
+    <!-- Top section      -->
     <div class="subsection-switcher">        
-        <xsearch ng-model="$ctrl.search"></xsearch>  
-        <h5>{{$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].name}}</h5>       
-        <div class="tabs" tab-selected="{{$ctrl.NewdataItemList.getCurrentTab()}}"  ng-hide="$ctrl.DashNav.getLevel() != 1">
-            <div ng-click="$ctrl.setCurrentTab($index)" ng-show="n.tablevel >= $ctrl.DashNav.getLevel()"
-                class="tab {{($ctrl.NewdataItemList.getCurrentTab()==$index)?'selected':''}}" 
-                ng-repeat="n in $ctrl.NewdataItemList.getTabs()">
-                <i class="material-icons">{{n.icon}}</i><span>{{n.name}}</span> 
-            </div>   
-        </div>
+
        
+        <!-- Tabs title -->
+        <!-- <h5>{{$ctrl.NewdataItemList.getCurrentTabName()}}</h5> -->
+        
+         <!-- search -->
+         <xsearch ng-model="$ctrl.search"></xsearch>  
+         
+        <!-- Tabs -->
+        <div class="tabs" 
+            tab-selected="{{$ctrl.NewdataItemList.getCurrentTab()-1}}"  
+            ng-hide="$ctrl.DashNav.getLevel() != 1">
+
+            <div ng-repeat="n in $ctrl.NewdataItemList.getTabs()" 
+                ng-click="$ctrl.setCurrentTab(n.id)" 
+                ng-show="n.tablevel >= $ctrl.DashNav.getLevel()"
+                class="tab {{($ctrl.NewdataItemList.getCurrentTab()==n.id)?'selected':''}}">
+                <i class="material-icons">{{n.icon}}</i>
+                <span>{{n.name}}</span>
+            </div>   
+        </div> 
+
+
     </div>  
    
+    <!-- Items container -->
     <div class="newdata-item-wrapper item-wrapper">  
+
+        <!-- Refresh Button -->
         <div class="refresh-btn tooltiped 
-            {{($ctrl.NewdataItemList.data.length == 0)?'big':'small'}}"
+            {{($ctrl.NewdataItemList.getData().length == 0)?'big':'small'}}"
             ng-click="$ctrl.loadData()"
             data-tooltip="Recargar"
             data-position="bottom">
-            <i class="material-icons {{($ctrl.isLoading)?'loading':''}}">
-                refresh</i>
+            <i class="material-icons {{($ctrl.isLoading)?'loading':''}}">refresh</i>
         </div> 
-        <div class="status-group">
-            <newdata-item
-                ng-repeat="x in $ctrl.NewdataItemList.data[$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].table] | filter:$ctrl.search"
-                data="x"
-                current="$ctrl.current">
-            </newdata-item>
-        </div> 
+
+        <!-- Client *********************************************** --> 
+
+        <div class="status-group"  ng-if="$ctrl.NewdataItemList.getCurrentTab() == '1'"
+            ng-repeat="(k, group) in $ctrl.NewdataItemList.getData().client"> 
+            
+            <!-- {{group}} -->
+            <div class="status-group-name" ng-if="group.length > 0"
+                ng-click="$ctrl.groupdisabled[0][k] = !$ctrl.groupdisabled[0][k]"> 
+                <i class="material-icons {{!$ctrl.groupdisabled[0][k]?'hidden':'visible'}}">expand_less</i>
+                <span class="quantity">{{group.length}}</span>
+                <span class="name">{{group[0].id_status.name}}</span>
+            </div> 
+            <!-- Items -->
+            <newdata-item  ng-repeat="x in group 
+                | filter: $ctrl.search 
+                | orderBy: 'name' " 
+                class="{{($ctrl.groupdisabled[0][k])?'hidden':'visible'}}"
+                data="x" current="$ctrl.current"> 
+            </newdata-item>  
+        </div>
+
+        <!-- Register medium *********************************************** --> 
+        
+        <div class="status-group"  ng-if="$ctrl.NewdataItemList.getCurrentTab() == '2'"
+            ng-repeat="(k, group) in $ctrl.NewdataItemList.getData().registerMedium 
+                | filter: $ctrl.search 
+                | orderBy: 'name' "> 
+             
+            <!-- Items -->
+            <newdata-item 
+                data="group" current="$ctrl.current"> 
+            </newdata-item>  
+        </div>
+
+        <!-- AgentThreat *********************************************** --> 
+        
+        <div class="status-group"  ng-if="$ctrl.NewdataItemList.getCurrentTab() == '3'"
+            ng-repeat="(k, group) in $ctrl.NewdataItemList.getData().agentThreat 
+                | filter: $ctrl.search 
+                | orderBy: 'name' "> 
+
+            <!-- Items -->
+            <newdata-item  
+                data="group" current="$ctrl.current"> 
+            </newdata-item>  
+        </div>
+
     </div>
 </div>

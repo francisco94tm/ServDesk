@@ -32,6 +32,7 @@
             <b>Estatus: </b><span>{{$ctrl.AgentContent.data.status}}</span>
         </div>
 
+
         <!-- Title --> 
         <xinput type="text" 
             class="extra-big"
@@ -67,6 +68,7 @@
                 <div class="item email">                    
                     <i class="material-icons">email</i>
                     <xinput 
+                        type="email"
                         class="like-select"
                         disabled="!$ctrl.AgentContent.isEditModeOn()"
                         label="Email:"  
@@ -78,6 +80,7 @@
                 <div class="item email">                    
                     <i class="material-icons">phone</i>
                     <xinput 
+                        type="phoneNumber"
                         class="like-select"
                         disabled="!$ctrl.AgentContent.isEditModeOn()"
                         label="Teléfono:"  
@@ -89,6 +92,7 @@
                 <div class="item email">                    
                         <i class="material-icons">phone_iphone</i>
                         <xinput 
+                            type="phoneNumber"
                             class="like-select"
                             disabled="!$ctrl.AgentContent.isEditModeOn()"
                             label="Teléfono móvil:"  

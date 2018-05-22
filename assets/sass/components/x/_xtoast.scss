@@ -46,8 +46,8 @@
         align-content: center;
         align-items: center;
         .title{                     
-            font-weight: bold; 
-            font-size: 13px; 
+            // font-weight: bold; 
+            font-size: 14px; 
         }
         .id{
             font-size: 70px; 
@@ -60,11 +60,16 @@
         // }
     }
     .close-btn{
-        padding: 10px 20px;
+        padding: 14px 20px;
         position: absolute;
-        top: 0;
+        top: -10px;
         right: 0;
+        color: white;
         cursor: pointer;
+        i{
+            line-height: 18px;
+            font-size: 16px;
+        }
     }
     .xtoast-controlls {
         display: flex;
@@ -83,7 +88,7 @@
             width: auto;
             min-width: auto;  
             opacity: 0.8;
-            color: $main-color;
+            color: yellow;
             &:hover{
                 background: rgba(white,0.05);
                 opacity: 1;

@@ -52,7 +52,15 @@ var Obj = function(Validate) {
             }
         });
         return isFilled;
-    }   
+    }
+
+    this.allPropertiesAreTrue = function(obj){
+        var r = true;
+        angular.forEach(obj, (val, key) => {
+            r = r && val;
+        });
+        return r;
+    }     
 }
 
 angular.module('app').service('Obj', Obj); 

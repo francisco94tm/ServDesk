@@ -1,4 +1,14 @@
-<div class="input-group">
-    <label class="{{$ctrl.disabled? 'disabled' : ''}}" ng-class="$ctrl.class">{{$ctrl.label}}</label> 
-    <input ng-disabled="$ctrl.disabled" type="{{$ctrl.type}}" placeholder = "{{$ctrl.placeholder}}" ng-model="$ctrl.ngModel" ng-class="$ctrl.class"/> 
+<div class="input-group {{!$ctrl.colorize?'':$ctrl.validModel?'valid':'invalid'}}">  
+    <label 
+        class="{{$ctrl.disabled? 'disabled' : ''}}" 
+        ng-class="$ctrl.class">{{$ctrl.label}}</label> 
+    <input autocomplete="nope"
+        ng-disabled="$ctrl.disabled" 
+        type="{{($ctrl.type == 'password')?$ctrl.type:'text'}}" 
+        placeholder = "{{$ctrl.placeholder}}" 
+        ng-model="$ctrl.ngModel" 
+        ng-class="$ctrl.class"/> 
+    <div class="message {{$ctrl.disabled? 'disabled' : ''}}" >
+        {{$ctrl.validate()}}
+    </div>
 </div>

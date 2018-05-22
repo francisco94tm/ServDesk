@@ -1,12 +1,24 @@
 <div class="newdata-item item {{($ctrl.data.id == $ctrl.NewdataItem.current.id) ? 'selected' : ''}}" 
      ng-click="newdataItemClick($ctrl.data)">
-    <div class="left">
-        <div class="title">{{$ctrl.data.id | minDigits: 3}}</div>
-        <div class="data">
-            {{$ctrl.data.name}} 
+    <!-- {{$ctrl.data}} -->
+     <div class="left">
+       <div class="title">        
+            {{$ctrl.data.name}}             
             {{$ctrl.data.firstLastname}}
+            {{$ctrl.data.secondLastname}}    
+       </div>
+        <div class="data"> 
+            {{($ctrl.NewdataItemList.getCurrentTab() == 1) ? $ctrl.data.email : ''}} 
+            {{($ctrl.NewdataItemList.getCurrentTab() == 3) ? $ctrl.data.description : ''}}  
         </div>
     </div>
+    <div class="right">
+        <div class="id">
+            <div class="title">{{$ctrl.data.id | minDigits: 4}}</div>
+        </div>
+    </div>
+
+
     <!-- <div class="right">
         <div class="alert-datetime">{{$ctrl.data.registerDate}}</div>  
     </div>     -->

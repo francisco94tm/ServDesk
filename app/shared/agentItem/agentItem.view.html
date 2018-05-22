@@ -1,10 +1,17 @@
 <div class="agent-item item {{($ctrl.data.id == $ctrl.current.id) ? 'selected' : ''}}" 
      ng-click="agentItemClick($ctrl.data)">
     <div class="left">
-        <div class="title">{{$ctrl.data.usr}}</div>
-        <div class="data">
+        <div class="title">
             {{$ctrl.data.name}} 
             {{$ctrl.data.firstLastname}}
+        </div>
+        <div class="data">
+            {{$ctrl.data.email}}
+        </div>
+    </div>
+    <div class="right">
+        <div class="id">            
+            {{$ctrl.data.usr}}
         </div>
     </div>
     <!-- <div class="right">

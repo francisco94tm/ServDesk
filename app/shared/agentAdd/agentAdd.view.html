@@ -8,10 +8,12 @@
 
     
     <div class="panel">
-        <button ng-disabled="$ctrl.AgentAdd.areFieldsMissing()" ng-click="$ctrl.saveAgent()">Registrar</button>     
+        <button 
+            ng-disabled="$ctrl.AgentAdd.areFieldsMissing() || !$ctrl.AgentAdd.allFieldsAreTrue($ctrl.valid)" 
+            ng-click="$ctrl.saveAgent()">Registrar</button>     
         <div class="panel-wrapper">
             <div class="head-data">
-                <xinput label="Registrar nuevo agente" ng-model="$ctrl.AgentAdd.data.usr" placeholder="Nombre de usuario"></xinput>
+                <xinput label="Registrar nuevo agente" ng-model="$ctrl.AgentAdd.data.usr" placeholder="Ingresa un alias"></xinput>
              </div> 
             <form>     
                 <div class="row">
@@ -20,10 +22,11 @@
                     <xinput placeholder="Ingresa un nombre" label="Nombre(s):" ng-model="$ctrl.AgentAdd.data.name"></xinput>   
                     <xinput placeholder="Ingresa un apellido" label="Primer apellido:" ng-model="$ctrl.AgentAdd.data.firstLastname"></xinput>   
                     <xinput placeholder="Ingresa un apellido" label="Segundo apellido:" ng-model="$ctrl.AgentAdd.data.secondLastname"></xinput>   
-                    <xinput placeholder="Ingresa un email" label="Email:" ng-model="$ctrl.AgentAdd.data.email"></xinput>   
-                    <xinput placeholder="Ingresa un teléfono" label="Teléfono Fijo:" ng-model="$ctrl.AgentAdd.data.phone"></xinput>   
-                    <xinput placeholder="Ingresa un teléfono" label="Teléfono Móvil:" ng-model="$ctrl.AgentAdd.data.mobilephone"></xinput>   
+                    <xinput valid-model="$ctrl.valid.email" type='email' placeholder="Ingresa un email" label="Email:" ng-model="$ctrl.AgentAdd.data.email"></xinput>   
+                    <xinput valid-model="$ctrl.valid.phone" type='phoneNumber' placeholder="Ingresa un teléfono" label="Teléfono Fijo:" ng-model="$ctrl.AgentAdd.data.phone"></xinput>   
+                    <xinput valid-model="$ctrl.valid.mobilePhone" type='phoneNumber' placeholder="Ingresa un teléfono" label="Teléfono Móvil:" ng-model="$ctrl.AgentAdd.data.mobilephone"></xinput>   
                     <xinput placeholder="Ingresa una dirección" label="Dirección:" ng-model="$ctrl.AgentAdd.data.address"></xinput>    
+                   
                 </div>                  
             </form> 
         </div>   

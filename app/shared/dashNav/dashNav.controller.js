@@ -12,7 +12,8 @@ function dashNavController($scope, $element, $attrs, $timeout, DashNav, $rootSco
     // ALert to DashContent that current section has changed
     $scope.$ctrl.setCurrentSection = (n) => { 
         DashNav.setCurrentSection(n);
-        $rootScope.$broadcast('getCurrentSection');
+        $rootScope.$broadcast('getCurrentSection'); 
+        $rootScope.$broadcast('drawPieChart');
     }
     
     // Detect if a new section has to be added to the dash-nav
@@ -20,7 +21,7 @@ function dashNavController($scope, $element, $attrs, $timeout, DashNav, $rootSco
         DashNav.reset();  
         DashNav.setLevel(data.level); 
         DashNav.addSection(data);      
-    })
+    });
 }
  
 angular.module('app').component('dashNav', {

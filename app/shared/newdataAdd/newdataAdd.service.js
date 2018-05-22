@@ -24,6 +24,10 @@ var NewdataAdd = function(System, Session, Obj){
         threatType: undefined
     } 
 
+    this.allFieldsAreTrue = function(obj){
+        return Obj.allPropertiesAreTrue(obj);
+    }
+
     this.reset = () => {
         this.data = {
             id: undefined, 

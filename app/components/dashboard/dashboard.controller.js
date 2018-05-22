@@ -7,7 +7,7 @@
 		$scope.Session = Session; 
 
 		// Check if session exist otherwise redirect to Login  ------------------------------------ 
-		Session.isSet().then(response => {  
+		Session.isSet().then(response => {  			 
 			if(response.data == "FALSE")
 				$window.location = "#"; 
 			else loadDashboard(); 
@@ -27,6 +27,5 @@
 	}; 
 
 	angular.module('app').controller('dashCtrl', dashCtrl);
-	dashCtrl.$inject = ['$scope', '$window', 'Session', '$timeout'];
-
+	dashCtrl.$inject = ['$scope', '$window', 'Session', '$timeout']; 
 }());

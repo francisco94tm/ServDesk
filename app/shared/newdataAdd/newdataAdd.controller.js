@@ -21,9 +21,7 @@ function newdataAddController($scope, $element, $attrs, DashNav, NewdataAdd, New
             $scope.$ctrl.NewdataAdd.close();
             Dashboard.getCatalogues(['client','registerMedium','agentThreat']).then(r => {	 
                 $rootScope.$broadcast('getNewdata', r);	 
-            });  		
-            console.log(NewdataAdd.what);
-            console.log(NewdataItemList.getTabs());
+            });  		 
             var objeto = {
                 title:  NewdataItemList.getTabs()[NewdataAdd.what.id - 1].name+" registrado, el folio es:",
                 id:  response.data.id

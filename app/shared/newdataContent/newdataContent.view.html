@@ -117,6 +117,8 @@
                 <div class="item email" ng-if="$ctrl.NewdataContent.data.email != undefined">                    
                     <i class="material-icons">email</i>
                     <xinput 
+                        type="email"
+                        valid-model="$ctrl.valid.email"
                         class="like-select"
                         disabled="!$ctrl.NewdataContent.isEditModeOn()"
                         label="Email:"  
@@ -128,6 +130,8 @@
                 <div class="item phone" ng-if="$ctrl.NewdataContent.data.phone != undefined">                    
                     <i class="material-icons">phone</i>
                     <xinput 
+                        type="phoneNumber"
+                        valid-model="$ctrl.valid.phone"
                         class="like-select"
                         disabled="!$ctrl.NewdataContent.isEditModeOn()"
                         label="Teléfono:"  
@@ -139,6 +143,8 @@
                 <div class="item mobilephone" ng-if="$ctrl.NewdataContent.data.mobilephone != undefined">                    
                     <i class="material-icons">phone_iphone</i>
                     <xinput 
+                        type="phoneNumber"
+                        valid-model="$ctrl.valid.mobilephone"
                         class="like-select"
                         disabled="!$ctrl.NewdataContent.isEditModeOn()"
                         label="Teléfono móvil:"  
@@ -151,6 +157,6 @@
     </div>
     
     <div class="closed" ng-show="$ctrl.NewdataContent.data==undefined"> 
-        <h1>Selecciona un {{$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()].name}}</h1> 
+        <h1>Selecciona un {{$ctrl.NewdataItemList.getTabs()[$ctrl.NewdataItemList.getCurrentTab()-1].name}}</h1> 
     </div>
 </div>

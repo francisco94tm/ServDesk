@@ -57,14 +57,15 @@
     }
 
     .add-container .panel{
-        max-width: 100%;
-        right: 0px; 
-        padding: 20px 0!important;
+        max-width: 100%; 
         form{
             overflow-x: hidden;
         }
         .head-data{
             padding: 10px 0px 0 10px;
+            input{
+                font-size: 30px;
+            }
         }
         .x-select{
             margin: 10px 19px 0px 20px !important;

@@ -6,7 +6,7 @@
         </div>
         <div class="xpopup-message">
             <div class="title">{{$ctrl.xPopup.getTitle()}}</div>
-            <div class="id">{{$ctrl.xPopup.getId()}}</div>
+            <div class="id">{{$ctrl.xPopup.getId() | minDigits: 4}}</div>
             <div class="description">{{$ctrl.xPopup.getDescription()}}</div>
         </div>
         <!-- <div class="xpopup-controlls">

@@ -11,11 +11,13 @@ function settingsContainerController($scope, $element, $attrs, $window, DashNav,
         $scope.$ctrl.options = data;
     });
 
-    $scope.$ctrl.logout = () => {        
-        Session.close().then(data => {
-            // console.log(data);
+    $scope.$ctrl.logout = () => {
+        Session.close().then(response => {
+            
+            console.log(response.data);
             $window.location = "#"; 
             CaseItemList.data = [];
+            $scope.$broadcast('resetCases');
             $rootScope.$broadcast('displayCase', undefined);
             DashNav.reset();
         }); 

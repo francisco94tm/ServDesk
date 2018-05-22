@@ -62,9 +62,10 @@ class Login{
     /************************************************************************
 	 * Close session deleting SESSION object 
 	 */
-    public function closeSession(){
-        if(isset($_SESSION['servDesk']))
-            unset($_SESSION['servDesk']);
+    public function closeSession(){ 
+        unset($_SESSION['servDesk']);
+        $_SESSION['servDesk'] = [];
+        return json_encode($_SESSION['servDesk']);
     }
 
     /************************************************************************
@@ -73,7 +74,7 @@ class Login{
      * @return the $_SESSION['servDesk'] object if it exists
 	 */
     public function verifySession(){
-        if(isset($_SESSION['servDesk']))
+        if(isset($_SESSION['servDesk']) && $_SESSION['servDesk'] != [])
             return json_encode($_SESSION['servDesk']);
         return 'FALSE';
     } 

@@ -12,6 +12,15 @@ function Utils (){
         });
         return cont;
     }
+
+    
+    this.media = function(arr) {
+        var prom = 0; 
+        angular.forEach(arr, val => {
+            prom += val;
+        });
+        return prom / arr.length;
+    }
 } 
 
 angular.module('app').service('Utils', Utils); 

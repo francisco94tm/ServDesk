@@ -1,12 +1,13 @@
 @import 'variables';
 @import 'helpers';
 @import 'navbar';
-@import 'addContainer';
 @import 'editContainer';
 @import 'caseContainer';
 @import 'agentContainer';
 @import 'reportContainer';
 @import 'newdataContainer';
+@import 'itemList';
+@import 'addContainer';
 
 
 // Panels Widhts ===================================================================
@@ -25,10 +26,14 @@
     opacity: 1; 
     z-index: 10001;
     transition: all 1s $animation-ease-out;
-    &.closed{
-        // background: red;
+    &.closed{ 
         opacity: 0!important;
         height: 0;
+        .lds-ring{
+            // z-index: -1!important;
+            display: none;
+            animation-play-state: paused;
+        }
     }
 }
 
@@ -39,9 +44,9 @@
     .column{        
         min-height: 100vh;
         &.dash-nav, &dash-nav{
-            width: 250px;
+            width: 220px;
             overflow-x: hidden; 
-            background: $theme--bg;
+            background:$theme--bg;
             transition: 0.3s $animation-ease-out;
             @media screen and (max-width: 1050px) { 
                 .logo{
@@ -54,22 +59,29 @@
         }
         &.dash-content, &dash-content{
             overflow-x: none;
-            width: calc(100% - 250px)!important;
+            width: calc(100% - 220px)!important;
+            transition: 0.3s $animation-ease-out;
+            position: relative;
             @media screen and (max-width: 1050px) {
                 width: 100vw!important;
             }
         } 
         &.section-nav { 
-            width: 350px; 
+            width: 370px; 
+            padding-left: 20px;
             overflow-x: hidden;
+            background: $theme--bg;
+            transition: 0.3s $animation-ease-out;
             @media screen and (max-width: 600px) {
                 width: 100vw!important;
             }
         }
-        &.section-content {     
+        &.section-content {   
+            width: 100%;
             overflow-x: hidden!important;            
             padding: 60px 100px 60px 100px;
             position: relative;
+            transition: 0.3s $animation-ease-out;
             @media screen and (max-width: 1050px) {
                 padding: 100px 80px 60px 80px;
             }
@@ -82,12 +94,15 @@
 
 .add-container{    
     .button{        
-        left: 535px;  
+        left: 515px;  
         bottom: 50px;           
+        
+        @media screen and (max-width: 1050px) { 
+            left: 270px;            
+            bottom: 30px; 
+        }
         @media screen and (max-width: 600px) {
-            left: auto;
-            right: 3.33%; 
-            bottom: 3.33%; 
+            left: calc(100vw - 85px); 
         }
     }
 }
@@ -108,8 +123,7 @@
     background-color: $theme--bg;
     top: 0px;
     z-index: 11; 
-    position: -webkit-sticky;
-    position: sticky;
+    
     font-weight: bold;
     padding: 10px 20px 10px 10px;  
     color: rgba($theme--fg, 0.8);
@@ -119,13 +133,22 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    cursor: pointer;  
-    // &:hover{
-    //     color: $main-color;  
+    cursor: pointer;
+    position: -webkit-sticky;
+    position: sticky;
+    margin-top: 20px;
+    // span.name{
+    //     // color: $main-color;
     // }
+    span.quantity{
+        color: rgba($main-color, 1);
+        font-size: 14px;
+        margin-right: 15px;
+    }
     i{
         float: right;
         margin-right: 15px;
+        color: $main-color;
         transition: 0.3s $animation-ease-out;
         
         &.hidden{
@@ -134,161 +157,15 @@
     } 
 }
 
-// Item list wrapper =========================================================
-
-.item-wrapper{    
-    overflow-y: scroll;
-    overflow-x: hidden;
-    padding-bottom: 40px;
-    margin-top: 5px;  
-    transition: all 0.3s; 
-
-    .refresh-btn{
-        cursor: pointer;
-        width: 320px; 
-        @media screen and (max-width: 600px) { 
-            width: 100%;
-        }
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        position: relative;  
-        i{
-            color: rgba($theme--fg,0.3); 
-            text-align: center; 
-            transition: 0.3s $animation-ease-out; 
-        }
-        @keyframes rotating{
-            from {transform: rotate(0deg)}
-            to {transform: rotate(360deg);}
-        }
-        .loading{
-            animation: rotating 1s infinite; 
-        }
-        &.big i{ 
-            font-size: 100px;
-            width: 200px;
-            height: 200px; 
-            line-height: 200px;
-        }
-        &.small i{ 
-            font-size: 25px;
-            width: 40px;
-            height: 40px; 
-            line-height:40px; 
-        }
-        &:hover i{
-            color: $main-color;
-        }
-    } 
-    
-    .item{
-        display: flex; 
-        padding: 20px 30px;
-        font-size: 13px;
-        justify-content: space-between; 
-        margin: 5px 0px 5px 10px;        
-        transition: 0.4s $animation-ease-out;
-        position: relative;  
-        // border-left: 4px solid rgba($theme--fg, 0.25); 
-        background: rgba($theme--fg, 0.02); 
-        cursor: pointer;
-        border-radius: 2px;
-
-        &:hover{
-            background: rgba($theme--fg, 0.09); 
-        }
-        .left{
-            z-index: 1;
-            display: flex;
-            color: $theme--fg;
-            .title{
-                white-space: nowrap; 
-                overflow: hidden;
-                text-overflow: ellipsis;
-                max-width: 170px;  
-                font-size: 13px; 
-                padding: 0;
-                margin: 0;
-                font-weight: bold;
-                padding-right: 10px;
-            }    
-            .data{ 
-                opacity: 0.6;
-                font-size: 13px; 
-            }
-        }
-        .right{             
-            text-align: right; 
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            .status{ 
-                margin-right: -5px;
-                border-radius: 2px;
-                color: rgba($theme--fg, 0.7);
-                font-size: 9px;
-                letter-spacing: 1px;
-                padding: 1px 5px;
-                z-index: 1;
-                border: solid 1px  rgba($theme--fg, 0.3); 
-            }        
-            .datetime{
-                z-index: 1;
-                color: $theme--fg;  
-                font-size: 11.5px;  
-                opacity: 0.6;
-            } 
-        }
-
-        // Animation when selected
-        $beforew: 3px;
-        &:before{
-            content: "";
-            display: block;
-            position: absolute;
-            width: 3px;
-            height: calc(100% - 20px);
-            border-radius: $beforew;
-            transition: 
-                transform 0.15s, 
-                height 0.15s 0.15s,  
-                top 0.15s 0.15s,  
-                border-radius 0.15s 0.15s; 
-            top: 10px;
-            left: 10px;
-            z-index: 0;
-        }
-
-        &.selected{        
-            background: rgba($theme--fg, 0.16);
-            &:before{ 
-                // $sc: calc(100% / #{$beforew});
-                // @error #{$sc};
-                transform: scale(200); 
-                top: calc((100% - #{$beforew}) / 2);
-                height: $beforew; 
-                border-radius: 50%; 
-                transition: 
-                    transform 0.15s 0.15s, 
-                    height 0.15s, 
-                    top 0.15s, 
-                    border-radius 0.15s; 
-            }   
-            .title{ 
-                max-width: 180px;
-            }
-        } 
-    }
-}
 
 // Panels preview content ===============================================================
 
 .container .section-content{
     position: relative;
-    transition: $animation-ease-out 0.3s; 
+    transition: 0.3s; 
     width: 100%;  
     &.is-closed{
+        transition: 0.3s; 
         background: $theme--bg;
         display: flex;
         justify-content: center;
@@ -309,7 +186,7 @@
         display: flex; 
         flex-direction: column; 
         .pre-data{
-            color: #666; 
+            color: rgba($theme--fg,0.4);
             padding: 10px 50px 10px 0;
             display: block;  
             text-transform: uppercase;
@@ -323,7 +200,6 @@
             margin-bottom: 40px; 
         }
         pre{
-            font-family: "Walfork"; 
             white-space: pre-wrap;  
             overflow: hidden; 
             font-style: italic;
@@ -346,7 +222,7 @@
         .item-list{
             // margin-top: 10px;
             display: flex;
-            flex-direction: column;
+            flex-direction: column; 
             // flex-wrap: wrap;
             .item{ 
                 display: flex;

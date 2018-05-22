@@ -27,6 +27,17 @@ var AgentContent = function(System){
     this.shuffleEditMode = function(){
         editMode = !editMode;
     }  
+
+    this.edit = function(){
+        var d = angular.copy(this.data);
+         // Change object field to id
+         Object.keys(d).map(function(key){ 
+            if(d[key] !== null && typeof d[key] === 'object'){
+                d[key] = d[key].id;
+            }
+        });  
+        return System.call('editAgent', d);
+    };
 }
 
 
