@@ -176,6 +176,7 @@ INSERT INTO `assetrepository` (`id`, `name`, `description`, `type`, `state`, `co
 -- Estructura de tabla para la tabla `businessunit`
 --
 
+
 CREATE TABLE `businessunit` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,

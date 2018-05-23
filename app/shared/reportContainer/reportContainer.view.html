@@ -14,7 +14,8 @@
             <tr ng-repeat="a in $ctrl.attentionTime">
                 <th>{{$ctrl.today | amAdd : a.month*1 : 'months' | amDateFormat: 'MMMM'}}</th>
                 <td>{{a.mediatime*1 | amDurationFormat : 'seconds' }}</td>
-                <td>{{$ctrl.solutionTime[$index].mediatime*1 | amDurationFormat : 'seconds' }}</td>
+                <td ng-if="$ctrl.solutionTime[$index] != undefined">{{$ctrl.solutionTime[$index].mediatime*1 | amDurationFormat : 'seconds'}}</td>
+                <td ng-if="$ctrl.solutionTime[$index] == undefined">-</td>
             </tr> 
         </table>   
     </div>
