@@ -41,5 +41,45 @@
             $values['error'][] = $db->error(); 
             return json_encode($values);
         }
+
+
+          /*****************************************************************************
+         * Edit a case into the Database
+         * @return  JSON object to inject into the view.
+         */ 
+        
+        public function edit($obj){
+            // Create connection
+            include_once('connection/connection.php' );
+            $db = new Connection();  
+            
+            $name = $obj['name'];
+            $firstLastname = $obj['firstLastname'];
+            $secondLastname = $obj['secondLastname'];
+            $mobilephone = $obj['mobilephone'];
+            $phone = $obj['phone'];
+            $email = $obj['email'];
+            $address = $obj['address'];
+            $usr = $obj['usr'];
+            $pass = $obj['pass'];
+            $level = $obj['id_level'];
+            $id = $obj['id'];  
+            
+            $values['query'] = "UPDATE agent SET
+                usr = '$usr',
+                name = '$name',
+                firstLastname = '$firstLastname', 
+                secondLastname =  '$secondLastname', 
+                mobilephone = '$mobilephone', 
+                address = '$address',
+                phone = '$phone', 
+                email = '$email',
+                id_level = '$level'
+                WHERE id = $id";
+ 
+            $values['info'] = $db->query($values['query']);	 
+            $values['error'][] = $db->error();  
+            return json_encode($values);
+        }
     }
 ?>

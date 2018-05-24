@@ -14,12 +14,12 @@
             </div> 
             <form autocomplete="off">     
                 <div class="row"> 
-                    <xselect label="Cliente:" options='$ctrl.options.client' ng-model="$ctrl.CaseAdd.data.client"></xselect>                   
-                    <xselect filter="infoType('Pública')" disabled="$ctrl.CaseAdd.data.client == undefined" label="Activo:" options='$ctrl.options.assetRepository' ng-model="$ctrl.CaseAdd.data.asset"></xselect> 
+                    <xselect type="people" label="Cliente:" options='$ctrl.options.client' ng-model="$ctrl.CaseAdd.data.client"></xselect>                   
+                    <xselect disabled="$ctrl.CaseAdd.data.client == undefined" label="Activo:" options='$ctrl.options.assetRepository' ng-model="$ctrl.CaseAdd.data.asset"></xselect> 
                     <xselect label="Medio de registro:" options='$ctrl.options.registerMedium' ng-model="$ctrl.CaseAdd.data.registerMedium"></xselect> 
                     <xselect label="Agente de amenaza:" options='$ctrl.options.agentThreat' ng-model="$ctrl.CaseAdd.data.agentThreat"></xselect> 
                     <xselect label="Tipo de Caso:" options='$ctrl.options.caseType' ng-model="$ctrl.CaseAdd.data.caseType"></xselect>
-                    <xselect label="Responsable:" options='$ctrl.options.agent' ng-model="$ctrl.CaseAdd.data.responsable"></xselect>                      
+                    <xselect type="people" label="Responsable:" options='$ctrl.options.agent' ng-model="$ctrl.CaseAdd.data.responsable"></xselect>                      
                 </div>               
             </form> 
         </div>   

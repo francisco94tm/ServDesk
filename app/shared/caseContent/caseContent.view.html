@@ -1,34 +1,77 @@
 <div class="case-content column section-content {{($ctrl.CaseContent.data != undefined)?'is-opened':'is-closed'}}">
     
-    
-
     <!-- Show when data is selected --> 
     <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.CaseContent.data != undefined">  
 
+        <!-- To solve panel --> 
+        <div class="to-solve-panel add-container" ng-class="(!$ctrl.solving)?'closed':'opened'">
+            <div class="back" ng-click="$ctrl.solving = false"></div>
+            <!-- Real Agent Threat --> 
+            <div class="panel">   
+                <div class="close-btn material-icons"  ng-click="$ctrl.solving = false">close</div>
+                <button 
+                    ng-disabled="$ctrl.isEmpty($ctrl.CaseContent.data.solution) ||
+                    $ctrl.isEmpty($ctrl.CaseContent.data.id_realAgentThreat)" 
+                    ng-click="$ctrl.solveCase()">Solucionar caso</button>
+                <div class="panel-wrapper">  
+                    <h1>{{$ctrl.CaseContent.data.subject}}</h1> 
+                    <form autocomplete="off">     
+                        <div class="row">
+                            <xselect
+                                options="$ctrl.options.agentThreat"  
+                                label="Agente de Amenaza Real:"  
+                                ng-model="$ctrl.CaseContent.data.id_realAgentThreat"> 
+                            </xselect>
+                            
+                            <!-- Description  -->
+                            <xtextarea
+                                class="pre" 
+                                placeholder="Ingresa una descripción de la solución del caso"
+                                label="Solución del caso:" 
+                                ng-model="$ctrl.CaseContent.data.solution">
+                            </xtextarea>    
+                        </div>
+                    </form>
+                </div>
+            </div>  
+        </div>
+
         <!-- Edit button --> 
-        <div class="edit-wrapper {{($ctrl.CaseContent.data != undefined)?'is-opened':'is-closed'">
+        <div class="toolbar-wrapper">
+           
             <div class="back-btn" ng-click="$ctrl.CaseContent.data = undefined">        
                 <i class="material-icons">arrow_back</i> 
             </div>
-            <div ng-if="2 >= $ctrl.Session.getId()" 
-                class="edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" 
-                ng-click="$ctrl.edit()">
-                <div class="off">
-                    <i class="material-icons">edit</i>
-                    <span>Editar</span>
-                </div>
-                <div class="on">
-                    <i class="material-icons">save</i>
-                    <span>Guardar</span>
-                </div>
-            </div>
+
+            <button ng-if="($ctrl.CaseContent.data.id_status.id==2 || $ctrl.CaseContent.data.id_status.id==1)&& 2 >= $ctrl.sessionId && !$ctrl.CaseContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.edit()">
+                <i class="material-icons">edit</i>
+                <span>Editar</span>
+            </button> 
+
+            <button ng-if="2 >= $ctrl.sessionId && $ctrl.CaseContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.edit()">
+                <i class="material-icons">save</i>
+                <span>Guardar</span>
+            </button>
+
+            <button ng-if="2 >= $ctrl.sessionId && $ctrl.CaseContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.revertEdit()">
+                <i class="material-icons">close</i>
+                <span>Cancelar</span>
+            </button> 
         </div> 
 
-        <div class="revert-edit-button {{$ctrl.CaseContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  
-            ng-click="$ctrl.revertEdit()">
-            <i class="material-icons">close</i>
-            <span>Cancelar</span>
-        </div>  
+        <button ng-click="$ctrl.setStatusTo(2)"
+            class="{{$ctrl.CaseContent.isEditModeOn()?'visible':'hidden'}} change-status priority-{{$ctrl.CaseContent.data.id_caseType.id}}" 
+            ng-if="2 >= $ctrl.sessionId && $ctrl.CaseContent.data.id_status.id==1">
+            <span>Dar seguimiento al caso</span>
+            <i class="material-icons">keyboard_arrow_right</i>
+        </button>
+
+        <button ng-click="$ctrl.setStatusTo(3)"
+            class="{{$ctrl.CaseContent.isEditModeOn()?'visible':'hidden'}} change-status priority-{{$ctrl.CaseContent.data.id_caseType.id}}" 
+            ng-if="2 >= $ctrl.sessionId && $ctrl.CaseContent.data.id_status.id==2">
+            <span>Solucionar caso</span>
+            <i class="material-icons">keyboard_arrow_right</i>
+        </button> 
 
         <!-- Pre-data -->
         <div class="pre-data priority priority-{{$ctrl.CaseContent.data.id_caseType.id}}" 
@@ -49,17 +92,7 @@
             ng-model="$ctrl.CaseContent.data.subject">
         </xinput>
         
-        
-        <!-- Author  -->
-        <!-- <div class="author">  
-            <b>Atendido por:</b><br>
-            <span>
-                {{$ctrl.CaseContent.data.author.name}} 
-                {{$ctrl.CaseContent.data.author.firstLastname}} 
-                {{$ctrl.CaseContent.data.author.secondLastname}}
-            </span>
-        </div> 
-          -->
+         
         <!-- Description  -->
         <xtextarea 
             class="pre"
@@ -72,8 +105,35 @@
         <div class="metadata"> 
             <!-- Bullets -->
             <div class="item-list"> 
-                
+                 
+                <div class="item register-medium">                    
+                    <i ng-if="$ctrl.CaseContent.data.id_status.id==1 || $ctrl.CaseContent.data.id_status.id==2" class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">fingerprint</i>
+                    <i ng-if="!($ctrl.CaseContent.data.id_status.id==1 || $ctrl.CaseContent.data.id_status.id==2)" class="material-icons">fingerprint</i>
+                    <div class="group-text">
+                        <div class="label">Folio del caso</div>
+                        <div class="text">{{$ctrl.CaseContent.data.id | minDigits: 4}}</div>
+                    </div> 
+                </div>  
 
+                <div class="item register-medium" ng-if="$ctrl.CaseContent.data.id_status.id!=3">                    
+                    <i ng-if="$ctrl.CaseContent.data.id_status.id==1 || $ctrl.CaseContent.data.id_status.id==2" class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">date_range</i>
+                    <i ng-if="!($ctrl.CaseContent.data.id_status.id==1 || $ctrl.CaseContent.data.id_status.id==2)" class="material-icons">date_range</i>
+                    <div class="group-text">
+                        <div class="label">Fecha máxima de solución:</div>
+                        <div class="text" am-time-ago="$ctrl.CaseContent.data.maxSolutionDate | amParse:'YYYY-MM-DD HH:mm:ss'"></div>
+                    </div> 
+                </div>  
+
+
+                <div class="item register-medium" ng-if="$ctrl.CaseContent.data.id_status.id==3">                    
+                    <i ng-if="$ctrl.CaseContent.data.id_status.id==1 || $ctrl.CaseContent.data.id_status.id==2" class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">calendar_today</i>
+                    <i ng-if="!($ctrl.CaseContent.data.id_status.id==1 || $ctrl.CaseContent.data.id_status.id==2)" class="material-icons">calendar_today</i>
+                    <div class="group-text">
+                        <div class="label">Se solucionó</div>
+                        <div class="text" am-time-ago="$ctrl.CaseContent.data.solutionDate | amParse:'YYYY-MM-DD HH:mm:ss'"></div>
+                    </div> 
+                </div>  
+                     
                 <!-- Responsable --> 
                 <div class="item register-medium">                    
                     <i ng-if="$ctrl.CaseContent.data.id_status.id==1 || $ctrl.CaseContent.data.id_status.id==2" class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">perm_identity</i>
@@ -86,8 +146,7 @@
                         item-selected="{{$ctrl.CaseContent.data.author.id}}"
                         ng-model="$ctrl.CaseContent.data.author"> 
                     </xselect>
-                </div>
-
+                </div> 
 
                 <!-- Client --> 
                 <div class="item register-medium">                    
@@ -142,23 +201,7 @@
                     </xselect>
                 </div> 
 
-                <!-- Max attention date -->
-                <!-- <div class="item max-attention-date">
-                    <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">date_range</i>
-                    <span class="data-wrapper">
-                        <div class="field"><b>Fecha máxima de atención:</b></div>
-                        <div class="data">{{$ctrl.CaseContent.data.maxAtentionDate}}</div>
-                    </span>                   
-                </div>  -->
-                    
-                <!-- Max solution date -->
-                <!-- <div class="item max-solution-date">
-                    <i class="material-icons priority-{{$ctrl.CaseContent.data.id_caseType.id}}">today</i>
-                    <span class="data-wrapper">
-                        <div class="field "><b>Fecha máxima de solución:</b></div>
-                        <div class="data">{{$ctrl.CaseContent.data.maxSolutionDate}}</div>
-                    </span>                   
-                </div>   -->
+                 
             </div>
         </div> 
     </div>  
@@ -167,4 +210,8 @@
     <div class="closed" ng-show="$ctrl.CaseContent.data == undefined">   
         <h1>{{$ctrl.CaseContent.getCloseMessage()}}</h1>
     </div>
+
+
+
+
 </div>

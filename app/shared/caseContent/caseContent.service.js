@@ -7,6 +7,11 @@ var CaseContent = function(System, Session, CaseItemList){
     var editMode = false;
     this.backup = {};
     this.data = undefined;
+
+    
+    this.hasChanged = function(){
+        return !angular.equals(this.data, this.backup);
+    };
             
     this.isEditModeOn = function(){
         return editMode == true;

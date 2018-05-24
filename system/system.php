@@ -21,8 +21,9 @@ if(isset($_REQUEST['request'])) {
 			echo $system->getTableData($_REQUEST);	
 			break;   
 
+
 		/**
-		 * Save or edit a request
+		 * REQUEST
 		 */
 		case 'saveCase':
 			include_once('request.class.php');
@@ -36,26 +37,69 @@ if(isset($_REQUEST['request'])) {
 			break; 
 
 
+		/**
+		 * CLIENT
+		 */
 		case 'saveClient':
-			include_once('system.class.php');
-			$system = new System(); 
-			echo $system->saveClient($_REQUEST);	
+			include_once('client.class.php');
+			$client = new Client(); 
+			echo $client->save($_REQUEST);	
 			break;
+		case 'editClient':
+			include_once('client.class.php');
+			$client = new Client(); 
+			echo $client->edit($_REQUEST);	
+			break;
+
+
+		/**
+		 * REGISTER MEDIUM
+		 */
 		case 'saveRegisterMedium':
-			include_once('system.class.php');
-			$system = new System(); 
-			echo $system->saveRegisterMedium($_REQUEST);	
+			include_once('registermedium.class.php');
+			$registerMedium = new RegisterMedium(); 
+			echo $registerMedium->save($_REQUEST);	
 			break;
+		case 'editRegisterMedium':
+			include_once('registermedium.class.php');
+			$registerMedium = new RegisterMedium(); 
+			echo $registerMedium->edit($_REQUEST);	
+			break;
+
+		
+		/**
+		 * AGENT THREAT
+		 */
 		case 'saveAgentThreat':
-			include_once('system.class.php');
-			$system = new System(); 
-			echo $system->saveAgentThreat($_REQUEST);	
+			include_once('agentthreat.class.php');
+			$agentThreat = new AgentThreat(); 
+			echo $agentThreat->save($_REQUEST);	
 			break;
+		case 'editAgentThreat':
+			include_once('agentthreat.class.php');
+			$agentThreat = new AgentThreat(); 
+			echo $agentThreat->edit($_REQUEST);	
+			break;
+
+
+		/**
+		 * AGENT
+		 */
 		case 'saveAgent':
 			include_once('agent.class.php');
 			$agent = new Agent(); 
 			echo $agent->save($_REQUEST);	
 			break; 
+		case 'editAgent':
+			include_once('agent.class.php');
+			$agent = new Agent(); 
+			echo $agent->edit($_REQUEST);	
+			break; 
+
+
+		/**
+		 * LOGIN
+		 */
 		case 'login':
 			include_once('login.class.php');
 			$login = new Login(); 	 
@@ -71,6 +115,11 @@ if(isset($_REQUEST['request'])) {
 			$login = new Login(); 	 
 			echo $login->verifySession($_REQUEST);
 			break; 
+
+		
+		/**
+		 * REPORTS
+		 */
 		case 'getRiskCalculation':
 			include_once('risk.class.php');
 			$risk = new Risk();   

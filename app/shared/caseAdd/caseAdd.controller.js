@@ -3,7 +3,7 @@
  * request Component
  */
 
-function caseAddController($scope, $element, $attrs, CaseAdd, $rootScope, Dashboard, $timeout){  
+function caseAddController($scope, $element, $attrs, CaseAdd, $rootScope, Dashboard, $timeout, $filter){  
     
     // Check if the dialog is closed 
     $scope.$ctrl.CaseAdd = CaseAdd; 
@@ -11,7 +11,19 @@ function caseAddController($scope, $element, $attrs, CaseAdd, $rootScope, Dashbo
  
     // Get catalogues
     Dashboard.getCatalogues().then(data => {
+        var c = [];
+        for(let i=0; i<4; i++){
+           angular.forEach(data.client[i], function(val, id){
+                c.push(val);
+           });
+        } 
+ 
+        data.client = c;
         $scope.$ctrl.options =  data;
+
+        console.log($scope.$ctrl.options.assetRepository);
+        $scope.$ctrl.options.assetRepository = $filter('filter')($scope.$ctrl.options.assetRepository, 'Pública');        
+        console.log($scope.$ctrl.options.assetRepository);
     }); 
 
     $scope.$ctrl.saveCase = () => {			

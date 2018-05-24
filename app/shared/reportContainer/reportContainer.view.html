@@ -1,119 +1,138 @@
 <!-- 03. Reports Section ****************************************** -->
-<div class="item-body column report-panel"> 
-    <h1 class="bold">Reporte</h1> 
-    <br>
-
-    <div class="time-reponse">
-        <h3>Tiempos promedio de respuesta</h3>
-        <table>
-            <tr>
-                <th></th>
-                <th>Atención</th>
-                <th>Solución</th>
-            </tr>
-            <tr ng-repeat="a in $ctrl.attentionTime">
-                <th>{{$ctrl.today | amAdd : a.month*1 : 'months' | amDateFormat: 'MMMM'}}</th>
-                <td>{{a.mediatime*1 | amDurationFormat : 'seconds' }}</td>
-                <td ng-if="$ctrl.solutionTime[$index] != undefined">{{$ctrl.solutionTime[$index].mediatime*1 | amDurationFormat : 'seconds'}}</td>
-                <td ng-if="$ctrl.solutionTime[$index] == undefined">-</td>
-            </tr> 
-        </table>   
+<div class="item-body column report-panel">  
+    
+    <div class="download-btn">
+        <i class="material-icons"></i>
     </div>
 
-    <br><br>
-
-    <div class="cases-resume"> 
-        <h3>Resumen de casos</h3> 
-        <table>
-            <tr>
-                <th>Abiertos</th>
-                <td>{{$ctrl.pie.data[0]}}</td>
-            </tr>
-            <tr>
-                <th>En progreso</th>
-                <td>{{$ctrl.pie.data[1]}}</td>
-            </tr>
-            <tr>
-                <th>Solucionados</th>
-                <td>{{$ctrl.pie.data[2]}}</td>
-            </tr>
-            <tr>
-                <th>Cancelados:</th>
-                <td>{{$ctrl.pie.data[3]}}</td>
-            </tr>
-        </table>
-        <canvas id="pie" class="chart chart-pie"
-            chart-data="$ctrl.pie.data" 
-            chart-labels="$ctrl.pie.labels">
-        </canvas>
+    <div class="graph-tabs">
+        <div ng-click="tabselected=0" class="tab {{tabselected == 0 ? 'selected':''}}">Desempeño</div> 
+        <div ng-click="tabselected=1" class="tab {{tabselected == 1 ? 'selected':''}}">Línea de tiempo</div>
+        <div ng-click="tabselected=2" class="tab {{tabselected == 2 ? 'selected':''}}">Infraestructura</div>    
     </div> 
-    <br><br>
-    <div class="chart-wrapper">
-        <h3>Por periodo de tiempo</h3> 
-        <div class="chart-item-wrapper">
-            <div class="chart-item line-chart-item">
-                <canvas id="line" class="chart chart-line" chart-data="$ctrl.line.data"
-                    chart-labels="$ctrl.line.labels" chart-series="$ctrl.line.series" chart-options="$ctrl.line.options">
-                </canvas>
-            </div>
-        </div>
-    </div>
-    <div class="chart-wrapper">
-        <h3>Por infraestructura</h3>
-        <br>
-        <xselect label="Infraestructura:" ng-model="asset" options="$ctrl.d"></xselect> 
-        <div class="chart-item-wrapper">
-            <div class="chart-item radar-chart-item">
-                <canvas id="radar" class="chart chart-radar"
-                    chart-data="$ctrl.radar.data" chart-options="$ctrl.radar.options" 
-                    chart-series="$ctrl.radar.series" chart-labels="$ctrl.radar.labels">
-                </canvas>
+
+
+    <div class="chart-container">
+        <div class="chart-wrapper time-response 
+            {{tabselected == 0 ? 'visible':'hidden left'}}"> 
+            <div class="performance">                
+                <div class="card-wrapper">
+                    <div class="card" ng-repeat="a in $ctrl.attentionTime | orderBy : '-month'">
+                        <div class="month">{{$ctrl.today | amAdd : a.month*1 : 'months' | amDateFormat: 'MMMM'}}</div>
+                        <div class="attention wrap">
+                            <div class="description">Media para atender casos</div>
+                            <div class="data">{{a.mediatime*1 | amDurationFormat : 'seconds' }}</div>
+                        </div>
+                        <div class="solution wrap">
+                            <div class="description">Media para solucionar casos</div>
+                            <div ng-if="$ctrl.solutionTime[$index] == undefined" class="data">-</div>
+                            <div ng-if="$ctrl.solutionTime[$index] != undefined" class="data">{{$ctrl.solutionTime[$index].mediatime*1 | amDurationFormat : 'seconds'}}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cases-chart"> 
+                    <canvas id="pie" class="chart chart-pie"
+                        chart-data="$ctrl.pie.data" 
+                        chart-labels="$ctrl.pie.labels">
+                    </canvas>
+                    <ul>
+                        <li>
+                            <div class="circle"></div>
+                            <div class="quantity">{{$ctrl.pie.data[0]}}</div>
+                            <div class="name">Abiertos</div>
+                        </li>
+                        <li>
+                            <div class="circle"></div>
+                            <div class="quantity">{{$ctrl.pie.data[1]}}</div>
+                            <div class="name">En proceso</div>
+                        </li>
+                        <li>
+                            <div class="circle"></div>
+                            <div class="quantity">{{$ctrl.pie.data[2]}}</div>
+                            <div class="name">Solucionados</div>
+                        </li>
+                        <li>
+                            <div class="circle"></div>                            
+                            <div class="quantity">{{$ctrl.pie.data[3]}}</div>
+                            <div class="name">Cancelados</div>
+                        </li>
+                    </ul> 
+                </div>
             </div> 
         </div> 
-    </div>  
 
-    <div class="infrastructure-wrapper" ng-if="$ctrl.asset != undefined">
-        <div class="infrastructure">
-            <caption><b>Infraestructura:</b> {{$ctrl.asset.name}}</caption>
-            <div class="table-wrapper">
-                <table class="theats" ng-repeat = "dx in asset.threatType">   
-                    <tr> 
-                        <th>Amenaza:</th>
-                        <td>{{dx.name}}</td>
-                    </tr>
-                    <tr> 
-                        <th>Ocurrencia:</th>
-                        <td>{{dx.ocurrences}}</td>
-                    <!-- </tr> -->
-                    <tr> 
-                        <th>Probabilidad:</th>
-                        <td>{{dx.probability*10}}%</td>
-                    </tr>
-                    <tr> 
-                        <th>Impacto:</th>
-                        <td>{{dx.impact}}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <table > 
-                                <tbody>
-                                    <tr>
-                                        <th>Agente:</th>
-                                        <th>Recom.</th>
-                                        <th>Ocurr.</th> 
-                                        <th>Prob.</th>  
-                                    </tr>
-                                    <tr ng-repeat="d in dx.agentThreat"> 
-                                        <td>{{d.name}}</td>
-                                        <td>{{d.recomendation}}</td>
-                                        <td>{{d.ocurrences}}</td>
-                                        <td>{{d.probability*100}}%</td>
-                                    </tr> 
-                                </tbody> 
-                            </table>
-                        </td>
-                    </tr>                   
-                </table> 
+ 
+        
+        <div class="chart-wrapper  
+            {{tabselected == 1 ? 'visible':'hidden'}}  
+            {{(tabselected == 0) ? 'right':''}} 
+            {{(tabselected == 2 || tabselected == 3) ? 'left':''}}">
+            <div class="chart-item-wrapper">
+                <div class="chart-item line-chart-item">
+                    <canvas id="line" class="chart chart-line" chart-data="$ctrl.line.data"
+                        chart-labels="$ctrl.line.labels" chart-series="$ctrl.line.series" chart-options="$ctrl.line.options">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="chart-wrapper 
+            {{tabselected == 2 ? 'visible':'hidden right'}}">
+            <xselect label="Infraestructura:" ng-model="asset" options="$ctrl.d"></xselect> 
+            <div class="chart-item-wrapper">
+                <div class="chart-item radar-chart-item">
+                    <canvas id="radar" class="chart chart-radar"
+                        chart-data="$ctrl.radar.data" chart-options="$ctrl.radar.options" 
+                        chart-series="$ctrl.radar.series" chart-labels="$ctrl.radar.labels">
+                    </canvas>
+                </div> 
+            </div> 
+        </div>  
+
+        <div class="infrastructure-wrapper" ng-if="$ctrl.asset != undefined">
+            <div class="infrastructure">
+                <caption><b>Infraestructura:</b> {{$ctrl.asset.name}}</caption>
+                <div class="table-wrapper">
+                    <table class="theats" ng-repeat = "dx in asset.threatType">   
+                        <tr> 
+                            <th>Amenaza:</th>
+                            <td>{{dx.name}}</td>
+                        </tr>
+                        <tr> 
+                            <th>Ocurrencia:</th>
+                            <td>{{dx.ocurrences}}</td>
+                        <!-- </tr> -->
+                        <tr> 
+                            <th>Probabilidad:</th>
+                            <td>{{dx.probability*10}}%</td>
+                        </tr>
+                        <tr> 
+                            <th>Impacto:</th>
+                            <td>{{dx.impact}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <table > 
+                                    <tbody>
+                                        <tr>
+                                            <th>Agente:</th>
+                                            <th>Recom.</th>
+                                            <th>Ocurr.</th> 
+                                            <th>Prob.</th>  
+                                        </tr>
+                                        <tr ng-repeat="d in dx.agentThreat"> 
+                                            <td>{{d.name}}</td>
+                                            <td>{{d.recomendation}}</td>
+                                            <td>{{d.ocurrences}}</td>
+                                            <td>{{d.probability*100}}%</td>
+                                        </tr> 
+                                    </tbody> 
+                                </table>
+                            </td>
+                        </tr>                   
+                    </table> 
+                </div>
             </div>
         </div>
     </div>

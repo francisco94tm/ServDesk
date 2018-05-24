@@ -4,7 +4,7 @@
     <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.NewdataContent.data!=undefined">          
         
         <!-- Edit button -->  
-        <div class="edit-wrapper {{($ctrl.NewdataContent.data != undefined)?'is-opened':'is-closed'">
+        <!-- <div class="edit-wrapper {{($ctrl.NewdataContent.data != undefined)?'is-opened':'is-closed'">
             <div class="back-btn" ng-click="$ctrl.NewdataContent.data = undefined">        
                 <i class="material-icons">arrow_back</i> 
             </div>
@@ -23,14 +23,33 @@
         <div class="revert-edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  ng-click="$ctrl.revertEdit()">
             <i class="material-icons">close</i>
             <span>Cancelar</span>
-        </div>     
+        </div>      -->
+
+
+         <!-- Edit button --> 
+         <div class="toolbar-wrapper {{($ctrl.NewdataContent.data != undefined)?'is-opened':'is-closed'">
+            <div class="back-btn" ng-click="$ctrl.NewdataContent.data = undefined">        
+                <i class="material-icons">arrow_back</i> 
+            </div>
+
+            <button ng-if="!$ctrl.NewdataContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.edit()">
+                <i class="material-icons">edit</i>
+                <span>Editar</span>
+            </button>
+    
+            <button ng-if="$ctrl.NewdataContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.edit()">
+                <i class="material-icons">save</i>
+                <span>Guardar</span>
+            </button>
+
+            <button ng-if="$ctrl.NewdataContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.revertEdit()">
+                <i class="material-icons">close</i>
+                <span>Cancelar</span>
+            </button> 
+        </div> 
 
         
-     
-        <!-- Pre-data -->
-        <div class="pre-data">
-            <span>{{$ctrl.NewdataContent.data.id | minDigits:3}}</span>
-        </div>
+      
 
         <!-- Title --> 
         <xinput type="text" 
@@ -52,7 +71,24 @@
 
             <!-- Bullets -->
             <div class="item-list"> 
-                
+
+                <div class="item register-medium">                     
+                    <i class="material-icons">fingerprint</i>
+                    <div class="group-text">
+                        <div class="label">Folio</div>
+                        <div class="text">{{$ctrl.NewdataContent.data.id | minDigits: 4}}</div>
+                    </div> 
+                </div>  
+            
+
+                <div class="item register-medium"  ng-if="$ctrl.NewdataContent.data.admissionDate != undefined">                     
+                    <i class="material-icons">calendar_today</i>
+                    <div class="group-text">
+                        <div class="label">Registrad{{$ctrl.NewdataContent.data.curp[10]=='H'?'o':$ctrl.NewdataContent.data.curp[10]=='M'?'a':'x'}}</div>
+                        <div class="text" am-time-ago="$ctrl.NewdataContent.data.admissionDate | amParse:'YYYY-MM-DD HH:mm:ss'"></div> 
+                    </div> 
+                </div>  
+
                 <!-- Threat Type --> 
                 <div class="item area" ng-if="$ctrl.NewdataContent.data.id_threatType != undefined">                    
                     <i class="material-icons">warning</i>
@@ -106,6 +142,7 @@
                 <div class="item curp" ng-if="$ctrl.NewdataContent.data.curp != undefined">                    
                     <i class="material-icons">account_box</i>
                     <xinput 
+                        type="curp"
                         class="like-select"
                         disabled="!$ctrl.NewdataContent.isEditModeOn()"
                         label="CURP:"  

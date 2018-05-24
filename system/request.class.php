@@ -54,7 +54,10 @@
             $subject = $obj['subject'];
             $id = $obj['id'];
             $status = $obj['id_status'];
-
+            $solution = $obj['solution'];
+            $realAgentThreat = $obj['id_realAgentThreat'];
+            $time = isset($obj['time']) ? $obj['time'] : false;
+ 
             $values['query'] = "UPDATE request SET
                 infrastructure = '$asset',
                 description = '$description',
@@ -64,9 +67,26 @@
                 id_agentThreat = $agentThreat,
                 id_registerMedium = $registerMedium
                 WHERE id = $id
-            ";
+            "; 
             $values['info'] = $db->query($values['query']);	 
-            $values['error'] = $db->error(); 
+            $values['error'][] = $db->error(); 
+
+            if($time){
+                switch($status){
+                    case 2:
+                        $db->query("UPDATE request SET atentionDate = NOW() WHERE id = $id");                         
+                        $values['error'][] = $db->error(); 
+                        break;
+                    case 3:
+                        $db->query("UPDATE request SET 
+                            solutionDate=NOW(), 
+                            solution = '$solution', 
+                            id_realAgentThreat = $realAgentThreat 
+                            WHERE id = $id");                         
+                            $values['error'][] = $db->error(); 
+                        break;
+                }
+            } 
             return json_encode($values);
         }
     }

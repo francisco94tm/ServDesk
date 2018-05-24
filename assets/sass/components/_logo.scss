@@ -16,6 +16,9 @@
     &.small{
         flex-direction: row;
         margin: 40px 40px; 
+        @media screen and(max-width: 600px){
+            margin: 40px 20px;   
+        }
         img{
             width: 40px;
         }

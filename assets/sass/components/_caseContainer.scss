@@ -26,6 +26,21 @@
     // box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.12);
 }
 
+button{
+    &.priority-1{
+        background-color: darken($low-priority, 15); 
+    }
+    &.priority-2{
+        color: #222;
+        background-color: darken($medium-priority, 10)!important;
+    }
+    &.priority-3{
+        background-color: darken($high-priority, 15)!important;
+    }
+    &.priority-4{
+        background-color: darken($very-high-priority, 15)!important;
+    }
+}
 
 .case-item-list{
     .x-select{
@@ -51,25 +66,18 @@ case-content{
     overflow-x: hidden;
     .priority{  
         // color: white!important; 
-        &.priority-1{ 
-            // background-color: lighten($low-priority, 27)!important; 
-            // border: solid 1px darken($low-priority, 15)!important; 
+        &.priority-1{  
             color: darken($low-priority, 15)!important; 
         }
-        &.priority-2{ 
-            // background-color: lighten($medium-priority, 27)!important; 
-            // border: solid 1px darken($medium-priority, 23)!important; 
+        &.priority-2{  
             color: darken($medium-priority, 23)!important; 
         }
-        &.priority-3{ 
-            // background-color: lighten($high-priority,30)!important;             
-            // border: solid 1px darken($high-priority, 15)!important; 
+        &.priority-3{  
             color: darken($high-priority, 15)!important; 
         }
-        &.priority-4{ 
-            // background-color: $very-high-priority!important; 
+        &.priority-4{  
             color: darken($very-high-priority, 15)!important;  
-        }
+        } 
     }
 
     .item-list{
@@ -88,3 +96,67 @@ case-content{
 
 
  
+
+.to-solve-panel {
+    position: fixed;
+    z-index: 15000!important;
+    .row{
+        flex-direction: column;
+    }
+    .panel-wrapper{
+        overflow-x: hidden;
+        padding-top: 0!important;
+    }
+    .close-btn{
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 20px;
+        cursor: pointer;
+        z-index: 100;
+    }
+    h1{
+        margin: 40px 0 0 20px!important;
+        font-size: 40px;
+        @media screen and(max-width:600px){
+            font-size: 30px;
+        }
+    }
+    textarea{
+        margin-left: 0;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        min-width: 100%;
+        width: 100%;
+        max-width: none;        
+        min-height:  230px;
+        @media screen and(max-width:600px){
+            margin-left: 0!important;
+            font-size: 18px!important;
+            max-width: auto!important; 
+            padding: 20px!important;
+            min-height: 130px;
+        }
+    }
+    .x-select{
+        max-width: none;
+        width: 400px!important;
+        min-width: auto; 
+        .select-selected{
+            padding: 10px 30px !important;
+            @media screen and(max-width:600px){
+                padding: 10px 30px !important;
+            }
+        }
+    }
+
+    .panel .panel-wrapper form .x-select {
+        @media screen and(max-width:600px){
+            margin-left: 0!important; 
+            .select-selected{
+                padding: 10px 30px !important;
+            }
+        }
+    }
+}

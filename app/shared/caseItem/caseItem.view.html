@@ -1,5 +1,6 @@
 <div class="case-item item {{($ctrl.data.id == $ctrl.current.id) ? 'selected' : ''}} {{($ctrl.data.id_status.id==1 || $ctrl.data.id_status.id==2)?$ctrl.priorityClass:''}}" 
      ng-click="$ctrl.caseItemClick($ctrl.data)"> 
+    <!-- <div class="id">{{$ctrl.data.id | minDigits: 4}}</div> -->
     <div class="left">
         <div class="title">{{$ctrl.data.subject}}</div>
         <div class="data" ng-if="$ctrl.Session.getLevel() == 4">
@@ -13,8 +14,10 @@
             {{$ctrl.data.id_client.secondLastname}} 
         </div>
     </div>
-    <div class="right">
-        <div class="datetime" am-time-ago="$ctrl.data.registerDate | amParse:'YYYY-MM-DD HH:mm:ss'"></div>  
+    <div class="right"> 
+        <div ng-if="$ctrl.data.id_status.id!=3" class="datetime" am-time-ago="$ctrl.data.registerDate | amParse:'YYYY-MM-DD HH:mm:ss'"></div>  
+        <div ng-if="$ctrl.data.id_status.id==3" class="datetime" am-time-ago="$ctrl.data.solutionDate | amParse:'YYYY-MM-DD HH:mm:ss'"></div>  
+         
         <!-- <div class="status status-{{$ctrl.data.id_status.id}}">{{$ctrl.data.id_status.value}}</div>   -->
     </div>    
 </div>

@@ -33,12 +33,12 @@
     // border-left-color: $color;
     
     @if $theme--bg == $dark-theme--bg{
-        background:     rgba($theme--fg, 0.12);
+        background:     rgba($color, 0.3);
         &:hover{
-            background: rgba($theme--fg,0.3)
+            background: rgba($color,0.3)
         }
         &:before{
-            background: rgba($color,0.7);
+            background: rgba($color,1);
         }
     } @else if $theme--bg == $clear-theme--bg{
         background:     rgba($color, 0.3);

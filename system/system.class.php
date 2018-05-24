@@ -37,12 +37,15 @@ class System {
         return json_encode($values);
     } 
 
+
     /*****************************************************************************
      * Change number keys to their text value
      * @return  JSON object to inject into the view.
      */ 
     private function fixIndexes($table, &$data){ 
         switch($table){
+
+        /**---------------------------*/    
         case 'request': 
         $new_data = [ [],[],[],[] ];
             foreach($data as &$row){
@@ -57,24 +60,23 @@ class System {
                 $this->swap($row['infrastructure'], 'assetRepository', '*');  
                 // Check status of request and categorize
                 switch($row['id_status']['id']){
-                    case 1:
-                        $new_data[0][] = $row; break;
-                    case 2:
-                        $new_data[1][] = $row; break;
-                    case 3:
-                        $new_data[2][] = $row; break;
-                    case 4:
-                        $new_data[3][] = $row; break;
+                    case 1: $new_data[0][] = $row; break;
+                    case 2: $new_data[1][] = $row; break;
+                    case 3: $new_data[2][] = $row; break;
+                    case 4: $new_data[3][] = $row; break;
                 }
-            }
-           
+            }           
             $data = $new_data;
             break;
+
+        /**---------------------------*/    
         case 'agent':
             foreach($data as &$row){
                 $this->swap($row['id_level'], 'Level', 'name');
             }   
-            break;     
+            break; 
+    
+        /**---------------------------*/    
         case 'client':
             $new_data = [ [],[],[],[] ];
             foreach($data as &$row){
@@ -84,18 +86,16 @@ class System {
                 $this->swap($row['id_status'], 'ClientStatus', 'name');
                 // Check status of request and categorize
                 switch($row['id_status']['id']){
-                    case 1:
-                        $new_data[0][] = $row; break;
-                    case 2:
-                        $new_data[1][] = $row; break;
-                    case 3:
-                        $new_data[2][] = $row; break;
-                    case 4:
-                        $new_data[3][] = $row; break;
+                    case 1: $new_data[0][] = $row; break;
+                    case 2: $new_data[1][] = $row; break;
+                    case 3: $new_data[2][] = $row; break;
+                    case 4: $new_data[3][] = $row; break;
                 }
             }
             $data = $new_data;
             break;
+        
+        /**---------------------------*/    
         case 'agentThreat':
             foreach($data as &$row){
                 $this->swap($row['id_threatType'], 'threatType', 'name'); 
@@ -104,6 +104,10 @@ class System {
         }
 
     } 
+
+    /**
+     * Swap
+     */
     private function swap(&$id, $table, $col){			
         include_once('connection/connection.php');
         $db = new Connection();
@@ -122,98 +126,16 @@ class System {
         }
     }
 
-
-    /*****************************************************************************
-     * Insert a client into the Database
-     * @return  JSON object to inject into the view.
-     */ 
-
-    public function saveClient($obj){
-        // Create connection
-        include_once('connection/connection.php' );
-        $db = new Connection(); 
-        
-        $curp = $obj['curp'];
-        $name = $obj['name'];
-        $firstLastname = $obj['firstLastname'];
-        $secondLastname = $obj['secondLastname'];
-        $mobilephone = $obj['mobilephone'];
-        $phone = $obj['phone'];
-        $email = $obj['email'];
-        $job = $obj['job'];
-        $area = $obj['area'];
-        $department = $obj['department'];
-        $businessUnit = $obj['businessUnit'];
-
-        $values['query'] = "INSERT INTO client (
-            curp, name, firstLastname, secondLastname,
-            id_job, id_area, id_department,
-            id_businessUnit, admissionDate, mobilephone,
-            phone, email, status
-        )
-            VALUES (
-            '$curp', '$name', '$firstLastname', '$secondLastname', 
-            $job, $area, $department,
-            $businessUnit, NOW(),  '$mobilephone',
-            '$phone', '$email', 1
-            )";
-        $values['info'] = $db->query($values['query']);			
-        $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
-        return json_encode($values);
-    }
-
-    /*****************************************************************************
-     * Insert a register Medium into the Database
-     * @return  JSON object to inject into the view.
-     */ 
-
-    public function saveRegisterMedium($obj){
-        // Create connection
-        include_once('connection/connection.php' );
-        $db = new Connection();         
-        $name = $obj['name']; 
-        $values['query'] = "INSERT INTO registerMedium (name) VALUES ('$name')";
-        $values['info'] = $db->query($values['query']);			
-        $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
-        return json_encode($values);
-    }
-
-     /*****************************************************************************
-     * Insert a Agent Threat into the Database
-     * @return  JSON object to inject into the view.
-     */ 
-
-    public function saveAgentThreat($obj){
-        // Create connection
-        include_once('connection/connection.php' );
-        $db = new Connection();         
-        $name = $obj['name']; 
-        $description = $obj['description']; 
-        $threatType = $obj['threatType']; 
-        $values['query'] = "INSERT INTO  agentThreat
-            (name, description, id_threatType) 
-        VALUES 
-            ('$name', '$description', $threatType)";
-        $values['info'] = $db->query($values['query']);			
-        $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
-        return json_encode($values);
-    }
-
     public function getResponseTime(){
         include_once('connection/connection.php');
         $db = new Connection();
-
-        $id = $_SESSION['servDesk']['id'];
-            
+        $id = $_SESSION['servDesk']['id'];            
         // Calculate 
-        $q  = "SELECT (MONTH(solutionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, atentionDate, solutionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && id_status = 3 GROUP BY month";
+        $q  = "SELECT MONTH(solutionDate) 'month', AVG(TIMESTAMPDIFF(SECOND, atentionDate, solutionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && id_status = 3 GROUP BY month";
         $values['solutionTime'] = $db->select($q);
         $values['error'][] = $db->error(); 
 
-        $q  = "SELECT (MONTH(atentionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, registerDate, atentionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && (id_status = 3 || id_status = 2) GROUP BY month";
+        $q  = "SELECT MONTH(atentionDate) 'month', AVG(TIMESTAMPDIFF(SECOND, registerDate, atentionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && (id_status = 3 || id_status = 2) GROUP BY month";
         $values['attentionTime'] = $db->select($q); 
         $values['error'][] = $db->error();  
 

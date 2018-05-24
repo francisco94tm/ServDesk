@@ -6,9 +6,9 @@
 function reportContainerController($scope, $element, $attrs, $rootScope, ReportContainer, Chart, System, moment, CaseItemList, Utils){ 
     
     $scope.$ctrl.CaseItemList = CaseItemList;  
+    $scope.tabselected = 0;
  
-    ReportContainer.getResponseTime().then(response => { 
-        console.log(response.data);
+    ReportContainer.getResponseTime().then(response => {  
         $scope.$ctrl.solutionTime = response.data.solutionTime;
         $scope.$ctrl.attentionTime = response.data.attentionTime;
         $scope.$ctrl.today = new Date();
@@ -22,13 +22,12 @@ function reportContainerController($scope, $element, $attrs, $rootScope, ReportC
 
     $scope.$ctrl.pie = {};    
     $scope.$ctrl.pie.data = [];
-    $scope.$ctrl.pie.labels = ["Abiertos", "En progreso", "Solucionados", "Cancelados"];   
+    // $scope.$ctrl.pie.labels = ["Abiertos", "En progreso", "Solucionados", "Cancelados"];   
 
     $scope.$on('drawPieChart', (event, data) => {  
         $scope.$ctrl.pie.data = CaseItemList.getQuantity();
     });
-
-    
+ 
     /* --------------------------------------------------------- */
     
     /**
