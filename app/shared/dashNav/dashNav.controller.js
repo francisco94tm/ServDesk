@@ -14,6 +14,9 @@ function dashNavController($scope, $element, $attrs, $timeout, DashNav, $rootSco
         DashNav.setCurrentSection(n);
         $rootScope.$broadcast('getCurrentSection'); 
         $rootScope.$broadcast('drawPieChart');
+
+        if(n == 3)
+            $rootScope.$broadcast('updateCharts');
     }
     
     // Detect if a new section has to be added to the dash-nav

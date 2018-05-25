@@ -6,7 +6,7 @@
         text-transform: uppercase;
         font-size: 12px;
         letter-spacing: 0.1em; 
-        color: rgba($theme--fg, 0.5);
+        color: rgba($theme--bg, 0.5);
         border-left: solid 3px transparent;
         display: flex;
         align-items: center;
@@ -25,13 +25,13 @@
         }
 
         &:hover{
-            color: rgba($theme--fg, 0.8);
+            color: rgba($theme--bg, 0.8);
         }
 
         &.selected{
             font-weight: bold;
-            color: $main-color;
-            border-left-color: $main-color;
+            color: $theme--bg;
+            border-left-color: $theme--bg;
             // background: linear-gradient(to right, darken($theme--bg, 5), transparent);
         }
     }

@@ -9,7 +9,7 @@ class Login{
     public function startSession($credentials){
 
         // Create connection
-		include_once("connection/connection.php");
+		include_once('connection/connection.php');
         $db = new Connection(); 
 
         $user = $credentials['user'];

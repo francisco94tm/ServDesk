@@ -19,11 +19,8 @@ function caseAddController($scope, $element, $attrs, CaseAdd, $rootScope, Dashbo
         } 
  
         data.client = c;
-        $scope.$ctrl.options =  data;
-
-        console.log($scope.$ctrl.options.assetRepository);
-        $scope.$ctrl.options.assetRepository = $filter('filter')($scope.$ctrl.options.assetRepository, 'Pública');        
-        console.log($scope.$ctrl.options.assetRepository);
+        $scope.$ctrl.options =  data; 
+        $scope.$ctrl.options.assetRepository = $filter('filter')($scope.$ctrl.options.assetRepository, 'Pública');  
     }); 
 
     $scope.$ctrl.saveCase = () => {			

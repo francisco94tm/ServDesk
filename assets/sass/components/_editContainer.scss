@@ -61,14 +61,7 @@ button.change-status{
         transform: translateY(0); 
     }
 }
-  
-.section-content.is-opened .toolbar-wrapper{    
-    background: $theme--bg;
-}
-.section-content.is-closed .toolbar-wrapper{ 
-    background: transparent;
-}
-
+   
 .toolbar-wrapper{ 
     position: fixed;
     display: flex;

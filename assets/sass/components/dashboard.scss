@@ -8,6 +8,7 @@
 @import 'newdataContainer';
 @import 'itemList';
 @import 'addContainer';
+@import 'settingsContainer';
 
 
 // Panels Widhts ===================================================================
@@ -46,7 +47,7 @@
         &.dash-nav, &dash-nav{
             width: 220px;
             overflow-x: hidden; 
-            background:$theme--bg;
+            background: $main-color;
             transition: 0.3s $animation-ease-out;
             @media screen and (max-width: 1050px) { 
                 .logo{
@@ -167,6 +168,7 @@
             max-width: 500px;
         }
     }
+    
     // Opened panel
     .section-content-wrapper{
         color: $theme--fg;

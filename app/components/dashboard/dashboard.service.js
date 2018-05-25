@@ -22,7 +22,7 @@ var Dashboard = function(Session, System, $timeout, $q) {
             
         angular.forEach(defcat, (val, id) => {
             promises.push(
-                System.call('getTableData', {'table': val}).then(function(response){    
+                System.call('getTableData', {'table': val}).then(function(response){     
                     if(response.data.error != undefined && response.data.error[0] !== "")
                         console.log(response.data.error[0]);
                     opt[val] = response.data.info; 

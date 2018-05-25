@@ -1,17 +1,16 @@
 <?php if(!isset($_SESSION)) session_start();
-    class Risk{ 
-
+    class Report{  
         /************************************************************************
          * Calculate Risk from a period of time
          * @return  JSON with recomendations and analisys data
          */
-        public function calculate($fechaIni, $fechaFin){
+        public function calculateRisk($fechaIni, $fechaFin){
             $assets = []; 
             $fechaIni = $fechaIni ?: "2018-04-17";
             $fechaFin = $fechaFin ?: "2018-04-26";
             $id = $_SESSION['servDesk']['id'];
             
-            include_once("connection/connection.php");
+            include_once('connection/connection.php');
             $db = new Connection(); 
 
             if($_SESSION['servDesk']['id_level'] == 4)

@@ -3,6 +3,42 @@
 class System { 
     protected $values = []; 
 
+    public function getReport(){  
+
+        if(!isset($_SESSION['servDesk']['id']))
+            return [];
+
+        $id = $_SESSION['servDesk']['id'];
+
+        // Create connection
+        include_once('connection/connection.php');
+        $db = new Connection();
+
+        $query = "SELECT 
+        r.id, r.subject, r.description, ct.name caseType, 
+                CONCAT(c.name, ' ', c.firstLastname, ' ', c.secondLastname) client, 
+                CONCAT(a2.name, ' ', a2.firstLastname, ' ', a2.secondLastname) responsable, 
+                rm.name registerMedium, at.name agentThreat, ar.name infrastructure, 
+                s.name status, r.registerDate, r.atentionDate, r.solutionDate, 
+                r.solution, at2.name realAgentThreat, CONCAT(a.name, ' ', a.firstLastname, ' ', a.secondLastname) author
+
+            FROM request r, status s, registerMedium rm, client c, agentthreat at, agentthreat at2, assetrepository ar, casetype ct, agent a, agent a2
+            WHERE r.responsable = $id
+            AND r.id_status = s.id 
+            AND r.author = a.id
+            AND r.responsable = a2.id
+            AND r.id_caseType = ct.id
+            AND r.id_agentThreat = at.id  
+            AND r.id_realAgentThreat = at2.id  
+            AND r.id_registerMedium = rm.id
+            AND r.infrastructure = ar.id
+            AND r.id_client = c.id
+            ORDER BY r.id";
+
+        return $db->select($query);
+    }
+
+
     /*****************************************************************************
      * Load data from database
      * @return  JSON object to inject into the view.
@@ -22,9 +58,9 @@ class System {
         // Select from table
         if($table === "request"){
             if($_SESSION['servDesk']['id_level'] != 4)
-                $values['query'] = "SELECT * from $table WHERE responsable = $id";
+                $values['query'] = "SELECT * from $table WHERE responsable = $id ORDER by id";
             else{
-                $values['query'] = "SELECT * from $table WHERE id_client = $id"; 
+                $values['query'] = "SELECT * from $table WHERE id_client = $id ORDER by id"; 
             }
         }
         else 
@@ -131,11 +167,11 @@ class System {
         $db = new Connection();
         $id = $_SESSION['servDesk']['id'];            
         // Calculate 
-        $q  = "SELECT MONTH(solutionDate) 'month', AVG(TIMESTAMPDIFF(SECOND, atentionDate, solutionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && id_status = 3 GROUP BY month";
+        $q  = "SELECT (MONTH(solutionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, atentionDate, solutionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && id_status = 3 GROUP BY month";
         $values['solutionTime'] = $db->select($q);
         $values['error'][] = $db->error(); 
 
-        $q  = "SELECT MONTH(atentionDate) 'month', AVG(TIMESTAMPDIFF(SECOND, registerDate, atentionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && (id_status = 3 || id_status = 2) GROUP BY month";
+        $q  = "SELECT (MONTH(atentionDate) - MONTH(NOW())) 'month', AVG(TIMESTAMPDIFF(SECOND, registerDate, atentionDate)) DIV 1 'mediatime' FROM request WHERE responsable=$id && (id_status = 3 || id_status = 2) GROUP BY month";
         $values['attentionTime'] = $db->select($q); 
         $values['error'][] = $db->error();  
 

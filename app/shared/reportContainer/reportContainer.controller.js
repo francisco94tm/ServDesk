@@ -3,33 +3,48 @@
  * request Component
  */
 
-function reportContainerController($scope, $element, $attrs, $rootScope, ReportContainer, Chart, System, moment, CaseItemList, Utils){ 
+function reportContainerController(
+    $scope, $element, $attrs, 
+    $rootScope, ReportContainer, Chart, 
+    System, moment, Utils, 
+    Dashboard, $timeout){ 
     
     $scope.$ctrl.CaseItemList = CaseItemList;  
-    $scope.tabselected = 0;
- 
-    ReportContainer.getResponseTime().then(response => {  
-        $scope.$ctrl.solutionTime = response.data.solutionTime;
-        $scope.$ctrl.attentionTime = response.data.attentionTime;
-        $scope.$ctrl.today = new Date();
-    }); 
-
-    /* --------------------------------------------------------- */
-
-    /**
-     *  Resumen de casos
-     */
-
+    $scope.tabselected = 0;    
     $scope.$ctrl.pie = {};    
     $scope.$ctrl.pie.data = [];
-    // $scope.$ctrl.pie.labels = ["Abiertos", "En progreso", "Solucionados", "Cancelados"];   
+    $scope.$ctrl.downloading = false;
 
-    $scope.$on('drawPieChart', (event, data) => {  
-        $scope.$ctrl.pie.data = CaseItemList.getQuantity();
-    });
+    $scope.$ctrl.downloadReport = function(){        
+        $scope.$ctrl.downloading = true;
+        $timeout(() => {
+            $scope.$ctrl.downloading = false; 
+        }, 1000);
+    };
+
+    $scope.$on('updateCharts', (event, data) => {
+
+        // Media solution and attention time ---------------------------------
+        ReportContainer.getResponseTime().then(response => {  
+            $scope.$ctrl.solutionTime = response.data.solutionTime;
+            $scope.$ctrl.attentionTime = response.data.attentionTime;
+            $scope.$ctrl.today = new Date();
+        }); 
+        
+        // Draw pie chart  ----------------------------------------------------
+        Dashboard.getCatalogues(['request']).then(response => { 
+            var new_array = [ 
+                response.request[0].length,
+                response.request[1].length,
+                response.request[2].length,
+                response.request[3].length,
+            ];
+            $scope.$ctrl.pie.data = new_array;
  
-    /* --------------------------------------------------------- */
+        }); 
+    });
     
+    /* --------------------------------------------------------- */
     /**
      * Resumen por infraestructura
      */

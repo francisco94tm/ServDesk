@@ -1,9 +1,12 @@
 <!-- 03. Reports Section ****************************************** -->
 <div class="item-body column report-panel">  
     
-    <div class="download-btn">
-        <i class="material-icons"></i>
-    </div>
+    <a href="system/getReport.php" ng-click="$ctrl.downloadReport()">
+        <div class="download-button {{$ctrl.downloading?'downloading':''}}">
+            <i class="material-icons">get_app</i>
+            <span>Descargar reporte</span>
+        </div>
+    </a>
 
     <div class="graph-tabs">
         <div ng-click="tabselected=0" class="tab {{tabselected == 0 ? 'selected':''}}">Desempeño</div> 
