@@ -7,13 +7,14 @@ function caseContentController(
     $scope, $element, $attrs, 
     $rootScope, CaseContent,
     CaseItemList, Dashboard, Session, 
-    Validate){    
+    Validate, $sce){    
 
-    // Init Services 
+    // Init Services  
     $scope.$ctrl.CaseContent = CaseContent;
     $scope.$ctrl.CaseItemList = CaseItemList;  
     $scope.$ctrl.solving = false;    
     $scope.$ctrl.sessionId = Session.getId(); 
+    $scope.$ctrl.sessionLevel = Session.getLevel(); 
     $scope.$ctrl.isEmpty = function(obj){
         return Validate.isEmpty(obj);
     }
@@ -23,12 +24,10 @@ function caseContentController(
      */ 
     $scope.$ctrl.options = {}; 
     Dashboard.getCatalogues().then((data) => {  
-        var c = [];
-        for(let i=0; i<4; i++){
-           angular.forEach(data.client[i], function(val, id){
-                c.push(val);
-           });
-        } 
+        var c = []; 
+        angular.forEach(data.client[0], function(val, id){
+            c.push(val);
+        });        
         data.client = c;
         $scope.$ctrl.options = data; 
     });
@@ -56,7 +55,7 @@ function caseContentController(
                 console.log(response.data)
 
                 // CHeck for errors ------------
-                if(response.data.error[0] != ""){                    
+                if(response.data.error != ""){                    
                     // Revert data in view
                     $scope.$ctrl.revertEdit();
                     // An error happened, show alert
@@ -79,7 +78,7 @@ function caseContentController(
                         CaseContent.edit().then(response => {
                             
                             // Could revert changes
-                            if(response.data.error[0] != ""){
+                            if(response.data.error != ""){
                                 console.log(response.data.error);
                                 $rootScope.$broadcast('openToast', {
                                     'show_button': false,
@@ -117,6 +116,27 @@ function caseContentController(
             return;
         }
 
+        if(status == 4){ 
+            var obj = {
+                'yes_no': true,
+                'title': '¿Está seguro de querer cancelar este caso?',
+                'description': $sce.trustAsHtml('<br>'),
+                'promise': 'CASE_'+CaseContent.data.id
+            }
+            $rootScope.$broadcast('openPopup', obj);
+            $scope.$on('YES', (event, value) => {   
+                if(value['promise'] == 'CASE_'+CaseContent.data.id){
+                    $scope.$ctrl.saveNewStatus(status).then(response => {
+                        console.log(response.data);
+                        $rootScope.$broadcast('openToast', {'title': 'Caso '+CaseContent.data.id+' cancelado', 'show_button': false});
+                        CaseContent.setEditModeOff(); 
+                    });
+                }
+            });
+            // CaseContent.setEditModeOff(); 
+            // return;
+        }
+
         if(status == 2){
             $scope.$ctrl.saveNewStatus(status).then(response => {
                 console.log(response.data);
@@ -142,12 +162,16 @@ function caseContentController(
      * @param {integer} status 
      */
     $scope.$ctrl.saveNewStatus = function(status){ 
+       
+        var from = (status != 4) ? CaseItemList.data[status-2] : CaseItemList.data[status-3];
+        var to = CaseItemList.data[status-1];
+
         var this_id = CaseContent.data.id; 
-        angular.forEach(CaseItemList.data[status-2], function(obj, id){
+        angular.forEach(from, function(obj, id){
             if(obj.id != this_id) 
                 return; 
-            CaseItemList.data[status-2].splice(id, 1);  
-            CaseItemList.data[status-1].push(obj);  
+            from.splice(id, 1);              
+            to.push(obj);  
         }); 
         CaseContent.data.id_status.id = status;
         CaseContent.data.time = true; 

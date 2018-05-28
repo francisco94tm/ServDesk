@@ -18,8 +18,10 @@ class Curp{
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST", 
             CURLOPT_HTTPHEADER => array( 
-                "authorization: Token token=dceade403b9dda272e2cf3d54da7138d",
+                "authorization: Token token=1bd627ff6b61d1c526325dfc7f70feda",
+                // "authorization: Token token=dceade403b9dda272e2cf3d54da7138d",
                 "content-type: application/json"
+                
             ),
         ));
         $values['info'] = curl_exec($curl);

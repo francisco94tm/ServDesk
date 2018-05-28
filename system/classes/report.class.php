@@ -4,10 +4,24 @@
          * Calculate Risk from a period of time
          * @return  JSON with recomendations and analisys data
          */
-        public function calculateRisk($fechaIni, $fechaFin){
+        public function calculateRisk($data){
+
+
+            // Set timezone
+            date_default_timezone_set('America/Mexico_City');
+
+            // calculate from all times
+            if($data['from'] === "true" && $data['to'] === "true"){
+                $time_difference = " ";
+            }
+            // Calculate date from and to
+            else{
+                $fechaIni = date('Y-m-01 H:i:s', strtotime($data['from']));
+                $fechaFin = date('Y-m-01 H:i:s', strtotime($data['to']));
+                $time_difference = " AND r.registerDate BETWEEN '$fechaIni' AND '$fechaFin' ";
+            }
+ 
             $assets = []; 
-            $fechaIni = $fechaIni ?: "2018-04-17";
-            $fechaFin = $fechaFin ?: "2018-04-26";
             $id = $_SESSION['servDesk']['id'];
             
             include_once('connection/connection.php');
@@ -28,9 +42,9 @@
                 AND r.id_agentThreat = at.id
                 AND at.id_threatType = tt.id
                 AND r.infrastructure = ar.id 
-                AND $condition
-                AND r.registerDate BETWEEN '$fechaIni' AND '$fechaFin'
-                GROUP BY r.infrastructure, tt.name, at.name;";
+                AND $condition 
+                $time_difference 
+                GROUP BY r.infrastructure, tt.name, at.name";
             $rows = $db->select($query);
 
             // Loop through rows
@@ -152,7 +166,7 @@
                     }
                 }
             } 
-
+            
             return json_encode($assets); 
         }
     }   

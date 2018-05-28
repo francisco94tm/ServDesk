@@ -6,7 +6,7 @@ var Dashboard = function(Session, System, $timeout, $q) {
         "threatImpact", "threatInterest", "threatType", "threatExists", "threatCapacity",
         "infrastructureVulnerability", "assetRepository", "agentThreat",
         "status", "agent", "caseType", "registerMedium", "job", "client",
-        "area", "department", "businessUnit", "level"
+        "area", "department", "businessUnit", "level", "clientstatus"
     ];
       
     // Set default catalogues

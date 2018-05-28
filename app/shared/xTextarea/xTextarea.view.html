@@ -4,5 +4,10 @@
         ng-disabled="$ctrl.disabled" 
         placeholder = "{{$ctrl.placeholder}}" 
         ng-model="$ctrl.ngModel"
+        ng-keypress="limitKeypress($event, $ctrl.ngModel, $ctrl.maxLength)"
         msd-elastic/> 
+    <div class="length">
+        <div class="now">{{($ctrl.ngModel)?$ctrl.ngModel.length:0}}</div>
+        <div class="max"> / {{$ctrl.maxLength}}</div>
+    </div>
 </div>

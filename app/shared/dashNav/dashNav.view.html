@@ -1,6 +1,5 @@
 
-<div class="back-nav {{$ctrl.mobile.isNavClosed?'nav-hidden':''}}" 
-     ng-init="$ctrl.mobile.isNavClosed == false"
+<div class="back-nav {{$ctrl.mobile.isNavClosed?'nav-hidden':''}}"  
      ng-click="$ctrl.mobile.isNavClosed = !$ctrl.mobile.isNavClosed"></div>
 <div class="menu-btn" ng-click="$ctrl.mobile.isNavClosed = !$ctrl.mobile.isNavClosed">        
     <i class="material-icons">menu</i>
@@ -11,7 +10,8 @@
         <div ng-click="$ctrl.setCurrentSection($index)"  ng-show="n.level >= $ctrl.DashNav.getLevel()"
             class="item {{$last?'user-section':''}} {{($ctrl.DashNav.getCurrentSection()==$index)?'selected':''}}" 
             ng-repeat="n in $ctrl.DashNav.getSections()">
-            <i class="material-icons">{{n.icon}}</i><span>{{n.name}}</span> 
+            <i class="material-icons">{{($index==1 && $ctrl.DashNav.getLevel() != 1)?'face':n.icon}}</i>
+            <span>{{($index==1 && $ctrl.DashNav.getLevel() != 1)?'Clientes':n.name}}</span> 
         </div>  
     </div>
 </div>

@@ -9,7 +9,8 @@ function agentItemListController($scope, $element, $attrs, AgentItemList, Dashbo
 
     // Update alerts
     $scope.$on('getAgents', function (event, data) {   
-        $scope.$ctrl.data = data;  
+        // $scope.$ctrl.data = data;  
+        $scope.$ctrl.loadData();
     }); 
     
     $scope.$ctrl.loadData = function(){ 

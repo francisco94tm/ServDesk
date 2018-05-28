@@ -10,7 +10,8 @@
         public function save($obj){
 
             // Create connection
-            include_once('connection/connection.php' );
+            include_once('connection/connection.php' );            
+            include_once('email.class.php' );
             $db = new Connection(); 
             
             $name = $obj['name'];
@@ -36,9 +37,26 @@
             '$phone', '$email', '$usr', '$pass', '$level' 
             )";
                 
-            $values['info'] = $db->query($values['query']);			
-            $values['id']   = $db->getLastID(); 
-            $values['error'][] = $db->error(); 
+            $values['info'] = $db->query($values['query']);	                
+            $values['id'] = $db->getLastID(); 
+
+            $values['error'] = $db->error();   
+             // If no errors, send email to client
+             if($values['error'] === ""){
+                $mail = new Mail();
+                $data = [
+                    "token"=> "NEWAGENT",
+                    "name" => $name,
+                    "lastname" => $firstLastname,
+                    "user" => $usr,
+                    "pass" => $pass,
+                    "id"   => $values['id']
+                ];
+                $values["emailmsg"] = $mail->send($email, $data);
+            }              
+                     
+
+            $values['commit'] = $db->commit();     
             return json_encode($values);
         }
 
@@ -51,6 +69,7 @@
         public function edit($obj){
             // Create connection
             include_once('connection/connection.php' );
+            
             $db = new Connection();  
             
             $name = $obj['name'];
@@ -75,11 +94,29 @@
                 phone = '$phone', 
                 email = '$email',
                 id_level = '$level'
-                WHERE id = $id";
- 
-            $values['info'] = $db->query($values['query']);	 
-            $values['error'][] = $db->error();  
+                WHERE id = $id";            
+            $values['info'] = $db->query($values['query']);	  
+            $values['error'] = $db->error();  
+            $values['commit'] = $db->commit();    
             return json_encode($values);
+        }
+
+        public function delete($obj){
+            include_once('connection/connection.php');
+            $db = new Connection();
+            $id = $obj['id'];
+            $query = "DELETE FROM agent WHERE id = $id";
+            $values['info'] = $db->query($query); 
+            $values['error'] = $db->error(); 
+            $values['commit'] = $db->commit();  
+            return json_encode($values);
+        }
+
+        public function exists($obj){
+            include_once('connection/connection.php' );
+            $db = new Connection();         
+            $query = $db->select("SELECT id from agent where usr = '".$obj['user']."'");
+            return sizeof($query);
         }
     }
 ?>

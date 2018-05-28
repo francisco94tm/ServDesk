@@ -8,13 +8,15 @@ function dashNavController($scope, $element, $attrs, $timeout, DashNav, $rootSco
     $scope.$ctrl.DashNav = DashNav;   
     DashNav.reset();
     $rootScope.$broadcast('getCurrentSection');
+    $scope.$ctrl.mobile = {};
+    $scope.$ctrl.mobile.isNavClosed == false;
     
     // ALert to DashContent that current section has changed
     $scope.$ctrl.setCurrentSection = (n) => { 
+        $scope.$ctrl.mobile.isNavClosed = true;
         DashNav.setCurrentSection(n);
         $rootScope.$broadcast('getCurrentSection'); 
         $rootScope.$broadcast('drawPieChart');
-
         if(n == 3)
             $rootScope.$broadcast('updateCharts');
     }

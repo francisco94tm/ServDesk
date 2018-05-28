@@ -3,7 +3,7 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    z-index: 1000;
+    z-index: 10000;
     top: 0;
     left: 0;
     justify-content: center;
@@ -11,12 +11,20 @@
     align-content: center;
     transition: 0.3s $animation-ease-out; 
     opacity: 1;
+
+    @media screen and(max-width: 600px){
+        align-items: flex-end;
+        align-content: flex-end;
+    }
      
     &.hidden{
         z-index: -1; 
         opacity: 0;
         .xpopup-body{ 
-            transform: scale(0.7);
+            transform: scale(0.7) translateY(400px);
+            @media screen and(max-width: 600px){
+                transform: translateY(400px);
+            }
         }
     }
     .xpopup-back{
@@ -26,6 +34,7 @@
         background: rgba(50,50,50,0.45);
     }
     .xpopup-body{  
+        border-radius: 5px;
         width: 400px;
         max-width: 400px;
         min-height: 200px;
@@ -33,24 +42,40 @@
         color: $theme--fg;
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
         text-align: center;
-        padding: 50px;
+        padding: 50px 50px 50px 50px;
         position: relative;
         font-family: "Walfork";
-        transition: 0.3s $animation-ease-out; 
-        border-radius: 3px;
+        transition: 0.4s $animation-ease-out; 
+        @media screen and(max-width: 600px){
+            border-radius: 5px 5px 0 0;
+        }
     }
 
     .xpopup-message { 
         .title{                     
-            font-weight: bold; 
-            font-size: 13px;
+            font-weight: bold;
+            font-size: 15px;
+            letter-spacing: 1px;
             text-transform: uppercase;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            color: $main-color;
+        }
+        .pre-id{
+            font-size: 12px;
+            letter-spacing: 5px;
+        }
+        hr{
+            margin-bottom: 20px;
         }
         .id{
             font-size: 70px; 
             font-weight: 400;   
             padding: 0;
             line-height: 80px;
+        }
+        .description{
+            font-size: 14px;
         }
         // .message{
 
@@ -63,22 +88,41 @@
         right: 0;
         cursor: pointer;
     }
-    .xpopup-controlls button{
+    .xpopup-controlls{
         border: none;
         font-size: 14px;
         background: none;
         font-family: "Walfork"; 
-        position: absolute;
+        position: relative;
         bottom: 0;
         right: 0px;
-        padding: 20px 30px;
+        padding: 10px 10px;
         outline: none; 
         width: auto;
         min-width: auto;  
         opacity: 0.8;
         color: $theme--fg;
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: -55px;
+        margin-right: -50px;
         &:hover{
             opacity: 1;
+        }
+        button{
+            position: relative;
+            width: 80px;
+            background: $theme--bg;
+            padding: 12px 20px;
+            border: none;
+            color: $theme--fg;
+            min-width: auto;
+            font-weight: bold;
+            font-size: 16px;
+            color: rgba($theme--fg, 0.6);
+            &.main{
+                color: $main-color;
+            }
         }
     }
 }  

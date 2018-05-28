@@ -17,9 +17,10 @@ class AgentThreat{
             (name, description, id_threatType) 
         VALUES 
             ('$name', '$description', $threatType)";
-        $values['info'] = $db->query($values['query']);			
-        $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
+        $values['info'] = $db->query($values['query']);	 
+        $values['id']   = $db->getLastID();           
+        $values['error'] = $db->error(); 
+        $values['commit'] = $db->commit();  
         return json_encode($values);
     }
 
@@ -41,9 +42,22 @@ class AgentThreat{
             WHERE 
                 id = $id";
 
-        $values['info'] = $db->query($values['query']);			
-        $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
+        $values['info'] = $db->query($values['query']);		
+        
+        $values['id'] = $db->getLastID(); 
+        $values['error'] = $db->error(); 
+        $values['commit'] = $db->commit();
+        return json_encode($values);
+    }
+
+    public function delete($obj){
+        include_once('connection/connection.php');
+        $db = new Connection();
+        $id = $obj['id'];
+        $query = "DELETE FROM agentThreat WHERE id = $id";
+        $values['info'] = $db->query($query);	         
+        $values['error'] = $db->error(); 
+        $values['commit'] = $db->commit();
         return json_encode($values);
     }
 

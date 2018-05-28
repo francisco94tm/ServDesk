@@ -11,6 +11,7 @@ class Client {
     public function save($obj){
         // Create connection
         include_once('connection/connection.php' );
+        include_once('email.class.php' );
         $db = new Connection(); 
         
         $curp = $obj['curp'];
@@ -29,7 +30,7 @@ class Client {
             curp, name, firstLastname, secondLastname,
             id_job, id_area, id_department,
             id_businessUnit, admissionDate, mobilephone,
-            phone, email, status
+            phone, email, id_status
         )
             VALUES (
             '$curp', '$name', '$firstLastname', '$secondLastname', 
@@ -37,9 +38,23 @@ class Client {
             $businessUnit, NOW(),  '$mobilephone',
             '$phone', '$email', 1
             )";
-        $values['info'] = $db->query($values['query']);			
-        $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
+        $values['info'] = $db->query($values['query']);   
+        $values['id']   = $db->getLastID();      
+        $values['error'] = $db->error(); 
+        // If no errors, send email to client
+        if($values['error'] === ""){
+            $mail = new Mail();
+            $data = [
+                "token"=> "NEWCLIENT",
+                "name" => $name,
+                "lastname" => $firstLastname,
+                "user" => $curp,
+                "pass"   => $values['id']
+            ];
+            $values["emailmsg"] = $mail->send($email, $data);
+        } 
+        $values['commit'] = $db->commit();        
+          
         return json_encode($values);
     }
 
@@ -76,17 +91,29 @@ class Client {
             email = '$email'
             WHERE id = $id";
 
-        $values['info'] = $db->query($values['query']);			
+        $values['info'] = $db->query($values['query']);		
+        $db->commit();	
         $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
-        return json_encode($values);    
-            // VALUES (
-            // '$curp', '$name', '$firstLastname', '$secondLastname', 
-            // $job, $area, $department,
-            // $businessUnit, NOW(),  '$mobilephone',
-            // '$phone', '$email', 1
-            // )";
-    
+        $values['error'] = $db->error(); 
+        return json_encode($values);     
+    }
+
+    public function delete($obj){
+        include_once('connection/connection.php');
+        $db = new Connection();
+        $id = $obj['id'];
+        $query = "DELETE FROM client WHERE id = $id";
+        $values['info'] = $db->query($query);	 
+        $db->commit();
+        $values['error'] = $db->error(); 
+        return json_encode($values);
+    }
+
+    public function exists($obj){
+        include_once('connection/connection.php' );
+        $db = new Connection();         
+        $query = $db->select("SELECT id from client where CURP = '".$obj['curp']."'");
+        return sizeof($query);
     }
 }
 ?>

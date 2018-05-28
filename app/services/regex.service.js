@@ -6,7 +6,7 @@ var Regex = function() {
     this.getPatterns = function(language){
         return {
             'email' : {
-                'pattern': '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$',
+                'pattern': '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)+$',
                 'message': 'Ingresa un email válido'            
             },
             'date' : {
@@ -48,6 +48,10 @@ var Regex = function() {
             'validDate':{
                 'pattern' : '^(0?[1-9]|[12][0-9]|3[01])[\\/](0?[1-9]|1[012])[\\/]([8][789]|[019][\\d])',
                 'message' : 'Ingresa fecha válida posterior a 01/01/87'
+            },
+            'username':{
+                'pattern' : '^[a-zA-Z0-9][a-zA-Z0-9|\\-|_]+$',
+                'message' : 'Ingresa un nombre de usuario con caracteres alfanuméricos y/o guiones (-,_)'
             }
         };
     }

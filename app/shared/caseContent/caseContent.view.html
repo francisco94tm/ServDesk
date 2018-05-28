@@ -9,10 +9,12 @@
             <!-- Real Agent Threat --> 
             <div class="panel">   
                 <div class="close-btn material-icons"  ng-click="$ctrl.solving = false">close</div>
-                <button 
+                <button class='solvebtn'
                     ng-disabled="$ctrl.isEmpty($ctrl.CaseContent.data.solution) ||
                     $ctrl.isEmpty($ctrl.CaseContent.data.id_realAgentThreat)" 
-                    ng-click="$ctrl.solveCase()">Solucionar caso</button>
+                    ng-click="$ctrl.solveCase()">
+                    Solucionar caso
+                </button>
                 <div class="panel-wrapper">  
                     <h1>{{$ctrl.CaseContent.data.subject}}</h1> 
                     <form autocomplete="off">     
@@ -25,6 +27,7 @@
                             
                             <!-- Description  -->
                             <xtextarea
+                                max-length = "300"
                                 class="pre" 
                                 placeholder="Ingresa una descripción de la solución del caso"
                                 label="Solución del caso:" 
@@ -37,8 +40,7 @@
         </div>
 
         <!-- Edit button --> 
-        <div class="toolbar-wrapper">
-           
+        <div class="toolbar-wrapper" ng-if="$ctrl.sessionLevel != 4">  
             <div class="back-btn" ng-click="$ctrl.CaseContent.data = undefined">        
                 <i class="material-icons">arrow_back</i> 
             </div>
@@ -65,6 +67,13 @@
             <span>Dar seguimiento al caso</span>
             <i class="material-icons">keyboard_arrow_right</i>
         </button>
+
+        <button ng-click="$ctrl.setStatusTo(4)"
+            class="{{$ctrl.CaseContent.isEditModeOn()?'visible':'hidden'}} change-status cancel-case" 
+            ng-if="2 >= $ctrl.sessionId && $ctrl.CaseContent.data.id_status.id==2">
+            <span>Cancelar caso</span>
+            <i class="material-icons">close</i>
+        </button> 
 
         <button ng-click="$ctrl.setStatusTo(3)"
             class="{{$ctrl.CaseContent.isEditModeOn()?'visible':'hidden'}} change-status priority-{{$ctrl.CaseContent.data.id_caseType.id}}" 

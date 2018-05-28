@@ -2,13 +2,15 @@
  *  xPopup Service
  ********************************************/
 
-var xPopup = function(){
+var xPopup = function($sce){
 
     this.display = false;
     this.data = {
         title: "Cargando...",
-        id: "",
-        description: ""
+        id: undefined,
+        description: "",
+        yes_no: false,
+        promise: undefined
     };
 
 
@@ -50,6 +52,14 @@ var xPopup = function(){
 
     this.getDescription = function(){
         return this.data.description;
+    }
+
+    this.setYESNO = function(yn){
+        this.data.yes_no = yn;
+    }
+
+    this.getYESNO = function(){
+        return this.data.yes_no;
     }
 }
 

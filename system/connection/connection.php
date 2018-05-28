@@ -16,7 +16,8 @@ class Connection {
             // Load configuration as an array. Use the actual location of your configuration file
             $config = parse_ini_file('config.ini'); 
             self::$connection = new mysqli($config['host'],$config['user'],$config['pass'],$config['dbname']);
-            mysqli_set_charset(self::$connection, 'utf8'); 
+            mysqli_set_charset(self::$connection, 'utf8');             
+            self::$connection->autocommit(FALSE);
         }
 
         // If connection was not successful, handle the error
@@ -38,12 +39,20 @@ class Connection {
     public function query($query) {
         // Connect to the database
         $connection = $this -> connect();
-
         // Query the database
         $result = $connection -> query($query);
         return $result;
     }
 
+
+    public function commit(){
+        $connection = $this -> connect();
+        return $connection->commit();
+    }
+    public function rollback(){
+        $connection = $this -> connect();
+        return $connection->rollback();
+    }
 
     /**
      * Close the database connection 
@@ -104,7 +113,7 @@ class Connection {
      */
     public function getLastID(){
         $connection = $this -> connect();
-        return mysqli_insert_id($connection);
+        return $connection->insert_id;
     }
 }
 ?>

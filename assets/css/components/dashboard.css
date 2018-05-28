@@ -67,11 +67,12 @@
 --------------------------------------------*/
 /* On Hover */
 .back-btn {
+  cursor: pointer;
   color: rgba(17, 17, 17, 0.87);
-  padding: 42px 10px 0 0;
+  padding: 42px 10px 0 10px;
   position: absolute;
   top: 0;
-  left: 30px;
+  left: 20px;
   z-index: 1011;
   transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
   display: none;
@@ -99,12 +100,23 @@ button.change-status {
   z-index: 999;
   width: auto;
   min-width: auto;
-  border-radius: 100px;
+  border-radius: 5px;
   font-weight: bold;
   padding: 12px 25px 12px 40px;
   transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   opacity: 1; }
+  button.change-status.cancel-case {
+    background-color: #cccccc;
+    color: rgba(17, 17, 17, 0.87);
+    bottom: 35px;
+    right: calc(240px + 3.33%); }
+    @media screen and (max-width: 1200px) {
+      button.change-status.cancel-case {
+        bottom: 100px;
+        right: 3.33%; }
+        button.change-status.cancel-case.hidden {
+          transform: translateY(200px); } }
   button.change-status:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
   button.change-status i {
@@ -302,6 +314,14 @@ button.change-status {
     z-index: -1;
     color: rgba(17, 17, 17, 0.87); }
 
+.fullname {
+  display: flex;
+  flex-direction: row; }
+  .fullname.editing {
+    flex-direction: column; }
+  .fullname input {
+    width: fit-content; }
+
 /********************************************************
  * Dark theme
  */
@@ -462,10 +482,12 @@ case-content {
       .to-solve-panel .panel .panel-wrapper form .x-select .select-selected {
         padding: 10px 30px !important; } }
 
-.agent-item-wrapper .title {
-  padding: 0 5px 0 0; }
-.agent-item-wrapper .data {
-  font-size: 13px; }
+.agent-item-wrapper {
+  height: calc(100% - 90px); }
+  .agent-item-wrapper .title {
+    padding: 0 5px 0 0; }
+  .agent-item-wrapper .data {
+    font-size: 13px; }
 
 agent-content {
   width: 100%; }
@@ -502,7 +524,7 @@ agent-content {
   cursor: pointer;
   z-index: 1000;
   max-width: 400px;
-  transition: all 0.6s cubic-bezier(0, 0, 0.2, 1); }
+  transition: all 0.4s cubic-bezier(0, 0, 0.2, 1); }
   .download-button:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
   .download-button span {
@@ -520,8 +542,18 @@ agent-content {
 
 .report-panel {
   overflow-x: hidden;
-  padding: 30px 50px 100px 100px !important;
   background: rgba(17, 17, 17, 0.08); }
+  .report-panel .x-select {
+    margin: 0 0px 20px 0px !important;
+    height: 75px;
+    width: fit-content;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    max-width: 100%; }
+    .report-panel .x-select .select-selected {
+      padding: 12px 60px 12px 45px; }
+      .report-panel .x-select .select-selected span.value {
+        font-size: 20px; }
   @media screen and (max-width: 600px) {
     .report-panel {
       padding: 30px 30px 100px 30px !important; } }
@@ -615,23 +647,51 @@ agent-content {
 .graph-tabs {
   display: flex;
   width: 100%;
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  justify-content: flex-start; }
+  @media screen and (max-width: 900px) {
+    .graph-tabs {
+      justify-content: center;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      background: #fff;
+      margin-bottom: 0; }
+      .graph-tabs .tab.selected {
+        border-bottom: none !important;
+        border-top: solid 2px #7A1326; } }
   .graph-tabs .tab {
+    display: flex;
+    align-items: center;
     font-weight: bold;
     font-size: 12px;
     letter-spacing: 1px;
     text-transform: uppercase;
     opacity: 0.4;
-    padding: 15px 30px;
+    padding: 20px 30px;
     cursor: pointer;
     transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
     border-bottom: solid 1px transparent; }
+    @media screen and (max-width: 600px) {
+      .graph-tabs .tab {
+        border-bottom: none;
+        width: 33.33%;
+        justify-content: center; }
+        .graph-tabs .tab span {
+          display: none; }
+        .graph-tabs .tab i {
+          font-size: 25px !important; } }
     .graph-tabs .tab:hover {
       opacity: 0.6; }
     .graph-tabs .tab.selected {
       opacity: 1;
       color: #7A1326;
       border-bottom: solid 1px #7A1326; }
+    .graph-tabs .tab i {
+      font-size: 15px;
+      margin-right: 15px; }
 
 .chart-container {
   position: relative;
@@ -652,18 +712,8 @@ agent-content {
     opacity: 0;
     transform: translateX(10vw); }
 
-.infrastructure-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 10px; }
-  .infrastructure-wrapper .infrastructure {
-    margin-bottom: 50px; }
-  .infrastructure-wrapper .table-wrapper {
-    display: flex;
-    flex-wrap: wrap; }
-
 .report-panel {
-  padding: 50px 80px; }
+  padding: 50px 50px; }
   @media screen and (max-width: 600px) {
     .report-panel {
       padding: 70px 10px; } }
@@ -681,32 +731,56 @@ agent-content {
     width: calc(100% - 100px);
     margin: 0 0 0 -100px; }
 
-table {
-  margin: 20px 20px 0 0;
-  font-size: 11px; }
-  table caption {
-    text-align: left;
-    color: #7A1326;
-    font-size: 16px;
-    padding: 5px 30px;
-    letter-spacing: 1px; }
-  table th {
-    text-transform: uppercase;
-    letter-spacing: 1px; }
-  table td, table th {
-    padding: 10px 20px;
-    border-bottom: solid 1px rgba(17, 17, 17, 0.2); }
-  table table {
-    border: none;
-    margin: 10px 0 0 0;
-    box-shadow: none; }
-    table table tr {
-      border-bottom: none; }
-      table table tr:nth-last-child(1) td, table table tr:nth-last-child(1) th {
-        border-bottom: solid 1px transparent; }
-    table table th, table table caption {
-      text-align: left;
-      color: rgba(17, 17, 17, 0.87); }
+.infrastructure-wrapper {
+  display: flex;
+  flex-direction: column; }
+
+.infrastructure-card-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  min-width: 100%; }
+  .infrastructure-card-wrapper .infrastructure-card {
+    text-align: center;
+    background: white;
+    padding: 30px 40px;
+    width: 400px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin: 0 20px 20px 0;
+    cursor: pointer;
+    border-radius: 5px; }
+    .infrastructure-card-wrapper .infrastructure-card .title {
+      text-align: center;
+      margin-bottom: 15px; }
+      .infrastructure-card-wrapper .infrastructure-card .title .pre {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 10px;
+        letter-spacing: 1px; }
+      .infrastructure-card-wrapper .infrastructure-card .title .name {
+        text-align: center;
+        font-weight: bold;
+        font-size: 30px; }
+    .infrastructure-card-wrapper .infrastructure-card .table {
+      display: flex;
+      justify-content: space-between;
+      text-align: center; }
+      .infrastructure-card-wrapper .infrastructure-card .table .th {
+        font-size: 11.5px;
+        font-weight: bold; }
+      .infrastructure-card-wrapper .infrastructure-card .table .td {
+        font-size: 13.5px; }
+    .infrastructure-card-wrapper .infrastructure-card hr {
+      margin-top: 20px;
+      margin-bottom: 5px; }
+    .infrastructure-card-wrapper .infrastructure-card .expanded {
+      margin: 20px -10px 0 -25px; }
+      .infrastructure-card-wrapper .infrastructure-card .expanded table {
+        font-size: 11.5px;
+        width: 100%; }
 
 .newdata-add-container .panel-wrapper {
   padding-top: 0 !important;
@@ -928,6 +1002,21 @@ h5 {
     .item-wrapper .item.selected .title {
       max-width: 180px; }
 
+.saving-animation {
+  background: rgba(255, 255, 255, 0.85);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0; }
+  .saving-animation.hidden {
+    z-index: 0;
+    opacity: 0; }
+  .saving-animation.visible {
+    z-index: 1;
+    opacity: 1; }
+  .saving-animation .lds-ring {
+    position: absolute; }
+
 .add-container {
   z-index: 9000;
   position: fixed;
@@ -963,7 +1052,7 @@ h5 {
     transition: opacity 0.45s cubic-bezier(0, 0, 0.2, 1), height 0s linear 0.45s, width 0s linear 0.45s; }
   .add-container .panel {
     opacity: 0;
-    transform: scale(0.3) translateY(100vh);
+    transform: scale(0.6) translateY(100vh);
     border-radius: 5px 5px 0 0;
     z-index: 2;
     background: #fff;
@@ -977,7 +1066,12 @@ h5 {
     overflow-y: auto; }
     @media screen and (max-width: 910px) {
       .add-container .panel {
+        padding: 0px;
         border-radius: 5px 5px 0 0; } }
+    @media screen and (max-width: 600px) {
+      .add-container .panel {
+        transform: translateY(100vh);
+        padding: 0; } }
     .add-container .panel .panel-wrapper {
       padding-top: 50px;
       padding-bottom: 100px; }
@@ -1091,7 +1185,7 @@ h5 {
 .add-container .panel button {
   z-index: 5;
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   right: 20px; }
   @media screen and (max-width: 910px) {
     .add-container .panel button {
@@ -1101,8 +1195,42 @@ h5 {
       border-radius: 0; } }
 
 .settings-container {
-  padding: 50px 100px !important;
+  padding: 50px 50px !important;
   background: #7A1326; }
+  .settings-container .logout-btn {
+    width: auto;
+    min-width: auto;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 5px;
+    padding: 15px 30px;
+    z-index: 10; }
+  .settings-container h1 {
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    text-align: center; }
+  .settings-container img {
+    width: 250px;
+    margin: 50px auto 0 auto;
+    display: block; }
+  .settings-container pre {
+    text-align: justify;
+    max-width: 100%;
+    margin: 0 auto;
+    width: 500px;
+    white-space: pre-wrap;
+    /* css-3 */
+    white-space: -moz-pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* Internet Explorer 5.5+ */ }
 
 .section-container {
   overflow-x: hidden !important; }

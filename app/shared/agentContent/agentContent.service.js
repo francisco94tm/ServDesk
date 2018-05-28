@@ -38,6 +38,10 @@ var AgentContent = function(System){
         });  
         return System.call('editAgent', d);
     };
+
+    this.delete = function(){
+        return System.call("deleteAgent", {'id': this.data.id});
+    }
 }
 
 

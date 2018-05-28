@@ -20,8 +20,7 @@ if(isset($_REQUEST['request'])) {
 			$system = new System(); 
 			echo $system->getTableData($_REQUEST);	
 			break;   
-
-
+ 
 		/**
 		 * REQUEST
 		 */
@@ -50,6 +49,16 @@ if(isset($_REQUEST['request'])) {
 			$client = new Client(); 
 			echo $client->edit($_REQUEST);	
 			break;
+		case 'deleteClient':
+			include_once('classes/client.class.php');
+			$client = new Client(); 
+			echo $client->delete($_REQUEST);	
+			break;
+		case 'doesCURPExist':
+			include_once('classes/client.class.php');
+			$client = new Client(); 
+			echo $client->exists($_REQUEST);	
+			break;
 
 
 		/**
@@ -64,6 +73,11 @@ if(isset($_REQUEST['request'])) {
 			include_once('classes/registermedium.class.php');
 			$registerMedium = new RegisterMedium(); 
 			echo $registerMedium->edit($_REQUEST);	
+			break;
+		case 'deleteRegisterMedium':
+			include_once('classes/registermedium.class.php');
+			$registerMedium = new RegisterMedium(); 
+			echo $registerMedium->delete($_REQUEST);	
 			break;
 
 		
@@ -80,6 +94,11 @@ if(isset($_REQUEST['request'])) {
 			$agentThreat = new AgentThreat(); 
 			echo $agentThreat->edit($_REQUEST);	
 			break;
+		case 'deleteAgentThreat':
+			include_once('classes/agentthreat.class.php');
+			$agentThreat = new AgentThreat(); 
+			echo $agentThreat->delete($_REQUEST);	
+			break;
 
 
 		/**
@@ -95,6 +114,16 @@ if(isset($_REQUEST['request'])) {
 			$agent = new Agent(); 
 			echo $agent->edit($_REQUEST);	
 			break; 
+		case 'deleteAgent':
+			include_once('classes/agent.class.php');
+			$agent = new Agent(); 
+			echo $agent->delete($_REQUEST);	
+			break; 			
+		case 'doesAgentExist':
+			include_once('classes/agent.class.php');
+			$agent = new Agent(); 
+			echo $agent->exists($_REQUEST);	
+			break;
 
 
 		/**
@@ -120,13 +149,13 @@ if(isset($_REQUEST['request'])) {
 		/**
 		 * REPORTS
 		 */
-		case 'getRiskCalculation':
-			include_once('classes/report.class.php');
-			$report = new Report();   
-			$_REQUEST['from'] = ($_REQUEST['from'] == "today") ? date('Y-m-01 H:i:s', time()) : date('Y-m-01 H:i:s', strtotime($_REQUEST['from']));
-			$_REQUEST['to']   = ($_REQUEST['to']   == "today") ? date('Y-m-01 H:i:s', time()) : date('Y-m-01 H:i:s', strtotime($_REQUEST['to']));
-			echo $report->calculateRisk($_REQUEST['from'], $_REQUEST['to']);	
+		case 'getRiskCalculation':			
+			include_once('classes/report.class.php'); 
+			$report = new Report();
+			echo $report->calculateRisk($_REQUEST);	
 			break;  
+
+
 		case 'getCURPMetadata':
 			include_once('classes/curp.class.php');
 			$curp = new Curp(); 

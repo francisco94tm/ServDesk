@@ -14,27 +14,25 @@ class System {
         include_once('connection/connection.php');
         $db = new Connection();
 
-        $query = "SELECT 
+        $query = "SELECT
         r.id, r.subject, r.description, ct.name caseType, 
-                CONCAT(c.name, ' ', c.firstLastname, ' ', c.secondLastname) client, 
-                CONCAT(a2.name, ' ', a2.firstLastname, ' ', a2.secondLastname) responsable, 
-                rm.name registerMedium, at.name agentThreat, ar.name infrastructure, 
-                s.name status, r.registerDate, r.atentionDate, r.solutionDate, 
-                r.solution, at2.name realAgentThreat, CONCAT(a.name, ' ', a.firstLastname, ' ', a.secondLastname) author
-
-            FROM request r, status s, registerMedium rm, client c, agentthreat at, agentthreat at2, assetrepository ar, casetype ct, agent a, agent a2
-            WHERE r.responsable = $id
-            AND r.id_status = s.id 
-            AND r.author = a.id
-            AND r.responsable = a2.id
-            AND r.id_caseType = ct.id
-            AND r.id_agentThreat = at.id  
-            AND r.id_realAgentThreat = at2.id  
-            AND r.id_registerMedium = rm.id
-            AND r.infrastructure = ar.id
-            AND r.id_client = c.id
-            ORDER BY r.id";
-
+        CONCAT(c.name, ' ', c.firstLastname, ' ', c.secondLastname) client, 
+        CONCAT(a2.name, ' ', a2.firstLastname, ' ', a2.secondLastname) responsable, 
+        rm.name registerMedium, at1.name agentThreat, ar.name infrastructure, 
+        s.name status, r.registerDate, r.atentionDate, r.solutionDate, 
+        r.solution, at2.name realAgentThreat, CONCAT(a.name, ' ', a.firstLastname, ' ', a.secondLastname) author
+        FROM request as r 
+            JOIN status as s ON r.id_status = s.id 
+            JOIN registerMedium as rm ON  r.id_registerMedium = rm.id
+            JOIN client as c ON r.id_client = c.id
+            JOIN agentthreat as at1 ON r.id_agentThreat = at1.id
+            JOIN assetrepository as ar ON r.infrastructure = ar.id
+            JOIN casetype as ct ON r.id_caseType = ct.id
+            JOIN agent as a ON r.author = a.id
+            JOIN agent as a2 ON r.responsable = a2.id          
+            LEFT JOIN agentthreat as at2 ON r.id_realAgentThreat = at2.id                  
+        WHERE r.responsable = $id
+        ORDER BY r.id"; 
         return $db->select($query);
     }
 
@@ -109,6 +107,7 @@ class System {
         case 'agent':
             foreach($data as &$row){
                 $this->swap($row['id_level'], 'Level', 'name');
+                $this->swap($row['id_status'], 'ClientStatus', 'name');
             }   
             break; 
     
@@ -136,6 +135,11 @@ class System {
             foreach($data as &$row){
                 $this->swap($row['id_threatType'], 'threatType', 'name'); 
             } 
+            break; 
+        
+
+        case 'level':
+            unset($data[3]);
             break; 
         }
 

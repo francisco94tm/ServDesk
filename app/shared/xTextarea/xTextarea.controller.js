@@ -1,7 +1,14 @@
 /*****************************************************************
  * x Input Component
  */
-function xTextareaController($scope, $element, $attrs){  
+function xTextareaController($scope, $element, $attrs){ 
+    $scope.limitKeypress = function ($event, value, maxLength) {
+        if(maxLength == undefined)
+            return; 
+        if (value != undefined && value.toString().length >= maxLength) {
+            $event.preventDefault();
+        }
+    } 
 }
 
 angular.module('app').component('xtextarea', {
@@ -12,7 +19,9 @@ angular.module('app').component('xtextarea', {
         'ngModel': '=',
         'disabled': '=?', 
         'placeholder': '@',
-        'class': '@'
+        'class': '@',
+        'maxLength': '@?',
+        'minLength': '@?',
     }, 
     replace: true
 });

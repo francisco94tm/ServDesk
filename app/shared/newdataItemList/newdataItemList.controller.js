@@ -54,7 +54,8 @@ function newdataItemListController(
      * Update data when a broadcast call is received
      * *****************************************************/
     $scope.$on('getNewdata', function (event, data) {
-        NewdataItemList.setData(data);
+        $scope.$ctrl.loadData();
+        // NewdataItemList.setData(data);
     });  
 
 

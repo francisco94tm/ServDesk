@@ -3,34 +3,16 @@
     <!-- Show when data is selected -->
     <div class="opened section-content-wrapper edit-panel" ng-show="$ctrl.NewdataContent.data!=undefined">          
         
-        <!-- Edit button -->  
-        <!-- <div class="edit-wrapper {{($ctrl.NewdataContent.data != undefined)?'is-opened':'is-closed'">
-            <div class="back-btn" ng-click="$ctrl.NewdataContent.data = undefined">        
-                <i class="material-icons">arrow_back</i> 
-            </div>
-            <div class="edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}" ng-click="$ctrl.edit()">
-                <div class="off">
-                    <i class="material-icons">edit</i>
-                    <span>Editar</span>
-                </div>
-                <div class="on">
-                    <i class="material-icons">save</i>
-                    <span>Guardar</span>
-                </div>            
-            </div>
-        </div>
-
-        <div class="revert-edit-button {{$ctrl.NewdataContent.isEditModeOn() ? 'mode-on' : 'mode-off'}}"  ng-click="$ctrl.revertEdit()">
-            <i class="material-icons">close</i>
-            <span>Cancelar</span>
-        </div>      -->
-
-
          <!-- Edit button --> 
          <div class="toolbar-wrapper {{($ctrl.NewdataContent.data != undefined)?'is-opened':'is-closed'">
             <div class="back-btn" ng-click="$ctrl.NewdataContent.data = undefined">        
                 <i class="material-icons">arrow_back</i> 
             </div>
+
+            <button ng-if="!$ctrl.NewdataContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.delete()">
+                <i class="material-icons">delete</i>
+                <span>Eliminar</span>
+            </button>
 
             <button ng-if="!$ctrl.NewdataContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.edit()">
                 <i class="material-icons">edit</i>
@@ -58,6 +40,20 @@
             label="Nombre" 
             ng-model="$ctrl.NewdataContent.data.name">
         </xinput>  
+        <xinput type="text" 
+            class="extra-big"
+            ng-if="$ctrl.NewdataContent.isEditModeOn()"
+            disabled="!$ctrl.NewdataContent.isEditModeOn()"
+            label="Primer apellido" 
+            ng-model="$ctrl.NewdataContent.data.firstLastname">
+        </xinput> 
+        <xinput type="text" 
+            class="extra-big"
+            ng-if="$ctrl.NewdataContent.isEditModeOn()"
+            disabled="!$ctrl.NewdataContent.isEditModeOn()"
+            label="Segundo apellido" 
+            ng-model="$ctrl.NewdataContent.data.secondLastname">
+        </xinput> 
 
         <!-- Description  -->
         <xtextarea ng-if="$ctrl.NewdataContent.data.description != undefined"
@@ -79,7 +75,18 @@
                         <div class="text">{{$ctrl.NewdataContent.data.id | minDigits: 4}}</div>
                     </div> 
                 </div>  
-            
+                
+                <!-- Access Level --> 
+                <div class="item level">                    
+                    <i class="material-icons">error_outline</i>
+                    <xselect
+                        options="$ctrl.options.clientstatus" 
+                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        label="Estatus:" 
+                        item-selected="{{$ctrl.NewdataContent.data.id_status.id}}"
+                        ng-model="$ctrl.NewdataContent.data.id_status"> 
+                    </xselect>
+                </div>
 
                 <div class="item register-medium"  ng-if="$ctrl.NewdataContent.data.admissionDate != undefined">                     
                     <i class="material-icons">calendar_today</i>
@@ -142,10 +149,12 @@
                 <div class="item curp" ng-if="$ctrl.NewdataContent.data.curp != undefined">                    
                     <i class="material-icons">account_box</i>
                     <xinput 
+                        max-length="18"
                         type="curp"
                         class="like-select"
-                        disabled="!$ctrl.NewdataContent.isEditModeOn()"
+                        disabled="true"
                         label="CURP:"  
+                        uppercase = "true"
                         ng-model="$ctrl.NewdataContent.data.curp"> 
                     </xinput>
                 </div>
@@ -154,6 +163,7 @@
                 <div class="item email" ng-if="$ctrl.NewdataContent.data.email != undefined">                    
                     <i class="material-icons">email</i>
                     <xinput 
+                        max-length="60"
                         type="email"
                         valid-model="$ctrl.valid.email"
                         class="like-select"
@@ -167,6 +177,7 @@
                 <div class="item phone" ng-if="$ctrl.NewdataContent.data.phone != undefined">                    
                     <i class="material-icons">phone</i>
                     <xinput 
+                        max-length="10"
                         type="phoneNumber"
                         valid-model="$ctrl.valid.phone"
                         class="like-select"
@@ -180,6 +191,7 @@
                 <div class="item mobilephone" ng-if="$ctrl.NewdataContent.data.mobilephone != undefined">                    
                     <i class="material-icons">phone_iphone</i>
                     <xinput 
+                        max-length="10"
                         type="phoneNumber"
                         valid-model="$ctrl.valid.mobilephone"
                         class="like-select"

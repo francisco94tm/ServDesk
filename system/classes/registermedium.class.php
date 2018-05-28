@@ -12,9 +12,12 @@ class RegisterMedium {
         $db = new Connection();         
         $name = $obj['name']; 
         $values['query'] = "INSERT INTO registerMedium (name) VALUES ('$name')";
-        $values['info'] = $db->query($values['query']);			
+        $values['info'] = $db->query($values['query']);		
+        
+        
         $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
+        $values['error'] = $db->error(); 
+        $values['commit'] = $db->commit();
         return json_encode($values);
     }
 
@@ -27,9 +30,22 @@ class RegisterMedium {
         $name = $obj['name']; 
 
         $values['query'] = "UPDATE registerMedium SET name = '$name' WHERE id = $id";
-        $values['info'] = $db->query($values['query']);			
-        $values['id']   = $db->getLastID(); 
-        $values['error'][] = $db->error(); 
+        $values['info'] = $db->query($values['query']);	
+        
+        $values['id'] = $db->getLastID();         
+        $values['error'] = $db->error(); 
+        $values['commit'] = $db->commit();		
+        return json_encode($values);
+    }
+
+    public function delete($obj){
+        include_once('connection/connection.php');
+        $db = new Connection();
+        $id = $obj['id'];
+        $query = "DELETE FROM registerMedium WHERE id = $id";
+        $values['info'] = $db->query($query);	  
+        $values['error'] = $db->error(); 
+        $values['commit'] = $db->commit();  
         return json_encode($values);
     }
 

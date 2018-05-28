@@ -9,6 +9,11 @@
                 <i class="material-icons">arrow_back</i> 
             </div>
 
+            <button ng-if="!$ctrl.AgentContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.delete()">
+                <i class="material-icons">delete</i>
+                <span>Eliminar</span>
+            </button>
+
             <button ng-if="!$ctrl.AgentContent.isEditModeOn()" class="toolbar-button" ng-click="$ctrl.edit()">
                 <i class="material-icons">edit</i>
                 <span>Editar</span>
@@ -26,15 +31,14 @@
         </div> 
  
         <!-- Pre-data -->
-        <div class="pre-data">
+        <!-- <div class="pre-data">
             <b>Estatus: </b><span>{{$ctrl.AgentContent.data.status}}</span>
-        </div>
-
-
+        </div> -->
+ 
         <!-- Title --> 
         <xinput type="text" 
             class="extra-big"
-            disabled="!$ctrl.AgentContent.isEditModeOn()"
+            disabled="true"
             label="Usuario" 
             ng-model="$ctrl.AgentContent.data.usr">
         </xinput> 
@@ -46,13 +50,35 @@
             {{$ctrl.AgentContent.data.secondLastname}}
         </div>
 
+        <br><br>
+
         <div class="metadata">   
             <!-- Bullets -->
             <div class="item-list"> 
 
+                <div class="item register-medium">                     
+                    <i class="material-icons">fingerprint</i>
+                    <div class="group-text">
+                        <div class="label">Folio</div>
+                        <div class="text">{{$ctrl.AgentContent.data.id | minDigits: 4}}</div>
+                    </div> 
+                </div>  
+
                 <!-- Access Level --> 
                 <div class="item level">                    
-                    <i class="material-icons">face</i>
+                    <i class="material-icons">error_outline</i>
+                    <xselect
+                        options="$ctrl.options.clientstatus" 
+                        disabled="!$ctrl.AgentContent.isEditModeOn()"
+                        label="Estatus:" 
+                        item-selected="{{$ctrl.AgentContent.data.id_status.id}}"
+                        ng-model="$ctrl.AgentContent.data.id_status"> 
+                    </xselect>
+                </div>
+
+                <!-- Access Level --> 
+                <div class="item level">                    
+                    <i class="material-icons">star_border</i>
                     <xselect
                         options="$ctrl.options.level" 
                         disabled="!$ctrl.AgentContent.isEditModeOn()"

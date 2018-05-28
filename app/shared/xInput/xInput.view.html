@@ -1,13 +1,19 @@
-<div class="input-group {{!$ctrl.colorize?'':$ctrl.validModel?'valid':'invalid'}}">  
+<div class="input-group {{ !$ctrl.colorize ? '' : $ctrl.validModel ? 'valid' : 'invalid' }}">  
     <label 
         class="{{$ctrl.disabled? 'disabled' : ''}}" 
         ng-class="$ctrl.class">{{$ctrl.label}}</label> 
     <input autocomplete="nope"
+        ng-change="$ctrl.ngModel = $ctrl.uppercase ? ($ctrl.ngModel | uppercase) : $ctrl.ngModel" 
         ng-disabled="$ctrl.disabled" 
         type="{{($ctrl.type == 'password')?$ctrl.type:'text'}}" 
         placeholder = "{{$ctrl.placeholder}}" 
         ng-model="$ctrl.ngModel" 
+        ng-keypress="limitKeypress($event, $ctrl.ngModel, $ctrl.maxLength)"
         ng-class="$ctrl.class"/> 
+    <div class="length"  ng-if="$ctrl.maxLength != undefined">
+        <div class="now">{{($ctrl.ngModel)?$ctrl.ngModel.length:0}}</div>
+        <div class="max"> / {{$ctrl.maxLength}}</div>
+    </div>
     <div class="message {{$ctrl.disabled? 'disabled' : ''}}" >
         {{$ctrl.validate()}}
     </div>

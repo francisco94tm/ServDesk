@@ -3,7 +3,7 @@
  * request Component
  */
 
-function agentContentController($scope, $element, $attrs, $rootScope, AgentItemList, AgentContent, Dashboard){
+function agentContentController($scope, $element, $attrs, $rootScope, AgentItemList, AgentContent, Dashboard,$sce){
 
     $scope.$ctrl.AgentContent = AgentContent;
     $scope.$ctrl.AgentItemList = AgentItemList;  
@@ -35,7 +35,7 @@ function agentContentController($scope, $element, $attrs, $rootScope, AgentItemL
                 console.log(response.data)
 
                 // CHeck for errors ------------
-                if(response.data.error[0] != ""){                    
+                if(response.data.error != ""){                    
                     // Revert data in view
                     $scope.$ctrl.revertEdit();
                     // An error happened, show alert
@@ -58,7 +58,7 @@ function agentContentController($scope, $element, $attrs, $rootScope, AgentItemL
                         AgentContent.edit().then(response => {
                             
                             // Could revert changes
-                            if(response.data.error[0] != ""){
+                            if(response.data.error != ""){
                                 console.log(response.data.error);
                                 $rootScope.$broadcast('openToast', {
                                     'show_button': false,
@@ -74,24 +74,32 @@ function agentContentController($scope, $element, $attrs, $rootScope, AgentItemL
             AgentContent.backup = angular.copy($scope.$ctrl.AgentContent.data);    
     };
 
-
-    // $scope.$ctrl.edit = function(){  
-    //    AgentContent.backup = angular.copy($scope.$ctrl.AgentContent.data);         
-    //     AgentContent.shuffleEditMode(); 
-    //     // CLicked on Save, proceed to save in Database
-    //     if(!AgentContent.isEditModeOn()){
-    //         $rootScope.$broadcast('openToast', {'title': 'Agente guardado'}); 
-    //         AgentContent.edit().then(response => {
-    //             if(response.data.error[0] != "")
-    //                 console.log(response.data.error);
-    //         });
-    //     } 
-    // }; 
+ 
     $scope.$ctrl.revertEdit = function(){  
         for (var key in AgentContent.data)
             if (AgentContent.data.hasOwnProperty(key))
                 AgentContent.data[key] = AgentContent.backup[key];       
         AgentContent.setEditModeOff(); 
+    };
+
+    $scope.$ctrl.delete = function(){ 
+        var obj = {
+            'yes_no': true,
+            'title': '¿Está seguro de eliminar este agente?',
+            'description': $sce.trustAsHtml('<br>'),
+            'promise': 'AGENT_'+AgentContent.data.id
+        }
+        $rootScope.$broadcast('openPopup', obj); 
+        $scope.$on('YES', (event, value) => { 
+            console.log(value);
+            console.log("AGENT_"+AgentContent.data.id);
+            if(value['promise'] == "AGENT_"+AgentContent.data.id){
+                AgentContent.delete().then(function(response){ 
+                    $rootScope.$broadcast('getAgents');
+                    $scope.$ctrl.AgentContent.data = undefined;
+                });
+            }
+        });
     };
 }
  

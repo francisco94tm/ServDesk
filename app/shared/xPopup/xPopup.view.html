@@ -5,12 +5,15 @@
             <i class="material-icons">close</i>
         </div>
         <div class="xpopup-message">
+            <div class="pre-id">{{$ctrl.xPopup.getId() != undefined ? 'FOLIO':''}}</div>
+            <div class="id">{{$ctrl.xPopup.getId() | minDigits: 4}}</div>            
             <div class="title">{{$ctrl.xPopup.getTitle()}}</div>
-            <div class="id">{{$ctrl.xPopup.getId() | minDigits: 4}}</div>
-            <div class="description">{{$ctrl.xPopup.getDescription()}}</div>
+            <!-- <hr ng-if="$ctrl.xPopup.getDescription() != '' && $ctrl.xPopup.getDescription() != undefined"> -->
+            <div class="description" ng-bind-html="$ctrl.xPopup.getDescription()"></div>
         </div>
-        <!-- <div class="xpopup-controlls">
-            <button ng-click="$ctrl.xPopup.hide()">ACEPTAR</button>
-        </div> -->
+        <div class="xpopup-controlls yes_no" ng-if="$ctrl.xPopup.getYESNO()">
+            <button ng-click="$ctrl.yes()">SI</button>
+            <button class="main" ng-click="$ctrl.xPopup.hide()">NO</button>
+        </div>
     </div>
 </div>

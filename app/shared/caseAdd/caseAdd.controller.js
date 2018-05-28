@@ -12,12 +12,11 @@ function caseAddController($scope, $element, $attrs, CaseAdd, $rootScope, Dashbo
     // Get catalogues
     Dashboard.getCatalogues().then(data => {
         var c = [];
-        for(let i=0; i<4; i++){
-           angular.forEach(data.client[i], function(val, id){
-                c.push(val);
-           });
-        } 
- 
+         
+        angular.forEach(data.client[0], function(val, id){
+            c.push(val);
+        });
+           
         data.client = c;
         $scope.$ctrl.options =  data; 
         $scope.$ctrl.options.assetRepository = $filter('filter')($scope.$ctrl.options.assetRepository, 'Pública');  

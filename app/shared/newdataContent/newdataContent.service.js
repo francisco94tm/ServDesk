@@ -2,7 +2,7 @@
  *  NewdataContent Service
  ********************************************/
 
-var NewdataContent = function(System){ 
+var NewdataContent = function(System, NewdataItemList){ 
 
     var editMode = false;
     this.backup = {};
@@ -29,7 +29,7 @@ var NewdataContent = function(System){
     }  
 
     
-    this.edit = function(what){
+    this.edit = function(){
         var d = angular.copy(this.data);
          // Change object field to id
          Object.keys(d).map(function(key){ 
@@ -37,6 +37,7 @@ var NewdataContent = function(System){
                 d[key] = d[key].id;
             }
         });  
+        var what = NewdataItemList.getCurrentTab();
         switch(what){
             case 1:                
                 return System.call('editClient', d);
@@ -44,9 +45,20 @@ var NewdataContent = function(System){
                 return System.call('editRegisterMedium', d);
             case 3:
                 return System.call('editAgentThreat', d);
-        }
-
+        } 
     };
+
+    this.delete = function(){
+        var what = NewdataItemList.getCurrentTab();
+        switch(what){
+            case 1:                
+                return System.call('deleteClient', {'id': this.data.id});
+            case 2:                
+                return System.call('deleteRegisterMedium', {'id': this.data.id});
+            case 3:
+                return System.call('deleteAgentThreat', {'id': this.data.id});
+        } 
+    }
 }
 
 

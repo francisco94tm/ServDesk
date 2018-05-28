@@ -31,9 +31,10 @@
                     '$subject', $author, $responsable,
                     1, $client, $agentThreat,  $registerMedium
                 )";
-            $values['info'] = $db->query($values['query']);			
+            $values['info'] = $db->query($values['query']);	 
             $values['id']   = $db->getLastID(); 
-            $values['error'][] = $db->error(); 
+            $values['error'] = $db->error(); 
+            $values['commit'] = $db->commit();  
             return json_encode($values);
         }
 
@@ -68,22 +69,25 @@
                 id_registerMedium = $registerMedium
                 WHERE id = $id
             "; 
-            $values['info'] = $db->query($values['query']);	 
-            $values['error'][] = $db->error(); 
+            $values['info'] = $db->query($values['query']);	  
+            $values['error'] = $db->error(); 
+            $values['commit'] = $db->commit();  
 
             if($time){
                 switch($status){
                     case 2:
-                        $db->query("UPDATE request SET atentionDate = NOW() WHERE id = $id");                         
-                        $values['error'][] = $db->error(); 
+                        $db->query("UPDATE request SET atentionDate = NOW() WHERE id = $id");                                                 
+                        $values['error'] .= $db->error(); 
+                        $values['commit'] = $db->commit();  
                         break;
                     case 3:
                         $db->query("UPDATE request SET 
                             solutionDate=NOW(), 
                             solution = '$solution', 
                             id_realAgentThreat = $realAgentThreat 
-                            WHERE id = $id");                         
-                            $values['error'][] = $db->error(); 
+                            WHERE id = $id");                           
+                        $values['error'] .= $db->error(); 
+                        $values['commit'] = $db->commit();  
                         break;
                 }
             } 
