@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-05-2018 a las 08:07:32
+-- Tiempo de generación: 28-05-2018 a las 14:17:40
 -- Versión del servidor: 5.7.11
 -- Versión de PHP: 7.0.4
 
@@ -17,8 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `servicedesk`
+-- Base de datos: `servdesk`
 --
+
 drop database if exists ServDesk;
 create database ServDesk CHARACTER SET utf8 COLLATE utf8_general_ci;
 use ServDesk;
@@ -34,15 +35,15 @@ CREATE TABLE `agent` (
   `name` varchar(30) DEFAULT NULL,
   `firstLastname` varchar(30) DEFAULT NULL,
   `secondLastname` varchar(30) DEFAULT NULL,
-  `address` varchar(50) NOT NULL,
+  `address` varchar(100) NOT NULL,
   `mobilephone` varchar(30) NOT NULL,
   `phone` varchar(30) NOT NULL,
-  `email` varchar(30) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `id_level` int(11) DEFAULT NULL,
   `backup` int(11) DEFAULT NULL,
   `usr` varchar(20) DEFAULT NULL,
-  `pass` varchar(10) DEFAULT NULL,
-  `status` int(3) DEFAULT NULL,
+  `pass` varchar(30) DEFAULT NULL,
+  `id_status` int(3) DEFAULT '1',
   `id_theme` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -50,10 +51,10 @@ CREATE TABLE `agent` (
 -- Volcado de datos para la tabla `agent`
 --
 
-INSERT INTO `agent` (`id`, `name`, `firstLastname`, `secondLastname`, `address`, `mobilephone`, `phone`, `email`, `id_level`, `backup`, `usr`, `pass`, `status`, `id_theme`) VALUES
-(1, 'Orlando', 'Rocha', 'Montiel', 'Calle 1 colonia 1 ciudad de mexico', '55555555555', '55555555555', 'correo@dominio', 2, 2, 'Especialista1', '123', 1, 1),
-(2, 'Francisco', 'Trejo', 'Martínez', 'Calle 1 colonia 1 ciudad de mexico', '55555555555', '55555555555', 'correo@dominio', 1, 1, 'Agente1', '123', 1, 1),
-(3, 'Valeria', 'Mata', 'Cortés', 'Calle 1 colonia 1 ciudad de mexico', '55555555555', '55555555555', 'correo@dominio', 3, 1, 'HotFix1', '123', 1, 1);
+INSERT INTO `agent` (`id`, `name`, `firstLastname`, `secondLastname`, `address`, `mobilephone`, `phone`, `email`, `id_level`, `backup`, `usr`, `pass`, `id_status`, `id_theme`) VALUES
+(1, 'Orlando', 'Rocha', 'Montiel', 'Sin calle, Colonia X', '5555555555', '5555555555', 'orlando@gmail.com', 2, 2, 'Especialista1', '123', 1, 1),
+(2, 'Francisco', 'Trejo', 'Martínez', 'Las Américas', '4444455555', '5555555544', 'francisco@dominio.com', 1, 1, 'Agente1', '123', 1, 1),
+(3, 'Valeria', 'Mata', 'Cortés', 'Calle 1 colonia 1 ciudad de mexico', '5555555554', '5555555554', 'valeria@correo.com', 3, 1, 'HotFix1', '123', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -79,10 +80,10 @@ INSERT INTO `agentthreat` (`id`, `id_threatType`, `name`, `description`) VALUES
 (7, 2, 'Acceso no autorizado', 'Acceso ilegal a los sistemas'),
 (8, 1, 'Ingenieria social', 'Ingenieria social'),
 (9, 2, 'Codigo malicioso', 'Codigo malicioso'),
-(10, 1, 'Suplantacion de identidad', 'Suplantacion de identidad'),
-(11, 2, 'Negacion de servicio', 'Negacion de servicio'),
+(10, 1, 'Suplantación de identidad', 'Suplantacion de identidad'),
+(11, 2, 'Negación de servicio', 'Negacion de servicio'),
 (12, 2, 'Crackeo de contraseña', 'Crackeo de contraseña'),
-(13, 2, 'Modificacion de datos', 'Modificacion de datos');
+(13, 2, 'Modificación de datos', 'Modificacion de datos');
 
 -- --------------------------------------------------------
 
@@ -176,7 +177,6 @@ INSERT INTO `assetrepository` (`id`, `name`, `description`, `type`, `state`, `co
 -- Estructura de tabla para la tabla `businessunit`
 --
 
-
 CREATE TABLE `businessunit` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -208,10 +208,10 @@ CREATE TABLE `casetype` (
 --
 
 INSERT INTO `casetype` (`id`, `name`, `description`) VALUES
-(1, 'Requerimiento', 'No tiene alto impacto'),
-(2, 'Incidencia', 'Tiene alto impacto'),
-(3, 'Problema', 'Es crítico'),
-(4, 'Fallo', 'Es muy crítico');
+(2, 'Requerimiento', 'No tiene alto impacto'),
+(3, 'Incidente', 'Tiene alto impacto'),
+(4, 'Problema', 'Es crítico'),
+(1, 'Consulta', 'Bajo impacto');
 
 -- --------------------------------------------------------
 
@@ -232,7 +232,7 @@ CREATE TABLE `client` (
   `admissionDate` datetime NOT NULL,
   `mobilephone` varchar(30) NOT NULL,
   `phone` varchar(30) NOT NULL,
-  `email` varchar(30) NOT NULL,
+  `email` varchar(60) NOT NULL,
   `id_status` int(3) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -241,12 +241,11 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `curp`, `name`, `firstLastname`, `secondLastname`, `id_job`, `id_area`, `id_department`, `id_businessUnit`, `admissionDate`, `mobilephone`, `phone`, `email`, `id_status`) VALUES
-(1, 'XXXXXXXXX', 'Juan', 'Perez', 'Rojas', 1, 1, 1, 1, '2017-02-01 00:00:00', '6666666666', '6666666666', 'cliente@dominio', 1),
-(2, 'XXXXXXXXX', 'Ingrid', 'De la Cruz', 'Martínez', 1, 1, 1, 1, '2018-04-19 11:44:05', '55555555', '55555555', 'ingrid@email.com', 1),
-(3, 'XXXXXXXXX', 'Laura', 'León', 'Romo', 1, 1, 1, 1, '2018-04-19 16:29:25', '55555555', '55555555', 'correo@correo.com', 2),
-(4, 'TEMF941013HDFRRR05', 'Jesús', 'Lopez', 'Perez', 1, 1, 1, 1, '2018-05-02 11:09:35', '5555555555', '555555555', 'frtrma@outlook.com', 1),
-(5, 'TEMA000516HDFRRLA9', 'Alfredo', 'Trejo', 'Martínez', 1, 1, 1, 1, '2018-05-02 11:15:10', '55555555', '55555555', 'alfredo@email.com', 1),
-(6, 'TEMF941013HDFRRR0X', 'Ricardo', 'Coronado', 'Del Valle', 1, 1, 1, 1, '2018-05-13 16:26:29', '55555555', '55555555', 'f@f.com', 1);
+(1, 'AUAM630703HGTGRR02', 'Martin', 'Aguirre', 'Arriaga', 1, 1, 1, 1, '2017-02-01 00:00:00', '6666666666', '6666666666', 'martin@gmail.com', 1),
+(2, 'GOMS660206HMNMRR08', 'Servando', 'Gómez', 'Martínez', 1, 1, 1, 1, '2018-04-19 11:44:05', '5555555555', '5555555555', 'servando@email.com', 1),
+(3, 'MASM020203MDFRNTA6', 'Mitzy', 'Martínez', 'Sánchez', 1, 1, 1, 1, '2018-04-19 16:29:25', '5555555588', '5555555588', 'mitzy@correo.com', 2),
+(4, 'GALB650916HDFMPN09', 'Bernando', 'García', 'López', 1, 1, 1, 1, '2018-05-02 11:09:35', '5555555555', '5555555553', 'bernardo@outlook.com', 1),
+(5, 'TEMA000516HDFRRLA9', 'Alfredo', 'Trejo', 'Martínez', 1, 1, 1, 1, '2018-05-02 11:15:10', '5555555544', '5555555544', 'alfredotrejomartinez0@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -266,8 +265,7 @@ CREATE TABLE `clientstatus` (
 INSERT INTO `clientstatus` (`id`, `name`) VALUES
 (1, 'Activo'),
 (2, 'Bloqueado'),
-(3, 'Cancelado'),
-(4, 'Inactivo');
+(3, 'Inactivo');
 
 -- --------------------------------------------------------
 
@@ -374,8 +372,8 @@ CREATE TABLE `registermedium` (
 --
 
 INSERT INTO `registermedium` (`id`, `name`) VALUES
-(1, 'Teléfono'),
-(2, 'Correo Electrónico');
+(2, 'Correo Electrónico'),
+(1, 'Teléfono');
 
 -- --------------------------------------------------------
 
@@ -409,28 +407,31 @@ CREATE TABLE `request` (
 --
 
 INSERT INTO `request` (`id`, `id_caseType`, `infrastructure`, `subject`, `description`, `author`, `responsable`, `id_status`, `id_agentThreat`, `id_client`, `id_registerMedium`, `registerDate`, `atentionDate`, `solutionDate`, `maxAtentionDate`, `maxSolutionDate`, `solution`, `id_realAgentThreat`) VALUES
-(1, 1, 'COTR1', 'Req:', 'El usuario indica que no tiene acceso a internet', 2, 1, 3, 5, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(2, 1, 'COTR10', 'Req', 'El usuario indica que su monitor no sirve', 1, 1, 3, 5, 1, 1, '2018-04-11 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(3, 2, 'COTR1', 'Pagina.', 'El usuario indica que la pagina web no carga', 1, 2, 3, 11, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(4, 3, 'ELECT18', 'Problema', 'El usuario indica que no tiene acceso a la pagina web', 1, 1, 3, 11, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(5, 2, 'SI5', 'Contraseña', 'El usuario indica que no puede acceder a su maquina', 1, 1, 3, 12, 1, 1, '2018-04-26 10:12:40', '2018-04-27 10:34:40', '2018-04-28 16:23:06', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(6, 3, 'ELECT18', 'Servidor', 'El servidor está abajo', 1, 3, 3, 11, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(7, 1, 'ELECT1', 'Monitor no enciende', 'No encience el monitor', 1, 2, 3, 5, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-21 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(8, 1, 'ELECT1', 'Monitor descompuesto', 'El usuario solicita un nuevo monitor', 1, 2, 1, 5, 3, 1, '2018-04-26 10:12:40', NULL, NULL, '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(9, 1, 'COTR1', 'Req', 'No responde el teclado', 1, 1, 3, 5, 1, 2, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(10, 2, 'COTR1', 'Req', 'El usuario indica que no enciende su equipo', 1, 1, 3, 5, 1, 2, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(11, 1, 'COTR1', 'Cable de máquina', 'Cable de la maquina descompuesto', 1, 2, 3, 6, 1, 2, '2018-04-13 10:41:40', '2018-04-27 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(12, 2, 'COTR1', 'Req', 'El usuario indica que su maquina estaba encendida y no tiene archivos', 1, 3, 3, 7, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(13, 2, 'COTR1', 'Requerimiento', 'Usuario indica que le robaron sus examenes', 1, 2, 3, 7, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(14, 2, 'COTR1', 'Req', 'Maquina fuera de servicio', 1, 1, 3, 13, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(15, 3, 'COTR1', 'Suplantación', 'Usaron su máquina sin permiso', 1, 2, 2, 8, 1, 2, '2018-03-26 10:12:40', '2018-05-01 10:12:40', NULL, '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
-(16, 1, 'COTR1', 'Pérdida de datos', 'Perdida de datos', 1, 2, 3, 13, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
+(1, 4, 'COTR1', 'Req:', 'El usuario indica que no tiene acceso a internet', 2, 1, 1, 5, 1, 1, '2018-04-26 10:12:40', NULL, NULL, '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
+(2, 4, 'COTR10', 'Req', 'El usuario indica que su monitor no sirve', 1, 1, 1, 5, 1, 1, '2018-04-11 10:12:40', NULL, NULL, '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
+(3, 2, 'COTR1', 'Página.', 'El usuario indica que la pagina web no carga', 1, 2, 3, 11, 1, 1, '2018-04-26 10:12:40', '2018-05-24 16:15:14', '2018-05-24 16:15:24', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Se cayó la página.', 5),
+(4, 3, 'ELECT18', 'Problema', 'Breve descripción', 1, 1, 3, 11, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 11),
+(5, 2, 'SI5', 'Contraseña', 'El usuario indica que no puede acceder a su maquina', 1, 1, 1, 12, 1, 1, '2018-04-26 10:12:40', NULL, NULL, '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
+(6, 3, 'ELECT18', 'Servidor', 'El servidor está abajo', 1, 3, 1, 11, 1, 1, '2018-04-26 10:12:40', NULL, NULL, '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
+(7, 1, 'ELECT1', 'Monitor no enciende', 'Breve descripción', 1, 2, 3, 5, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-21 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 5),
+(8, 1, 'ELECT1', 'Monitores descompuesto', 'El usuario solicita un nuevo monitor.', 1, 2, 1, 5, 5, 1, '2018-04-26 10:12:40', NULL, NULL, '2018-05-01 10:12:40', '2018-05-24 01:12:40', NULL, NULL),
+(9, 1, 'COTR1', 'Req', 'Breve descripción', 1, 1, 3, 5, 1, 2, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 5),
+(10, 2, 'COTR1', 'Req', 'Breve descripción', 1, 1, 3, 5, 1, 2, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 5),
+(11, 1, 'COTR1', 'Cable de máquina', 'Breve descripción', 1, 2, 3, 6, 1, 2, '2018-04-13 10:41:40', '2018-04-27 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 6),
+(12, 2, 'COTR1', 'Req', 'Breve descripción', 1, 3, 3, 7, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 7),
+(13, 2, 'COTR1', 'Requerimiento', 'Breve descripción', 1, 2, 3, 7, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 7),
+(14, 2, 'COTR1', 'Req', 'Breve descripción', 1, 1, 3, 13, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 13),
+(15, 3, 'COTR1', 'Suplantación', 'Usaron su máquina sin permiso', 1, 2, 3, 8, 1, 2, '2018-03-26 10:12:40', '2018-05-01 10:12:40', '2018-05-24 16:14:44', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Alguien hackeo la cuenta.', 12),
+(16, 1, 'COTR1', 'Pérdida de datos', 'Breve descripción', 1, 2, 3, 13, 1, 1, '2018-04-26 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', '2018-05-01 10:12:40', 'Breve descripción', 13),
 (21, 2, 'COTR10', 'Urgente', 'Urge resolver este problema', 2, 1, 1, 5, 1, 2, '2018-05-03 13:58:41', NULL, NULL, '2018-05-08 13:58:41', '2018-05-08 13:58:41', NULL, NULL),
-(22, 3, 'COTR10', 'Prueba', 'Prueba prueba', 2, 2, 3, 9, 2, 2, '2018-05-03 15:51:38', '2018-05-08 15:51:38', '2018-05-08 15:51:38', '2018-05-08 15:51:38', '2018-05-08 15:51:38', NULL, NULL),
-(23, 3, 'ELECT6', 'Fraude', 'Fraude', 2, 2, 4, 4, 5, 1, '2018-05-03 15:55:30', NULL, NULL, '2018-05-08 15:55:30', '2018-05-08 15:55:30', NULL, NULL),
-(24, 4, 'COTR11', 'Caso', 'gfdgdfhg', 2, 1, 3, 10, 1, 3, '2018-05-06 17:17:26', '2018-05-11 17:17:26', '2018-05-11 17:17:26', '2018-05-11 17:17:26', '2018-05-11 17:17:26', NULL, NULL),
-(25, 1, 'COTR10', 'Ayuda', 'Descripción del caso', 2, 2, 4, 4, 4, 1, '2018-05-13 19:45:25', NULL, NULL, '2018-05-18 19:45:25', '2018-05-18 19:45:25', NULL, NULL),
-(26, 1, 'COTR10', 'Para Orlando', 'Brief description', 2, 1, 1, 5, 2, 2, '2018-05-09 11:46:03', NULL, NULL, '2018-05-18 19:46:03', '2018-05-18 19:46:03', NULL, NULL);
+(22, 3, 'COTR10', 'Prueba', 'Prueba prueba', 2, 2, 3, 9, 2, 2, '2018-05-03 15:51:38', '2018-05-08 15:51:38', '2018-05-08 15:51:38', '2018-05-08 15:51:38', '2018-05-08 15:51:38', 'Descripción', NULL),
+(23, 3, 'ELECT6', 'Fraude', 'Fraude', 2, 2, 4, 4, 5, 1, '2018-05-03 15:55:30', '2018-05-03 15:55:30', NULL, '2018-05-08 15:55:30', '2018-05-08 15:55:30', NULL, NULL),
+(24, 2, 'COTR11', 'Caso', 'gfdgdfhg', 2, 1, 1, 10, 1, 3, '2018-05-06 17:17:26', NULL, NULL, '2018-05-11 17:17:26', '2018-05-11 17:17:26', NULL, NULL),
+(25, 4, 'COTR10', 'Ayuda', 'Descripción del caso', 2, 2, 2, 4, 4, 1, '2018-05-13 19:45:25', '2018-05-24 16:14:14', NULL, '2018-05-18 19:45:25', '2018-05-18 19:45:25', NULL, NULL),
+(26, 1, 'COTR10', 'Para Orlando', 'Brief description', 2, 1, 1, 5, 2, 2, '2018-05-09 11:46:03', NULL, NULL, '2018-05-18 19:46:03', '2018-05-18 19:46:03', NULL, NULL),
+(27, 2, 'SI14', 'Hackeo', 'Hackeo', 2, 2, 3, 13, 4, 1, '2018-05-23 14:32:36', '2018-05-24 05:15:55', '2018-05-24 05:18:35', '2018-05-28 14:32:36', '2018-05-28 14:32:36', 'Fue un hacker.', 12),
+(28, 2, 'ELECT6', 'Ejemplo de caso', 'Descripción genérica', 2, 2, 3, 7, 2, 2, '2018-05-24 16:17:38', '2018-05-24 18:08:40', '2018-05-24 18:08:52', '2018-05-29 16:17:38', '2018-05-29 16:17:38', 'Bla bla bla', 7),
+(29, 3, 'ELECT1', 'Error de monitor', 'Arreglar a la brevedad posible.', 2, 2, 4, 5, 3, 2, '2018-05-24 23:03:59', '2018-05-27 21:31:57', '2018-05-27 21:37:53', '2018-05-29 23:03:59', '2018-05-29 23:03:59', 'null', NULL);
 
 --
 -- Disparadores `request`
@@ -661,6 +662,7 @@ INSERT INTO `threattype` (`id`, `name`, `description`) VALUES
 --
 ALTER TABLE `agent`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `usr` (`usr`),
   ADD KEY `id_level` (`id_level`);
 
 --
@@ -701,6 +703,7 @@ ALTER TABLE `casetype`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `curp` (`curp`),
   ADD KEY `id_job` (`id_job`),
   ADD KEY `id_area` (`id_area`),
   ADD KEY `id_department` (`id_department`),
@@ -817,12 +820,12 @@ ALTER TABLE `threattype`
 -- AUTO_INCREMENT de la tabla `agent`
 --
 ALTER TABLE `agent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `agentthreat`
 --
 ALTER TABLE `agentthreat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `businessunit`
 --
@@ -832,12 +835,12 @@ ALTER TABLE `businessunit`
 -- AUTO_INCREMENT de la tabla `casetype`
 --
 ALTER TABLE `casetype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `clientstatus`
 --
@@ -852,12 +855,12 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT de la tabla `registermedium`
 --
 ALTER TABLE `registermedium`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `request`
 --
 ALTER TABLE `request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT de la tabla `riskmatrix`
 --

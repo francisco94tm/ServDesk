@@ -171,7 +171,7 @@ button.change-status {
       .toolbar-wrapper button i {
         font-size: 20px !important; } }
     .toolbar-wrapper button:hover {
-      color: #7A1326; }
+      color: #75003E; }
     .toolbar-wrapper button i {
       font-size: 15px; }
     .toolbar-wrapper button span {
@@ -661,7 +661,7 @@ agent-content {
       margin-bottom: 0; }
       .graph-tabs .tab.selected {
         border-bottom: none !important;
-        border-top: solid 2px #7A1326; } }
+        border-top: solid 2px #75003E; } }
   .graph-tabs .tab {
     display: flex;
     align-items: center;
@@ -687,8 +687,8 @@ agent-content {
       opacity: 0.6; }
     .graph-tabs .tab.selected {
       opacity: 1;
-      color: #7A1326;
-      border-bottom: solid 1px #7A1326; }
+      color: #75003E;
+      border-bottom: solid 1px #75003E; }
     .graph-tabs .tab i {
       font-size: 15px;
       margin-right: 15px; }
@@ -811,7 +811,7 @@ h5 {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #7A1326;
+  color: #75003E;
   font-weight: bold;
   padding-top: 30px;
   text-align: center;
@@ -840,7 +840,7 @@ h5 {
     width: 33.33%;
     height: calc(100px - 4px);
     transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
-    border-bottom: solid 2px #7A1326; }
+    border-bottom: solid 2px #75003E; }
   .tabs[tab-selected="0"]:after {
     left: 0px; }
   .tabs[tab-selected="1"]:after {
@@ -875,7 +875,7 @@ h5 {
       position: relative;
       text-align: center; }
     .tabs .tab.selected {
-      color: #7A1326;
+      color: #75003E;
       font-weight: bold; }
 
 @keyframes rotating {
@@ -916,7 +916,7 @@ h5 {
       height: 40px;
       line-height: 40px; }
     .item-wrapper .refresh-btn:hover i {
-      color: #7A1326; }
+      color: #75003E; }
   .item-wrapper case-item .item, .item-wrapper newdata-item .item {
     transition: 0.3s cubic-bezier(0, 0, 0.2, 1);
     overflow: hidden; }
@@ -1087,7 +1087,7 @@ h5 {
     transition: transform 0.6s cubic-bezier(0, 0, 0.2, 1), background 0.6s cubic-bezier(0, 0, 0.2, 1);
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
     border-radius: 50%;
-    background: #7A1326;
+    background: #75003E;
     color: white;
     left: 0;
     bottom: 0;
@@ -1196,7 +1196,7 @@ h5 {
 
 .settings-container {
   padding: 50px 50px !important;
-  background: #7A1326; }
+  background: #75003E; }
   .settings-container .logout-btn {
     width: auto;
     min-width: auto;
@@ -1220,7 +1220,8 @@ h5 {
     text-align: justify;
     max-width: 100%;
     margin: 0 auto;
-    width: 500px;
+    width: 750px;
+    column-count: 2;
     white-space: pre-wrap;
     /* css-3 */
     white-space: -moz-pre-wrap;
@@ -1231,6 +1232,9 @@ h5 {
     /* Opera 7 */
     word-wrap: break-word;
     /* Internet Explorer 5.5+ */ }
+    @media screen and (max-width: 600px) {
+      .settings-container pre {
+        column-count: 1; } }
 
 .section-container {
   overflow-x: hidden !important; }
@@ -1259,7 +1263,7 @@ h5 {
   .container .column.dash-nav, .container .columndash-nav {
     width: 220px;
     overflow-x: hidden;
-    background: #7A1326;
+    background: #75003E;
     transition: 0.3s cubic-bezier(0, 0, 0.2, 1); }
     @media screen and (max-width: 1050px) {
       .container .column.dash-nav, .container .columndash-nav {
@@ -1323,13 +1327,13 @@ h5 {
   position: sticky;
   margin-top: 20px; }
   .status-group-name span.quantity {
-    color: #7a1326;
+    color: #75003e;
     font-size: 14px;
     margin-right: 15px; }
   .status-group-name i {
     float: right;
     margin-right: 15px;
-    color: #7A1326;
+    color: #75003E;
     transition: 0.3s cubic-bezier(0, 0, 0.2, 1); }
     .status-group-name i.hidden {
       transform: rotate(180deg); }
@@ -1404,7 +1408,7 @@ h5 {
             display: inline-block; }
         .container .section-content .section-content-wrapper .item-list .item i {
           margin-right: 30px;
-          color: #7A1326; }
+          color: #75003E; }
 
 .lds-ring {
   display: inline-block;
@@ -1426,7 +1430,7 @@ h5 {
   border: 2px solid #fff;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #7A1326 transparent transparent transparent; }
+  border-color: #75003E transparent transparent transparent; }
 
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s; }
