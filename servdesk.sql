@@ -9,13 +9,7 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
+ 
 --
 -- Base de datos: `servdesk`
 --
@@ -405,6 +399,14 @@ CREATE TABLE `request` (
 --
 -- Volcado de datos para la tabla `request`
 --
+--
+-- Disparadores `request`
+-- 
+CREATE TRIGGER `Request_INSERT` BEFORE INSERT ON `request` FOR EACH ROW set 
+		new.registerDate = now(), 
+		new.maxAtentionDate = adddate(now(),interval 5 day),
+		new.maxSolutionDate =  adddate(now(),interval 5 day);
+ 
 
 INSERT INTO `request` (`id`, `id_caseType`, `infrastructure`, `subject`, `description`, `author`, `responsable`, `id_status`, `id_agentThreat`, `id_client`, `id_registerMedium`, `registerDate`, `atentionDate`, `solutionDate`, `maxAtentionDate`, `maxSolutionDate`, `solution`, `id_realAgentThreat`) VALUES
 (1, 4, 'COTR1', 'Req:', 'El usuario indica que no tiene acceso a internet', 2, 1, 1, 5, 1, 1, '2018-04-26 10:12:40', NULL, NULL, '2018-05-01 10:12:40', '2018-05-01 10:12:40', NULL, NULL),
@@ -433,16 +435,6 @@ INSERT INTO `request` (`id`, `id_caseType`, `infrastructure`, `subject`, `descri
 (28, 2, 'ELECT6', 'Ejemplo de caso', 'Descripción genérica', 2, 2, 3, 7, 2, 2, '2018-05-24 16:17:38', '2018-05-24 18:08:40', '2018-05-24 18:08:52', '2018-05-29 16:17:38', '2018-05-29 16:17:38', 'Bla bla bla', 7),
 (29, 3, 'ELECT1', 'Error de monitor', 'Arreglar a la brevedad posible.', 2, 2, 4, 5, 3, 2, '2018-05-24 23:03:59', '2018-05-27 21:31:57', '2018-05-27 21:37:53', '2018-05-29 23:03:59', '2018-05-29 23:03:59', 'null', NULL);
 
---
--- Disparadores `request`
---
-DELIMITER $$
-CREATE TRIGGER `Request_INSERT` BEFORE INSERT ON `request` FOR EACH ROW set 
-		new.registerDate = now(), 
-		new.maxAtentionDate = adddate(now(),interval 5 day),
-		new.maxSolutionDate =  adddate(now(),interval 5 day)
-$$
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -880,7 +872,4 @@ ALTER TABLE `theme`
 -- AUTO_INCREMENT de la tabla `threattype`
 --
 ALTER TABLE `threattype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4; 
